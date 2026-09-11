@@ -50,6 +50,94 @@ body {
 a { color: var(--blue); }
 a:hover { color: var(--navy); }
 
+/* Píldora pequeña en línea ("PRÁCTICA" en el índice) */
+.pill-mini {
+  display: inline-block;
+  vertical-align: middle;
+  background: var(--green);
+  color: var(--navy);
+  padding: 4px 16px 5px;
+  margin-right: 18px;
+  border-radius: 999px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  position: relative;
+  top: -3px;
+}
+
+/* Número de sección: pastilla verde arriba a la derecha de cada diapositiva
+   de contenido (atributo data-seccion en el <section>). Las diapositivas las
+   posiciona deck-stage en absoluto, así que el pseudo-elemento se ancla a ellas. */
+deck-stage section[data-seccion]::after {
+  content: attr(data-seccion);
+  position: absolute;
+  top: 40px;
+  right: 48px;
+  z-index: 5;
+  background: var(--green);
+  color: var(--navy);
+  padding: 6px 22px 7px;
+  border-radius: 999px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+/* Pista de teclas de la portada */
+.pista-teclas {
+  font-size: var(--type-caption);
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pista-teclas kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 2px solid var(--line);
+  border-bottom-width: 4px;
+  background: var(--white);
+  color: var(--navy);
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 700;
+}
+.pista-teclas .sep { margin: 0 8px; opacity: .5; }
+
+/* Índice de la unidad: cada entrada salta a su sección (data-deck-id) */
+.indice-enlace {
+  display: grid;
+  grid-template-columns: 96px 1fr 56px;
+  align-items: center;
+  padding: 20px 24px;
+  margin: 0 -24px;
+  border-radius: 16px;
+  color: inherit;
+  text-decoration: none;
+  transition: background .15s ease;
+}
+.indice-enlace::after {
+  content: '→';
+  justify-self: end;
+  color: var(--blue);
+  font-weight: 800;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity .15s ease, transform .15s ease;
+}
+.indice-enlace:hover { background: rgba(1, 124, 233, .07); }
+.indice-enlace:hover::after { opacity: 1; transform: translateX(0); }
+
 deck-stage:not(:defined) { visibility: hidden; }
 
 deck-stage section {
