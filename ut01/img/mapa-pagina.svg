@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 760" font-family="JetBrains Mono, Consolas, monospace">
+  <rect width="900" height="760" fill="#FEFEFE"/>
+  <rect x="40" y="30" width="820" height="700" rx="18" fill="#FFFFFF" stroke="#D6E0EA" stroke-width="4"/>
+  <!-- header -->
+  <rect x="70" y="60" width="760" height="90" rx="12" fill="#041C3F"/>
+  <text x="90" y="96" font-size="26" font-weight="700" fill="#FFFFFF">&lt;header&gt;</text>
+  <text x="90" y="130" font-size="18" fill="#9FB0C8">logotipo y título del sitio</text>
+  <!-- nav -->
+  <rect x="70" y="164" width="760" height="56" rx="12" fill="#1CCFE3"/>
+  <text x="90" y="200" font-size="26" font-weight="700" fill="#041C3F">&lt;nav&gt;  Inicio · Noticias · Contacto</text>
+  <!-- main -->
+  <rect x="70" y="234" width="520" height="380" rx="12" fill="#E3ECF3"/>
+  <text x="90" y="270" font-size="26" font-weight="700" fill="#041C3F">&lt;main&gt;</text>
+  <rect x="90" y="290" width="480" height="140" rx="10" fill="#FFFFFF" stroke="#A5E070" stroke-width="4"/>
+  <text x="108" y="326" font-size="24" font-weight="700" fill="#0A6E1A">&lt;article&gt;</text>
+  <text x="108" y="356" font-size="18" fill="#4A5A7D" font-family="Plus Jakarta Sans, system-ui, sans-serif">Noticia 1: título, fecha, texto</text>
+  <rect x="90" y="450" width="480" height="140" rx="10" fill="#FFFFFF" stroke="#A5E070" stroke-width="4"/>
+  <text x="108" y="486" font-size="24" font-weight="700" fill="#0A6E1A">&lt;article&gt;</text>
+  <text x="108" y="516" font-size="18" fill="#4A5A7D" font-family="Plus Jakarta Sans, system-ui, sans-serif">Noticia 2: título, fecha, texto</text>
+  <!-- aside -->
+  <rect x="606" y="234" width="224" height="380" rx="12" fill="#FE8F46"/>
+  <text x="626" y="270" font-size="26" font-weight="700" fill="#FFFFFF">&lt;aside&gt;</text>
+  <text x="626" y="304" font-size="18" fill="#FFFFFF" font-family="Plus Jakarta Sans, system-ui, sans-serif">lo más leído,</text>
+  <text x="626" y="330" font-size="18" fill="#FFFFFF" font-family="Plus Jakarta Sans, system-ui, sans-serif">el tiempo, anuncios</text>
+  <!-- footer -->
+  <rect x="70" y="628" width="760" height="76" rx="12" fill="#3F485E"/>
+  <text x="90" y="662" font-size="26" font-weight="700" fill="#FFFFFF">&lt;footer&gt;</text>
+  <text x="90" y="690" font-size="18" fill="#D9E4E8">autor, aviso legal, contacto</text>
+</svg>

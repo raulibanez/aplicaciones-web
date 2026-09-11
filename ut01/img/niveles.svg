@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 720" font-family="Plus Jakarta Sans, system-ui, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#4A5A7D"/></marker>
+  </defs>
+  <rect width="1400" height="720" fill="#FEFEFE"/>
+  <!-- dos niveles -->
+  <text x="60" y="60" font-size="34" font-weight="800" fill="#041C3F">Dos niveles</text>
+  <text x="60" y="96" font-size="22" fill="#4A5A7D">Página estática: el servidor devuelve un archivo</text>
+  <rect x="60" y="150" width="300" height="150" rx="24" fill="#FFFFFF" stroke="#D6E0EA" stroke-width="4"/>
+  <text x="210" y="215" text-anchor="middle" font-size="28" font-weight="800" fill="#041C3F">Cliente</text>
+  <text x="210" y="250" text-anchor="middle" font-size="22" fill="#4A5A7D">navegador</text>
+  <rect x="520" y="150" width="300" height="150" rx="24" fill="#041C3F"/>
+  <text x="670" y="215" text-anchor="middle" font-size="28" font-weight="800" fill="#FFFFFF">Servidor web</text>
+  <text x="670" y="250" text-anchor="middle" font-size="22" fill="#9FB0C8">archivos .html</text>
+  <line x1="364" y1="205" x2="514" y2="205" stroke="#4A5A7D" stroke-width="5" marker-end="url(#a)"/>
+  <line x1="514" y1="245" x2="364" y2="245" stroke="#4A5A7D" stroke-width="5" marker-end="url(#a)"/>
+  <text x="440" y="190" text-anchor="middle" font-size="20" font-weight="700" fill="#041C3F">petición</text>
+  <text x="440" y="280" text-anchor="middle" font-size="20" font-weight="700" fill="#041C3F">respuesta</text>
+  <text x="900" y="215" font-size="22" fill="#4A5A7D">Ejemplo: tu página en GitHub Pages</text>
+  <!-- tres niveles -->
+  <text x="60" y="420" font-size="34" font-weight="800" fill="#041C3F">Tres niveles</text>
+  <text x="60" y="456" font-size="22" fill="#4A5A7D">Página dinámica: un programa fabrica el HTML con datos</text>
+  <rect x="60" y="510" width="300" height="150" rx="24" fill="#FFFFFF" stroke="#D6E0EA" stroke-width="4"/>
+  <text x="210" y="575" text-anchor="middle" font-size="28" font-weight="800" fill="#041C3F">Cliente</text>
+  <text x="210" y="610" text-anchor="middle" font-size="22" fill="#4A5A7D">capa de presentación</text>
+  <rect x="520" y="510" width="300" height="150" rx="24" fill="#041C3F"/>
+  <text x="670" y="565" text-anchor="middle" font-size="28" font-weight="800" fill="#FFFFFF">Servidor web</text>
+  <text x="670" y="597" text-anchor="middle" font-size="22" fill="#9FB0C8">+ PHP · capa de negocio</text>
+  <text x="670" y="630" text-anchor="middle" font-size="20" fill="#A5E070">WordPress, Moodle</text>
+  <rect x="980" y="510" width="300" height="150" rx="24" fill="#017CE9"/>
+  <text x="1130" y="575" text-anchor="middle" font-size="28" font-weight="800" fill="#FFFFFF">Base de datos</text>
+  <text x="1130" y="610" text-anchor="middle" font-size="22" fill="#D9E4E8">capa de datos · MariaDB</text>
+  <line x1="364" y1="565" x2="514" y2="565" stroke="#4A5A7D" stroke-width="5" marker-end="url(#a)"/>
+  <line x1="514" y1="605" x2="364" y2="605" stroke="#4A5A7D" stroke-width="5" marker-end="url(#a)"/>
+  <line x1="824" y1="565" x2="974" y2="565" stroke="#4A5A7D" stroke-width="5" marker-end="url(#a)"/>
+  <line x1="974" y1="605" x2="824" y2="605" stroke="#4A5A7D" stroke-width="5" marker-end="url(#a)"/>
+  <text x="900" y="550" text-anchor="middle" font-size="20" font-weight="700" fill="#041C3F">consulta</text>
+  <text x="900" y="640" text-anchor="middle" font-size="20" font-weight="700" fill="#041C3F">datos</text>
+</svg>

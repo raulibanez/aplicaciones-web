@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 660" font-family="Plus Jakarta Sans, system-ui, sans-serif">
+  <defs>
+    <marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#4A5A7D"/></marker>
+    <marker id="fb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#017CE9"/></marker>
+  </defs>
+  <rect width="1500" height="660" fill="#FEFEFE"/>
+  <!-- navegador -->
+  <g>
+    <rect x="60" y="200" width="360" height="320" rx="24" fill="#FFFFFF" stroke="#D6E0EA" stroke-width="4"/>
+    <rect x="60" y="200" width="360" height="56" rx="24" fill="#E3ECF3"/>
+    <circle cx="96" cy="228" r="8" fill="#FC565B"/><circle cx="122" cy="228" r="8" fill="#FED92F"/><circle cx="148" cy="228" r="8" fill="#A5E070"/>
+    <rect x="180" y="216" width="220" height="24" rx="12" fill="#FFFFFF"/>
+    <text x="240" y="350" text-anchor="middle" font-size="30" font-weight="800" fill="#041C3F">Tu navegador</text>
+    <text x="240" y="386" text-anchor="middle" font-size="22" fill="#4A5A7D">el cliente</text>
+    <text x="240" y="460" text-anchor="middle" font-size="22" font-family="JetBrains Mono, monospace" fill="#017CE9">ejemplo.es</text>
+  </g>
+  <!-- DNS -->
+  <g>
+    <rect x="760" y="40" width="300" height="150" rx="24" fill="#E3ECF3"/>
+    <text x="910" y="100" text-anchor="middle" font-size="30" font-weight="800" fill="#041C3F">Servidor DNS</text>
+    <text x="910" y="140" text-anchor="middle" font-size="22" fill="#4A5A7D">la guía de nombres</text>
+  </g>
+  <!-- servidor web -->
+  <g>
+    <rect x="1080" y="200" width="360" height="320" rx="24" fill="#041C3F"/>
+    <rect x="1130" y="260" width="260" height="44" rx="10" fill="#3F485E"/><circle cx="1150" cy="282" r="8" fill="#A5E070"/>
+    <rect x="1130" y="320" width="260" height="44" rx="10" fill="#3F485E"/><circle cx="1150" cy="342" r="8" fill="#A5E070"/>
+    <rect x="1130" y="380" width="260" height="44" rx="10" fill="#3F485E"/><circle cx="1150" cy="402" r="8" fill="#1CCFE3"/>
+    <text x="1260" y="480" text-anchor="middle" font-size="30" font-weight="800" fill="#FFFFFF">Servidor web</text>
+  </g>
+  <!-- 2: navegador → DNS -->
+  <path d="M424 270 C 540 270, 640 120, 756 100" fill="none" stroke="#4A5A7D" stroke-width="5" marker-end="url(#f)"/>
+  <text x="430" y="80" font-size="22" font-weight="700" fill="#041C3F">2 ¿Qué IP tiene ejemplo.es?</text>
+  <!-- 3: DNS → navegador -->
+  <path d="M756 160 C 660 200, 580 330, 424 330" fill="none" stroke="#4A5A7D" stroke-width="5" marker-end="url(#f)"/>
+  <text x="470" y="372" font-size="22" font-weight="700" fill="#041C3F">3 <tspan font-family="JetBrains Mono, monospace" fill="#017CE9">93.184.216.34</tspan></text>
+  <!-- 4 y 5: navegador ↔ servidor -->
+  <path d="M424 430 L 1076 430" fill="none" stroke="#017CE9" stroke-width="5" marker-end="url(#fb)"/>
+  <text x="750" y="415" text-anchor="middle" font-size="22" font-weight="700" fill="#041C3F">4 GET /index.html (petición HTTPS)</text>
+  <path d="M1076 490 L 424 490" fill="none" stroke="#017CE9" stroke-width="5" marker-end="url(#fb)"/>
+  <text x="750" y="528" text-anchor="middle" font-size="22" font-weight="700" fill="#041C3F">5 200 OK + el HTML (respuesta)</text>
+  <!-- pasos 1 y 6 -->
+  <text x="60" y="150" font-size="24" font-weight="700" fill="#041C3F">1 Escribes la dirección</text>
+  <text x="60" y="610" font-size="24" font-weight="700" fill="#041C3F">6 El navegador lee el HTML y pinta la página</text>
+  <text x="1080" y="610" font-size="22" fill="#4A5A7D">Si no existe: 404 Not Found</text>
+</svg>

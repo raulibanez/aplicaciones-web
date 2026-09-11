@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Presentación del módulo · Aplicaciones Web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/aw.css">
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+<!-- 01 Portada del módulo -->
+<section class="portada" data-label="Portada del módulo" data-notas="Primera sesión del curso, martes 15 de septiembre. Presentarse y dejar claro desde el principio que este módulo se aprende haciendo: páginas, instalaciones y configuraciones." style="position:relative;padding:0;overflow:hidden;background:var(--bg)">
+  <img src="img/portada.webp" alt="" style="position:absolute;left:0;top:0;width:1920px;height:1080px">
+  <span class="mancha abajo-izq" style="width:558px;left:676px;color:var(--gray);mix-blend-mode:multiply"></span>
+  <span class="mancha arriba-dcha" style="width:397px;color:var(--green)"></span>
+  <img src="img/portada-globo.webp" alt="" style="position:absolute;left:1300px;top:0;width:620px;height:600px">
+  <div style="position:absolute;left:104px;top:110px;width:1000px">
+    <div style="display:flex;align-items:center;gap:22px">
+      <span style="width:26px;height:26px;border-radius:50%;background:var(--cyan);display:block"></span>
+      <span style="font-size:28px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--navy)">Ciclo Formativo de Grado Medio</span>
+    </div>
+    <p style="margin-top:140px;font-size:34px;font-weight:700;color:var(--green-dark)">Módulo profesional 0228</p>
+    <h1 style="margin-top:25px;font-size:128px;font-weight:800;line-height:.97;letter-spacing:-.05em;color:var(--navy)">Aplicaciones<br>Web</h1>
+    <p style="margin-top:37px;font-size:34px;line-height:1.3;font-weight:500;color:var(--muted)">Diseño, desarrollo y publicación<br>de sitios y servicios web · Primer curso</p>
+  </div>
+  <div style="position:absolute;left:104px;bottom:88px;font-size:22px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;line-height:1.3;color:var(--navy)">
+    <span style="display:block;width:70px;height:6px;border-radius:3px;background:var(--green);margin-bottom:22px"></span>
+    Contenidos actualizados<br>para el curso 2026 / 2027
+  </div>
+</section>
+
+<!-- 02 Pregunta: qué aplicaciones web usáis -->
+<section data-label="¿Qué aplicaciones web usáis?" data-notas="Lanzar la pregunta y recoger ejemplos en la pizarra (Google, Gmail, Twitch, Kick, el banco). La idea que tiene que quedar: si se abre en el navegador y guarda tus cosas en Internet, es una aplicación web. Aquí encaja la charla sobre la carrera profesional: qué hace un técnico de SMR con lo que se ve en este módulo (mantener webs, instalar y administrar WordPress y Moodle, dar soporte a usuarios de Workspace)." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);align-items:center">
+  <div>
+    <img class="icono" src="../assets/question.png" alt="">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-top:var(--gap-item)">Pregunta a la clase</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.12;margin-top:20px;color:var(--navy);text-wrap:balance">¿Qué aplicaciones web usáis cada día sin saber que lo son?</h2>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">Pista: si se abre en el navegador, no hay que instalarla y guarda tus cosas en Internet, es una aplicación web.</p>
+  </div>
+  <div class="revela">
+    <div class="revela-cuerpo">
+      <p style="font-size:var(--type-caption);font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Ideas</p>
+      <ul style="list-style:none;padding:0;margin-top:24px;display:flex;flex-direction:column;gap:22px;font-size:var(--type-body);line-height:1.35">
+        <li style="display:flex;gap:20px"><span style="color:var(--green-dark);font-weight:800">●</span><span><b>El correo y el calendario</b>: Gmail u Outlook en el navegador, sin instalar nada.</span></li>
+        <li style="display:flex;gap:20px"><span style="color:var(--green-dark);font-weight:800">●</span><span><b>Classroom y Moodle</b>: las tareas y las notas del instituto. En este módulo instalaréis uno.</span></li>
+        <li style="display:flex;gap:20px"><span style="color:var(--green-dark);font-weight:800">●</span><span><b>Documentos y formularios compartidos</b>: Google Docs, Drive, Canva.</span></li>
+        <li style="display:flex;gap:20px"><span style="color:var(--green-dark);font-weight:800">●</span><span><b>Redes, vídeo y música en el navegador</b>: Instagram, YouTube, Twitch, Spotify.</span></li>
+        <li style="display:flex;gap:20px"><span style="color:var(--green-dark);font-weight:800">●</span><span><b>La web del instituto</b>: casi seguro que está hecha con un gestor de contenidos.</span></li>
+      </ul>
+    </div>
+    <button class="btn btn-primary revela-btn">Ver ideas</button>
+  </div>
+</section>
+
+<!-- 03 Pregunta: quién ha hecho una página web -->
+<section data-label="¿Quién ha hecho una página web?" data-notas="Que levanten la mano. Da igual la respuesta: en ocho sesiones todos tendrán una página publicada. Si hay tiempo, enseñar en el navegador una web actual bien hecha (por ejemplo la web oficial de GTA VI: efecto parallax, carga perezosa de imágenes, animación cuadro a cuadro) y decir que todo eso es HTML, CSS y JavaScript. Aquí va también la explicación de las rutas A→B: dos personas con conocimientos distintos llegan al mismo sitio por caminos distintos, y la anécdota que tú cuentas." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);align-items:center">
+  <div>
+    <img class="icono" src="../assets/question.png" alt="">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-top:var(--gap-item)">Pregunta a la clase</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.12;margin-top:20px;color:var(--navy);text-wrap:balance">¿Quién ha hecho alguna vez una página web?</h2>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">Con un editor, con un blog, con una plantilla o a mano. Cualquier cosa vale.</p>
+  </div>
+  <div class="revela">
+    <div class="revela-cuerpo">
+      <p style="font-size:var(--type-caption);font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Lo que va a pasar</p>
+      <ul style="list-style:none;padding:0;margin-top:24px;display:flex;flex-direction:column;gap:22px;font-size:var(--type-body);line-height:1.35">
+        <li style="display:flex;gap:20px"><span style="color:var(--green-dark);font-weight:800">●</span><span><b>En la tercera sesión</b> tendréis una página publicada en Internet, con su dirección, hecha por vosotros.</span></li>
+        <li style="display:flex;gap:20px"><span style="color:var(--green-dark);font-weight:800">●</span><span><b>En diciembre</b> sabréis escribir a mano una página completa con HTML y darle estilo con CSS.</span></li>
+        <li style="display:flex;gap:20px"><span style="color:var(--green-dark);font-weight:800">●</span><span><b>En la segunda evaluación</b> montaréis una web con WordPress en un hosting real y un Moodle en vuestro ordenador.</span></li>
+        <li style="display:flex;gap:20px"><span style="color:var(--green-dark);font-weight:800">●</span><span><b>En la tercera</b>, el entorno digital completo de una empresa: correo, calendario, archivos, formulario y web.</span></li>
+      </ul>
+    </div>
+    <button class="btn btn-primary revela-btn">Ver ideas</button>
+  </div>
+</section>
+
+<!-- 04 Qué es este módulo según el currículo -->
+<section data-label="Qué es este módulo" data-notas="Currículo: Decreto del título de Sistemas Microinformáticos y Redes en Castilla y León, BOCyL n.º 173 de 9 de septiembre de 2009, módulo 0228, 102 horas. Los cinco resultados de aprendizaje hablan de instalar; las orientaciones metodológicas piden exposición, demostración del profesor y supuestos prácticos, y recomiendan que el alumno no instale los servicios de red que hay debajo (eso es de otro módulo)." style="display:grid;grid-template-columns:1fr 1.2fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);align-items:center">
+  <div>
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Presentación del módulo</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Qué es este módulo, según el currículo oficial</h2>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">Lo que se enseña no lo decide el profesor: está publicado. El módulo 0228 tiene 102 horas y su currículo está en el BOCyL n.º 173, de 9 de septiembre de 2009.</p>
+    <p style="font-size:var(--type-caption);line-height:1.45;color:var(--ink);margin-top:var(--gap-item);border-left:5px solid var(--green);padding-left:20px">«El desarrollo de los contenidos tendrá siempre una orientación práctica; el esquema habitual será: exposición de conceptos, demostración práctica de la aplicación de los mismos por parte del profesor, resolución de supuestos prácticos por parte de los alumnos.» <span style="color:var(--muted)">Orientaciones metodológicas, módulo 0228.</span></p>
+  </div>
+  <div style="background:var(--white);border-radius:24px;padding:48px 56px;box-shadow:0 2px 0 var(--line)">
+    <p style="font-size:var(--type-caption);font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">En lenguaje de alumno</p>
+    <ul style="list-style:none;padding:0;margin-top:24px;display:flex;flex-direction:column;gap:22px;font-size:var(--type-small);line-height:1.4">
+      <li style="display:flex;gap:20px"><span style="color:var(--cyan);font-weight:800">01</span><span><b>Entender cómo funciona la web</b> y escribir páginas con HTML y CSS, a mano.</span></li>
+      <li style="display:flex;gap:20px"><span style="color:var(--cyan);font-weight:800">02</span><span><b>Instalar y configurar un gestor de contenidos</b> (WordPress) en un hosting: usuarios, menús, plugins, seguridad, copias.</span></li>
+      <li style="display:flex;gap:20px"><span style="color:var(--cyan);font-weight:800">03</span><span><b>Instalar una plataforma de aprendizaje</b> (Moodle) y montar un curso con contenidos, usuarios e informes.</span></li>
+      <li style="display:flex;gap:20px"><span style="color:var(--cyan);font-weight:800">04</span><span><b>Poner en marcha el entorno digital de una empresa</b> en la nube: archivos, ofimática, correo y calendario.</span></li>
+      <li style="display:flex;gap:20px"><span style="color:var(--cyan);font-weight:800">05</span><span><b>Documentar lo que instalas</b> y dar soporte a quien lo usa: es parte del trabajo.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 05 Los cinco resultados de aprendizaje -->
+<section data-label="Resultados de aprendizaje" data-notas="Explicar qué es un RA y que la nota se calcula por RA. Cada RA tiene sus criterios de evaluación en el currículo. Los nombres cortos son nuestros. Los pesos son los de la programación de este curso." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Presentación del módulo</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Los cinco resultados de aprendizaje</h2>
+  <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:20px;max-width:1560px">Un <b>resultado de aprendizaje (RA)</b> es algo que tienes que saber hacer al terminar el módulo. Cada RA tiene una lista de <b>criterios de evaluación</b>, que es lo que se comprueba en las prácticas y en los exámenes. La nota se calcula por RA.</p>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:24px;margin-top:32px">
+    <div style="background:var(--white);border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;gap:14px;box-shadow:0 2px 0 var(--line)">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="width:64px;height:64px;border-radius:16px;background:var(--blue);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800">RA1</span><span style="font-size:var(--type-small);font-weight:800;color:var(--blue)">50 %</span></div>
+      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Instalas gestores de contenidos</p>
+      <p style="font-size:22px;color:var(--muted);line-height:1.45">Sabes qué hace falta para instalar un CMS, lo configuras (usuarios, menús, módulos, seguridad, copias) y antes escribes páginas con HTML y CSS.</p>
+    </div>
+    <div style="background:var(--white);border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;gap:14px;box-shadow:0 2px 0 var(--line)">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="width:64px;height:64px;border-radius:16px;background:var(--cyan);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800">RA2</span><span style="font-size:var(--type-small);font-weight:800;color:var(--blue)">25 %</span></div>
+      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Instalas plataformas de aprendizaje</p>
+      <p style="font-size:22px;color:var(--muted);line-height:1.45">Instalas Moodle, entiendes su estructura, creas cursos y usuarios, haces copias, informes y compruebas la seguridad.</p>
+    </div>
+    <div style="background:var(--white);border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;gap:14px;box-shadow:0 2px 0 var(--line)">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="width:64px;height:64px;border-radius:16px;background:var(--green);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800">RA3</span><span style="font-size:var(--type-small);font-weight:800;color:var(--blue)">10 %</span></div>
+      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Gestionas archivos en la web</p>
+      <p style="font-size:22px;color:var(--muted);line-height:1.45">Montas un servicio de archivos compartidos con carpetas, usuarios y permisos, y compruebas su seguridad.</p>
+    </div>
+    <div style="background:var(--white);border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;gap:14px;box-shadow:0 2px 0 var(--line)">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="width:64px;height:64px;border-radius:16px;background:var(--orange);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800">RA4</span><span style="font-size:var(--type-small);font-weight:800;color:var(--blue)">8 %</span></div>
+      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Usas ofimática web</p>
+      <p style="font-size:22px;color:var(--muted);line-height:1.45">Documentos, hojas de cálculo y formularios en la nube, con cuentas, permisos y trabajo colaborativo.</p>
+    </div>
+    <div style="background:var(--white);border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;gap:14px;box-shadow:0 2px 0 var(--line)">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="width:64px;height:64px;border-radius:16px;background:var(--navy);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800">RA5</span><span style="font-size:var(--type-small);font-weight:800;color:var(--blue)">7 %</span></div>
+      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Correo y calendario web</p>
+      <p style="font-size:22px;color:var(--muted);line-height:1.45">Configuras el correo web y el calendario de una empresa, con sus cuentas, citas y tareas.</p>
+    </div>
+  </div>
+  <p style="font-size:var(--type-caption);color:var(--muted);margin-top:24px">Los nombres cortos son nuestros. Los enunciados completos y sus criterios están en el currículo del módulo 0228 (BOCyL n.º 173, 9 de septiembre de 2009).</p>
+</section>
+
+<!-- 06 Las seis unidades -->
+<section data-label="Las seis unidades" data-notas="Tres sesiones de 50 minutos a la semana: lunes, martes y miércoles a las 13:10. Unas 89 sesiones reales en el curso. La UT6 solo se da si sobra tiempo y no puntúa." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Presentación del módulo</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Las unidades de trabajo</h2>
+  <table style="width:100%;border-collapse:collapse;margin-top:32px;font-size:var(--type-caption);background:var(--white);border-radius:20px;overflow:hidden">
+    <thead>
+      <tr style="background:var(--navy);color:var(--white);text-align:left">
+        <th style="padding:16px 28px;font-weight:700;width:80px">UT</th>
+        <th style="padding:16px 28px;font-weight:700">Unidad de trabajo</th>
+        <th style="padding:16px 28px;font-weight:700;width:130px">RA</th>
+        <th style="padding:16px 28px;font-weight:700;width:130px">Sesiones</th>
+        <th style="padding:16px 28px;font-weight:700;width:150px">Evaluación</th>
+        <th style="padding:16px 28px;font-weight:700;width:640px">Práctica principal</th>
+      </tr>
+    </thead>
+    <tbody style="line-height:1.3">
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:12px 28px;font-weight:800;color:var(--blue)">1</td><td style="padding:12px 28px;font-weight:700;color:var(--navy)">La web y HTML</td><td style="padding:12px 28px">RA1</td><td style="padding:12px 28px">18</td><td style="padding:12px 28px">1.ª</td><td style="padding:12px 28px">Tu primera página publicada en Internet y un cuaderno de ejercicios HTML; una página completa escrita en el aula</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:12px 28px;font-weight:800;color:var(--blue)">2</td><td style="padding:12px 28px;font-weight:700;color:var(--navy)">CSS</td><td style="padding:12px 28px">RA1</td><td style="padding:12px 28px">14</td><td style="padding:12px 28px">1.ª</td><td style="padding:12px 28px">Dar estilo a tu página hasta igualar una maqueta, con versión para móvil</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:12px 28px;font-weight:800;color:var(--blue)">3</td><td style="padding:12px 28px;font-weight:700;color:var(--navy)">WordPress</td><td style="padding:12px 28px">RA1</td><td style="padding:12px 28px">15</td><td style="padding:12px 28px">2.ª</td><td style="padding:12px 28px">Web completa de un negocio en un hosting real: páginas, menús, contacto, textos legales, usuarios, seguridad y copias</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:12px 28px;font-weight:800;color:var(--blue)">4</td><td style="padding:12px 28px;font-weight:700;color:var(--navy)">Moodle</td><td style="padding:12px 28px">RA2</td><td style="padding:12px 28px">13</td><td style="padding:12px 28px">2.ª</td><td style="padding:12px 28px">Instalación en tu ordenador por parejas y un curso con contenidos, cuestionario, usuarios, copias e informes</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:12px 28px;font-weight:800;color:var(--blue)">5</td><td style="padding:12px 28px;font-weight:700;color:var(--navy)">Entorno digital en la nube</td><td style="padding:12px 28px">RA3, RA4, RA5</td><td style="padding:12px 28px">19</td><td style="padding:12px 28px">3.ª</td><td style="padding:12px 28px">El entorno digital de una empresa por parejas: correo, calendario, archivos, formulario y web publicada, con defensa</td></tr>
+      <tr><td style="padding:12px 28px;font-weight:800;color:var(--muted)">6</td><td style="padding:12px 28px;font-weight:700;color:var(--muted)">JavaScript</td><td style="padding:12px 28px;color:var(--muted)">—</td><td style="padding:12px 28px;color:var(--muted)">6</td><td style="padding:12px 28px;color:var(--muted)">3.ª</td><td style="padding:12px 28px;color:var(--muted)">Si sobra tiempo: una mejora interactiva sobre tu página. No puntúa</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:var(--type-caption);color:var(--muted);margin-top:20px">Sesiones de 50 minutos, tres a la semana (lunes, martes y miércoles). Unas 89 sesiones en el curso; casi la mitad son de práctica en el ordenador.</p>
+</section>
+
+<!-- 07 Cómo se calcula la nota -->
+<section data-label="Cómo se calcula la nota" data-notas="Cada RA vale un porcentaje fijo de la nota final. Hay que sacar al menos un 5 en cada RA: si uno queda por debajo, el módulo no se aprueba aunque la media salga. Se recupera solo ese RA." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Presentación del módulo</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Cuánto pesa cada cosa en la nota final</h2>
+  <table style="width:100%;border-collapse:collapse;margin-top:32px;font-size:var(--type-small);background:var(--white);border-radius:20px;overflow:hidden;text-align:center">
+    <thead>
+      <tr style="background:var(--navy);color:var(--white)">
+        <th style="padding:18px 28px;font-weight:700;text-align:left">Resultado de aprendizaje</th>
+        <th style="padding:18px 16px;font-weight:700">UT1</th><th style="padding:18px 16px;font-weight:700">UT2</th><th style="padding:18px 16px;font-weight:700">UT3</th><th style="padding:18px 16px;font-weight:700">UT4</th><th style="padding:18px 16px;font-weight:700">UT5</th><th style="padding:18px 16px;font-weight:700">UT6</th>
+        <th style="padding:18px 28px;font-weight:700;background:var(--green);color:var(--navy)">% de la nota</th>
+      </tr>
+    </thead>
+    <tbody style="line-height:1.3">
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 28px;text-align:left;font-weight:700;color:var(--navy)">RA1 Instalas gestores de contenidos</td><td>12</td><td>12</td><td>26</td><td></td><td></td><td></td><td style="background:#EDF8E2;font-weight:800;color:var(--navy)">50 %</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 28px;text-align:left;font-weight:700;color:var(--navy)">RA2 Instalas plataformas de aprendizaje</td><td></td><td></td><td></td><td>25</td><td></td><td></td><td style="background:#EDF8E2;font-weight:800;color:var(--navy)">25 %</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 28px;text-align:left;font-weight:700;color:var(--navy)">RA3 Gestionas archivos en la web</td><td></td><td></td><td></td><td></td><td>10</td><td></td><td style="background:#EDF8E2;font-weight:800;color:var(--navy)">10 %</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 28px;text-align:left;font-weight:700;color:var(--navy)">RA4 Usas ofimática web</td><td></td><td></td><td></td><td></td><td>8</td><td></td><td style="background:#EDF8E2;font-weight:800;color:var(--navy)">8 %</td></tr>
+      <tr style="border-bottom:3px solid var(--navy)"><td style="padding:14px 28px;text-align:left;font-weight:700;color:var(--navy)">RA5 Correo y calendario web</td><td></td><td></td><td></td><td></td><td>7</td><td></td><td style="background:#EDF8E2;font-weight:800;color:var(--navy)">7 %</td></tr>
+      <tr style="border-bottom:2px solid var(--line);background:var(--bg)"><td style="padding:14px 28px;text-align:left;font-weight:700;color:var(--navy)">% de la unidad</td><td>12</td><td>12</td><td>26</td><td>25</td><td>25</td><td>0</td><td style="font-weight:700">100 %</td></tr>
+      <tr><td style="padding:14px 28px;text-align:left;font-weight:700;color:var(--navy)">Evaluación</td><td>1.ª</td><td>1.ª</td><td>2.ª</td><td>2.ª</td><td>3.ª</td><td>3.ª</td><td></td></tr>
+    </tbody>
+  </table>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:24px;font-size:var(--type-caption);line-height:1.4;color:var(--muted)">
+    <p><b style="color:var(--navy)">Cómo leerla.</b> Cada unidad aporta la nota de su resultado de aprendizaje. El RA1 pesa la mitad porque son tres unidades: HTML, CSS y WordPress.</p>
+    <p><b style="color:var(--navy)">Mínimo 5 en cada RA.</b> Si un resultado de aprendizaje queda por debajo de 5, el módulo no se aprueba aunque la media salga. Se recupera solo ese RA.</p>
+  </div>
+</section>
+
+<!-- 08 Cómo se evalúa -->
+<section data-label="Cómo se evalúa" data-notas="Dentro de cada unidad: en HTML y CSS, práctica 60 % (cuaderno y página publicada) y prueba 40 % (examen de teoría y examen práctico en el aula); en WordPress, Moodle y el proyecto final, práctica 70 % y examen 30 %. Política de IA: no permitida en clase salvo indicación expresa. En las prácticas de instalación de WordPress y Moodle sí se permite, con la metodología de ayuda mínima: lo hacen todo ellos, solo la justa para no quedarse colgados." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Presentación del módulo</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Cómo se evalúa cada unidad</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:var(--gap-item)">
+    <div style="background:var(--white);border-radius:20px;padding:36px 44px;display:flex;flex-direction:column;gap:16px;box-shadow:0 2px 0 var(--line)">
+      <p style="font-size:96px;font-weight:800;line-height:1;color:var(--blue);letter-spacing:-.03em">60–70 %</p>
+      <p style="font-size:var(--type-body);font-weight:700;line-height:1.25;color:var(--navy)">Práctica</p>
+      <p style="font-size:var(--type-small);color:var(--muted);line-height:1.45">Lo que haces en el aula: páginas, cuaderno de ejercicios, instalaciones documentadas con capturas, la web de WordPress, el Moodle, el proyecto final con su defensa. Siempre con rúbrica publicada antes.</p>
+    </div>
+    <div style="background:var(--white);border-radius:20px;padding:36px 44px;display:flex;flex-direction:column;gap:16px;box-shadow:0 2px 0 var(--line)">
+      <p style="font-size:96px;font-weight:800;line-height:1;color:var(--blue);letter-spacing:-.03em">30–40 %</p>
+      <p style="font-size:var(--type-body);font-weight:700;line-height:1.25;color:var(--navy)">Prueba</p>
+      <p style="font-size:var(--type-small);color:var(--muted);line-height:1.45">Examen de teoría al final de cada unidad, en clase, sobre estas diapositivas. En HTML y CSS, además, examen práctico: una página escrita en el aula, sin ayuda.</p>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:var(--gap-item)">
+    <div style="display:flex;gap:24px;align-items:center;background:#FFF6D1;border-radius:20px;padding:24px 32px">
+      <img src="../assets/exclamation.png" alt="" style="width:64px;height:64px;object-fit:contain;flex:none">
+      <p style="font-size:var(--type-caption);line-height:1.45;color:var(--navy)"><b>Norma general.</b> Los porcentajes se aplican dentro de cada resultado de aprendizaje. Lo que no se entrega en el plazo no se recoge. Dos prácticas iguales son dos prácticas suspensas.</p>
+    </div>
+    <div style="display:flex;gap:24px;align-items:center;background:rgba(28,207,227,.14);border-radius:20px;padding:24px 32px">
+      <img src="../assets/exclamation.png" alt="" style="width:64px;height:64px;object-fit:contain;flex:none">
+      <p style="font-size:var(--type-caption);line-height:1.45;color:var(--navy)"><b>Inteligencia artificial.</b> No está permitida en clase salvo que se indique expresamente. HTML, CSS y el proyecto final se hacen sin ella. En las instalaciones de WordPress y Moodle sí se permite, como ayuda mínima: lo haces tú y preguntas solo para no quedarte parado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 09 Material y herramientas -->
+<section data-label="Material y herramientas" data-notas="Dónde está todo. La dirección web de las presentaciones se da cuando esté publicada. Las cuentas de GitHub y CodePen se crean en la tercera sesión, con el correo del centro. No hay que comprar ni instalar nada obligatorio en casa." style="display:grid;grid-template-columns:1fr 1.3fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);align-items:center">
+  <div>
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Presentación del módulo</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Con qué vamos a trabajar</h2>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">No hay libro. Todo el material de estudio está en estas presentaciones, que se abren en cualquier navegador: en el aula, en casa o en el móvil.</p>
+  </div>
+  <ul style="padding:0;list-style:none;display:flex;flex-direction:column;font-size:var(--type-small);line-height:1.4">
+    <li style="display:grid;grid-template-columns:300px 1fr;gap:32px;padding:20px 0;border-bottom:2px solid var(--line)"><span style="font-weight:700;color:var(--blue)">Presentaciones</span><span>Una por unidad, con código, ejemplos y ejercicios interactivos. Flechas para avanzar, Ctrl+P para guardar en PDF.</span></li>
+    <li style="display:grid;grid-template-columns:300px 1fr;gap:32px;padding:20px 0;border-bottom:2px solid var(--line)"><span style="font-weight:700;color:var(--blue)">Classroom</span><span>Entregas, avisos, enunciados de las prácticas y calificaciones.</span></li>
+    <li style="display:grid;grid-template-columns:300px 1fr;gap:32px;padding:20px 0;border-bottom:2px solid var(--line)"><span style="font-weight:700;color:var(--blue)">Editor y navegador</span><span>Visual Studio Code, gratuito, y Chrome o Firefox con sus herramientas de desarrollo (F12).</span></li>
+    <li style="display:grid;grid-template-columns:300px 1fr;gap:32px;padding:20px 0;border-bottom:2px solid var(--line)"><span style="font-weight:700;color:var(--blue)">Cuentas</span><span>GitHub (para publicar tus páginas), CodePen (para el cuaderno de ejercicios) y la cuenta de Google del centro (correo, calendario, Drive y formularios).</span></li>
+    <li style="display:grid;grid-template-columns:300px 1fr;gap:32px;padding:20px 0;border-bottom:2px solid var(--line)"><span style="font-weight:700;color:var(--blue)">Segunda evaluación</span><span>Un hosting con panel de control para WordPress y el paquete de Moodle para Windows, que se instala en el ordenador del aula.</span></li>
+    <li style="display:grid;grid-template-columns:300px 1fr;gap:32px;padding:20px 0"><span style="font-weight:700;color:var(--blue)">Inteligencia artificial</span><span>No está permitida en clase, salvo que se indique lo contrario.</span></li>
+  </ul>
+</section>
+
+<!-- 10 Cierre -->
+<section data-label="Empezamos" data-notas="Pasar a la UT1." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+  <span class="mancha arriba-dcha" style="width:560px;color:var(--green)"></span>
+  <span class="mancha abajo-izq" style="width:1000px;color:var(--gray)"></span>
+  <div style="display:flex;align-items:center;gap:20px;position:relative">
+    <span style="width:20px;height:20px;border-radius:50%;background:var(--cyan);display:block"></span>
+    <span style="font-size:var(--type-small);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--navy)">Presentación del módulo</span>
+  </div>
+  <h1 style="font-size:var(--type-hero);font-weight:800;line-height:1.02;letter-spacing:-.02em;max-width:1400px;position:relative;color:var(--navy)">¿Dudas? Empezamos.</h1>
+  <div style="display:flex;gap:56px;font-size:var(--type-caption);color:var(--navy);font-weight:600;position:relative">
+    <span>A continuación: UT1. La web y HTML</span>
+    <span>Classroom · Materiales del módulo</span>
+  </div>
+</section>
+
+</deck-stage>
+<script src="../assets/deck-stage.js"></script>
+<script src="../assets/aw.js"></script>
+</body>
+</html>
