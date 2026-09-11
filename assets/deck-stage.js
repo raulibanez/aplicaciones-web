@@ -27,7 +27,9 @@
  *      On touch devices, tapping the left/right half of the stage goes
  *      prev/next — taps on links, buttons and other interactive slide
  *      content are left alone.
- *  (c) press R to reset to slide 0 (with a tasteful keyboard hint).
+ *  (c) press P (or the overlay button) to toggle fullscreen. Fullscreen
+ *      enters presenting mode: the thumbnail rail is hidden and the
+ *      overlay becomes pointer-summoned only. Esc / P leaves it.
  *  (d) bottom-center overlay showing slide count + hints, fades out on
  *      idle; hovering or focusing its controls pins it visible until the
  *      pointer/focus leaves. While presenting it is pointer-summoned only:
@@ -685,6 +687,7 @@
       this._onMouseMove = this._onMouseMove.bind(this);
       this._onTap = this._onTap.bind(this);
       this._onMessage = this._onMessage.bind(this);
+      this._onFullscreenChange = this._onFullscreenChange.bind(this);
       // Capture-phase close so a click anywhere dismisses the menu, but
       // ignore clicks that land inside the menu itself — otherwise the
       // capture handler runs before the menu's own (bubble) handler and
@@ -716,6 +719,7 @@
       window.addEventListener('resize', this._onResize);
       window.addEventListener('mousemove', this._onMouseMove, { passive: true });
       window.addEventListener('message', this._onMessage);
+      document.addEventListener('fullscreenchange', this._onFullscreenChange);
       window.addEventListener('click', this._onDocClick, true);
       this.addEventListener('click', this._onTap);
       // Print lays every slide out as its own page, so [data-deck-active]-
@@ -1044,6 +1048,7 @@
       window.removeEventListener('resize', this._onResize);
       window.removeEventListener('mousemove', this._onMouseMove);
       window.removeEventListener('message', this._onMessage);
+      document.removeEventListener('fullscreenchange', this._onFullscreenChange);
       window.removeEventListener('click', this._onDocClick, true);
       window.removeEventListener('beforeprint', this._onBeforePrint);
       window.removeEventListener('afterprint', this._onAfterPrint);
@@ -1124,12 +1129,12 @@
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
         </button>
         <span class="divider"></span>
-        <button class="btn reset" type="button" aria-label="Reset to first slide" title="Reset (R)">Reset<span class="kbd">R</span></button>
+        <button class="btn reset" type="button" aria-label="Pantalla completa" title="Pantalla completa (P)">Pantalla completa<span class="kbd">P</span></button>
       `;
 
       overlay.querySelector('.prev').addEventListener('click', () => this._advance(-1, 'click'));
       overlay.querySelector('.next').addEventListener('click', () => this._advance(1, 'click'));
-      overlay.querySelector('.reset').addEventListener('click', () => this._go(0, 'click'));
+      overlay.querySelector('.reset').addEventListener('click', () => this._toggleFullscreen());
 
       // Pin the controls while the user is interacting with them —
       // hovering, or keyboard focus on a control. The hidden overlay is
@@ -1629,28 +1634,7 @@
         // overlay under a hovering cursor and close menus on every slide
         // change. Mirrors the preview_mode branch's unchanged-value guard
         // below.
-        if (d.__omelette_presenting !== !!this._presenting) {
-          this._presenting = d.__omelette_presenting;
-          // A presenting transition invalidates interaction pins: carried
-          // across the flip, a stale pin would hold the first summoned
-          // overlay open with no pointer anywhere near it. Hide on BOTH
-          // transitions: entry cleans the audience's screen, and on exit a
-          // pin-skipped hide timeout may have left data-visible set with
-          // no timer armed — without this, the footer would linger in the
-          // editor until the next mousemove. The next interaction
-          // re-summons it either way.
-          this._overlayHover = false;
-          this._overlayFocus = false;
-          if (this._overlay) {
-            this._overlay.removeAttribute('data-visible');
-            if (this._hideTimer) clearTimeout(this._hideTimer);
-          }
-          this._syncRailHidden();
-          this._closeMenu();
-          this._closeConfirm();
-          this._fit();
-          this._scaleThumbs();
-        }
+        this._setPresenting(d.__omelette_presenting);
       }
       // Host's Preview segment (ViewerMode='none'): the rail's drag-reorder /
       // right-click skip-delete affordances are editing chrome, so hide it
@@ -1703,6 +1687,49 @@
         this._railAnimTimer = setTimeout(() => this.removeAttribute('data-rail-anim'), 220);
       }
       if (d && d.type === '__omelette_rail_enabled') this._enableRail();
+    }
+
+    /** Enter/leave presenting mode: rail hidden, overlay pointer-summoned
+     *  only. Shared by the host's __omelette_presenting message and the
+     *  standalone fullscreen toggle (P key / overlay button). */
+    _setPresenting(on) {
+      on = !!on;
+      if (on === !!this._presenting) return;
+      this._presenting = on;
+      // A presenting transition invalidates interaction pins: carried
+      // across the flip, a stale pin would hold the first summoned
+      // overlay open with no pointer anywhere near it. Hide on BOTH
+      // transitions: entry cleans the audience's screen, and on exit a
+      // pin-skipped hide timeout may have left data-visible set with
+      // no timer armed — without this, the footer would linger in the
+      // editor until the next mousemove. The next interaction
+      // re-summons it either way.
+      this._overlayHover = false;
+      this._overlayFocus = false;
+      if (this._overlay) {
+        this._overlay.removeAttribute('data-visible');
+        if (this._hideTimer) clearTimeout(this._hideTimer);
+      }
+      this._syncRailHidden();
+      this._closeMenu();
+      this._closeConfirm();
+      this._fit();
+      this._scaleThumbs();
+    }
+
+    _toggleFullscreen() {
+      const doc = document;
+      try {
+        if (doc.fullscreenElement) {
+          if (doc.exitFullscreen) doc.exitFullscreen();
+        } else if (doc.documentElement.requestFullscreen) {
+          doc.documentElement.requestFullscreen();
+        }
+      } catch (err) {}
+    }
+
+    _onFullscreenChange() {
+      this._setPresenting(!!document.fullscreenElement);
     }
 
     _syncRailHidden() {
@@ -1801,8 +1828,8 @@
         this._go(0, 'keyboard');
       } else if (key === 'End') {
         this._go(this._slides.length - 1, 'keyboard');
-      } else if (key === 'r' || key === 'R') {
-        this._go(0, 'keyboard');
+      } else if (key === 'p' || key === 'P') {
+        this._toggleFullscreen();
       } else if (/^[0-9]$/.test(key)) {
         // 1..9 jump to that slide; 0 jumps to 10.
         const n = key === '0' ? 9 : parseInt(key, 10) - 1;
