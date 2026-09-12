@@ -151,7 +151,7 @@
     <p style="font-size:var(--type-subtitle);font-weight:700;color:var(--navy);margin-top:16px">Casi tres cuartas partes de la población mundial usa Internet</p>
   </div>
   <div style="display:flex;flex-direction:column;gap:var(--gap-item)">
-    <p style="font-size:var(--type-body);line-height:1.5">Internet es la infraestructura más usada del planeta. Todo lo que vas a instalar en este módulo funciona sobre ella y se usa desde cualquier sitio con conexión.</p>
+    <p style="font-size:var(--type-body);line-height:1.5">Todo lo que se instala y se usa en este módulo funciona sobre Internet, desde cualquier sitio con conexión.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
       <div style="background:var(--white);border-radius:20px;padding:36px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-title);font-weight:800;color:var(--navy)">2.200 M</p><p style="font-size:var(--type-caption);color:var(--muted);margin-top:8px">Personas que siguen sin conexión, la mayoría en países de renta baja y media</p></div>
       <div style="background:var(--white);border-radius:20px;padding:36px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-title);font-weight:800;color:var(--navy)">1969</p><p style="font-size:var(--type-caption);color:var(--muted);margin-top:8px">Año de ARPANET, la red de cuatro universidades que fue el origen de Internet</p></div>
@@ -194,7 +194,7 @@
     <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--gap-item);margin-top:var(--gap-item);font-size:var(--type-body);line-height:1.4">
       <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>La propuso <b>Tim Berners-Lee</b> en el CERN en 1989 y la puso en marcha en 1990</span></li>
       <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Tres piezas: <b>URL</b> (dónde está), <b>HTTP</b> (cómo se pide) y <b>HTML</b> (cómo se escribe)</span></li>
-      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>En 1993 el CERN la hizo de dominio público: por eso es de todos</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>En 1993 el CERN puso el software de la web en el dominio público: cualquiera puede usarlo sin pagar licencias</span></li>
     </ul>
   </div>
   <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
@@ -249,7 +249,7 @@
       <img src="img/peticion.svg" alt="Esquema de una petición web: navegador, DNS y servidor web" title="Elaboración propia" style="object-fit:contain">
       <figcaption class="credito"><b>Figura 1.3.</b> Elaboración propia.</figcaption>
     </figure>
-    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 1.3. Todo esto pasa en menos de un segundo, y se repite para cada imagen, hoja de estilos o script de la página.</p>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 1.3. Todo esto suele tardar menos de un segundo, y se repite para cada imagen, hoja de estilos o script de la página.</p>
   </div>
 </section>
 
@@ -323,11 +323,11 @@ Content-Length: 1240
       </tr>
     </thead>
     <tbody style="line-height:1.3">
-      <tr style="border-bottom:2px solid var(--line)"><td style="padding:18px 32px;font-family:var(--mono);font-weight:600;color:var(--green-dark)">200</td><td style="padding:18px 32px;font-weight:700;color:var(--navy)">OK</td><td style="padding:18px 32px">La petición ha tenido éxito: aquí tienes la página.</td></tr>
-      <tr style="border-bottom:2px solid var(--line)"><td style="padding:18px 32px;font-family:var(--mono);font-weight:600;color:var(--blue)">301</td><td style="padding:18px 32px;font-weight:700;color:var(--navy)">Moved Permanently</td><td style="padding:18px 32px">La página se ha mudado a otra dirección; el navegador va allí solo.</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:18px 32px;font-family:var(--mono);font-weight:600;color:var(--green-dark)">200</td><td style="padding:18px 32px;font-weight:700;color:var(--navy)">OK</td><td style="padding:18px 32px">La petición ha tenido éxito y el servidor devuelve la página.</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:18px 32px;font-family:var(--mono);font-weight:600;color:var(--blue)">301</td><td style="padding:18px 32px;font-weight:700;color:var(--navy)">Moved Permanently</td><td style="padding:18px 32px">La página se ha trasladado a otra dirección y el navegador va a la nueva automáticamente.</td></tr>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:18px 32px;font-family:var(--mono);font-weight:600;color:var(--orange)">403</td><td style="padding:18px 32px;font-weight:700;color:var(--navy)">Forbidden</td><td style="padding:18px 32px">Existe, pero no tienes permiso para verla.</td></tr>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:18px 32px;font-family:var(--mono);font-weight:600;color:var(--orange)">404</td><td style="padding:18px 32px;font-weight:700;color:var(--navy)">Not Found</td><td style="padding:18px 32px">El servidor no encuentra ese recurso: dirección mal escrita o página borrada.</td></tr>
-      <tr><td style="padding:18px 32px;font-family:var(--mono);font-weight:600;color:var(--red)">500</td><td style="padding:18px 32px;font-weight:700;color:var(--navy)">Internal Server Error</td><td style="padding:18px 32px">El servidor ha fallado al fabricar la página: error del programa, no tuyo.</td></tr>
+      <tr><td style="padding:18px 32px;font-family:var(--mono);font-weight:600;color:var(--red)">500</td><td style="padding:18px 32px;font-weight:700;color:var(--navy)">Internal Server Error</td><td style="padding:18px 32px">El programa del servidor ha fallado al generar la página. El error está en el servidor, no en el cliente.</td></tr>
     </tbody>
   </table>
   <p style="font-size:var(--type-caption);color:var(--muted);margin-top:24px">Tabla 1.2. Los códigos y sus nombres son los de la RFC 9110, <em>HTTP Semantics</em>, IETF, junio de 2022 (secciones 15.3.1 y 15.5.5), consultada el 11 de septiembre de 2026. 2xx éxito, 3xx redirección, 4xx error del cliente, 5xx error del servidor.</p>
@@ -402,7 +402,7 @@ Content-Length: 1240
     <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--gap-item);margin-top:var(--gap-title);font-size:var(--type-small);line-height:1.4">
       <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Dirección IP</b>: el número del servidor. IPv4 son cuatro números de 0 a 255 (<code class="en-linea">93.184.216.34</code>); como se acabaron, existe IPv6, mucho más larga.</span></li>
       <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Dominio</b>: el nombre que la gente recuerda (<code class="en-linea">ejemplo.es</code>). Se registra por años en un registrador, y nadie más puede tenerlo mientras lo pagues.</span></li>
-      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>DNS</b> (Domain Name System, sistema de nombres de dominio): la guía que traduce el nombre en la IP. Sin DNS tendrías que saberte los números.</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>DNS</b> (Domain Name System, sistema de nombres de dominio): el sistema que traduce el nombre a la dirección IP. Sin DNS habría que recordar los números.</span></li>
     </ul>
   </div>
   <div style="display:flex;flex-direction:column;gap:32px">
@@ -418,8 +418,8 @@ Content-Length: 1240
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>consola</span></div>
       <pre class="cod compacto" data-lang="js">
-nslookup www.rae.es      // pregunta al DNS y devuelve la IP
-ping www.rae.es          // comprueba que el servidor responde</pre>
+nslookup www.rae.es      ← pregunta al DNS y devuelve la IP
+ping www.rae.es          ← comprueba si el servidor responde</pre>
     </div>
   </div>
 </section>
@@ -432,7 +432,7 @@ ping www.rae.es          // comprueba que el servidor responde</pre>
     <div style="background:var(--white);border-radius:20px;padding:44px 40px;display:flex;flex-direction:column;gap:20px;box-shadow:0 2px 0 var(--line)">
       <span style="width:64px;height:64px;border-radius:16px;background:var(--blue);color:var(--white);display:grid;place-items:center;font-size:var(--type-small);font-weight:800">1</span>
       <p style="font-size:var(--type-body);font-weight:700;line-height:1.25;color:var(--navy)">Un servidor: el hosting</p>
-      <p style="font-size:var(--type-small);color:var(--muted);line-height:1.45">Un ordenador siempre encendido y conectado donde viven los archivos. Se alquila: compartido (barato, con panel de control), VPS o nube. Gratis para páginas estáticas: GitHub Pages.</p>
+      <p style="font-size:var(--type-small);color:var(--muted);line-height:1.45">Un ordenador siempre encendido y conectado donde se guardan los archivos de la web. Se alquila: compartido (barato, con panel de control), VPS o nube. Gratis para páginas estáticas: GitHub Pages.</p>
     </div>
     <div style="background:var(--white);border-radius:20px;padding:44px 40px;display:flex;flex-direction:column;gap:20px;box-shadow:0 2px 0 var(--line)">
       <span style="width:64px;height:64px;border-radius:16px;background:var(--cyan);color:var(--navy);display:grid;place-items:center;font-size:var(--type-small);font-weight:800">2</span>
@@ -480,7 +480,7 @@ ping www.rae.es          // comprueba que el servidor responde</pre>
   <div style="display:flex;flex-direction:column">
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Internet y la web</p>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Dos niveles y tres niveles</h2>
-    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-title)">Con <b>dos niveles</b>, el servidor devuelve archivos tal cual: es una página <b>estática</b>. Con <b>tres niveles</b>, entre el cliente y los datos hay un programa que fabrica la página en cada petición: es una página <b>dinámica</b>.</p>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-title)">Con <b>dos niveles</b>, el servidor devuelve archivos tal cual: es una página <b>estática</b>. Con <b>tres niveles</b>, entre el cliente y los datos hay un programa que genera la página en cada petición: es una página <b>dinámica</b>.</p>
     <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">Tu página de GitHub Pages es de dos niveles. WordPress y Moodle, de tres: por eso necesitan PHP y una base de datos.</p>
   </div>
   <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
@@ -501,9 +501,9 @@ ping www.rae.es          // comprueba que el servidor responde</pre>
   <div style="display:flex;flex-direction:column;gap:var(--gap-item)">
     <p style="font-size:var(--type-body);line-height:1.5">El <b>navegador</b> es el cliente de la web: pide la página, la recibe, interpreta el HTML, aplica el CSS, ejecuta el JavaScript y la pinta. Y trae las DevTools.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
-      <div style="background:var(--white);border-radius:20px;padding:28px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-subtitle);font-weight:800;color:var(--navy)">15,8 %</p><p style="font-size:var(--type-caption);color:var(--muted);margin-top:8px">Safari, el de Apple</p></div>
-      <div style="background:var(--white);border-radius:20px;padding:28px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-subtitle);font-weight:800;color:var(--navy)">5,4 %</p><p style="font-size:var(--type-caption);color:var(--muted);margin-top:8px">Edge, el de Windows</p></div>
-      <div style="background:var(--white);border-radius:20px;padding:28px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-subtitle);font-weight:800;color:var(--navy)">3,0 %</p><p style="font-size:var(--type-caption);color:var(--muted);margin-top:8px">Firefox, el libre</p></div>
+      <div style="background:var(--white);border-radius:20px;padding:28px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-subtitle);font-weight:800;color:var(--navy)">15,8 %</p><p style="font-size:var(--type-caption);color:var(--muted);margin-top:8px">Safari, de Apple</p></div>
+      <div style="background:var(--white);border-radius:20px;padding:28px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-subtitle);font-weight:800;color:var(--navy)">5,4 %</p><p style="font-size:var(--type-caption);color:var(--muted);margin-top:8px">Edge, de Microsoft</p></div>
+      <div style="background:var(--white);border-radius:20px;padding:28px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-subtitle);font-weight:800;color:var(--navy)">3,0 %</p><p style="font-size:var(--type-caption);color:var(--muted);margin-top:8px">Firefox, de Mozilla</p></div>
     </div>
     <p style="font-size:var(--type-caption);color:var(--muted)">Fuente: StatCounter, <em>Browser Market Share Worldwide</em>, agosto de 2026. Consultado el 11 de septiembre de 2026. Solo quedan tres motores: Blink (Chrome, Edge, Opera), WebKit (Safari) y Gecko (Firefox).</p>
   </div>
@@ -541,7 +541,7 @@ ping www.rae.es          // comprueba que el servidor responde</pre>
     </div>
   </div>
   <div style="background:var(--white);border-radius:20px;padding:32px 40px;margin-top:var(--gap-title);box-shadow:0 2px 0 var(--line);font-size:var(--type-caption);line-height:1.5;color:var(--muted)">
-    <b style="color:var(--navy)">Historia en tres líneas.</b> El primer navegador fue <b>WorldWideWeb</b> (Berners-Lee, CERN, 1990). <b>Mosaic</b> (NCSA, 1993) fue el primero que mostraba imágenes entre el texto y el que hizo popular la web; de su equipo salió Netscape. <b>Internet Explorer</b> (1995) dominó veinte años y se retiró en 2022. Hoy: Chrome (2008), Safari, Edge, Firefox (2004) y, en el móvil, Chrome, Safari y Samsung Internet.
+    <b style="color:var(--navy)">Un poco de historia.</b> El primer navegador fue <b>WorldWideWeb</b> (Berners-Lee, CERN, 1990). <b>Mosaic</b> (NCSA, 1993) fue el primero que mostraba imágenes entre el texto y el que hizo popular la web; de su equipo salió Netscape. <b>Internet Explorer</b> (1995) fue el más usado durante más de diez años y se retiró en 2022. Hoy: Chrome (2008), Safari, Edge, Firefox (2004) y, en el móvil, Chrome, Safari y Samsung Internet.
   </div>
 </section>
 
@@ -559,9 +559,9 @@ ping www.rae.es          // comprueba que el servidor responde</pre>
       </tr>
     </thead>
     <tbody style="line-height:1.3">
-      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy)">Nginx</td><td style="padding:14px 32px;font-weight:800;color:var(--blue)">31,0 %</td><td style="padding:14px 32px">De 2004. Un solo proceso atiende miles de conexiones a la vez: el preferido de las webs grandes.</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy)">Nginx</td><td style="padding:14px 32px;font-weight:800;color:var(--blue)">31,0 %</td><td style="padding:14px 32px">De 2004. Un solo proceso atiende miles de conexiones a la vez: habitual en las webs con más tráfico.</td></tr>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy)">Cloudflare</td><td style="padding:14px 32px;font-weight:800;color:var(--blue)">30,5 %</td><td style="padding:14px 32px">No es un servidor que instales: es una red que se pone delante de tu web, la acelera y la protege de ataques.</td></tr>
-      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy)">Apache</td><td style="padding:14px 32px;font-weight:800;color:var(--blue)">22,1 %</td><td style="padding:14px 32px">De 1995, libre. El clásico de los hostings compartidos y el que traen XAMPP y el paquete de Moodle.</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy)">Apache</td><td style="padding:14px 32px;font-weight:800;color:var(--blue)">22,1 %</td><td style="padding:14px 32px">De 1995, libre. El más habitual en hostings compartidos; es el que traen XAMPP y el paquete de Moodle.</td></tr>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy)">LiteSpeed</td><td style="padding:14px 32px;font-weight:800;color:var(--blue)">14,6 %</td><td style="padding:14px 32px">Compatible con Apache pero más rápido; habitual en hostings de WordPress.</td></tr>
       <tr><td style="padding:14px 32px;font-weight:700;color:var(--navy)">Microsoft IIS</td><td style="padding:14px 32px;font-weight:800;color:var(--blue)">3,0 %</td><td style="padding:14px 32px">El de Windows Server, para aplicaciones .NET.</td></tr>
     </tbody>
@@ -602,7 +602,7 @@ ErrorLog "logs/error.log"</pre>
 </section>
 
 <!-- 27 Estática y dinámica -->
-<section data-label="1.1 · Estática y dinámica" data-seccion="1.1" data-notas="Estática: el servidor devuelve un archivo HTML tal cual (GitHub Pages). Dinámica: el servidor ejecuta un programa (PHP) que consulta la base de datos (MariaDB, MySQL, PostgreSQL) y fabrica el HTML en cada petición (WordPress, Moodle). PHP sigue siendo el lenguaje de servidor de casi siete de cada diez webs cuyo lenguaje se conoce: 69,9 % según W3Techs el 11 de septiembre de 2026." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.1 · Estática y dinámica" data-seccion="1.1" data-notas="Estática: el servidor devuelve un archivo HTML tal cual (GitHub Pages). Dinámica: el servidor ejecuta un programa (PHP) que consulta la base de datos (MariaDB, MySQL, PostgreSQL) y genera el HTML en cada petición (WordPress, Moodle). PHP sigue siendo el lenguaje de servidor de casi siete de cada diez webs cuyo lenguaje se conoce: 69,9 % según W3Techs el 11 de septiembre de 2026." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Internet y la web</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Página estática y página dinámica</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-title);flex:1">
@@ -618,13 +618,13 @@ ErrorLog "logs/error.log"</pre>
     </div>
     <div style="background:var(--white);border:3px solid var(--line);border-radius:24px;padding:48px 56px">
       <h3 style="font-size:var(--type-subtitle);font-weight:800;color:var(--navy)">Dinámica</h3>
-      <p style="font-size:var(--type-small);line-height:1.45;margin-top:24px;color:var(--navy)">Un programa en el servidor fabrica el HTML en cada petición con datos de una base de datos. Cada usuario puede ver algo distinto.</p>
+      <p style="font-size:var(--type-small);line-height:1.45;margin-top:24px;color:var(--navy)">Un programa en el servidor genera el HTML en cada petición con datos de una base de datos. Cada usuario puede ver algo distinto.</p>
       <ol style="padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:28px;font-size:var(--type-caption);line-height:1.35;color:var(--navy)">
         <li style="display:flex;gap:16px"><b style="color:var(--blue)">1</b><span>Petición: GET /noticias.php</span></li>
         <li style="display:flex;gap:16px"><b style="color:var(--blue)">2</b><span>El servidor web pasa la petición a <b>PHP</b></span></li>
         <li style="display:flex;gap:16px"><b style="color:var(--blue)">3</b><span>PHP consulta la <b>base de datos</b> (MariaDB, MySQL, PostgreSQL)</span></li>
         <li style="display:flex;gap:16px"><b style="color:var(--blue)">4</b><span>PHP monta el HTML con los datos</span></li>
-        <li style="display:flex;gap:16px"><b style="color:var(--blue)">5</b><span>Respuesta: 200 y el HTML recién fabricado</span></li>
+        <li style="display:flex;gap:16px"><b style="color:var(--blue)">5</b><span>Respuesta: 200 y el HTML recién generado</span></li>
       </ol>
       <p style="font-size:var(--type-caption);margin-top:28px;font-weight:700;color:var(--navy)">WordPress, Moodle, tu banco, Classroom.</p>
     </div>
@@ -639,9 +639,9 @@ ErrorLog "logs/error.log"</pre>
   <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:20px;max-width:1560px">Un <b>CMS</b> (Content Management System, gestor de contenidos) como WordPress o Moodle es una aplicación web dinámica. Antes de instalarlo hay que tener esto.</p>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:var(--gap-item)">
     <div style="background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-body);font-weight:700;color:var(--navy)">1 · Servidor web</p><p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:10px">Apache, Nginx o LiteSpeed, en un hosting o en tu ordenador.</p></div>
-    <div style="background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-body);font-weight:700;color:var(--navy)">2 · PHP</p><p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:10px">En la versión que pida el CMS. Es el programa que fabrica las páginas.</p></div>
+    <div style="background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-body);font-weight:700;color:var(--navy)">2 · PHP</p><p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:10px">En la versión que pida el CMS. Es el programa que genera las páginas.</p></div>
     <div style="background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-body);font-weight:700;color:var(--navy)">3 · Base de datos</p><p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:10px">MariaDB o MySQL, con un usuario y una contraseña para el CMS.</p></div>
-    <div style="background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-body);font-weight:700;color:var(--navy)">4 · Dominio y DNS</p><p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:10px">Para que la gente llegue. Y HTTPS con certificado, que hoy el hosting da gratis.</p></div>
+    <div style="background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-body);font-weight:700;color:var(--navy)">4 · Dominio y DNS</p><p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:10px">Para que los usuarios lleguen a la web. Y HTTPS con certificado, que casi todos los hostings incluyen gratis.</p></div>
     <div style="background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-body);font-weight:700;color:var(--navy)">5 · Acceso al servidor</p><p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:10px">Un panel de control (cPanel) o SFTP para subir los archivos y crear la base de datos.</p></div>
     <div style="background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-body);font-weight:700;color:var(--navy)">6 · Los archivos del CMS</p><p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:10px">Descargados de su web oficial o instalados desde el panel con un clic.</p></div>
   </div>
@@ -666,7 +666,7 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
       <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
         <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>REST</b>: cada cosa tiene su URL y se pide con GET, POST…</span></li>
         <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>JSON</b>: el formato de la respuesta, texto con claves y valores</span></li>
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Abre la URL en el navegador y lo verás en crudo</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Abre la URL en el navegador y verás la respuesta tal cual</span></li>
       </ul>
     </div>
     <div class="ventana">
@@ -691,10 +691,10 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
   <p style="font-size:var(--type-caption);color:var(--muted);margin-top:20px">PokeAPI, pokeapi.co, servicio público y gratuito. Consultado el 11 de septiembre de 2026.</p>
 </section>
 
-<!-- 30 La web ha cambiado cuatro veces -->
+<!-- 30 Las etapas de la web, de la 1.0 a la 4.0 -->
 <section data-label="1.1 · Web 1.0 a 4.0" data-seccion="1.1" data-notas="El término Web 2.0 lo popularizó Tim O'Reilly en 2004: el usuario pasa de mirar a hacer. Web 3.0 tiene dos sentidos: el clásico (web semántica, datos que entienden las máquinas, buscadores que responden) y el de «Web3» desde 2021 (web descentralizada con blockchain), que es otra cosa. Web 4.0 es todavía una etiqueta: web ubicua, en todos los dispositivos, con IA que actúa por ti. Estas etapas no son versiones: son formas de contar la evolución." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Internet y la web</p>
-  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">La web ha cambiado cuatro veces</h2>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Las etapas de la web, de la 1.0 a la 4.0</h2>
   <table style="width:100%;border-collapse:collapse;margin-top:var(--gap-item);font-size:var(--type-caption);background:var(--white);border-radius:20px;overflow:hidden">
     <thead>
       <tr style="background:var(--navy);color:var(--white);text-align:left">
@@ -706,7 +706,7 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
     <tbody style="line-height:1.35">
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:16px 28px;font-weight:800;color:var(--blue)">Web 1.0<br><span style="font-weight:400;color:var(--muted)">años 90</span></td><td style="padding:16px 28px">Páginas estáticas escritas a mano, solo lectura. Contenido y aspecto mezclados en el HTML. Sin usuarios: todos eran visitantes.</td><td style="padding:16px 28px">Yahoo, Altavista, las páginas personales</td></tr>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:16px 28px;font-weight:800;color:var(--blue)">Web 2.0<br><span style="font-weight:400;color:var(--muted)">desde 2004</span></td><td style="padding:16px 28px">El usuario crea el contenido: se registra, comenta, sube fotos. Bases de datos detrás, redes sociales, aplicaciones web que sustituyen a las de escritorio.</td><td style="padding:16px 28px">Wikipedia, YouTube, Facebook, Google Docs</td></tr>
-      <tr style="border-bottom:2px solid var(--line)"><td style="padding:16px 28px;font-weight:800;color:var(--blue)">Web 3.0<br><span style="font-weight:400;color:var(--muted)">años 2010</span></td><td style="padding:16px 28px">Datos estructurados que entienden las máquinas (web semántica), buscadores que responden en vez de enlazar, publicidad y contenido personalizados.<br><span style="color:var(--muted)">Ojo: desde 2021 «Web3» también nombra la web descentralizada con blockchain. Es otra cosa.</span></td><td style="padding:16px 28px">Tarjetas de resultados de Google, recomendaciones, la vista previa de un enlace</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:16px 28px;font-weight:800;color:var(--blue)">Web 3.0<br><span style="font-weight:400;color:var(--muted)">años 2010</span></td><td style="padding:16px 28px">Datos estructurados que entienden las máquinas (web semántica), buscadores que responden en vez de enlazar, publicidad y contenido personalizados.<br><span style="color:var(--muted)">Desde 2021, «Web3» también nombra la web descentralizada con blockchain, que es otra cosa.</span></td><td style="padding:16px 28px">Tarjetas de resultados de Google, recomendaciones, la vista previa de un enlace</td></tr>
       <tr><td style="padding:16px 28px;font-weight:800;color:var(--blue)">Web 4.0<br><span style="font-weight:400;color:var(--muted)">en marcha</span></td><td style="padding:16px 28px">Web ubicua: en el reloj, el coche, la casa. Asistentes de IA que navegan y actúan por ti: reservan, compran, resumen.</td><td style="padding:16px 28px">Asistentes de IA generativa, agentes, Internet de las cosas</td></tr>
     </tbody>
   </table>
@@ -769,14 +769,14 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
 <!-- 33 Redes sociales y apps -->
 <section data-label="1.1 · Redes sociales y apps" data-seccion="1.1" data-notas="Redes horizontales (para todo) y verticales (por tema). Tres riesgos clásicos: privacidad (configurar el perfil), suplantación de identidad, pérdida de control de lo publicado (concedes una licencia de uso; el RGPD de 2018 da derecho a acceder, rectificar y borrar). Apps nativas: se instalan y se programan con el SDK de cada sistema; web apps: van por el navegador y se adaptan con diseño responsive; las PWA (progressive web apps) se instalan desde el navegador. Diseño responsive, UX (experiencia de usuario) y SDK son vocabulario de la profesión." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Internet y la web</p>
-  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Dos apuntes más: redes sociales y apps</h2>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Redes sociales y aplicaciones móviles</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-title);flex:1">
     <div style="background:var(--white);border:3px solid var(--line);border-radius:24px;padding:48px 56px">
       <h3 style="font-size:var(--type-subtitle);font-weight:800;color:var(--navy)">Redes sociales</h3>
       <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:20px;margin-top:28px;font-size:var(--type-small);line-height:1.4;color:var(--navy)">
         <li style="display:flex;gap:20px"><span style="color:var(--blue)">●</span><span><b>Horizontales</b>, para todo: Instagram, TikTok, X, Facebook. <b>Verticales</b>, por tema: LinkedIn (trabajo), Strava (deporte), Letterboxd (cine).</span></li>
         <li style="display:flex;gap:20px"><span style="color:var(--blue)">●</span><span><b>Tres riesgos</b>: privacidad (revisa qué ve quién), suplantación de identidad, y pérdida de control de lo que publicas: concedes una licencia de uso.</span></li>
-        <li style="display:flex;gap:20px"><span style="color:var(--blue)">●</span><span><b>Tus derechos</b>: el RGPD (2018) te deja acceder a tus datos, corregirlos y pedir que los borren.</span></li>
+        <li style="display:flex;gap:20px"><span style="color:var(--blue)">●</span><span><b>Tus derechos</b>: el RGPD (en vigor desde 2018) te permite acceder a tus datos, corregirlos y pedir que los borren.</span></li>
       </ul>
     </div>
     <div style="background:var(--green);color:var(--navy);border-radius:24px;padding:48px 56px">
@@ -811,7 +811,7 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
     <ol style="padding:0;list-style:none;display:flex;flex-direction:column;gap:20px;font-size:var(--type-small);line-height:1.4">
       <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue)">1.</span><span>Crea la cuenta y el repositorio público con tu nombre de usuario</span></li>
       <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue)">2.</span><span>Crea index.html desde la web de GitHub y pega el esqueleto de la diapositiva siguiente</span></li>
-      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue)">3.</span><span>Activa Pages, espera y abre tu dirección. Si funciona, toca la página y vuelve a guardar</span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue)">3.</span><span>Activa Pages, espera y abre tu dirección. Si funciona, cambia algo en la página y vuelve a guardar</span></li>
     </ol>
   </div>
 </section>
@@ -902,9 +902,9 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:20px 36px;font-weight:700;color:var(--navy)">Hosting (servidor)</td><td style="padding:20px 36px">Lo pone GitHub. Sus servidores guardan tu archivo y lo sirven las 24 horas.</td></tr>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:20px 36px;font-weight:700;color:var(--navy)">Dominio</td><td style="padding:20px 36px"><code class="en-linea">github.io</code> es de GitHub; <code class="en-linea">tuusuario</code> es tu subdominio. Si compraras un dominio, podrías apuntarlo aquí.</td></tr>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:20px 36px;font-weight:700;color:var(--navy)">DNS</td><td style="padding:20px 36px">GitHub ha creado el registro que une tu nombre con la IP de sus servidores.</td></tr>
-      <tr style="border-bottom:2px solid var(--line)"><td style="padding:20px 36px;font-weight:700;color:var(--navy)">HTTPS</td><td style="padding:20px 36px">GitHub pone el certificado: por eso tu dirección lleva candado sin hacer nada.</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:20px 36px;font-weight:700;color:var(--navy)">HTTPS</td><td style="padding:20px 36px">GitHub instala el certificado, por eso tu dirección lleva el candado sin configurar nada.</td></tr>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:20px 36px;font-weight:700;color:var(--navy)">Página estática</td><td style="padding:20px 36px">El servidor devuelve tu index.html tal cual. Sin PHP ni base de datos: por eso es gratis y no hace falta instalar nada.</td></tr>
-      <tr><td style="padding:20px 36px;font-weight:700;color:var(--navy)">DirectoryIndex</td><td style="padding:20px 36px">Pides <code class="en-linea">tuusuario.github.io/</code> sin archivo y el servidor te da <code class="en-linea">index.html</code>.</td></tr>
+      <tr><td style="padding:20px 36px;font-weight:700;color:var(--navy)">Archivo por defecto</td><td style="padding:20px 36px">Pides <code class="en-linea">tuusuario.github.io/</code> sin archivo y el servidor te da <code class="en-linea">index.html</code>.</td></tr>
     </tbody>
   </table>
 </section>
@@ -975,7 +975,7 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
       <img src="../plantilla/img/mdn-html.jpg" alt="Página de MDN Web Docs sobre HTML" title="Captura de MDN Web Docs · Mozilla · CC BY-SA 2.5">
       <figcaption class="credito"><b>MDN Web Docs, «HTML»</b>. Captura de developer.mozilla.org, 10 de septiembre de 2026. Contenido de MDN bajo <a href="https://creativecommons.org/licenses/by-sa/2.5/" target="_blank" rel="noopener">CC BY-SA 2.5</a>.</figcaption>
     </figure>
-    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 1.6. La referencia de HTML en MDN Web Docs. Cuando tengas una duda sobre una etiqueta, aquí está la respuesta.</p>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 1.6. La referencia de HTML en MDN Web Docs. Es la referencia para consultar cualquier etiqueta.</p>
   </div>
 </section>
 
@@ -1041,11 +1041,11 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
       </tr>
     </thead>
     <tbody style="line-height:1.35">
-      <tr style="border-bottom:2px solid var(--line)"><td style="padding:16px 32px;font-weight:700;color:var(--navy)">Bloc de notas</td><td style="padding:16px 32px">Vale, HTML es texto. Pero no colorea, no cierra etiquetas ni avisa de errores.</td><td style="padding:16px 32px">Solo para demostrar que no hace falta nada más.</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:16px 32px;font-weight:700;color:var(--navy)">Bloc de notas</td><td style="padding:16px 32px">Sirve, porque HTML es solo texto, pero no colorea, no cierra etiquetas ni avisa de errores.</td><td style="padding:16px 32px">Solo para demostrar que no hace falta nada más.</td></tr>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:16px 32px;font-weight:700;color:var(--navy)">Visual Studio Code</td><td style="padding:16px 32px">Editor gratuito de Microsoft. Colorea, autocompleta, cierra etiquetas, indenta (Shift+Alt+F) y con la extensión Live Preview enseña la página al lado.</td><td style="padding:16px 32px">El editor del aula. Sin asistente de IA activado.</td></tr>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:16px 32px;font-weight:700;color:var(--navy)">CodePen</td><td style="padding:16px 32px">Editor en el navegador: escribes y ves el resultado. Cada ejercicio es un «pen». Plan gratuito con pens públicos.</td><td style="padding:16px 32px">El cuaderno de ejercicios. Datos ficticios: se ve desde fuera.</td></tr>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:16px 32px;font-weight:700;color:var(--navy)">El navegador</td><td style="padding:16px 32px">Abre el archivo (doble clic) y recarga con F5. Con F12, las DevTools.</td><td style="padding:16px 32px">Siempre abierto al lado del editor.</td></tr>
-      <tr><td style="padding:16px 32px;font-weight:700;color:var(--navy)">Editores WYSIWYG</td><td style="padding:16px 32px">«Lo que ves es lo que obtienes»: arrastras bloques y el programa escribe el HTML. Dreamweaver ayer; hoy, los maquetadores de los CMS, como Elementor.</td><td style="padding:16px 32px">En la UT3, con WordPress. Aquí no: primero hay que entender lo que generan.</td></tr>
+      <tr><td style="padding:16px 32px;font-weight:700;color:var(--navy)">Editores WYSIWYG</td><td style="padding:16px 32px">«Lo que ves es lo que obtienes»: arrastras bloques y el programa escribe el HTML. Dreamweaver ayer; hoy, los maquetadores de los CMS, como Elementor.</td><td style="padding:16px 32px">En la UT3, con WordPress. En esta unidad no: primero hay que entender el HTML que generan.</td></tr>
     </tbody>
   </table>
   <p style="font-size:var(--type-caption);color:var(--muted);margin-top:20px">Tabla 1.5. Atom, Brackets y KompoZer salen en muchos libros y ya no existen o no se mantienen. En 2026 el editor habitual es Visual Studio Code.</p>
@@ -1121,13 +1121,13 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Siete normas para escribir HTML</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px 48px;margin-top:var(--gap-title)">
-    <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--blue);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">1</span><p style="font-size:var(--type-small);line-height:1.4"><b>Minúsculas.</b> <code class="en-linea">&lt;p&gt;</code>, no <code class="en-linea">&lt;P&gt;</code>. Funcionan las dos, pero todo el mundo escribe en minúsculas.</p></div>
-    <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--cyan);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">2</span><p style="font-size:var(--type-small);line-height:1.4"><b>Comillas en los valores.</b> <code class="en-linea">href="contacto.html"</code>. Sin comillas funciona a veces; con comillas, siempre.</p></div>
+    <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--blue);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">1</span><p style="font-size:var(--type-small);line-height:1.4"><b>Minúsculas.</b> <code class="en-linea">&lt;p&gt;</code>, no <code class="en-linea">&lt;P&gt;</code>. Las dos formas funcionan, pero la convención es escribir en minúsculas.</p></div>
+    <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--cyan);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">2</span><p style="font-size:var(--type-small);line-height:1.4"><b>Comillas en los valores.</b> <code class="en-linea">href="contacto.html"</code>. Sin comillas funciona solo en algunos casos; con comillas, siempre.</p></div>
     <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--green);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">3</span><p style="font-size:var(--type-small);line-height:1.4"><b>Cierra lo que abres.</b> Cada <code class="en-linea">&lt;p&gt;</code> tiene su <code class="en-linea">&lt;/p&gt;</code>. Menos los elementos vacíos.</p></div>
     <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--orange);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">4</span><p style="font-size:var(--type-small);line-height:1.4"><b>Anida bien.</b> Lo último que se abre es lo primero que se cierra: <code class="en-linea">&lt;p&gt;&lt;strong&gt;así&lt;/strong&gt;&lt;/p&gt;</code>.</p></div>
     <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--navy);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">5</span><p style="font-size:var(--type-small);line-height:1.4"><b>Los espacios se colapsan.</b> Diez espacios o tres saltos de línea se ven como uno. Para separar párrafos, <code class="en-linea">&lt;p&gt;</code>; para un salto, <code class="en-linea">&lt;br&gt;</code>.</p></div>
     <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--green-dark);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">6</span><p style="font-size:var(--type-small);line-height:1.4"><b>Indenta.</b> Lo que va dentro, más a la derecha. Se lee y se corrige mejor. VS Code lo hace con Shift+Alt+F.</p></div>
-    <div style="display:flex;gap:24px;align-items:flex-start;grid-column:1 / -1"><span style="width:56px;height:56px;border-radius:14px;background:var(--red);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">7</span><p style="font-size:var(--type-small);line-height:1.4"><b>El navegador no avisa de los errores.</b> Ignora lo que no entiende y pinta lo que puede: una página con errores se ve «casi bien». Por eso se pasa por el <b>validador</b> (lo verás en el bloque 1.5) y se mira en las DevTools.</p></div>
+    <div style="display:flex;gap:24px;align-items:flex-start;grid-column:1 / -1"><span style="width:56px;height:56px;border-radius:14px;background:var(--red);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">7</span><p style="font-size:var(--type-small);line-height:1.4"><b>El navegador no avisa de los errores.</b> Ignora lo que no entiende y pinta lo que puede: una página con errores puede verse casi bien. Por eso se pasa por el <b>validador</b> (lo verás en el bloque 1.5) y se mira en las DevTools.</p></div>
   </div>
 </section>
 
@@ -1312,7 +1312,7 @@ DirectoryIndex index.html&lt;/code&gt;&lt;/pre&gt;</pre>
 &lt;/ul&gt;
 
 &lt;h2&gt;Cómo instalarlo&lt;/h2&gt;
-&lt;ol type="1" start="1"&gt;
+&lt;ol type="A"&gt;
   &lt;li&gt;Descarga el instalador&lt;/li&gt;
   &lt;li&gt;Ejecútalo&lt;/li&gt;
   &lt;li&gt;Elige un personaje&lt;/li&gt;
@@ -1339,7 +1339,7 @@ DirectoryIndex index.html&lt;/code&gt;&lt;/pre&gt;</pre>
 <!-- 54 Enlaces -->
 <section data-label="1.3 · Enlaces" data-seccion="1.3" data-notas="href absoluto (otra web), relativo (otra página de tu sitio), mailto y tel, download para forzar la descarga. target _blank abre en pestaña nueva; con rel noopener por seguridad. Anclas: un id en el destino y href con almohadilla; es el fragmento de la URL de la diapositiva 13. El atributo name para anclas es de HTML 4 y está obsoleto." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
-  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Enlaces: lo que hace que la web sea la web</h2>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Enlaces: el hipertexto</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>enlaces.html</span></div>
@@ -1377,7 +1377,7 @@ DirectoryIndex index.html&lt;/code&gt;&lt;/pre&gt;</pre>
 <section data-label="1.3 · Rutas relativas" data-seccion="1.3" data-notas="La carpeta del proyecto: index.html, paginas/, img/. Mismo nivel: el nombre. Bajar: carpeta/archivo. Subir: ../. Nada de C:\Users: en el servidor no existe. Nombres en minúsculas, sin espacios ni tildes: el servidor es Linux y distingue Foto.JPG de foto.jpg." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
   <div style="display:flex;flex-direction:column">
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
-    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Rutas relativas sin perderse</h2>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Rutas relativas</h2>
     <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:24px;margin-top:var(--gap-title);font-size:var(--type-small);line-height:1.4">
       <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Mismo nivel</b>: el nombre. <code class="en-linea">contacto.html</code></span></li>
       <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Bajar a una carpeta</b>: <code class="en-linea">img/portada.jpg</code></span></li>
@@ -1411,7 +1411,7 @@ mi-web/
   </div>
   <div>
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
-    <h2 style="font-size:var(--type-subtitle);font-weight:800;line-height:1.15;margin-top:20px;color:var(--navy);text-wrap:balance">Historia de HTML en cinco minutos</h2>
+    <h2 style="font-size:var(--type-subtitle);font-weight:800;line-height:1.15;margin-top:20px;color:var(--navy);text-wrap:balance">Vídeo: la historia de HTML</h2>
     <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">Mientras lo ves, apunta las respuestas. Las comentamos al terminar.</p>
     <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:20px;margin-top:var(--gap-title);font-size:var(--type-small);line-height:1.4">
       <li style="display:flex;gap:20px"><span style="color:var(--cyan);font-weight:800">—</span><span>¿En qué año aparece HTML5?</span></li>
@@ -1533,7 +1533,7 @@ mi-web/
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:20px 36px;font-weight:800;color:var(--blue)">PNG</td><td style="padding:20px 36px">Capturas de pantalla, imágenes con transparencia</td><td style="padding:20px 36px">Sin pérdida: nítido, pero pesa más que el JPG</td></tr>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:20px 36px;font-weight:800;color:var(--blue)">SVG</td><td style="padding:20px 36px">Logotipos, iconos, esquemas</td><td style="padding:20px 36px">Vectorial: se escala sin perder calidad y es texto (los esquemas de esta unidad son SVG)</td></tr>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:20px 36px;font-weight:800;color:var(--blue)">WebP</td><td style="padding:20px 36px">Fotos y capturas en webs modernas</td><td style="padding:20px 36px">Más ligero que JPG y PNG; lo generan WordPress y los gestores de contenidos</td></tr>
-      <tr><td style="padding:20px 36px;font-weight:800;color:var(--blue)">GIF</td><td style="padding:20px 36px">Animaciones cortas</td><td style="padding:20px 36px">Solo 256 colores. Para todo lo demás hay algo mejor</td></tr>
+      <tr><td style="padding:20px 36px;font-weight:800;color:var(--blue)">GIF</td><td style="padding:20px 36px">Animaciones cortas</td><td style="padding:20px 36px">Solo 256 colores. Para el resto de usos hay formatos mejores</td></tr>
     </tbody>
   </table>
   <p style="font-size:var(--type-caption);color:var(--muted);margin-top:28px">Tabla 1.7. Una imagen de una web debería pesar decenas o pocos cientos de kilobytes. La foto del móvil, de varios megabytes, se reduce antes de subirla.</p>
@@ -1548,26 +1548,26 @@ mi-web/
       <div class="ventana-barra"><i></i><i></i><i></i><span>figura.html</span></div>
       <pre class="cod compacto" data-lang="html" id="ej-figure">
 &lt;figure&gt;
-  &lt;img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
-       alt="Ilustración oficial de Pikachu" width="300"&gt;
+  &lt;img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/First_Web_Server.jpg"
+       alt="El primer servidor web, un ordenador NeXT" width="300"&gt;
   &lt;figcaption&gt;
-    Pikachu. Ilustración de PokeAPI (pokeapi.co).
+    El primer servidor web, en el CERN. Foto: Coolcaesar, Wikimedia Commons, CC BY-SA 3.0.
   &lt;/figcaption&gt;
 &lt;/figure&gt;</pre>
     </div>
     <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
       <div class="resultado" data-codigo="ej-figure" data-url="localhost/figura.html" data-zoom="1.3" style="flex:1"></div>
       <div style="background:var(--white);border-radius:16px;padding:24px 32px;box-shadow:0 2px 0 var(--line);font-size:var(--type-caption);line-height:1.45;color:var(--navy)">
-        <b>Dónde conseguir imágenes que puedas usar.</b> Wikimedia Commons (cada archivo dice su licencia), Unsplash y Pexels. Siempre con el crédito en el pie: autor, fuente y licencia. Una imagen de Google Imágenes no es tuya por estar en Google.
+        <b>Dónde conseguir imágenes que puedas usar.</b> Wikimedia Commons (cada archivo dice su licencia), Unsplash y Pexels. Siempre con el crédito en el pie: autor, fuente y licencia. Las imágenes que devuelve un buscador tienen autor y licencia: no se usan sin comprobarla.
       </div>
     </div>
   </div>
 </section>
 
 <!-- 63 Vídeo y audio -->
-<section data-label="1.5 · Vídeo y audio" data-seccion="1.5" data-notas="video y audio con controls; source para dar varios formatos; poster, muted, loop. Los navegadores bloquean el autoplay con sonido: solo arranca solo si va con muted. Formatos: MP4 (H.264) y WebM para vídeo; MP3 y OGG para audio. Un vídeo pesa mucho: para YouTube se incrusta, no se sube." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.5 · Vídeo y audio" data-seccion="1.5" data-notas="video y audio con controls; source para dar varios formatos; poster, muted, loop. Los navegadores bloquean el autoplay con sonido: solo arranca por sí mismo si va con muted. Formatos: MP4 (H.264) y WebM para vídeo; MP3 y OGG para audio. Un vídeo pesa mucho: para YouTube se incrusta, no se sube." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Imágenes, tablas y semántica</p>
-  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Vídeo y audio sin plugins</h2>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Vídeo y audio</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>multimedia.html</span></div>
@@ -1584,7 +1584,7 @@ mi-web/
   &lt;source src="tema.mp3" type="audio/mpeg"&gt;
 &lt;/audio&gt;
 
-&lt;!-- Solo arranca solo si va sin sonido --&gt;
+&lt;!-- Arranca sin pulsar nada solo si va sin sonido --&gt;
 &lt;video autoplay muted loop width="320"
        src="fondo.mp4"&gt;&lt;/video&gt;</pre>
     </div>
@@ -1592,7 +1592,7 @@ mi-web/
       <div class="resultado" data-codigo="ej-video" data-url="localhost/multimedia.html" data-zoom="1.3" style="flex:1"></div>
       <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
         <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">controls</code> pone los botones; <code class="en-linea">poster</code>, la imagen de portada; <code class="en-linea">&lt;source&gt;</code> ofrece varios formatos y el navegador elige</span></li>
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Los navegadores <b>bloquean el autoplay con sonido</b>: solo arranca solo si lleva <code class="en-linea">muted</code></span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Los navegadores <b>bloquean el autoplay con sonido</b>: solo arranca por sí mismo si lleva <code class="en-linea">muted</code></span></li>
         <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Formatos: MP4 y WebM; MP3 y OGG. Un vídeo pesa mucho: los de YouTube se incrustan, no se suben</span></li>
       </ul>
     </div>
@@ -1600,7 +1600,7 @@ mi-web/
 </section>
 
 <!-- 64 Incrustar algo de otra web -->
-<section data-label="1.5 · Incrustar algo de otra web" data-seccion="1.5" data-notas="iframe: una ventana a otra página dentro de la tuya. Se usa con el código para insertar (embed) que dan YouTube (Compartir, Insertar) y Google Maps (Compartir, Insertar un mapa). Solo src, width, height, title y allowfullscreen; frameborder y scrolling son de los obsoletos. Los frames y framesets de HTML 4 dividían toda la ventana: historia." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.5 · Incrustar algo de otra web" data-seccion="1.5" data-notas="iframe: una ventana a otra página dentro de la tuya. Se usa con el código para insertar (embed) que dan YouTube (Compartir, Insertar) y OpenStreetMap o Google Maps (Compartir, Insertar un mapa). Solo src, width, height, title y allowfullscreen; frameborder y scrolling son de los obsoletos. Los frames y framesets de HTML 4 dividían toda la ventana: historia." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Imágenes, tablas y semántica</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Incrustar un vídeo o un mapa de otra web</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
@@ -1616,8 +1616,8 @@ mi-web/
   allowfullscreen&gt;&lt;/iframe&gt;
 
 &lt;h2&gt;Dónde estamos&lt;/h2&gt;
-&lt;!-- Código para insertar (embed) de Google Maps:
-     Compartir, Insertar un mapa --&gt;
+&lt;!-- Código para insertar (embed) de OpenStreetMap:
+     Compartir, HTML (Google Maps da uno parecido) --&gt;
 &lt;iframe width="400" height="225"
   src="https://www.openstreetmap.org/export/embed.html?bbox=-4.74,41.64,-4.70,41.66"
   title="Mapa"&gt;&lt;/iframe&gt;</pre>
@@ -1872,7 +1872,7 @@ mi-web/
   <div style="display:flex;flex-direction:column">
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Formularios</p>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Para qué sirve un formulario</h2>
-    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">Todo lo que escribes en una web va en un formulario: la caja del buscador, el inicio de sesión, la dirección de envío, un comentario. Es la única forma que tiene una página de recoger datos tuyos.</p>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">Todo lo que escribes en una web va en un formulario: la caja del buscador, el inicio de sesión, la dirección de envío, un comentario. Es la forma habitual de que una página recoja datos del usuario.</p>
     <ol style="padding:0;list-style:none;display:flex;flex-direction:column;gap:18px;margin-top:var(--gap-item);font-size:var(--type-small);line-height:1.4">
       <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue)">1.</span><span>Rellenas los campos y pulsas el botón</span></li>
       <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue)">2.</span><span>El navegador empaqueta los datos y los envía al servidor en una petición</span></li>
@@ -1921,7 +1921,7 @@ mi-web/
 <!-- 76 Tipos de campo -->
 <section data-label="1.7 · Tipos de campo" data-seccion="1.7" data-notas="Cada type cambia lo que hace el navegador: teclado numérico en el móvil, selector de fecha, validación del formato del correo, ocultar la contraseña. Si el navegador no conoce un tipo, lo trata como text. El tipo datetime se eliminó de la especificación; queda datetime-local." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Formularios</p>
-  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Tipos de campo: el navegador trabaja por ti</h2>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Tipos de campo</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>tipos.html</span></div>
@@ -2245,7 +2245,7 @@ mi-web/
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:var(--gap-title)">
     <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--blue);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">01</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">Internet es la red; la web es uno de sus servicios: documentos enlazados que se piden con HTTP y se escriben en HTML.</p></div>
     <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--cyan);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">02</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">Para ver una página hacen falta un dominio, el DNS que lo traduce a una IP y un servidor que responde con un código: 200 si va bien, 404 si no existe.</p></div>
-    <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--green);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">03</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">Una página estática es un archivo; una dinámica la fabrica un programa. Un gestor de contenidos necesita servidor web, PHP, base de datos, dominio y acceso al servidor.</p></div>
+    <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--green);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">03</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">Una página estática es un archivo; una dinámica la genera un programa. Un gestor de contenidos necesita servidor web, PHP, base de datos, dominio y acceso al servidor.</p></div>
     <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--orange);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">04</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">HTML dice qué es cada cosa, no cómo se ve. Una página válida tiene doctype, head y body, etiquetas cerradas y bien anidadas, y pasa el validador.</p></div>
     <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--navy);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">05</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">Un solo h1, énfasis con significado, imágenes con alt, tablas solo para datos, y etiquetas semánticas para que buscadores y lectores de pantalla entiendan la página.</p></div>
     <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--green-dark);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">06</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">Un formulario recoge datos con label, name y el tipo de campo adecuado; el navegador valida y los envía por GET (en la URL) o POST (en el cuerpo).</p></div>
@@ -2279,7 +2279,7 @@ mi-web/
     <span style="width:20px;height:20px;border-radius:50%;background:var(--cyan);display:block"></span>
     <span style="font-size:var(--type-small);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--navy)">Fin de la unidad 1</span>
   </div>
-  <h1 style="font-size:var(--type-hero);font-weight:800;line-height:1.02;letter-spacing:-.02em;max-width:1400px;position:relative;color:var(--navy)">Ya sabes escribir la web. Ahora toca vestirla.</h1>
+  <h1 style="font-size:var(--type-hero);font-weight:800;line-height:1.02;letter-spacing:-.02em;max-width:1400px;position:relative;color:var(--navy)">Dudas y preguntas</h1>
   <div style="display:flex;gap:56px;font-size:var(--type-caption);color:var(--navy);font-weight:600;position:relative">
     <span>Próxima unidad: UT2. CSS, sobre estas mismas páginas</span>
     <span>Conserva tus pens y tu página de GitHub: se reutilizan</span>
