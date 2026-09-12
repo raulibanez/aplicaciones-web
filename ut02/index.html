@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UT2 · CSS · Aplicaciones Web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/aw.css">
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+<!-- ═══════════ BLOQUE 0 · APERTURA ═══════════ -->
+
+<!-- 01 Portada de unidad -->
+<section data-label="UT2 · Portada" data-notas="Segunda unidad. 14 sesiones de 50 minutos, 6 de práctica y 2 de examen. Todo se hace sobre la página «Mi videojuego favorito» de la UT1: no se escribe HTML nuevo, se le da aspecto." style="display:flex;flex-direction:column;justify-content:flex-end;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);position:relative;overflow:hidden">
+  <span class="mancha arriba-dcha" style="width:640px;color:var(--green)"></span>
+  <span class="mancha abajo-izq" style="width:980px;color:var(--gray)"></span>
+  <span class="mancha abajo-izq volteada" style="width:460px;color:var(--cyan)"></span>
+  <p style="position:relative;font-size:180px;font-weight:800;line-height:1;color:var(--blue);letter-spacing:-.04em">UT 2</p>
+  <h1 style="position:relative;font-size:var(--type-title);font-weight:800;line-height:1.12;max-width:1200px;margin-top:24px;color:var(--navy);text-wrap:balance">CSS: aspecto y colocación</h1>
+  <p style="position:relative;font-size:var(--type-body);color:var(--muted);margin-top:32px;max-width:1100px;line-height:1.4">Cómo se decide el aspecto de una página y dónde va cada cosa.</p>
+  <p class="pista-teclas" style="position:relative;margin-top:72px"><kbd>←</kbd><kbd>→</kbd> para moverte <span class="sep">·</span> <kbd>P</kbd> pantalla completa <span class="sep">·</span> rueda del ratón o clic en el índice</p>
+</section>
+
+<!-- 02 Índice -->
+<section data-label="Índice" data-notas="Recorrido: cada bloque de teoría va seguido de su práctica sobre la misma página. La página se entrega una vez, al final, pero se revisa en cada hito. Cuaderno de cinco ejercicios en CodePen." style="display:grid;grid-template-columns:1fr 1.4fr;gap:120px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div>
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Unidad 2</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Contenidos de la unidad</h2>
+    <p style="font-size:var(--type-small);color:var(--muted);line-height:1.5;margin-top:var(--gap-title)">Catorce sesiones, seis de práctica en el ordenador. Al terminar, tu página de la UT1 tendrá una hoja de estilo que la hace verse bien en el ordenador y en el móvil, y estará publicada.</p>
+  </div>
+  <ol style="list-style:none;padding:0;display:flex;flex-direction:column">
+    <li style="border-bottom:2px solid var(--line);font-size:var(--type-body)"><a class="indice-enlace" href="#que-es-css"><span style="font-weight:800;color:var(--blue)">2.1</span><span>Qué es CSS y cómo se escribe: reglas, selectores, colores, texto y cajas</span></a></li>
+    <li style="border-bottom:2px solid var(--line);font-size:var(--type-body)"><a class="indice-enlace" href="#practica-2-1"><span style="font-weight:800;color:var(--blue)">2.2</span><span><span class="pill-mini">Práctica</span>Tu página con estilo, parte 1</span></a></li>
+    <li style="border-bottom:2px solid var(--line);font-size:var(--type-body)"><a class="indice-enlace" href="#flexbox"><span style="font-weight:800;color:var(--blue)">2.3</span><span>Colocar cosas: display y flexbox; menús, tablas, formularios e imágenes</span></a></li>
+    <li style="border-bottom:2px solid var(--line);font-size:var(--type-body)"><a class="indice-enlace" href="#practica-2-2"><span style="font-weight:800;color:var(--blue)">2.4</span><span><span class="pill-mini">Práctica</span>Cabecera, menú y columnas</span></a></li>
+    <li style="border-bottom:2px solid var(--line);font-size:var(--type-body)"><a class="indice-enlace" href="#grid"><span style="font-weight:800;color:var(--blue)">2.5</span><span>Grid, posición y diseño responsive</span></a></li>
+    <li style="border-bottom:2px solid var(--line);font-size:var(--type-body)"><a class="indice-enlace" href="#practica-2-3"><span style="font-weight:800;color:var(--blue)">2.6</span><span><span class="pill-mini">Práctica</span>Página final responsive y publicada</span></a></li>
+    <li style="font-size:var(--type-body)"><a class="indice-enlace" href="#evaluacion"><span style="font-weight:800;color:var(--blue)">2.7</span><span>Examen de teoría y examen práctico «Mi película favorita»</span></a></li>
+  </ol>
+</section>
+
+<!-- 03 Objetivos -->
+<section data-label="Qué vas a saber hacer" data-notas="En el esquema de rutas del módulo (HOY → HTML, CSS, hosting → WordPress → AW), esta unidad es la segunda pieza. Lo que se aprende aquí es lo que se toca después en un tema de WordPress y en la apariencia de Moodle." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Unidad 2</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Qué vas a saber hacer</h2>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:28px;margin-top:var(--gap-title)">
+    <div style="background:var(--white);border-radius:20px;padding:40px 32px;display:flex;flex-direction:column;gap:20px;box-shadow:0 2px 0 var(--line)">
+      <span style="width:64px;height:64px;border-radius:16px;background:var(--blue);color:var(--white);display:grid;place-items:center;font-size:var(--type-small);font-weight:800">1</span>
+      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Dar color, tipografía y espacio a cualquier página</p>
+      <p style="font-size:22px;color:var(--muted);line-height:1.45">Desde una hoja de estilo externa, sin tocar el HTML.</p>
+    </div>
+    <div style="background:var(--white);border-radius:20px;padding:40px 32px;display:flex;flex-direction:column;gap:20px;box-shadow:0 2px 0 var(--line)">
+      <span style="width:64px;height:64px;border-radius:16px;background:var(--cyan);color:var(--navy);display:grid;place-items:center;font-size:var(--type-small);font-weight:800">2</span>
+      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Elegir el selector que llega justo al elemento que quieres</p>
+      <p style="font-size:22px;color:var(--muted);line-height:1.45">Y saber qué regla gana cuando hay varias.</p>
+    </div>
+    <div style="background:var(--white);border-radius:20px;padding:40px 32px;display:flex;flex-direction:column;gap:20px;box-shadow:0 2px 0 var(--line)">
+      <span style="width:64px;height:64px;border-radius:16px;background:var(--green);color:var(--navy);display:grid;place-items:center;font-size:var(--type-small);font-weight:800">3</span>
+      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Colocar cabecera, menú, columnas y pie</p>
+      <p style="font-size:22px;color:var(--muted);line-height:1.45">Con flexbox y grid, como se hace hoy.</p>
+    </div>
+    <div style="background:var(--white);border-radius:20px;padding:40px 32px;display:flex;flex-direction:column;gap:20px;box-shadow:0 2px 0 var(--line)">
+      <span style="width:64px;height:64px;border-radius:16px;background:var(--orange);color:var(--white);display:grid;place-items:center;font-size:var(--type-small);font-weight:800">4</span>
+      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Hacer que la misma página se vea bien en el móvil</p>
+      <p style="font-size:22px;color:var(--muted);line-height:1.45">Diseño responsive con media queries.</p>
+    </div>
+    <div style="background:var(--white);border-radius:20px;padding:40px 32px;display:flex;flex-direction:column;gap:20px;box-shadow:0 2px 0 var(--line)">
+      <span style="width:64px;height:64px;border-radius:16px;background:var(--navy);color:var(--white);display:grid;place-items:center;font-size:var(--type-small);font-weight:800">5</span>
+      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Leer la hoja de estilo de cualquier web y entender cada regla</p>
+      <p style="font-size:22px;color:var(--muted);line-height:1.45">En DevTools. Es lo que harás para personalizar un tema de WordPress o de Moodle.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ BLOQUE 2.1 · QUÉ ES CSS Y CÓMO SE ESCRIBE (sesiones 1 y 2) ═══════════ -->
+
+<!-- 04 Tu página, antes y después -->
+<section data-label="2.1 · Antes y después" data-seccion="2.1" data-deck-id="que-es-css" data-deck-section="2.1" data-notas="Mismo HTML, cero cambios en él: solo se añade una línea en el head que enlaza la hoja de estilo. La captura de la derecha es la página final de la práctica 2.3; la de la izquierda, la que entregaron en la UT1. Es lo que van a hacer en tres prácticas." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Qué es CSS</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Tu página, antes y después. El HTML es el mismo</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
+    <div style="display:flex;flex-direction:column;gap:16px;min-height:0">
+      <figure class="foto" style="flex:1;border:3px solid var(--line);background:var(--white)">
+        <img src="img/antes-1280x720.png" data-grande="img/antes.jpg" alt="La página de SuperTuxKart sin hoja de estilo: texto en Times, todo seguido en una columna" title="Elaboración propia" style="object-fit:contain;object-position:top">
+        <figcaption class="credito"><b>Antes.</b> La página «Mi videojuego favorito» tal como quedó en la UT1, sin CSS. Elaboración propia; capturas del juego de los autores de SuperTuxKart, CC BY-SA 4.0. Clic para ver la página entera.</figcaption>
+      </figure>
+      <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4"><b>Antes.</b> Sin CSS, el navegador aplica su estilo por defecto: letra Times New Roman, texto negro sobre fondo blanco, todo en una columna.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;min-height:0">
+      <figure class="foto" style="flex:1;border:3px solid var(--line);background:var(--white)">
+        <img src="img/despues-1280x720.png" data-grande="img/maqueta-3-escritorio.jpg" alt="La misma página con la hoja de estilo: cabecera azul oscuro, menú verde, dos columnas y galería" title="Elaboración propia" style="object-fit:contain;object-position:top">
+        <figcaption class="credito"><b>Después.</b> La misma página con la hoja de estilo de la práctica 2.3. Elaboración propia; capturas del juego de los autores de SuperTuxKart, CC BY-SA 4.0 y CC BY 3.0. Clic para ver la página entera.</figcaption>
+      </figure>
+      <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4"><b>Después.</b> Una hoja de estilo de unas 120 líneas: paleta, tipografía, cabecera, menú, dos columnas, galería y versión móvil.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 Pregunta: qué hace esta web -->
+<section data-label="2.1 · ¿Qué hace esta web?" data-seccion="2.1" data-notas="Abrir en clase la web de GTA VI (rockstargames.com/VI) y hacer scroll despacio. Comprobar antes de la sesión que sigue en línea; si falla la conexión, captura propia. No se publican capturas: © Rockstar. Es el ejemplo de frontend de la presentación del módulo." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);align-items:center">
+  <div>
+    <img class="icono" src="../assets/question.png" alt="">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-top:var(--gap-item)">Pregunta a la clase</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.12;margin-top:20px;color:var(--navy);text-wrap:balance">¿Qué hace esta web que la tuya no hace?</h2>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">Se abre en clase la web de <b>GTA VI</b> (rockstargames.com/VI) y se hace scroll. Fíjate en lo que se mueve, en lo que aparece y en cuándo cargan las imágenes.</p>
+  </div>
+  <div class="revela">
+    <div class="revela-cuerpo">
+      <p style="font-size:var(--type-caption);font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Qué hay detrás</p>
+      <ul style="list-style:none;padding:0;margin-top:24px;display:flex;flex-direction:column;gap:22px;font-size:var(--type-body);line-height:1.35">
+        <li style="display:flex;gap:20px"><span style="color:var(--green-dark);font-weight:800">●</span><span><b>Parallax</b>: el fondo se mueve a distinta velocidad que el texto. Posiciones y transformaciones CSS.</span></li>
+        <li style="display:flex;gap:20px"><span style="color:var(--green-dark);font-weight:800">●</span><span><b>Bloques que aparecen</b> al llegar a ellos: transiciones y animaciones CSS.</span></li>
+        <li style="display:flex;gap:20px"><span style="color:var(--green-dark);font-weight:800">●</span><span><b>Lazy loading</b>: las imágenes cargan cuando hacen falta, no todas al principio.</span></li>
+        <li style="display:flex;gap:20px"><span style="color:var(--green-dark);font-weight:800">●</span><span><b>Una secuencia de imágenes</b> que avanza con el scroll: JavaScript (UT6) cambia lo que CSS muestra.</span></li>
+        <li style="display:flex;gap:20px"><span style="color:var(--green-dark);font-weight:800">●</span><span>El HTML de debajo es el mismo que sabes escribir: encabezados, párrafos, imágenes y enlaces.</span></li>
+      </ul>
+    </div>
+    <button class="btn btn-primary revela-btn">Ver qué hay detrás</button>
+  </div>
+</section>
+
+<!-- 06 Definición: CSS -->
+<section data-label="2.1 · CSS" data-seccion="2.1" data-notas="Cascada: cuando varias reglas afectan al mismo elemento hay un orden para decidir cuál gana; se ve en la diapositiva de cascada y especificidad. Una sola hoja sirve para todas las páginas del sitio: es la ventaja frente a poner el aspecto en cada etiqueta, que es lo que hacían FONT y ALIGN." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:center;position:relative;overflow:hidden">
+  <span class="mancha abajo-izq volteada" style="width:620px;color:var(--gray)"></span>
+  <div style="position:relative">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Concepto clave</p>
+    <h2 style="font-size:var(--type-hero);font-weight:800;line-height:1.02;margin-top:24px;letter-spacing:-.02em;color:var(--navy)">CSS</h2>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-title);max-width:640px"><b>Cascading Style Sheets</b>, hojas de estilo en cascada. HTML dice <b>qué es</b> cada cosa; CSS dice <b>cómo se ve</b>. Una hoja sirve para todas las páginas del sitio.</p>
+  </div>
+  <div style="position:relative;background:var(--green);color:var(--navy);border-radius:8px;padding:64px 60px;transform:rotate(-1.5deg);box-shadow:0 18px 40px rgba(4,28,63,.14)">
+    <p style="font-size:var(--type-subtitle);font-weight:700;line-height:1.3">Lenguaje que describe cómo se muestra un documento HTML: colores, tipografía, tamaños, espacios y colocación de cada elemento.</p>
+    <p style="font-size:var(--type-caption);line-height:1.5;margin-top:var(--gap-item);color:rgba(4,28,63,.7)">«En cascada» porque, cuando varias reglas afectan al mismo elemento, hay un orden para decidir cuál gana. Se explica en la diapositiva de cascada y especificidad.</p>
+  </div>
+</section>
+
+<!-- 07 Historia -->
+<section data-label="2.1 · Un poco de historia" data-seccion="2.1" data-notas="Muchos tutoriales antiguos hablan de CSS3 como algo futuro y de un CSS4 que nunca llegó: desde 2000 CSS se desarrolla por módulos, cada uno con su nivel. Todo lo de esta unidad funciona en todos los navegadores actuales. Fuente: W3C, «A brief history of CSS until 2016», y MDN. Comprobado el 12 de septiembre de 2026." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Qué es CSS</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Un poco de historia, sin versiones que memorizar</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">CSS lo mantiene el <b>W3C</b>, la organización que publica los estándares de la web. La referencia que usaremos es <b>MDN</b>; para saber si algo funciona en todos los navegadores, <b>caniuse.com</b> o la marca «Baseline» de MDN.</p>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">«CSS3» aparece en muchos tutoriales y cursos; hoy no designa ninguna versión concreta. Todo lo de esta unidad funciona en cualquier navegador actual.</p>
+  </div>
+  <ol style="padding:0;list-style:none;display:flex;flex-direction:column;gap:22px;font-size:var(--type-small);line-height:1.4;align-self:center">
+    <li style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:baseline"><span style="font-weight:800;color:var(--blue);font-size:var(--type-body)">1994</span><span>Håkon Wium Lie propone CSS en el CERN para separar el aspecto del contenido HTML</span></li>
+    <li style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:baseline"><span style="font-weight:800;color:var(--blue);font-size:var(--type-body)">1996</span><span><b>CSS1</b>: texto, colores, fondos, márgenes</span></li>
+    <li style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:baseline"><span style="font-weight:800;color:var(--blue);font-size:var(--type-body)">1998</span><span><b>CSS2</b>: posicionamiento y cajas. Muchos tutoriales antiguos se quedan aquí</span></li>
+    <li style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:baseline"><span style="font-weight:800;color:var(--blue);font-size:var(--type-body)">desde 2000</span><span>Se deja de numerar: CSS se desarrolla por <b>módulos</b>, cada uno con su nivel (Flexbox nivel 1, Grid nivel 2, Selectores nivel 4). No existe ni existirá un «CSS4»</span></li>
+    <li style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:baseline"><span style="font-weight:800;color:var(--blue);font-size:var(--type-body)">2015–2017</span><span><b>Flexbox</b> y <b>Grid</b> funcionan en todos los navegadores. Ya no hace falta maquetar con float ni con tablas</span></li>
+    <li style="display:grid;grid-template-columns:130px 1fr;gap:24px;align-items:baseline"><span style="font-weight:800;color:var(--blue);font-size:var(--type-body)">hoy</span><span>Variables, funciones, consultas de contenedor, anidamiento. Lo básico de esta unidad no ha cambiado en años</span></li>
+  </ol>
+</section>
+
+<!-- 08 Anatomía de una regla -->
+<section data-label="2.1 · Anatomía de una regla" data-seccion="2.1" data-notas="El error más común de la unidad: olvidar el punto y coma o la llave de cierre. Todo lo que viene después deja de funcionar sin que el navegador avise. Los espacios y saltos de línea no importan; las mayúsculas en las propiedades sí (todo en minúsculas)." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Qué es CSS</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Anatomía de una regla</h2>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--gap-item);margin-top:var(--gap-title);font-size:var(--type-small);line-height:1.4">
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Una <b>regla</b> tiene un selector y, entre llaves, una o varias declaraciones</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>El <b>selector</b> dice a qué elementos afecta la regla</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Cada <b>declaración</b> es una <b>propiedad</b>, dos puntos, un <b>valor</b> y punto y coma. Una por línea</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Los comentarios van entre <code class="en-linea">/* */</code></span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Los espacios y saltos de línea no importan. Todo en minúsculas</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--red);font-weight:800">—</span><span>Si falta un punto y coma o una llave, <b>todo lo que viene después deja de funcionar</b> y el navegador no avisa</span></li>
+    </ul>
+  </div>
+  <div class="ventana">
+    <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+    <pre class="cod grande" data-lang="css" data-marca="3">
+/* Título principal de la página */
+h1 {
+  color: #041c3f;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+/* selector { propiedad: valor; } */
+p {
+  line-height: 1.6;
+}</pre>
+  </div>
+</section>
+
+<!-- 09 Tres formas de aplicar CSS -->
+<section data-label="2.1 · Tres formas de aplicar CSS" data-seccion="2.1" data-notas="Primero la hoja externa, que es la que se usa. El atributo style en línea es lo que hacían FONT y ALIGN en HTML 4: mezcla contenido y aspecto y hay que repetirlo en cada etiqueta. Ni type=text/css ni rel=STYLESHEET en mayúsculas: son restos de HTML 4." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Qué es CSS</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Tres formas de aplicar CSS, y la que usamos</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;margin-top:var(--gap-item);flex:1;min-height:0">
+    <div style="display:flex;flex-direction:column;gap:16px;min-height:0">
+      <p style="font-size:var(--type-small);font-weight:800;color:var(--green-dark)">1 · Hoja externa: la que usamos</p>
+      <div class="ventana" style="flex:1">
+        <div class="ventana-barra"><i></i><i></i><i></i><span>index.html</span></div>
+        <pre class="cod compacto" data-lang="html">
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;SuperTuxKart&lt;/title&gt;
+  &lt;link rel="stylesheet"
+        href="estilos.css"&gt;
+&lt;/head&gt;</pre>
+      </div>
+      <div class="ventana">
+        <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+        <pre class="cod compacto" data-lang="css">
+h1 { color: crimson; }</pre>
+      </div>
+      <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Un archivo para todo el sitio. Se cambia una vez y cambian todas las páginas.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;min-height:0">
+      <p style="font-size:var(--type-small);font-weight:800;color:var(--navy)">2 · Interna: para pruebas y CodePen</p>
+      <div class="ventana" style="flex:1">
+        <div class="ventana-barra"><i></i><i></i><i></i><span>index.html</span></div>
+        <pre class="cod compacto" data-lang="html">
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;SuperTuxKart&lt;/title&gt;
+  &lt;style&gt;
+    h1 { color: crimson; }
+  &lt;/style&gt;
+&lt;/head&gt;</pre>
+      </div>
+      <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Vale para una sola página. En CodePen, la pestaña CSS hace esto por ti.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;min-height:0">
+      <p style="font-size:var(--type-small);font-weight:800;color:var(--red)">3 · En línea: no se usa</p>
+      <div class="ventana" style="flex:1">
+        <div class="ventana-barra"><i></i><i></i><i></i><span>index.html</span></div>
+        <pre class="cod compacto" data-lang="html">
+&lt;body&gt;
+  &lt;h1 style="color: crimson;"&gt;
+    SuperTuxKart
+  &lt;/h1&gt;
+&lt;/body&gt;</pre>
+      </div>
+      <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Mezcla contenido y aspecto, hay que repetirlo en cada etiqueta y gana a todo lo demás. Es lo mismo que hacían los atributos <code class="en-linea">FONT</code> y <code class="en-linea">ALIGN</code> de HTML 4.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 Tu primera hoja en cinco pasos -->
+<section data-label="2.1 · Tu primera hoja de estilo" data-seccion="2.1" data-notas="Lo hacen todos en la sesión 3 sobre su carpeta de la UT1. El fallo típico del paso 4: el archivo se llama Estilos.css o está en otra carpeta; en el servidor, mayúsculas y minúsculas son archivos distintos." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Qué es CSS</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Tu primera hoja de estilo en cinco pasos</h2>
+    <ol style="padding:0;list-style:none;display:flex;flex-direction:column;gap:20px;margin-top:var(--gap-title);font-size:var(--type-small);line-height:1.35">
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">1.</span><span>Crea <code class="en-linea">estilos.css</code> en la misma carpeta que <code class="en-linea">index.html</code></span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">2.</span><span>Escribe el <code class="en-linea">&lt;link&gt;</code> dentro del <code class="en-linea">&lt;head&gt;</code></span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">3.</span><span>Una regla para <code class="en-linea">body</code> con un color de fondo, y guarda</span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">4.</span><span>Recarga. Si no cambia nada, revisa la ruta del <code class="en-linea">href</code> y el nombre del archivo: minúsculas, sin espacios</span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">5.</span><span>Abre DevTools, pestaña <b>Estilos</b>, y comprueba que aparece tu archivo</span></li>
+    </ol>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>index.html</span></div>
+      <pre class="cod compacto" data-lang="html" data-marca="6">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;SuperTuxKart&lt;/title&gt;
+  &lt;link rel="stylesheet" href="estilos.css"&gt;
+&lt;/head&gt;</pre>
+    </div>
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css">
+body {
+  background-color: #e3ecf3;
+}</pre>
+    </div>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">La carpeta del proyecto: <code class="en-linea">index.html</code>, <code class="en-linea">estilos.css</code> e <code class="en-linea">img/</code>. Es la misma que subirás a GitHub al final de la unidad.</p>
+  </div>
+</section>
+
+<!-- 11 DevTools: pestaña Estilos -->
+<section data-label="2.1 · DevTools, pestaña Estilos" data-seccion="2.1" data-notas="F12, o clic derecho, Inspeccionar. Se usa en todas las prácticas y en la corrección. Lo tachado es lo que perdió frente a otra regla; el triángulo amarillo marca una propiedad o un valor que el navegador no entiende. Editar en vivo sirve para probar: al recargar se pierde." style="display:grid;grid-template-columns:1fr 1.3fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Qué es CSS</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Verlo en el navegador: DevTools, pestaña Estilos</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">Selecciona un elemento en <b>Elementos</b> y a la derecha aparecen todas las reglas que le afectan, con el archivo y la línea de cada una.</p>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--gap-item);margin-top:var(--gap-item);font-size:var(--type-small);line-height:1.4">
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Tachado</b>: esa declaración perdió frente a otra regla</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Triángulo amarillo</b>: el navegador no entiende esa propiedad o ese valor</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>user agent stylesheet</b>: el estilo por defecto del navegador. Por eso un <code class="en-linea">h1</code> se ve grande y en negrita aunque no tengas CSS</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Puedes editar en vivo para probar; al recargar se pierde</span></li>
+    </ul>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+    <div class="img-slot" style="flex:1">Captura propia de Chrome: un h1 de la página de SuperTuxKart seleccionado en Elementos y, a la derecha, la pestaña Estilos con las reglas de estilos.css (con número de línea), una declaración tachada y el bloque «user agent stylesheet» al final. Se hace en el aula con la página de ejemplo.</div>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.1. La pestaña Estilos de las DevTools. Abajo del todo está el dibujo del modelo de caja del elemento seleccionado.</p>
+  </div>
+</section>
+
+<!-- 12 Selectores básicos -->
+<section data-label="2.1 · Selectores básicos" data-seccion="2.1" data-notas="El de clase es el que más se usa: se repite en todos los elementos que haga falta. El id es único en la página y lo reservamos para las anclas. Nombres con sentido: .precio, .aviso, .destacado; nunca .rojo ni .estilo1, porque el día que el rojo pase a azul el nombre miente." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Selectores</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Selectores básicos: a quién afecta la regla</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">El selector es la parte de la regla que dice a qué elementos se aplica. Estos son los cinco básicos.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-sel-basicos">
+/* de elemento: todos los p */
+p { line-height: 1.6; }
+
+/* de clase: los que llevan class="destacado" */
+.destacado { background: #a5e070; padding: .5rem; }
+
+/* de id: el único elemento con id="ficha" */
+#ficha { border-left: 6px solid #017ce9; padding-left: 1rem; }
+
+/* agrupación: la misma regla para varios */
+h1, h2, h3 { color: #041c3f; font-family: sans-serif; }
+
+/* universal: todos los elementos */
+* { box-sizing: border-box; }</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-sel-basicos" data-url="localhost/index.html" data-zoom="1.4" data-html="<h1>SuperTuxKart</h1><p>Un juego de karts libre y gratuito.</p><p class='destacado'>Salió en 2004 y sigue actualizándose.</p><h2 id='ficha'>Ficha técnica</h2><p>Plataformas: Windows, Linux, macOS, Android.</p>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>En el HTML: <code class="en-linea">&lt;p class="destacado"&gt;</code> y <code class="en-linea">&lt;h2 id="ficha"&gt;</code></span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>La <b>clase</b> se repite; el <b>id</b> es único. Nombres que digan qué es: <code class="en-linea">.precio</code>, no <code class="en-linea">.rojo</code></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 13 Selectores combinados -->
+<section data-label="2.1 · Selectores combinados" data-seccion="2.1" data-notas="Cuanto más concreto, menos cosas alcanza. El descendiente (espacio) es el que más se usa: nav a, .galeria img. El hijo directo (>) solo baja un nivel. El encadenado (sin espacio) exige las dos clases en el mismo elemento; con espacio sería un descendiente. El de atributo es útil en formularios." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Selectores</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Selectores combinados: llegar a un elemento concreto</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Los selectores se combinan para afectar solo a los elementos que interesan. Cuanto más concreto es el selector, a menos elementos llega.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-sel-comb">
+/* descendiente (espacio): enlaces dentro de nav, a
+   cualquier nivel */
+nav a {
+  color: white; background: #041c3f; padding: .3rem .8rem;
+}
+
+/* hijo directo (>): solo los li hijos directos de la ul */
+ul > li { margin-bottom: .3rem; }
+
+/* elemento con clase (pegados): solo los p destacados */
+p.destacado { font-weight: 700; }
+
+/* dos clases encadenadas: el elemento que tiene las dos */
+.boton.grande { font-size: 1.4rem; }
+
+/* de atributo: los input de tipo email */
+input[type="email"] { border: 2px solid #017ce9; }</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-sel-comb" data-url="localhost/index.html" data-zoom="1.4" data-html="<nav><ul><li><a href='#'>Qué es</a></li><li><a href='#'>Ficha</a></li></ul></nav><p>Un enlace <a href='#'>en el texto</a> no cambia.</p><p class='destacado'>Párrafo destacado.</p><span class='boton'>Ver</span> <span class='boton grande'>Descargar</span><br><br><input type='text' placeholder='texto'> <input type='email' placeholder='correo'>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">nav a</code> afecta a los enlaces del menú y no al enlace del párrafo</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">.boton.grande</code> (pegados) no es <code class="en-linea">.boton .grande</code> (descendiente)</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 14 Quiz: qué regla pone en verde solo los enlaces del menú -->
+<section data-label="2.1 · Quiz: el selector del menú" data-seccion="2.1" data-notas="A también pinta el enlace del párrafo. C busca una clase que no existe: nav es una etiqueta, no una clase. D busca un nav dentro de un enlace, al revés." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1.2fr;gap:96px;align-items:center;position:relative;overflow:hidden">
+  <span class="mancha arriba-dcha" style="width:380px;color:var(--cyan)"></span>
+  <div class="quiz" data-correct="1" data-ok="Correcto. El descendiente nav a alcanza solo los enlaces que están dentro del nav." data-ko="No. Piensa qué elementos alcanza cada selector: ¿solo los del menú, o también el del párrafo, o ninguno?" style="display:contents">
+    <div style="position:relative">
+      <span class="pill">Comprueba lo aprendido</span>
+      <h2 style="font-size:var(--type-subtitle);font-weight:800;line-height:1.2;margin-top:32px;color:var(--navy);text-wrap:balance">¿Qué regla pone en verde solo los enlaces del menú?</h2>
+      <div class="ventana" style="margin-top:24px">
+        <div class="ventana-barra"><i></i><i></i><i></i><span>index.html</span></div>
+        <pre class="cod compacto" data-lang="html">
+&lt;nav&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#que-es"&gt;Qué es&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#ficha"&gt;Ficha&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;p&gt;Lee &lt;a href="#"&gt;más&lt;/a&gt;.&lt;/p&gt;</pre>
+      </div>
+      <p class="quiz-fb">Selecciona una opción.</p>
+      <button class="btn btn-ghost quiz-reset" style="margin-top:var(--gap-item)">Reiniciar</button>
+    </div>
+    <div class="quiz-opts" style="position:relative">
+      <button class="quiz-opt"><span class="letra">A</span><span><code class="en-linea">a { color: green; }</code></span></button>
+      <button class="quiz-opt"><span class="letra">B</span><span><code class="en-linea">nav a { color: green; }</code></span></button>
+      <button class="quiz-opt"><span class="letra">C</span><span><code class="en-linea">.nav { color: green; }</code></span></button>
+      <button class="quiz-opt"><span class="letra">D</span><span><code class="en-linea">a nav { color: green; }</code></span></button>
+    </div>
+  </div>
+</section>
+
+<!-- 15 Colores -->
+<section data-label="2.1 · Colores" data-seccion="2.1" data-notas="Cuatro maneras de escribir el mismo color. El hexadecimal es el que más verás: dos dígitos por rojo, verde y azul. La escritura de rgb con comas también vale y la verás en muchos sitios. hsl sirve para aclarar u oscurecer un color cambiando solo el tercer número. Selector de color de DevTools: clic en el cuadradito junto al valor. Paletas: coolors.co o colorhunt.co, comprobar que siguen gratuitos." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Estilo visual</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Colores: cuatro maneras de escribir el mismo</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Un mismo color se puede escribir de cuatro formas equivalentes. La hexadecimal es la más habitual.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-colores">
+/* unos 148 nombres */
+.nombre  { background: crimson; }
+/* rojo verde azul, 00 a ff */
+.hex     { background: #dc143c; }
+/* abrevia #ffaa00 */
+.hex3    { background: #fa0; }
+.rgb     { background: rgb(220 20 60); }     /* de 0 a 255 */
+/* tono, saturación, luz */
+.hsl     { background: hsl(348 83% 47%); }
+/* con transparencia */
+.alfa    { background: rgb(220 20 60 / 40%); }
+
+/* color es el texto; background-color, el fondo */
+body { color: #041c3f; background-color: #fefefe; }
+div {
+  padding: .6rem 1rem; margin: .4rem 0; color: white;
+  font-weight: 700;
+}</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-colores" data-url="localhost/index.html" data-zoom="1.5" data-html="<div class='nombre'>crimson</div><div class='hex'>#dc143c</div><div class='hex3'>#fa0</div><div class='rgb'>rgb(220 20 60)</div><div class='hsl'>hsl(348 83% 47%)</div><div class='alfa' style='color:#041c3f'>rgb(220 20 60 / 40%)</div>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>La escritura con comas, <code class="en-linea">rgb(220, 20, 60)</code>, también vale y la verás en muchos sitios</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>En DevTools, clic en el cuadrado de color junto al valor para abrir el selector de color. Paletas hechas: coolors.co, colorhunt.co</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 16 Que se lea -->
+<section data-label="2.1 · Que se lea" data-seccion="2.1" data-notas="La recomendación de accesibilidad WCAG es un contraste de 4,5 a 1 para texto normal; DevTools lo mide en el selector de color. Tamaño mínimo de lectura en pantalla: 16 px. Es lo que separa una página bonita de una página que se usa." style="display:grid;grid-template-columns:1fr 1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Estilo visual</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Contraste y tamaño: que el texto se lea</h2>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--gap-item);margin-top:var(--gap-title);font-size:var(--type-small);line-height:1.4">
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Contraste</b>: texto oscuro sobre fondo claro o al revés. La recomendación de accesibilidad (WCAG) es <b>4,5 a 1</b> para texto normal, y DevTools lo mide en el selector de color</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Evita el gris claro sobre blanco y el texto sobre una foto sin una capa oscura debajo</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Tamaño de lectura en pantalla: <b>16 px como mínimo</b>. Los títulos, más; la letra pequeña, para pies y notas</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Una paleta corta: fondo, texto, un acento y una versión clara del acento. Es la de tu maqueta</span></li>
+    </ul>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-self:center">
+    <div style="background:#fefefe;color:#041c3f;border:3px solid var(--line);border-radius:20px;padding:36px"><p style="font-size:var(--type-body);font-weight:800">Se lee</p><p style="font-size:var(--type-caption);margin-top:12px;line-height:1.4">Texto #041c3f sobre #fefefe. Contraste 16 a 1.</p></div>
+    <div style="background:#fefefe;color:#b8c2cc;border:3px solid var(--line);border-radius:20px;padding:36px"><p style="font-size:var(--type-body);font-weight:800">No se lee</p><p style="font-size:var(--type-caption);margin-top:12px;line-height:1.4">Texto #b8c2cc sobre #fefefe. Contraste 1,9 a 1.</p></div>
+    <div style="background:#041c3f;color:#a5e070;border-radius:20px;padding:36px"><p style="font-size:var(--type-body);font-weight:800">Se lee</p><p style="font-size:var(--type-caption);margin-top:12px;line-height:1.4">Texto #a5e070 sobre #041c3f. Contraste 10 a 1.</p></div>
+    <div style="background:#a5e070;color:#fefefe;border-radius:20px;padding:36px"><p style="font-size:var(--type-body);font-weight:800">No se lee</p><p style="font-size:var(--type-caption);margin-top:12px;line-height:1.4">Texto blanco sobre #a5e070. Contraste 1,5 a 1.</p></div>
+  </div>
+</section>
+
+<!-- 17 Tipografía -->
+<section data-label="2.1 · Tipografía" data-seccion="2.1" data-notas="La pila de fuentes: el navegador usa la primera que tenga instalada y la última siempre es una genérica (serif, sans-serif, monospace). Comillas solo si el nombre lleva espacios. Equivalencias con lo que se daba en HTML: P ALIGN es text-align; FONT SIZE y COLOR son font-size y color; BIG y SMALL son font-size; TT es font-family monospace. font-weight es el grosor de la letra, no el ancho." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Estilo visual</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Tipografía</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Las propiedades del texto. <code class="en-linea">font-family</code> recibe una lista de fuentes, llamada pila: el navegador usa la primera que tenga instalada.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-tipo">
+body {
+  /* pila: la primera que tenga */
+  font-family: "Segoe UI", Roboto, system-ui, sans-serif;
+  font-size: 1.1rem;
+  /* sin unidad: 1,6 veces la letra */
+  line-height: 1.6;
+}
+h1 {
+  font-size: 2.5rem;
+  font-weight: 800;          /* grosor: 400 normal, 700 bold */
+  letter-spacing: -.02em;
+  text-align: center;        /* lo que hacía P ALIGN */
+}
+h2 { font-style: italic; text-transform: uppercase; }
+a  { text-decoration: none; }  /* sin subrayado */
+small { font-size: .85rem; }   /* lo que hacía BIG y SMALL */
+code  { font-family: monospace; }  /* lo que hacía TT */</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-tipo" data-url="localhost/index.html" data-zoom="1.3" data-html="<h1>SuperTuxKart</h1><h2>Ficha técnica</h2><p>Un juego de carreras de karts <a href='#'>libre y gratuito</a> en el que corren las mascotas del software libre. <small>Salió en 2004.</small> Se instala con <code>apt install supertuxkart</code>.</p>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>La última de la pila es siempre una <b>genérica</b>: <code class="en-linea">serif</code>, <code class="en-linea">sans-serif</code>, <code class="en-linea">monospace</code>. Comillas solo si el nombre lleva espacios</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Todo lo que hacían <code class="en-linea">FONT</code>, <code class="en-linea">ALIGN</code>, <code class="en-linea">BIG</code>, <code class="en-linea">SMALL</code> y <code class="en-linea">TT</code> en HTML 4 está aquí</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 18 Unidades -->
+<section data-label="2.1 · Unidades" data-seccion="2.1" data-notas="px es el píxel CSS, fijo, no el píxel físico de la pantalla. rem respeta el tamaño que el usuario haya puesto en el navegador: por eso es la unidad del texto. em se acumula: un em dentro de un em dentro de un em crece. Las de impresión (pt, cm, in) aparecen en tutoriales antiguos; en pantalla no se usan." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Estilo visual</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Unidades: cuál usar para cada cosa</h2>
+  <table style="width:100%;border-collapse:collapse;margin-top:var(--gap-item);font-size:var(--type-caption);background:var(--white);border-radius:20px;overflow:hidden">
+    <thead>
+      <tr style="background:var(--navy);color:var(--white);text-align:left">
+        <th style="padding:18px 32px;font-weight:700;width:160px">Unidad</th>
+        <th style="padding:18px 32px;font-weight:700">Qué es</th>
+        <th style="padding:18px 32px;font-weight:700;width:520px">Para qué</th>
+      </tr>
+    </thead>
+    <tbody style="line-height:1.35">
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy);font-family:var(--mono)">px</td><td style="padding:14px 32px">Píxel CSS. Fijo, no cambia con nada</td><td style="padding:14px 32px">Bordes, sombras, detalles finos</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy);font-family:var(--mono)">%</td><td style="padding:14px 32px">Relativo al contenedor</td><td style="padding:14px 32px">Anchos: <code class="en-linea">width: 100%</code></td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy);font-family:var(--mono)">em</td><td style="padding:14px 32px">Relativo al tamaño de letra del propio elemento. Se acumula si se anida</td><td style="padding:14px 32px">Espacios dentro de un componente (el relleno de un botón)</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy);font-family:var(--mono)">rem</td><td style="padding:14px 32px">Relativo al tamaño de letra de la raíz: 16 px por defecto. Respeta lo que el usuario ponga en el navegador</td><td style="padding:14px 32px"><b>Texto y espaciados generales.</b> La unidad del curso</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy);font-family:var(--mono)">vw, vh</td><td style="padding:14px 32px">1 % del ancho o del alto de la ventana</td><td style="padding:14px 32px">Una portada que ocupa la pantalla entera: <code class="en-linea">min-height: 100vh</code></td></tr>
+      <tr><td style="padding:14px 32px;font-weight:700;color:var(--muted);font-family:var(--mono)">pt, cm, in</td><td style="padding:14px 32px;color:var(--muted)">Unidades de impresión</td><td style="padding:14px 32px;color:var(--muted)">Solo tienen sentido al imprimir. En pantalla no se usan</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:var(--type-caption);color:var(--muted);margin-top:20px">Tabla 2.1. Regla del curso: <b>rem</b> para texto y espacios, <b>px</b> para detalles, <b>%</b> para anchos. El cero no lleva unidad: <code class="en-linea">margin: 0</code>.</p>
+</section>
+
+<!-- 19 Fuentes web -->
+<section data-label="2.1 · Fuentes que no están en el ordenador" data-seccion="2.1" data-notas="Con el link, cada visita a tu página descarga la fuente de los servidores de Google, y eso envía la IP del visitante. En la Unión Europea se ha considerado un problema de privacidad (sentencia del Tribunal Regional de Múnich, enero de 2022) y muchas webs descargan la fuente y la sirven desde su propio servidor. En el cuaderno de CodePen se usa el link sin más; en la página publicada, o pila del sistema, o fuente descargada con @font-face." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Estilo visual</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Fuentes que no están en el ordenador</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">Con la pila del sistema cada visitante ve la fuente que tenga instalada. Si quieres una concreta, <b>Google Fonts</b> tiene cientos gratuitas: eliges una, copias el <code class="en-linea">&lt;link&gt;</code> al <code class="en-linea">&lt;head&gt;</code> y la usas en <code class="en-linea">font-family</code>, con su pila de reserva.</p>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)"><b>Aviso.</b> Con el <code class="en-linea">&lt;link&gt;</code>, cada visita descarga la fuente de Google y le envía su IP. En la UE se ha considerado un problema de privacidad, y muchas webs descargan la fuente (Google Fonts lo permite) y la sirven desde su propio servidor con <code class="en-linea">@font-face</code>. En CodePen, el <code class="en-linea">&lt;link&gt;</code>; en tu página publicada, la pila del sistema o la fuente descargada.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>index.html y estilos.css</span></div>
+      <pre class="cod compacto" data-lang="html">
+&lt;!-- en el head, lo que da Google Fonts --&gt;
+&lt;link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Nunito
+        :wght@400;700&amp;display=swap"&gt;
+
+&lt;style&gt;
+  body { font-family: "Nunito", system-ui, sans-serif; }
+
+  /* alternativa: fuente descargada, servida desde tu carpeta */
+  @font-face {
+    font-family: "Nunito";
+    src: url("fuentes/nunito.woff2") format("woff2");
+  }
+&lt;/style&gt;</pre>
+    </div>
+    <div class="img-slot" style="flex:1;min-height:180px">Captura propia de fonts.google.com con una familia abierta (Nunito o similar) y el botón «Get embed code» o «Download». Con fecha.</div>
+  </div>
+</section>
+
+<!-- 20 El modelo de caja -->
+<section data-label="2.1 · El modelo de caja" data-seccion="2.1" data-notas="Todo elemento es una caja. El relleno está dentro del borde y coge el color de fondo; el margen está fuera y es transparente. DevTools dibuja la caja al pasar el ratón por un elemento y, en la pestaña Estilos, abajo del todo. Detalle que sale cuando preguntan: el margen vertical de dos cajas seguidas no se suma, se solapa el mayor." style="display:grid;grid-template-columns:1fr 1.3fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Cajas</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Todo es una caja</h2>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--gap-item);margin-top:var(--gap-title);font-size:var(--type-small);line-height:1.4">
+      <li style="display:flex;gap:24px"><span style="color:var(--blue);font-weight:800">—</span><span><b>Contenido</b>: el texto o la imagen. Su tamaño es <code class="en-linea">width</code> y <code class="en-linea">height</code></span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--green-dark);font-weight:800">—</span><span><b>Relleno</b>, <code class="en-linea">padding</code>: espacio entre el contenido y el borde. Tiene el mismo color de fondo que el contenido</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--navy);font-weight:800">—</span><span><b>Borde</b>, <code class="en-linea">border</code>: la línea que rodea la caja</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--muted);font-weight:800">—</span><span><b>Margen</b>, <code class="en-linea">margin</code>: separación con las cajas de al lado. Transparente</span></li>
+    </ul>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4;margin-top:var(--gap-item)">DevTools dibuja esta caja al pasar el ratón por cualquier elemento, con sus medidas.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+    <figure class="foto" style="flex:1;background:var(--bg);border:3px solid var(--line)">
+      <img src="img/caja.svg" alt="Esquema del modelo de caja: margen, borde, relleno y contenido" title="Elaboración propia" style="object-fit:contain">
+      <figcaption class="credito"><b>Figura 2.2.</b> Elaboración propia.</figcaption>
+    </figure>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.2. El modelo de caja. Es lo que DevTools enseña abajo del todo en la pestaña Estilos.</p>
+  </div>
+</section>
+
+<!-- 21 margin, padding y border -->
+<section data-label="2.1 · margin, padding y border" data-seccion="2.1" data-notas="Atajos: un valor para los cuatro lados; dos valores, arriba-abajo e izquierda-derecha; cuatro valores en el sentido del reloj desde arriba. margin: 0 auto centra una caja que tenga ancho. border es grosor, estilo y color. border-radius al 50 % hace un círculo si la caja es cuadrada. hr: el navegador la dibuja con un borde gris; se cambia con border." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Cajas</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">margin, padding y border</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Las tres partes de la caja alrededor del contenido. Cada una se escribe con un atajo de uno a cuatro valores.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-caja">
+.ficha {
+  /* arriba y abajo · izquierda y derecha */
+  padding: 1rem 1.5rem;
+  /* separación con lo de arriba y abajo */
+  margin: 1rem 0;
+  border: 2px solid #041c3f;   /* grosor · estilo · color */
+  border-radius: 12px;         /* esquinas */
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+  background: #e3ecf3;
+}
+.etiqueta {
+  /* un valor: los cuatro lados iguales */
+  padding: .25rem .75rem;
+  border: 2px dashed #017ce9;
+  border-radius: 999px;        /* píldora */
+}
+/* círculo */
+.avatar { width: 80px; height: 80px; border-radius: 50%; }
+/* la línea horizontal hr, con el borde que quieras */
+hr { border: 0; border-top: 1px solid #d6e0ea; }</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-caja" data-url="localhost/index.html" data-zoom="1.4" data-html="<div class='ficha'><b>Ficha técnica</b><br>Primera versión: 2004 · Licencia: GPL</div><span class='etiqueta'>Libre</span> <span class='etiqueta'>Gratis</span><hr><div class='avatar' style='background:#a5e070'></div>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Cuatro valores van en el sentido del reloj: arriba, derecha, abajo, izquierda</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Estilos de borde: <code class="en-linea">solid</code>, <code class="en-linea">dashed</code>, <code class="en-linea">dotted</code>. <code class="en-linea">margin: 0 auto</code> centra una caja con ancho</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 22 Ancho, alto y el reset del curso -->
+<section data-label="2.1 · Ancho, alto y el reset" data-seccion="2.1" data-notas="Sin box-sizing, el ancho es solo el contenido: una caja de 250 px con 10 px de borde y 20 de relleno mide 310, y es la causa de muchos desajustes. Con border-box el ancho incluye relleno y borde, y 250 son 250. El alto casi nunca se fija: lo pone el contenido. max-width en vez de width: la caja crece hasta ahí y se encoge en pantallas pequeñas. El reset abre todas las hojas del curso." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Cajas</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Ancho, alto y el reset del curso</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">El ancho se controla con <code class="en-linea">max-width</code>; el alto lo pone el contenido. El reset son tres reglas que abren todas las hojas del curso.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-reset" data-marca="2-4">
+/* El reset del curso: siempre al principio de la hoja */
+/* el ancho incluye relleno y borde */
+* { box-sizing: border-box; }
+/* quita el margen que el navegador pone por defecto */
+body { margin: 0; }
+/* las imágenes nunca desbordan */
+img { max-width: 100%; height: auto; }
+
+/* Ancho: max-width, no width */
+/* crece hasta ahí y se centra */
+main { max-width: 60rem; margin: 0 auto; }
+
+/* Las dos cajas miden 250px de ancho, pero solo una lo
+   cumple */
+.sin {
+  box-sizing: content-box; width: 250px; padding: 20px;
+  border: 10px solid #fc565b;
+}
+.con {
+  box-sizing: border-box; width: 250px; padding: 20px;
+  border: 10px solid #0a6e1a;
+}
+.sin, .con { margin: .5rem 0; background: #e3ecf3; }</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-reset" data-url="localhost/index.html" data-zoom="1.4" data-html="<div class='sin'>content-box: 250 + 20 + 20 + 10 + 10 = 310 px</div><div class='con'>border-box: 250 px en total</div>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">height</code> casi nunca: el alto lo pone el contenido. Si hace falta, <code class="en-linea">min-height</code></span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Con <code class="en-linea">max-width</code> la caja se encoge sola en pantallas estrechas. Es el primer paso del diseño responsive</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 23 Cascada, especificidad y herencia -->
+<section data-label="2.1 · Quién gana" data-seccion="2.1" data-notas="La puntuación 1, 10, 100 sirve para comparar, pero no se suma: once clases no ganan a un id. La hoja interna y la externa tienen la misma fuerza; decide el orden en el head. !important gana a todo y por eso no se usa: se convierte en el problema que había que resolver. En DevTools, lo tachado es lo que perdió." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Cascada</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Cascada, especificidad y herencia: quién gana</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-title)">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--blue);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">1</span><p style="font-size:var(--type-small);line-height:1.4"><b>Gana la regla más específica.</b> Un id pesa más que una clase; una clase más que un elemento. <code class="en-linea">nav a</code> gana a <code class="en-linea">a</code>. Para comparar se puede contar 100 por cada id, 10 por cada clase y 1 por cada elemento, pero las cuentas no se suman: once clases no ganan a un id.</p></div>
+      <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--cyan);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">2</span><p style="font-size:var(--type-small);line-height:1.4"><b>A igual especificidad, gana la última escrita.</b> Por eso el orden de la hoja importa, y la interna y la externa tienen la misma fuerza: decide cuál va después en el <code class="en-linea">&lt;head&gt;</code>.</p></div>
+      <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--orange);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">3</span><p style="font-size:var(--type-small);line-height:1.4"><b>El estilo en línea gana a la hoja</b>, y <code class="en-linea">!important</code> gana a todo. Por eso no se usan: después no hay manera de corregir esa regla sin otro <code class="en-linea">!important</code>.</p></div>
+      <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--green);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">4</span><p style="font-size:var(--type-small);line-height:1.4"><b>Herencia.</b> Lo del texto (color, fuente, tamaño) pasa de <code class="en-linea">body</code> a todo lo de dentro; lo de la caja (borde, margen, fondo) no. Por eso <code class="en-linea">body { font-family }</code> cambia toda la página.</p></div>
+    </div>
+    <div class="ventana" style="align-self:start">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>¿de qué color se ve el enlace del menú?</span></div>
+      <pre class="cod compacto" data-lang="css">
+a        { color: blue; }     /* 1 elemento */
+/* 2 elementos: gana a la anterior */
+nav a    { color: white; }
+/* 1 clase: gana a las dos anteriores */
+.activo  { color: green; }
+/* 1 id + 1 elemento: gana a todas */
+#menu a  { color: red; }
+/* igual que la primera, pero después:
+   gana a la primera, no a las demás */
+a        { color: orange; }
+
+/* En DevTools verás tachado lo que perdió */</pre>
+    </div>
+  </div>
+</section>
+
+<!-- 24 Cómo se elige el selector (previa) -->
+<section data-label="2.1 · Cómo se elige el selector" data-seccion="2.1" data-notas="Explicación previa al interactivo con un ejemplo resuelto. Regla: leer el HTML de dentro afuera, mirar clases e ids, y comprobar que el selector no alcance de más." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Selectores</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Cómo se elige el selector</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">Quieres una regla que afecte solo al enlace marcado. Lee el HTML desde el elemento marcado hacia fuera: es un <code class="en-linea">a</code> con la clase <code class="en-linea">activo</code>, dentro de un <code class="en-linea">nav</code>.</p>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:20px;margin-top:var(--gap-item);font-size:var(--type-small);line-height:1.4">
+      <li style="display:flex;gap:20px"><span style="color:var(--ok);font-weight:800">✓</span><span><code class="en-linea">nav .activo</code>: lo alcanza, y solo a él</span></li>
+      <li style="display:flex;gap:20px"><span style="color:var(--ko);font-weight:800">✗</span><span><code class="en-linea">nav a</code>: alcanza de más, también el otro enlace del menú</span></li>
+      <li style="display:flex;gap:20px"><span style="color:var(--ko);font-weight:800">✗</span><span><code class="en-linea">#activo</code>: no alcanza nada, es una clase, no un id</span></li>
+      <li style="display:flex;gap:20px"><span style="color:var(--ko);font-weight:800">✗</span><span><code class="en-linea">a .activo</code>: con espacio busca un descendiente del enlace; no hay</span></li>
+    </ul>
+  </div>
+  <div class="ventana" style="align-self:center">
+    <div class="ventana-barra"><i></i><i></i><i></i><span>index.html</span></div>
+    <pre class="cod compacto" data-lang="html" data-marca="4">
+&lt;nav&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#que-es"&gt;Qué es&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#ficha" class="activo"&gt;Ficha&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;p&gt;Lee &lt;a href="#"&gt;más&lt;/a&gt;.&lt;/p&gt;</pre>
+  </div>
+</section>
+
+<!-- 25 Interactivo: selector -->
+<section data-label="2.1 · ¿Qué selector lo alcanza?" data-seccion="2.1" data-notas="Cada vez sale un HTML distinto con una o varias líneas marcadas y cuatro selectores. Comprobar pinta en el HTML lo que alcanza el selector elegido: verde lo correcto, rojo lo que sobra. Resolver explica qué alcanza cada uno de los otros tres." style="display:grid;grid-template-columns:1fr 1.5fr;gap:80px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div>
+    <span class="pill">Ejercicio interactivo</span>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">¿Qué selector lo alcanza?</h2>
+    <p style="font-size:var(--type-small);line-height:1.5;margin-top:var(--gap-title);color:var(--muted)">Cada vez sale un HTML distinto con una o varias líneas marcadas. Elige el selector que llega <b>justo</b> a lo marcado. <b>Comprobar</b> marca en el HTML lo que alcanza tu selector; <b>Pista</b> te dice de qué familia es; <b>Resolver</b> explica qué alcanzaba cada uno.</p>
+  </div>
+  <div class="ej" data-tipo="selector"></div>
+</section>
+
+<!-- ═══════════ BLOQUE 2.2 · PRÁCTICA 2.1 (sesiones 3 y 4) ═══════════ -->
+
+<!-- 26 Práctica 2.1 -->
+<section data-label="2.2 · Práctica 2.1: tu página con estilo" data-seccion="2.2" data-deck-id="practica-2-1" data-deck-section="2.2" data-notas="Se revisa en la sesión 4 pero se entrega al final de la unidad con las otras dos partes. Cada uno trabaja sobre su propia página de la UT1; se exige que tenga header, nav, main, aside y footer, y añadir el nav es el único cambio de HTML permitido. La paleta de la maqueta es la del módulo; pueden cambiarla por la de su juego si el contraste se lee." style="display:grid;grid-template-columns:1fr 1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div>
+    <span class="pill">Práctica 2.1</span>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Tu página con estilo, parte 1</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">Abre en VS Code la carpeta de tu «Mi videojuego favorito» (si no la conservas, descarga el <code class="en-linea">index.html</code> que entregaste). Crea <code class="en-linea">estilos.css</code>, enlázala y consigue el aspecto de la <b>maqueta 1</b>. Todavía en una columna.</p>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">Tu HTML tiene que tener <code class="en-linea">header</code>, <code class="en-linea">nav</code>, <code class="en-linea">main</code>, <code class="en-linea">aside</code> y <code class="en-linea">footer</code>. Si te falta el <code class="en-linea">nav</code> con los cuatro enlaces a las anclas, añádelo: es el único cambio de HTML permitido en la unidad.</p>
+  </div>
+  <div style="background:var(--white);border-radius:24px;padding:48px 56px;display:flex;flex-direction:column;gap:32px;box-shadow:0 2px 0 var(--line)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px 32px;font-size:var(--type-caption)">
+      <div><p style="color:var(--muted)">Duración</p><p style="font-weight:700;color:var(--navy);margin-top:6px">2 sesiones</p></div>
+      <div><p style="color:var(--muted)">Modalidad</p><p style="font-weight:700;color:var(--navy);margin-top:6px">Individual, en el aula</p></div>
+      <div><p style="color:var(--muted)">Entrega</p><p style="font-weight:700;color:var(--navy);margin-top:6px">Al final de la unidad, con las partes 2 y 3. Se revisa en la sesión 4</p></div>
+      <div><p style="color:var(--muted)">Material</p><p style="font-weight:700;color:var(--navy);margin-top:6px">VS Code, navegador, esta presentación. Sin IA</p></div>
+    </div>
+    <div style="height:2px;background:var(--line)"></div>
+    <ol style="padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;font-size:var(--type-caption);line-height:1.4">
+      <li style="display:flex;gap:16px"><span style="font-weight:800;color:var(--blue)">1.</span><span>El reset del curso y la paleta en variables: fondo, texto, acento, acento claro y línea</span></li>
+      <li style="display:flex;gap:16px"><span style="font-weight:800;color:var(--blue)">2.</span><span>Tipografía con pila (una de Google Fonts en los títulos, si quieres) y <code class="en-linea">main</code> centrado con <code class="en-linea">max-width: 60rem</code></span></li>
+      <li style="display:flex;gap:16px"><span style="font-weight:800;color:var(--blue)">3.</span><span>Espaciado de encabezados, párrafos y listas; tabla con bordes unidos y filas cebra; formulario con campos a ancho completo; figuras con pie en pequeño</span></li>
+      <li style="display:flex;gap:16px"><span style="font-weight:800;color:var(--blue)">4.</span><span><b>Cuaderno</b>, en CodePen: ejercicio 1, la bandera de Laos; ejercicio 2, la tarjeta de un videojuego</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 27 Maqueta 1 -->
+<section data-label="2.2 · Maqueta 1" data-seccion="2.2" data-notas="Se sube también a Classroom a tamaño completo. Paleta: fondo #fefefe, texto #041c3f, acento #a5e070, acento claro #e3ecf3, línea #d6e0ea, enlace #017ce9. Tipografía: Segoe UI, Roboto, system-ui, sans-serif." style="display:grid;grid-template-columns:1fr 1.3fr;gap:80px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <span class="pill">Práctica 2.1</span>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Maqueta 1: cómo debe quedar</h2>
+    <p style="font-size:var(--type-small);line-height:1.5;margin-top:var(--gap-title)">Una columna centrada, paleta aplicada, tipografía cuidada, tabla con cebra, formulario limpio. Clic en la imagen para verla entera.</p>
+    <p style="font-size:var(--type-caption);font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-top:var(--gap-title)">La paleta</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px;font-size:20px;font-family:var(--mono)">
+      <div style="background:#fefefe;border:2px solid var(--line);border-radius:12px;padding:14px"><span style="display:block;font-weight:700;font-family:inherit">--fondo</span>#fefefe</div>
+      <div style="background:#041c3f;color:#fff;border-radius:12px;padding:14px"><span style="display:block;font-weight:700">--texto</span>#041c3f</div>
+      <div style="background:#a5e070;border-radius:12px;padding:14px"><span style="display:block;font-weight:700">--acento</span>#a5e070</div>
+      <div style="background:#e3ecf3;border-radius:12px;padding:14px"><span style="display:block;font-weight:700">--acento-claro</span>#e3ecf3</div>
+      <div style="background:#d6e0ea;border-radius:12px;padding:14px"><span style="display:block;font-weight:700">--linea</span>#d6e0ea</div>
+      <div style="background:#017ce9;color:#fff;border-radius:12px;padding:14px"><span style="display:block;font-weight:700">--enlace</span>#017ce9</div>
+    </div>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4;margin-top:var(--gap-item)">Puedes cambiarla por la de tu juego si el contraste se lee (4,5 a 1 en el texto).</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:16px;min-height:0">
+    <figure class="foto" style="flex:1;border:3px solid var(--line);background:var(--white)">
+      <img src="img/maqueta-1.jpg" alt="Maqueta 1: la página en una columna centrada con la paleta del módulo" title="Elaboración propia" style="object-fit:cover;object-position:top">
+      <figcaption class="credito"><b>Maqueta 1.</b> Elaboración propia. Capturas del juego de los autores de SuperTuxKart, CC BY-SA 4.0 y CC BY 3.0.</figcaption>
+    </figure>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.3. Maqueta 1, primera parte de la página. La captura completa está en Classroom.</p>
+  </div>
+</section>
+
+<!-- 28 Checklist -->
+<section data-label="2.2 · Antes de dar por buena una práctica" data-seccion="2.2" data-notas="Vale para las tres prácticas y para el examen. El validador CSS del W3C es jigsaw.w3.org/css-validator. Los nombres de clase con sentido y los cero atributos style son parte de la rúbrica." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <span class="pill">Práctica</span>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy)">Antes de dar por buena una práctica</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px 48px;margin-top:var(--gap-title)">
+    <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--blue);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">1</span><p style="font-size:var(--type-small);line-height:1.4"><b>La hoja pasa el validador CSS</b> sin errores: jigsaw.w3.org/css-validator. Pega el código o sube el archivo.</p></div>
+    <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--cyan);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">2</span><p style="font-size:var(--type-small);line-height:1.4"><b>En DevTools no hay triángulos amarillos</b>: ninguna propiedad ni valor que el navegador no entienda.</p></div>
+    <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--green);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">3</span><p style="font-size:var(--type-small);line-height:1.4"><b>Cero atributos <code class="en-linea">style</code> en el HTML.</b> Todo el aspecto está en <code class="en-linea">estilos.css</code>.</p></div>
+    <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--orange);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">4</span><p style="font-size:var(--type-small);line-height:1.4"><b>Los nombres de clase describen el contenido</b>: <code class="en-linea">.galeria</code>, <code class="en-linea">.notas</code>, no <code class="en-linea">.caja1</code>.</p></div>
+    <div style="display:flex;gap:24px;align-items:flex-start;grid-column:1 / -1"><span style="width:56px;height:56px;border-radius:14px;background:var(--navy);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">5</span><p style="font-size:var(--type-small);line-height:1.4"><b>Se ve bien al estrechar la ventana.</b> En la práctica 2.1 basta con que nada desborde; en la 2.3, que la maqueta cambie a una columna.</p></div>
+  </div>
+</section>
+
+<!-- ═══════════ BLOQUE 2.3 · COLOCAR COSAS: DISPLAY Y FLEXBOX (sesiones 5 y 6) ═══════════ -->
+
+<!-- 29 Bloque y línea -->
+<section data-label="2.3 · Bloque y línea" data-seccion="2.3" data-deck-id="flexbox" data-deck-section="2.3" data-notas="Aquí se cierra lo de bloque y línea que quedó pendiente en la UT1. display: none quita el elemento del todo; visibility: hidden lo oculta pero deja el hueco. Los valores flex y grid, que son el corazón de la unidad, vienen a continuación." style="display:grid;grid-template-columns:1fr 1.3fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Colocar cosas</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Cajas de bloque y cajas de línea</h2>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--gap-item);margin-top:var(--gap-title);font-size:var(--type-small);line-height:1.4">
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">display: block</code>: ocupa toda la anchura y empieza en línea nueva. <code class="en-linea">p</code>, <code class="en-linea">h1</code>, <code class="en-linea">div</code>, <code class="en-linea">section</code></span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">inline</code>: va dentro del texto y no acepta ancho ni alto. <code class="en-linea">a</code>, <code class="en-linea">strong</code>, <code class="en-linea">span</code></span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">inline-block</code>: en línea, pero con ancho, alto y relleno. Una etiqueta «PEGI 12»</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">none</code>: desaparece del todo. <code class="en-linea">visibility: hidden</code> lo oculta pero deja el hueco</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--green-dark);font-weight:800">—</span><span><code class="en-linea">flex</code> y <code class="en-linea">grid</code>: los que colocan a los hijos. Se explican a continuación</span></li>
+    </ul>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+    <figure class="foto" style="flex:1;background:var(--bg);border:3px solid var(--line)">
+      <img src="img/bloque-linea.svg" alt="Esquema de cajas de bloque, de línea y de línea con bloque dentro de un body" title="Elaboración propia" style="object-fit:contain">
+      <figcaption class="credito"><b>Figura 2.4.</b> Elaboración propia.</figcaption>
+    </figure>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.4. Cada elemento tiene un <code class="en-linea">display</code> por defecto; con CSS se cambia.</p>
+  </div>
+</section>
+
+<!-- 30 Flexbox: un padre que reparte -->
+<section data-label="2.3 · Flexbox" data-seccion="2.3" data-notas="display: flex en el contenedor coloca a sus hijos directos en fila. Sirve para todo lo que va en una línea o una columna: menús, cabecera con logo a un lado y botones al otro, tarjetas en fila, centrar. Antes de flexbox, en todos los navegadores hacia 2015, esto se hacía con float y trucos; muchas páginas antiguas siguen así." style="display:grid;grid-template-columns:1fr 1.3fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Flexbox</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Flexbox: el contenedor coloca a sus hijos</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)"><code class="en-linea">display: flex</code> en el <b>contenedor</b> coloca a sus hijos directos en fila. El contenedor decide la dirección, el reparto y la alineación; los hijos se adaptan.</p>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--gap-item);margin-top:var(--gap-item);font-size:var(--type-small);line-height:1.4">
+      <li style="display:flex;gap:24px"><span style="color:var(--blue);font-weight:800">—</span><span><b>Eje principal</b>: la fila (o la columna). <code class="en-linea">justify-content</code> reparte aquí</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--orange);font-weight:800">—</span><span><b>Eje cruzado</b>: el otro. <code class="en-linea">align-items</code> alinea aquí</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Para todo lo que va en una dirección: menús, logo a un lado y botones al otro, tarjetas en fila, centrar</span></li>
+    </ul>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+    <figure class="foto" style="flex:1;background:var(--bg);border:3px solid var(--line)">
+      <img src="img/flex-ejes.svg" alt="Esquema de un contenedor flex con tres hijos, el eje principal horizontal y el eje cruzado vertical" title="Elaboración propia" style="object-fit:contain">
+      <figcaption class="credito"><b>Figura 2.5.</b> Elaboración propia.</figcaption>
+    </figure>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.5. Contenedor, hijos y los dos ejes. Antes de flexbox (2015) esto se hacía con <code class="en-linea">float</code> y trucos; muchas páginas antiguas siguen así.</p>
+  </div>
+</section>
+
+<!-- 31 Dirección, reparto y alineación -->
+<section data-label="2.3 · Dirección, reparto y alineación" data-seccion="2.3" data-notas="Cambiar en DevTools cada valor y ver cómo se recolocan las cajas. space-between es el que más van a usar: logo a la izquierda, menú a la derecha. gap separa sin márgenes." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Flexbox</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Dirección, reparto y alineación</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Tres propiedades del contenedor flex deciden en qué dirección van los hijos, cómo se reparte el espacio y cómo se alinean.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-flex">
+.fila {
+  display: flex;
+  flex-direction: row;       /* row (defecto) o column */
+  /* eje principal: flex-start, center, space-between,
+     space-around, space-evenly */
+  justify-content: space-between;
+  /* eje cruzado: stretch (defecto), center,
+     flex-start, flex-end */
+  align-items: center;
+  /* hueco entre hijos, sin márgenes */
+  gap: 1rem;
+  background: #e3ecf3; padding: 1rem;
+  border-radius: 12px; margin-bottom: 1rem;
+}
+.columna {
+  display: flex; flex-direction: column; gap: .5rem;
+}
+.caja {
+  background: #a5e070; padding: 1rem; border-radius: 8px;
+  font-weight: 700;
+}
+.alta { padding: 2rem 1rem; }</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-flex" data-url="localhost/index.html" data-zoom="1.3" data-html="<p style='margin:0 0 .4rem;font-family:sans-serif'>row · space-between · center</p><div class='fila'><div class='caja'>1</div><div class='caja alta'>2</div><div class='caja'>3</div></div><p style='margin:0 0 .4rem;font-family:sans-serif'>column</p><div class='fila columna' style='align-items:stretch'><div class='caja'>1</div><div class='caja'>2</div><div class='caja'>3</div></div>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">space-between</code> es el que más usarás: logo a la izquierda, menú a la derecha</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Cámbialo en DevTools y mira cómo se recolocan las cajas</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 32 Centrar, crecer y saltar de línea -->
+<section data-label="2.3 · Centrar, crecer y saltar" data-seccion="2.3" data-notas="Fin del meme de cómo centro un div: flex con justify-content y align-items en center. flex: 1 reparte el espacio a partes iguales; flex: 2 da el doble a uno; flex: 0 0 16rem fija un lateral. flex-wrap deja saltar de línea cuando no caben. Es la maqueta de escritorio de la práctica 2.2, con el cuerpo como contenedor flex que salta de línea; la definitiva, con grid, en la 2.3." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Flexbox</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Centrar, crecer y saltar de línea</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Tres usos más de flexbox: centrar en las dos direcciones, repartir el espacio entre los hijos y dejar que salten de línea.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-flex2">
+/* Centrar cualquier cosa en las dos direcciones */
+.centro {
+  display: flex; justify-content: center; align-items: center;
+  height: 6rem; background: #041c3f; color: white;
+}
+
+/* El cuerpo como contenedor flex que salta de línea */
+body {
+  display: flex; flex-wrap: wrap; gap: 0 1rem; margin: 0;
+}
+header, nav, footer { flex: 0 0 100%; }  /* toda la anchura */
+/* el doble de espacio… */
+main  { flex: 2; }
+aside { flex: 1; }                       /* …que el lateral */
+/* flex: 0 0 16rem fijaría el lateral, sin crecer ni
+   encoger */
+
+header, nav, footer {
+  background: #a5e070; padding: .5rem 1rem;
+}
+main, aside {
+  background: #e3ecf3; padding: 1rem; margin: .5rem 0;
+}</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-flex2" data-url="localhost/index.html" data-zoom="1.3" data-html="<header>header</header><nav>nav</nav><main>main · flex: 2<div class='centro'>centrado</div></main><aside>aside · flex: 1</aside><footer>footer</footer>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">flex: 1</code> reparte a partes iguales; <code class="en-linea">flex: 2</code> da el doble; <code class="en-linea">flex-wrap: wrap</code> deja saltar de línea</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Es la maqueta de escritorio de la práctica 2.2. La definitiva, con grid, en la 2.3</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 33 El menú de navegación -->
+<section data-label="2.3 · El menú de navegación" data-seccion="2.3" data-notas="Es el patrón que verán en cualquier web y el que trae el tema de WordPress: nav, ul, li, a; la lista sin viñetas ni relleno, en flex; el enlace como bloque para que toda la caja sea clicable. Los enlaces van a las anclas de la página." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Flexbox</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">El menú de navegación</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">El menú de la página, con el HTML de la UT1 y cuatro reglas: la lista en fila, sin viñetas ni sangría, y cada enlace como una caja.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-menu">
+/* El HTML es el de la UT1: nav > ul > li > a */
+nav { background: #a5e070; }
+nav ul {
+  display: flex;         /* los li en fila */
+  gap: .5rem;
+  justify-content: center;
+  list-style: none;      /* sin viñetas */
+  margin: 0;
+  padding: 0;            /* sin la sangría por defecto de la lista */
+}
+nav a {
+  display: block;        /* toda la caja es clicable */
+  padding: .75rem 1.25rem;
+  color: #041c3f;
+  text-decoration: none;
+  font-weight: 600;
+}</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-menu" data-url="localhost/index.html" data-zoom="1.4" data-html="<body style='margin:0;font-family:sans-serif'><nav><ul><li><a href='#que-es'>Qué es</a></li><li><a href='#personajes'>Personajes</a></li><li><a href='#ficha'>Ficha</a></li><li><a href='#opinion'>Opinión</a></li></ul></nav><p style='padding:1rem'>Los enlaces van a las anclas de la página.</p></body>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Es el patrón de cualquier web, y el que usa el tema de WordPress</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Los cambios al pasar el ratón se añaden en la siguiente diapositiva</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 34 Estados -->
+<section data-label="2.3 · Estados" data-seccion="2.3" data-notas=":focus es el estado al llegar con el teclado (Tab): no se quita el outline sin poner otro. Orden si se usan todas: link, visited, hover, active. transition suaviza el cambio; cursor pointer en lo que parece botón." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Flexbox</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Estados: cuando pasas el ratón, cuando pulsas</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Las seudoclases seleccionan un elemento según su estado: con el ratón encima, seleccionado con el teclado, pulsado o ya visitado.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-estados">
+nav ul {
+  display: flex; gap: .5rem; list-style: none; margin: 0;
+  padding: 0; background: #a5e070;
+}
+nav a {
+  display: block; padding: .75rem 1.25rem; color: #041c3f;
+  text-decoration: none; font-weight: 600;
+  /* el cambio, suave */
+  transition: background-color .2s, color .2s;
+}
+/* ratón encima */
+nav a:hover  { background: #041c3f; color: white; }
+/* llegando con Tab */
+nav a:focus  { outline: 3px solid #017ce9; }
+/* mientras pulsas */
+nav a:active { background: #017ce9; }
+/* ya visitado */
+a:visited    { color: inherit; }
+
+.boton {
+  display: inline-block; padding: .6rem 1.2rem;
+  margin-top: 1rem; background: #017ce9; color: white;
+  border-radius: 8px; cursor: pointer;
+  transition: transform .1s;
+}
+.boton:hover { transform: scale(1.05); }</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-estados" data-url="localhost/index.html" data-zoom="1.4" data-html="<body style='margin:0;font-family:sans-serif'><nav><ul><li><a href='#'>Qué es</a></li><li><a href='#'>Personajes</a></li><li><a href='#'>Ficha</a></li><li><a href='#'>Opinión</a></li></ul></nav><p style='padding:0 1rem'>Pasa el ratón por el menú y por el botón. <span class='boton'>Descargar</span></p></body>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Las <b>seudoclases</b> van pegadas al selector: <code class="en-linea">a:hover</code>. Si usas las cuatro, en este orden: link, visited, hover, active</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>No quites el <code class="en-linea">outline</code> del <code class="en-linea">:focus</code> sin poner otro: es lo que ve quien navega con teclado</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 35 Quiz: logo a la izquierda, menú a la derecha -->
+<section data-label="2.3 · Quiz: logo y menú" data-seccion="2.3" data-notas="D también funciona: un margen automático en flexbox se lleva todo el espacio libre. Pero no es lo explicado. A no existe como valor de align-items. C invierte el orden, no reparte." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1.2fr;gap:96px;align-items:center;position:relative;overflow:hidden">
+  <span class="mancha arriba-dcha" style="width:380px;color:var(--cyan)"></span>
+  <div class="quiz" data-correct="1" data-ok="Correcto. justify-content reparte el espacio libre en el eje principal; space-between lo pone todo en medio." data-ko="No. Piensa en qué eje está el espacio que sobra y qué propiedad lo reparte." style="display:contents">
+    <div style="position:relative">
+      <span class="pill">Comprueba lo aprendido</span>
+      <h2 style="font-size:var(--type-subtitle);font-weight:800;line-height:1.2;margin-top:32px;color:var(--navy);text-wrap:balance">Una cabecera con <code class="en-linea">display: flex</code>. ¿Qué propiedad deja el logo a la izquierda y el menú a la derecha?</h2>
+      <p class="quiz-fb">Selecciona una opción.</p>
+      <button class="btn btn-ghost quiz-reset" style="margin-top:var(--gap-item)">Reiniciar</button>
+    </div>
+    <div class="quiz-opts" style="position:relative">
+      <button class="quiz-opt"><span class="letra">A</span><span><code class="en-linea">align-items: space-between</code></span></button>
+      <button class="quiz-opt"><span class="letra">B</span><span><code class="en-linea">justify-content: space-between</code></span></button>
+      <button class="quiz-opt"><span class="letra">C</span><span><code class="en-linea">flex-direction: row-reverse</code></span></button>
+      <button class="quiz-opt"><span class="letra">D</span><span><code class="en-linea">margin-right: auto</code> en el logo</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- 36 Listas con estilo -->
+<section data-label="2.3 · Listas con estilo" data-seccion="2.3" data-notas="Los navegadores ponen a las listas 40 px de sangría izquierda: por eso el menú lleva padding 0. Para la lista de definición del glosario, dt en negrita y dd con sangría." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Componentes</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Listas con estilo</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Las viñetas, la numeración y la sangría de una lista se cambian con las propiedades <code class="en-linea">list-style</code>.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-listas">
+/* disc, circle, square, none */
+ul { list-style-type: square; }
+/* decimal, lower-alpha, upper-roman… */
+ol { list-style-type: lower-alpha; }
+li { margin-bottom: .4rem; }
+/* la viñeta, de color */
+li::marker { color: #017ce9; }
+
+/* Los navegadores ponen 40px de sangría: por eso los menús
+   llevan padding: 0 */
+ul.dentro { list-style-position: inside; padding-left: 0; }
+
+/* Lista de definiciones: el glosario */
+dt { font-weight: 700; color: #041c3f; margin-top: .6rem; }
+dd { margin-left: 1.5rem; color: #4a5a7d; }</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-listas" data-url="localhost/index.html" data-zoom="1.4" data-html="<body style='font-family:sans-serif'><ul><li>Tux, el protagonista</li><li>Gnu, su mentor</li></ul><ol><li>Página oficial</li><li>Wikipedia</li></ol><ul class='dentro'><li>Viñeta dentro, sin sangría</li></ul><dl><dt>CSS</dt><dd>Hojas de estilo en cascada</dd><dt>Flexbox</dt><dd>Colocar en una dirección</dd></dl></body>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>El atributo <code class="en-linea">type</code> de las listas de HTML 4 es hoy <code class="en-linea">list-style-type</code></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 37 Tablas -->
+<section data-label="2.3 · Tablas" data-seccion="2.3" data-notas="Los atributos de tabla de HTML 4 pasados a CSS: BORDER es border; CELLSPACING es border-spacing, o border-collapse collapse para quitarlo; CELLPADDING es padding; ALIGN es text-align; VALIGN es vertical-align; WIDTH es width; caption sigue siendo la etiqueta y se coloca con caption-side. No cambiar el tamaño de letra en hover: hace saltar la tabla. Para móvil, la tabla dentro de un div con overflow-x auto." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Componentes</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Tablas: lo que hacían los atributos, en CSS</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Cada atributo de tabla de HTML 4 tiene hoy su propiedad CSS. Se aplican a la tabla, a las celdas o a las filas.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-tablas">
+/* bordes unidos (CELLSPACING 0) */
+table { border-collapse: collapse; width: 100%; }
+caption {
+  caption-side: bottom; color: #4a5a7d; font-size: .9rem;
+  padding: .5rem;
+}
+th, td {
+  padding: .5rem .75rem;                 /* CELLPADDING */
+  text-align: left;                      /* ALIGN */
+  vertical-align: middle;                /* VALIGN */
+  /* BORDER, pero solo abajo */
+  border-bottom: 1px solid #d6e0ea;
+}
+/* WIDTH */
+th { background: #a5e070; width: 12rem; }
+/* filas cebra */
+tbody tr:nth-child(even) { background: #e3ecf3; }
+tbody tr:hover { background: #f3f7c9; }
+/* Si no caben en el móvil: un div.tabla alrededor */
+.tabla { overflow-x: auto; }</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-tablas" data-url="localhost/index.html" data-zoom="1.4" data-html="<body style='font-family:sans-serif'><table><caption>Datos del juego</caption><tbody><tr><th>Primera versión</th><td>2004</td></tr><tr><th>Última versión</th><td>1.4</td></tr><tr><th>Plataformas</th><td>Windows, Linux, macOS, Android</td></tr><tr><th>Licencia</th><td>GPL</td></tr></tbody></table></body>" style="flex:1"></div>
+      <table style="width:100%;border-collapse:collapse;font-size:20px;background:var(--white);border-radius:14px;overflow:hidden">
+        <thead><tr style="background:var(--navy);color:var(--white);text-align:left"><th style="padding:8px 18px">Atributo de HTML 4</th><th style="padding:8px 18px">Hoy, en CSS</th></tr></thead>
+        <tbody style="font-family:var(--mono)">
+          <tr style="border-bottom:2px solid var(--line)"><td style="padding:6px 18px">BORDER</td><td style="padding:6px 18px">border</td></tr>
+          <tr style="border-bottom:2px solid var(--line)"><td style="padding:6px 18px">CELLSPACING · CELLPADDING</td><td style="padding:6px 18px">border-spacing · padding</td></tr>
+          <tr style="border-bottom:2px solid var(--line)"><td style="padding:6px 18px">ALIGN · VALIGN · WIDTH</td><td style="padding:6px 18px">text-align · vertical-align · width</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 38 Formularios -->
+<section data-label="2.3 · Formularios" data-seccion="2.3" data-notas="Los campos no heredan la fuente del body si no se les dice: font inherit. El outline del focus es lo que ve quien navega con teclado; se cambia, no se quita. Los radios del 1 al 10 en fila con flex y gap." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Componentes</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Formularios</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Los campos de formulario tienen un aspecto distinto en cada navegador. Con CSS se unifican: misma fuente, mismo ancho, mismo borde.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-form">
+label { display: block; margin-bottom: .25rem; }
+input, textarea, select {
+  /* los campos no heredan la fuente si no se lo dices */
+  font: inherit;
+  width: 100%;
+  padding: .5rem;
+  border: 1px solid #d6e0ea;
+  border-radius: 6px;
+}
+/* cámbialo, no lo quites */
+input:focus, textarea:focus { outline: 2px solid #a5e070; }
+button {
+  font: inherit; background: #a5e070; color: #041c3f;
+  border: none; padding: .75rem 1.5rem;
+  border-radius: 6px; cursor: pointer;
+}
+button:hover { background: #041c3f; color: white; }
+/* los radios en fila */
+.notas { display: flex; gap: .75rem; flex-wrap: wrap; }
+.notas label { display: inline; }
+.notas input { width: auto; }</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-form" data-url="localhost/index.html" data-zoom="1.3" data-html="<body style='font-family:sans-serif'><form><p class='notas'><label><input type='radio' name='n'> 1</label><label><input type='radio' name='n'> 2</label><label><input type='radio' name='n'> 3</label><label><input type='radio' name='n'> 4</label><label><input type='radio' name='n'> 5</label></p><label for='c'>Comentario</label><textarea id='c' rows='3'></textarea><p><button type='button'>Enviar opinión</button></p></form></body>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Es el formulario de valoración de tu página. El selector de atributo <code class="en-linea">input[type="email"]</code> sirve para tratar un tipo de campo distinto</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 39 Imágenes y figuras -->
+<section data-label="2.3 · Imágenes y figuras" data-seccion="2.3" data-notas="max-width 100% viene del reset: las imágenes nunca desbordan. object-fit cover con aspect-ratio hace que todas las capturas de una galería tengan la misma forma sin deformarse. float queda solo para que un texto rodee una imagen. Equivalencias: WIDTH, HEIGHT, ALIGN y BORDER de img son width, height, float y border." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Componentes</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Imágenes y figuras</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Dos objetivos: que ninguna imagen desborde su caja y que todas las capturas de una galería tengan la misma forma.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-img">
+/* del reset: nunca desbordan */
+img { max-width: 100%; height: auto; }
+figure { margin: 0 0 1rem; }
+figure img { border-radius: 8px; display: block; }
+figcaption {
+  font-size: .85rem; color: #4a5a7d; margin-top: .3rem;
+}
+
+/* Todas las capturas con la misma forma, sin deformarse */
+.galeria img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* El único uso de float que queda: texto alrededor */
+.flotante {
+  float: left; width: 8rem; margin: 0 1rem .5rem 0;
+}
+
+/* WIDTH, HEIGHT, ALIGN y BORDER de <img> son hoy
+   width, height, float y border */</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-img" data-url="localhost/index.html" data-zoom="1.3" data-html="<body style='font-family:sans-serif'><div class='galeria' style='display:flex;gap:.5rem'><figure><img src='img/stk-mini-1.jpg' alt='Circuito'><figcaption>Un circuito. Autores de SuperTuxKart, CC BY-SA 4.0.</figcaption></figure><figure><img src='img/stk-mini-2.jpg' alt='Modo historia'><figcaption>Modo historia. QwertyChouskie, CC BY-SA 4.0.</figcaption></figure></div><p><img class='flotante' src='img/stk-mini-1.jpg' alt=''>Con float el texto rodea la imagen. Es el único caso en que hoy se usa: para todo lo demás están flexbox y grid, que veremos a continuación en la unidad.</p></body>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Dos capturas con formas distintas se ven iguales gracias a <code class="en-linea">aspect-ratio</code> y <code class="en-linea">object-fit: cover</code></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 40 Cómo se completa (previa) -->
+<section data-label="2.3 · Cómo se completa una regla" data-seccion="2.3" data-notas="Explicación previa al interactivo. Regla: leer el selector y el resto de declaraciones, pensar qué falta, escribir solo el valor o la propiedad." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Repaso</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Cómo se completa una regla</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">Aparece una regla con un hueco. Lee el selector y las otras declaraciones: dicen para qué es la regla. Escribe solo lo que falta, una propiedad o un valor.</p>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:20px;margin-top:var(--gap-item);font-size:var(--type-small);line-height:1.4">
+      <li style="display:flex;gap:20px"><span style="color:var(--blue);font-weight:800">1.</span><span>El selector es <code class="en-linea">nav ul</code> y hay un <code class="en-linea">gap</code>: es el menú, en fila</span></li>
+      <li style="display:flex;gap:20px"><span style="color:var(--blue);font-weight:800">2.</span><span>Lo que pone a los hijos en fila es <code class="en-linea">display: flex</code></span></li>
+      <li style="display:flex;gap:20px"><span style="color:var(--ok);font-weight:800">✓</span><span>Se escribe <code class="en-linea">flex</code>, sin punto y coma</span></li>
+    </ul>
+  </div>
+  <div class="ventana" style="align-self:center">
+    <div class="ventana-barra"><i></i><i></i><i></i><span>ejemplo resuelto</span></div>
+    <pre class="cod grande" data-lang="css">
+nav ul {
+  display: ___;
+  gap: 1rem;
+  list-style: none;
+}
+
+/* respuesta: flex */</pre>
+  </div>
+</section>
+
+<!-- 41 Interactivo: completar -->
+<section data-label="2.3 · Completa la regla" data-seccion="2.3" data-notas="Veinticinco huecos de los bloques 2.1 y 2.3. Comprobar acepta con o sin punto y coma. Cuenta los aciertos seguidos sin pista." style="display:grid;grid-template-columns:1fr 1.5fr;gap:80px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div>
+    <span class="pill">Ejercicio interactivo</span>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Completa la regla que falta</h2>
+    <p style="font-size:var(--type-small);line-height:1.5;margin-top:var(--gap-title);color:var(--muted)">Cada vez sale una regla distinta con un hueco. <b>Comprobar</b> corrige, <b>Pista</b> te dice para qué es, <b>Resolver</b> lo rellena y <b>Otro ejercicio</b> cambia de regla. Cuenta los aciertos seguidos sin pista.</p>
+  </div>
+  <div class="ej" data-tipo="completar" data-banco="completarCss" data-enunciado="Escribe la propiedad o el valor que falta en el hueco. Sin punto y coma."></div>
+</section>
+
+<!-- ═══════════ BLOQUE 2.4 · PRÁCTICA 2.2 (sesiones 7 y 8) ═══════════ -->
+
+<!-- 42 Práctica 2.2 -->
+<section data-label="2.4 · Práctica 2.2: cabecera, menú y columnas" data-seccion="2.4" data-deck-id="practica-2-2" data-deck-section="2.4" data-notas="Sobre la página de la práctica 2.1. El cuerpo como contenedor flex que salta de línea, como en la diapositiva 32: header, nav y footer a toda la anchura; main y aside en proporción 2 a 1. Se revisa en la sesión 8." style="display:grid;grid-template-columns:1fr 1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div>
+    <span class="pill">Práctica 2.2</span>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Cabecera, menú y columnas</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">Sobre tu página de la práctica 2.1, consigue la <b>maqueta 2</b> de escritorio: cabecera con franja de color, menú horizontal, dos columnas y pie.</p>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">Las columnas se hacen como en la diapositiva 32: el <code class="en-linea">body</code> es un contenedor flex que salta de línea; cabecera, menú y pie ocupan toda la anchura y <code class="en-linea">main</code> y <code class="en-linea">aside</code> comparten una línea en proporción 2 a 1. Sin tocar el HTML.</p>
+  </div>
+  <div style="background:var(--white);border-radius:24px;padding:48px 56px;display:flex;flex-direction:column;gap:32px;box-shadow:0 2px 0 var(--line)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px 32px;font-size:var(--type-caption)">
+      <div><p style="color:var(--muted)">Duración</p><p style="font-weight:700;color:var(--navy);margin-top:6px">2 sesiones</p></div>
+      <div><p style="color:var(--muted)">Modalidad</p><p style="font-weight:700;color:var(--navy);margin-top:6px">Individual, en el aula</p></div>
+      <div><p style="color:var(--muted)">Entrega</p><p style="font-weight:700;color:var(--navy);margin-top:6px">Al final de la unidad. Se revisa en la sesión 8</p></div>
+      <div><p style="color:var(--muted)">Material</p><p style="font-weight:700;color:var(--navy);margin-top:6px">VS Code, navegador, esta presentación. Sin IA</p></div>
+    </div>
+    <div style="height:2px;background:var(--line)"></div>
+    <ol style="padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;font-size:var(--type-caption);line-height:1.4">
+      <li style="display:flex;gap:16px"><span style="font-weight:800;color:var(--blue)">1.</span><span><code class="en-linea">header</code> con fondo de color de texto, título en blanco y subtítulo en acento; <code class="en-linea">footer</code> igual, con el autor</span></li>
+      <li style="display:flex;gap:16px"><span style="font-weight:800;color:var(--blue)">2.</span><span><code class="en-linea">nav</code> con los cuatro enlaces en fila con flexbox, <code class="en-linea">:hover</code> con transición, y las anclas funcionando</span></li>
+      <li style="display:flex;gap:16px"><span style="font-weight:800;color:var(--blue)">3.</span><span><code class="en-linea">main</code> y <code class="en-linea">aside</code> en dos columnas, <code class="en-linea">flex: 2</code> y <code class="en-linea">flex: 1</code>; el lateral con fondo claro y las capturas</span></li>
+      <li style="display:flex;gap:16px"><span style="font-weight:800;color:var(--blue)">4.</span><span>Tabla cebra con <code class="en-linea">:hover</code> y formulario como en las diapositivas 37 y 38</span></li>
+      <li style="display:flex;gap:16px"><span style="font-weight:800;color:var(--blue)">5.</span><span><b>Cuaderno</b>: ejercicio 3, un menú de navegación; ejercicio 4, el horario y el formulario de la UT1 con estilo</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 43 Maqueta 2 -->
+<section data-label="2.4 · Maqueta 2" data-seccion="2.4" data-notas="Captura a 1280 px de ancho. Medidas: ancho máximo 72rem, proporción 2 a 1 entre main y aside, hueco de 2rem. También en Classroom a tamaño completo." style="display:grid;grid-template-columns:1fr 1.3fr;gap:80px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <span class="pill">Práctica 2.2</span>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Maqueta 2: escritorio</h2>
+    <p style="font-size:var(--type-small);line-height:1.5;margin-top:var(--gap-title)">A 1280 px de ancho. Clic en la imagen para verla entera.</p>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;margin-top:var(--gap-title);font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+      <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Cabecera y pie con fondo <code class="en-linea">--texto</code>; menú con fondo <code class="en-linea">--acento</code></span></li>
+      <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">main</code> y <code class="en-linea">aside</code> en proporción 2 a 1, con un hueco de 2rem</span></li>
+      <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>El lateral con fondo <code class="en-linea">--acento-claro</code>, esquinas redondeadas y las capturas una debajo de otra (la rejilla llega en la 2.3)</span></li>
+    </ul>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:16px;min-height:0">
+    <figure class="foto" style="flex:1;border:3px solid var(--line);background:var(--white)">
+      <img src="img/maqueta-2.jpg" alt="Maqueta 2: cabecera azul oscuro, menú verde en fila, contenido a la izquierda y lateral con capturas a la derecha, pie oscuro" title="Elaboración propia" style="object-fit:cover;object-position:top">
+      <figcaption class="credito"><b>Maqueta 2.</b> Elaboración propia. Capturas del juego de los autores de SuperTuxKart, CC BY-SA 4.0 y CC BY 3.0.</figcaption>
+    </figure>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.6. Maqueta 2, segunda parte de la página.</p>
+  </div>
+</section>
+
+<!-- ═══════════ BLOQUE 2.5 · GRID, POSICIÓN Y RESPONSIVE (sesiones 9 y 10) ═══════════ -->
+
+<!-- 44 Grid: filas y columnas -->
+<section data-label="2.5 · Grid" data-seccion="2.5" data-deck-id="grid" data-deck-section="2.5" data-notas="Regla práctica: grid reparte la página, flex ordena lo que hay dentro de cada zona. Flexbox es para una dirección; grid para dos." style="display:grid;grid-template-columns:1fr 1.3fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Grid</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Grid: filas y columnas a la vez</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)"><code class="en-linea">display: grid</code> en el contenedor define una <b>rejilla</b>; los hijos se colocan en sus celdas.</p>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--gap-item);margin-top:var(--gap-item);font-size:var(--type-small);line-height:1.4">
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Flexbox</b>: una dirección. Un menú, una fila de tarjetas, centrar</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Grid</b>: dos direcciones. La página entera, una galería</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--green-dark);font-weight:800">—</span><span>Regla práctica: <b>grid reparte la página; flex ordena lo que hay dentro de cada zona</b></span></li>
+    </ul>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+    <figure class="foto" style="flex:1;background:var(--bg);border:3px solid var(--line)">
+      <img src="img/grid-flex.svg" alt="Esquema de una página en rejilla con cabecera, menú, contenido, lateral y pie; dentro del menú y del formulario, flex" title="Elaboración propia" style="object-fit:contain">
+      <figcaption class="credito"><b>Figura 2.7.</b> Elaboración propia.</figcaption>
+    </figure>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.7. La maqueta final de tu página: grid para las zonas, flex dentro del menú y del formulario, grid otra vez para la galería.</p>
+  </div>
+</section>
+
+<!-- 45 Columnas y huecos -->
+<section data-label="2.5 · Columnas y huecos" data-seccion="2.5" data-notas="fr es fracción del espacio libre. repeat(auto-fit, minmax(14rem, 1fr)) mete tantas columnas como quepan: es la rejilla responsive sin media query, y sirve para el ejercicio 5 del cuaderno." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Grid</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Columnas y huecos</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px"><code class="en-linea">grid-template-columns</code> dice cuántas columnas tiene la rejilla y de qué ancho es cada una.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-grid">
+/* tres iguales: fr es «fracción» */
+.tres  { grid-template-columns: 1fr 1fr 1fr; }
+/* lo mismo, abreviado */
+.rep   { grid-template-columns: repeat(3, 1fr); }
+/* lateral fijo y el resto */
+.lado  { grid-template-columns: 12rem 1fr; }
+/* tantas como quepan: responsive sin media query */
+.auto  {
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+}
+.galeria { display: grid; gap: .5rem; margin-bottom: .8rem; }
+.galeria div {
+  background: #a5e070; padding: .6rem; border-radius: 6px;
+  text-align: center;
+}</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-grid" data-url="localhost/index.html" data-zoom="1.3" data-html="<body style='font-family:sans-serif;font-size:14px'>1fr 1fr 1fr<div class='galeria tres'><div>1</div><div>2</div><div>3</div></div>12rem 1fr<div class='galeria lado'><div>lateral</div><div>resto</div></div>repeat(auto-fit, minmax(9rem, 1fr))<div class='galeria auto'><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div></div></body>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">gap</code> funciona igual que en flexbox</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Estrecha la ventana del resultado: la última rejilla cambia sola de columnas</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 46 La página entera con áreas -->
+<section data-label="2.5 · La página con áreas" data-seccion="2.5" data-notas="Se ve el dibujo de la página en el propio CSS: cambiar la maqueta es cambiar las comillas. Sustituye a las columnas hechas con float y clear. En la práctica 2.3 se pasa de flex a grid y, en móvil, bastará con reescribir las áreas en una columna." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Grid</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">La página entera con áreas</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Con <code class="en-linea">grid-template-areas</code> se dibuja la maqueta de la página con el nombre de cada zona.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-areas">
+body {
+  display: grid;
+  grid-template-areas:        /* el dibujo de la página */
+    "header header"
+    "nav    nav"
+    "main   aside"
+    "footer footer";
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  margin: 0;
+}
+header { grid-area: header; }
+nav    { grid-area: nav; }
+main   { grid-area: main; }
+aside  { grid-area: aside; }
+footer { grid-area: footer; }
+header, nav, footer { background: #a5e070; padding: .6rem; }
+main, aside {
+  background: #e3ecf3; padding: .6rem; min-height: 5rem;
+}</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-areas" data-url="localhost/index.html" data-zoom="1.4" data-html="<header>header</header><nav>nav</nav><main>main</main><aside>aside</aside><footer>footer</footer>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Cambiar la maqueta es cambiar las comillas. En móvil bastará con ponerlas en una columna</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Sustituye a las columnas hechas con <code class="en-linea">float</code> y <code class="en-linea">clear</code> de las páginas antiguas</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 47 Ocupar varias celdas -->
+<section data-label="2.5 · Ocupar varias celdas" data-seccion="2.5" data-notas="Rejilla bento: una captura destacada más grande. Las imágenes con width y height al 100 % y object-fit cover para llenar la celda sin deformarse." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Grid</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Ocupar varias celdas: la galería</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Un elemento puede ocupar varias celdas de la rejilla, en horizontal o en vertical.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-span">
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .5rem;
+}
+.galeria img {
+  width: 100%; height: 100%;   /* llena la celda… */
+  object-fit: cover;           /* …sin deformarse */
+  aspect-ratio: 16 / 9;
+  border-radius: 6px; display: block;
+}
+.destacada { grid-column: span 2; }   /* ocupa dos columnas */
+/* también: grid-column: 1 / 3;  o  grid-row: span 2 */</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-span" data-url="localhost/index.html" data-zoom="1.3" data-html="<div class='galeria'><img class='destacada' src='img/stk-mini-1.jpg' alt='Circuito'><img src='img/stk-mini-2.jpg' alt='Modo historia'><img src='img/stk-mini-3.jpg' alt='Circuito nevado'><img src='img/stk-mini-4.jpg' alt='Carrera'><img src='img/stk-mini-5.jpg' alt='Otro circuito'></div>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">span 2</code> cuenta celdas; <code class="en-linea">1 / 3</code> cuenta líneas de la rejilla (de la 1 a la 3)</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Es la galería de la práctica 2.3. Capturas: autores de SuperTuxKart, CC BY-SA 4.0 y CC BY 3.0</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 48 position -->
+<section data-label="2.5 · position" data-seccion="2.5" data-notas="Confusión habitual: absolute no es respecto a la página, ni relative respecto a la caja que lo contiene. absolute sale del flujo y se coloca respecto al ancestro más cercano con position distinto de static; si no hay ninguno, respecto a la página. relative se desplaza desde su sitio y deja el hueco, y sirve sobre todo de referencia. sticky es lo que se usa para el menú." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Posición</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">position: colocar una caja fuera de su sitio</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px"><code class="en-linea">position</code> cambia el sitio de una caja respecto a su posición normal en la página.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-pos">
+/* static: lo normal.
+   relative: se desplaza desde su sitio y deja el hueco;
+   sobre todo sirve de referencia para un hijo absolute */
+figure { position: relative; margin: 0; width: 16rem; }
+.etiqueta {
+  position: absolute;  /* sale del flujo; se coloca respecto
+                          al ancestro más cercano posicionado */
+  top: .5rem; left: .5rem;
+  background: #a5e070; padding: .2rem .6rem; border-radius: 4px;
+}
+/* sticky: normal hasta que llega al borde; ahí se queda */
+nav { position: sticky; top: 0; z-index: 10;
+      background: #a5e070; padding: .5rem; }
+/* fixed: respecto a la ventana; no se mueve con el scroll */
+.subir { position: fixed; right: .5rem; bottom: .5rem;
+         background: #041c3f; color: white;
+         padding: .4rem .8rem; border-radius: 999px; }</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-pos" data-url="localhost/index.html" data-zoom="1.3" data-html="<body style='font-family:sans-serif;margin:0'><nav>nav · sticky: haz scroll aquí</nav><div style='padding:.5rem'><figure><img src='img/stk-mini-1.jpg' alt='' style='width:100%;display:block;border-radius:6px'><span class='etiqueta'>Libre</span></figure><p>Texto para poder hacer scroll.</p><p>Más texto.</p><p>Y más.</p><p>Y más todavía.</p><p>Casi.</p><p>Fin.</p></div><span class='subir'>↑ subir</span></body>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">top</code>, <code class="en-linea">right</code>, <code class="en-linea">bottom</code>, <code class="en-linea">left</code> dicen dónde; <code class="en-linea">z-index</code>, quién queda encima</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Dos usos en tu página: la etiqueta sobre una captura y el menú que se queda arriba</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 49 Quiz: sticky -->
+<section data-label="2.5 · Quiz: el menú pegado" data-seccion="2.5" data-notas="B también lo deja fijo, pero desde el principio y tapando lo que hay debajo: hay que compensarlo con un margen. sticky solo actúa cuando el scroll llega a él." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1.2fr;gap:96px;align-items:center;position:relative;overflow:hidden">
+  <span class="mancha arriba-dcha" style="width:380px;color:var(--cyan)"></span>
+  <div class="quiz" data-correct="2" data-ok="Correcto. sticky se comporta como normal hasta que el scroll lo lleva al borde; entonces se queda pegado." data-ko="No del todo. fixed también lo fija, pero desde el principio y tapando lo que hay debajo; absolute y relative no lo pegan a nada." style="display:contents">
+    <div style="position:relative">
+      <span class="pill">Comprueba lo aprendido</span>
+      <h2 style="font-size:var(--type-subtitle);font-weight:800;line-height:1.2;margin-top:32px;color:var(--navy);text-wrap:balance">¿Qué valor de <code class="en-linea">position</code> deja el menú pegado arriba cuando haces scroll, sin tapar la cabecera al principio?</h2>
+      <p class="quiz-fb">Selecciona una opción.</p>
+      <button class="btn btn-ghost quiz-reset" style="margin-top:var(--gap-item)">Reiniciar</button>
+    </div>
+    <div class="quiz-opts" style="position:relative">
+      <button class="quiz-opt"><span class="letra">A</span><span><code class="en-linea">absolute</code></span></button>
+      <button class="quiz-opt"><span class="letra">B</span><span><code class="en-linea">fixed</code></span></button>
+      <button class="quiz-opt"><span class="letra">C</span><span><code class="en-linea">sticky</code></span></button>
+      <button class="quiz-opt"><span class="letra">D</span><span><code class="en-linea">relative</code></span></button>
+    </div>
+  </div>
+</section>
+
+<!-- 50 Cifra: 54 % -->
+<section data-label="2.5 · Cuánto tráfico es móvil" data-seccion="2.5" data-notas="Actualizar cada curso. El dato mundial de agosto de 2026 en StatCounter da móvil y escritorio a la par, más bajo para el móvil que en años anteriores: comprobar la serie al actualizar. Una página que solo se ve bien en el aula no sirve a la mitad de los visitantes." style="display:grid;grid-template-columns:1fr 1fr;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);align-items:center;gap:120px">
+  <div>
+    <p style="font-size:220px;font-weight:800;line-height:1;color:var(--blue);letter-spacing:-.04em">54 %</p>
+    <p style="font-size:var(--type-subtitle);font-weight:700;color:var(--navy);margin-top:16px">De las visitas a webs en España se hacen desde el móvil</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:var(--gap-item)">
+    <p style="font-size:var(--type-body);line-height:1.5">Una página que solo se ve bien en el ordenador del aula no le sirve a más de la mitad de la gente que la abre. Por eso la maqueta final tiene dos versiones.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+      <div style="background:var(--white);border-radius:20px;padding:36px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-title);font-weight:800;color:var(--navy)">44 %</p><p style="font-size:var(--type-caption);color:var(--muted);margin-top:8px">Desde el ordenador en España. Tableta, 1 %</p></div>
+      <div style="background:var(--white);border-radius:20px;padding:36px;box-shadow:0 2px 0 var(--line)"><p style="font-size:var(--type-title);font-weight:800;color:var(--navy)">49 / 49</p><p style="font-size:var(--type-caption);color:var(--muted);margin-top:8px">En el mundo, móvil y ordenador están a la par</p></div>
+    </div>
+    <p style="font-size:var(--type-caption);color:var(--muted)">Fuente: StatCounter, <em>Platform Market Share</em>, España y mundo, agosto de 2026, gs.statcounter.com. Consultado el 12 de septiembre de 2026.</p>
+  </div>
+</section>
+
+<!-- 51 Diseño responsive en cinco pasos -->
+<section data-label="2.5 · Diseño responsive" data-seccion="2.5" data-notas="La meta viewport ya está desde la UT1: sin ella el móvil simula una pantalla de 980 px y lo encoge todo y lo encoge todo. Móvil primero: se escribe la hoja para la pantalla estrecha y las media queries añaden columnas al crecer." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Responsive</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Diseño responsive en cinco pasos</h2>
+    <ol style="padding:0;list-style:none;display:flex;flex-direction:column;gap:20px;margin-top:var(--gap-title);font-size:var(--type-small);line-height:1.35">
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">1.</span><span>La <code class="en-linea">meta viewport</code> en el <code class="en-linea">head</code>. Ya está desde la UT1: sin ella el móvil simula una pantalla de 980 px y lo encoge todo</span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">2.</span><span>Anchos en <code class="en-linea">%</code>, <code class="en-linea">rem</code> y <code class="en-linea">max-width</code>, nunca en píxeles fijos</span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">3.</span><span>Imágenes fluidas: <code class="en-linea">max-width: 100%</code> (del reset)</span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">4.</span><span><b>Media queries</b> que cambian la colocación cuando la pantalla es estrecha o ancha</span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">5.</span><span>Probar en DevTools con el modo dispositivo y en tu móvil con la URL de GitHub Pages</span></li>
+    </ol>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4;margin-top:var(--gap-item)"><b>Móvil primero</b>: la hoja se escribe para la pantalla estrecha y las media queries añaden columnas al crecer.</p>
+  </div>
+  <div class="ventana" style="align-self:center">
+    <div class="ventana-barra"><i></i><i></i><i></i><span>index.html</span></div>
+    <pre class="cod compacto" data-lang="html" data-marca="3">
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport"
+        content="width=device-width, initial-scale=1"&gt;
+  &lt;title&gt;SuperTuxKart&lt;/title&gt;
+  &lt;link rel="stylesheet" href="estilos.css"&gt;
+&lt;/head&gt;</pre>
+  </div>
+</section>
+
+<!-- 52 Media queries -->
+<section data-label="2.5 · Media queries" data-seccion="2.5" data-notas="Base: una columna y menú apilado. A partir de 48rem (768 px): dos columnas y menú en fila. Los puntos de corte no se memorizan: se ponen donde el diseño se rompe. Estrechar y ensanchar la ventana del resultado en clase." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Responsive</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Media queries: la misma hoja, dos maquetas</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Una media query aplica sus reglas solo cuando se cumple una condición, por ejemplo un ancho mínimo de pantalla.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-media">
+/* Base: móvil, una columna, menú apilado */
+body {
+  display: grid; gap: .5rem; margin: 0;
+  grid-template-areas: "header" "nav" "main" "aside" "footer";
+}
+nav ul { display: flex; flex-direction: column;
+         list-style: none; margin: 0; padding: 0; }
+
+/* A partir de 48rem (768px): dos columnas, menú en fila */
+@media (min-width: 48rem) {
+  body {
+    grid-template-areas:
+      "header header" "nav nav" "main aside" "footer footer";
+    grid-template-columns: 2fr 1fr;
+  }
+  nav ul { flex-direction: row; gap: .5rem; }
+}
+header { grid-area: header; }  nav { grid-area: nav; }
+main { grid-area: main; }  aside { grid-area: aside; }
+footer { grid-area: footer; }
+header, nav, footer { background: #a5e070; padding: .5rem; }
+main, aside {
+  background: #e3ecf3; padding: .5rem; min-height: 4rem;
+}</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-media" data-url="localhost/index.html" data-zoom="1" data-html="<body style='font-family:sans-serif'><header>header</header><nav><ul><li>Qué es</li><li>Personajes</li><li>Ficha</li></ul></nav><main>main</main><aside>aside</aside><footer>footer</footer></body>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Puntos de corte habituales: 48rem (tableta) y 64rem (escritorio). No se memorizan: se ponen donde el diseño se rompe. <code class="en-linea">max-width</code> para el caso contrario</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 53 DevTools: modo dispositivo -->
+<section data-label="2.5 · DevTools, modo dispositivo" data-seccion="2.5" data-notas="Icono de móvil y tableta en DevTools, o Ctrl+Mayús+M. Es la captura que se entrega con la práctica 2.3. También se puede arrastrar el borde de la ventana y ver el punto exacto en que cambia la maqueta." style="display:grid;grid-template-columns:1fr 1.3fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Responsive</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Verlo como en el móvil: DevTools, modo dispositivo</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">En DevTools, el icono de móvil y tableta (o <b>Ctrl+Mayús+M</b>) muestra la página al ancho de un teléfono. Arriba eliges el dispositivo o escribes el ancho a mano.</p>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--gap-item);margin-top:var(--gap-item);font-size:var(--type-small);line-height:1.4">
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>375 px es el ancho habitual de un móvil; 768, de una tableta</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Si aparece una barra de desplazamiento horizontal, algo desborda: busca el ancho fijo</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Es la captura que entregas con la práctica 2.3</span></li>
+    </ul>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+    <div class="img-slot" style="flex:1">Captura propia de Chrome con el modo dispositivo activado: la página de SuperTuxKart a 375 px de ancho, con el menú apilado y una sola columna, y el selector de dispositivos arriba. Se hace en el aula con la página de ejemplo.</div>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.8. El modo dispositivo de las DevTools.</p>
+  </div>
+</section>
+
+<!-- 54 Variables -->
+<section data-label="2.5 · Variables" data-seccion="2.5" data-notas="Cambiar la paleta entera es cambiar cinco líneas. Es lo que hace un tema de WordPress con sus estilos globales: el color de acento que eliges en el personalizador es una variable como esta." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Organizar la hoja</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Variables: la paleta en un solo sitio</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px;max-width:1500px">Una variable guarda un valor con nombre; se declara en <code class="en-linea">:root</code> y se usa con <code class="en-linea">var()</code>.</p>
+  <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:48px;margin-top:20px;flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css</span></div>
+      <pre class="cod compacto" data-lang="css" id="ej-vars">
+/* la raíz: valen en toda la página */
+:root {
+  --fondo: #fefefe;
+  --texto: #041c3f;
+  --acento: #a5e070;
+  --acento-claro: #e3ecf3;
+  --linea: #d6e0ea;
+}
+body {
+  background: var(--fondo); color: var(--texto);
+  font-family: sans-serif;
+}
+header {
+  background: var(--texto); color: var(--fondo);
+  padding: 1rem;
+}
+nav    { background: var(--acento); padding: .5rem 1rem; }
+th     { background: var(--acento); }
+td, th {
+  padding: .4rem; border-bottom: 1px solid var(--linea);
+}
+aside  { background: var(--acento-claro); padding: 1rem; }
+
+/* Cambiar la paleta entera es cambiar cinco líneas */</pre>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+      <div class="resultado" data-codigo="ej-vars" data-url="localhost/index.html" data-zoom="1.3" data-html="<header><b>SuperTuxKart</b></header><nav>Qué es · Ficha · Opinión</nav><table><tr><th>Versión</th><td>1.4</td></tr><tr><th>Licencia</th><td>GPL</td></tr></table><aside>Lateral con las capturas</aside>" style="flex:1"></div>
+      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Prueba en DevTools a cambiar <code class="en-linea">--acento</code> en <code class="en-linea">:root</code>: cambia todo a la vez</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Es lo que hace un tema de WordPress con sus «estilos globales»</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 55 Cómo se organiza una hoja -->
+<section data-label="2.5 · Cómo se organiza una hoja" data-seccion="2.5" data-notas="Orden fijo del curso: reset, variables, base, zonas, componentes, media queries al final. Sin important, sin style en línea, sin ids para dar estilo: los ids son para las anclas. Antes de entregar, el validador." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Organizar la hoja</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Cómo se organiza una hoja de estilo</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-title);flex:1;min-height:0">
+    <div class="ventana">
+      <div class="ventana-barra"><i></i><i></i><i></i><span>estilos.css · el orden del curso</span></div>
+      <pre class="cod compacto" data-lang="css">
+/* 1. Reset del curso */
+* {
+  box-sizing: border-box; }  body { margin: 0;
+  }  img { max-width: 100%; height: auto;
+}
+
+/* 2. Variables */
+:root {
+  --fondo: #fefefe; --texto: #041c3f; --acento: #a5e070; …;
+}
+
+/* 3. Base: body, encabezados, enlaces */
+body { … }  h1, h2, h3 { … }  a { … }
+
+/* 4. Zonas: header, nav, main, aside, footer */
+
+/* 5. Componentes: tabla, formulario, galería, tarjeta */
+
+/* 6. Media queries, al final */
+@media (min-width: 48rem) { … }</pre>
+    </div>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:22px;font-size:var(--type-small);line-height:1.4;align-self:center">
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Comentarios de sección: la hoja se lee de arriba abajo como un índice</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Nombres de clase que describan el contenido, en minúsculas y con guiones: <code class="en-linea">.acento-claro</code>, <code class="en-linea">.galeria</code></span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--red);font-weight:800">—</span><span>Sin <code class="en-linea">!important</code>, sin <code class="en-linea">style</code> en línea, sin ids para dar estilo: los ids son para las anclas</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Antes de entregar, el validador CSS y la checklist</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 56 Lo que verás en páginas viejas -->
+<section data-label="2.5 · Lo que ya no se escribe" data-seccion="2.5" data-notas="Aquí se explica por qué aparece en muchas páginas y tutoriales: son técnicas de antes de flexbox y grid, y los atributos de presentación de HTML 4 que se dieron como obsoletos en la UT1. Enlaza con la diapositiva de elementos obsoletos de la UT1." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Organizar la hoja</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Lo que verás en páginas antiguas y no debes escribir</h2>
+  <table style="width:100%;border-collapse:collapse;margin-top:var(--gap-item);font-size:22px;background:var(--white);border-radius:20px;overflow:hidden">
+    <thead>
+      <tr style="background:var(--navy);color:var(--white);text-align:left">
+        <th style="padding:16px 28px;font-weight:700;width:46%">Antes</th>
+        <th style="padding:16px 28px;font-weight:700">Hoy</th>
+      </tr>
+    </thead>
+    <tbody style="line-height:1.35">
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:11px 28px;font-family:var(--mono)">&lt;font size color&gt;, &lt;big&gt;, &lt;small&gt;, &lt;tt&gt;, &lt;p align&gt;</td><td style="padding:11px 28px;font-family:var(--mono)">font-size, color, font-family, text-align</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:11px 28px;font-family:var(--mono)">&lt;img align border&gt;, bgcolor</td><td style="padding:11px 28px;font-family:var(--mono)">float, border, background-color</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:11px 28px;font-family:var(--mono)">&lt;table border cellspacing cellpadding align valign width&gt;</td><td style="padding:11px 28px;font-family:var(--mono)">border, border-spacing, padding, text-align, vertical-align, width</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:11px 28px"><code style="font-family:var(--mono)">&lt;table&gt;</code> para maquetar la página</td><td style="padding:11px 28px;font-family:var(--mono)">grid-template-areas</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:11px 28px"><code style="font-family:var(--mono)">float</code> y <code style="font-family:var(--mono)">clear</code> para hacer columnas</td><td style="padding:11px 28px">flexbox y grid; <code style="font-family:var(--mono)">float</code> solo para texto alrededor de una imagen</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:11px 28px"><code style="font-family:var(--mono)">position: fixed</code> con coordenadas para colocar menús; <code style="font-family:var(--mono)">height: 100%</code> para igualar columnas</td><td style="padding:11px 28px">flex y <code style="font-family:var(--mono)">sticky</code>; grid iguala las columnas solo</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:11px 28px">Ancho fijo de 750 o 960 px; <code style="font-family:var(--mono)">px</code> para todo</td><td style="padding:11px 28px;font-family:var(--mono)">max-width, media queries, rem</td></tr>
+      <tr><td style="padding:11px 28px;font-family:var(--mono)">type="text/css", rel="STYLESHEET", -webkit-flex</td><td style="padding:11px 28px"><code style="font-family:var(--mono)">rel="stylesheet"</code> y nada más; sin prefijos desde hace años</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:var(--type-caption);color:var(--muted);margin-top:16px">Tabla 2.2. Funciona todavía, pero es de antes de flexbox y grid (2015). Cuando lo veas en una página o en un tutorial antiguo, ya sabes qué es y por qué no lo copias.</p>
+</section>
+
+<!-- 57 Frameworks y la IA -->
+<section data-label="2.5 · Frameworks y la IA" data-seccion="2.5" data-notas="Única demostración de IA de la unidad: se pide a un asistente de código la hoja de estilo de la maqueta 3, con la captura o con una descripción, y se revisa en clase con la checklist de la diapositiva 28 y el orden de la 55. Qué ha hecho bien, qué nombres pone, si usa important, si se adapta bien al móvil. Conclusión: para pedir bien y para corregir lo que devuelve hay que saber lo de esta unidad. Política: no permitida en la unidad." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Fuera de esta unidad</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Frameworks y la IA</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)"><b>Frameworks CSS</b>: Bootstrap (2011, clases hechas como <code class="en-linea">.btn</code> y <code class="en-linea">.row</code>) y Tailwind (clases de utilidad: <code class="en-linea">p-4 flex</code>) dan clases ya escritas para no redactar todo el CSS a mano. Aquí no se usan: el objetivo es entender el CSS que luego modificarás en un tema de WordPress, que ya incluye el suyo.</p>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)"><b>La IA</b>: los asistentes de código escriben CSS a partir de una descripción o de la imagen de una maqueta. En clase se hace una demostración: se le pide la hoja de estilo de la maqueta 3 y se revisa con la checklist. Para pedir bien y para corregir lo que devuelve hay que saber lo de esta unidad. En la unidad, no permitida.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+    <div class="img-slot" style="flex:1">Captura propia de la demostración: un asistente de código generando la hoja de estilo de la maqueta 3 a partir de la captura, con fecha. Solo la usa el profesor; se hace en directo en la sesión 10.</div>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.9. Lo que se revisa: qué ha hecho bien, qué nombres pone, si usa <code class="en-linea">!important</code>, si se adapta bien al móvil.</p>
+  </div>
+</section>
+
+<!-- 58 Cómo se encuentra el error (previa) -->
+<section data-label="2.5 · Cómo se encuentra el error" data-seccion="2.5" data-notas="Explicación previa al interactivo. Regla: leer de arriba abajo, comprobar llaves y puntos y coma; luego el selector (¿lleva el punto la clase?); luego el valor (¿tiene unidad?, ¿está bien escrito el color?)." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Repaso</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Cómo se encuentra el error en una hoja</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">El navegador no avisa: descarta lo que no entiende y sigue. Por eso se busca en orden.</p>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:20px;margin-top:var(--gap-item);font-size:var(--type-small);line-height:1.4">
+      <li style="display:flex;gap:20px"><span style="color:var(--blue);font-weight:800">1.</span><span>Llaves y puntos y coma: ¿cierra cada regla?, ¿acaba cada declaración?</span></li>
+      <li style="display:flex;gap:20px"><span style="color:var(--blue);font-weight:800">2.</span><span>El selector: ¿lleva el punto la clase, la almohadilla el id, va pegada la seudoclase?</span></li>
+      <li style="display:flex;gap:20px"><span style="color:var(--blue);font-weight:800">3.</span><span>La propiedad y el valor: ¿está bien escrita?, ¿tiene unidad?, ¿el color tiene 3 o 6 dígitos?</span></li>
+      <li style="display:flex;gap:20px"><span style="color:var(--ok);font-weight:800">✓</span><span>En el ejemplo, la línea 2 no acaba en punto y coma: el navegador lee «#041c3f font-size: 2rem» como un solo valor y pierde las dos</span></li>
+    </ul>
+  </div>
+  <div class="ventana" style="align-self:center">
+    <div class="ventana-barra"><i></i><i></i><i></i><span>ejemplo resuelto</span></div>
+    <pre class="cod grande" data-lang="css" data-marca="2">
+h1 {
+  color: #041c3f
+  font-size: 2rem;
+}
+
+/* línea 2: falta el punto y coma */</pre>
+  </div>
+</section>
+
+<!-- 59 Interactivo: error -->
+<section data-label="2.5 · Encuentra el error" data-seccion="2.5" data-notas="Dieciséis hojas de 2 a 6 líneas con un error cada una. Pulsar la línea y elegir el tipo. Pista marca la línea; Resolver lo explica." style="display:grid;grid-template-columns:1fr 1.5fr;gap:80px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div>
+    <span class="pill">Ejercicio interactivo</span>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Encuentra el error</h2>
+    <p style="font-size:var(--type-small);line-height:1.5;margin-top:var(--gap-title);color:var(--muted)">Cada fragmento tiene un error. Pulsa la línea donde está y elige de qué tipo es. <b>Pista</b> te marca la línea; <b>Resolver</b> lo explica.</p>
+    <p style="font-size:var(--type-caption);line-height:1.45;color:var(--navy);margin-top:var(--gap-title)">Los errores que más se repiten en las prácticas: el punto y coma que falta, la clase sin punto, el valor sin unidad y el <code class="en-linea">justify-content</code> puesto en el hijo en vez de en el contenedor.</p>
+  </div>
+  <div class="ej" data-tipo="error" data-banco="errorCss" data-tipos="tiposErrorCss" data-enunciado="Hay un error en la hoja. Pulsa la línea donde está y elige de qué tipo es."></div>
+</section>
+
+<!-- ═══════════ BLOQUE 2.6 · PRÁCTICA 2.3 (sesiones 11 y 12) ═══════════ -->
+
+<!-- 60 Práctica 2.3 -->
+<section data-label="2.6 · Práctica 2.3: página final" data-seccion="2.6" data-deck-id="practica-2-3" data-deck-section="2.6" data-notas="Entrega de toda la unidad al final de la sesión 12: URL de la página publicada, captura del modo dispositivo y URL del índice del cuaderno. Las tres capturas nuevas para la galería, con crédito, de Wikimedia Commons." style="display:grid;grid-template-columns:1fr 1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div>
+    <span class="pill">Práctica 2.3</span>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Página final: responsive y publicada</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">Pasa la maqueta de tu página a <code class="en-linea">grid-template-areas</code>, con la versión de una columna como base y la de escritorio en una media query. Publica y comprueba en tu móvil.</p>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">Es la entrega de toda la unidad: la página con sus tres partes, la captura del modo dispositivo y el índice del cuaderno.</p>
+  </div>
+  <div style="background:var(--white);border-radius:24px;padding:48px 56px;display:flex;flex-direction:column;gap:32px;box-shadow:0 2px 0 var(--line)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px 32px;font-size:var(--type-caption)">
+      <div><p style="color:var(--muted)">Duración</p><p style="font-weight:700;color:var(--navy);margin-top:6px">2 sesiones</p></div>
+      <div><p style="color:var(--muted)">Modalidad</p><p style="font-weight:700;color:var(--navy);margin-top:6px">Individual, en el aula</p></div>
+      <div><p style="color:var(--muted)">Entrega en Classroom</p><p style="font-weight:700;color:var(--navy);margin-top:6px">URL de la página, captura del modo dispositivo y URL del índice del cuaderno</p></div>
+      <div><p style="color:var(--muted)">Material</p><p style="font-weight:700;color:var(--navy);margin-top:6px">VS Code, navegador, GitHub, CodePen. Sin IA</p></div>
+    </div>
+    <div style="height:2px;background:var(--line)"></div>
+    <ol style="padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;font-size:var(--type-caption);line-height:1.4">
+      <li style="display:flex;gap:16px"><span style="font-weight:800;color:var(--blue)">1.</span><span>Base de una columna con áreas; a partir de 48rem, dos columnas. Menú apilado en móvil y en fila en escritorio, <code class="en-linea">sticky</code> arriba</span></li>
+      <li style="display:flex;gap:16px"><span style="font-weight:800;color:var(--blue)">2.</span><span>Galería de capturas con grid: al menos tres más con crédito, <code class="en-linea">object-fit</code> y una destacada con etiqueta</span></li>
+      <li style="display:flex;gap:16px"><span style="font-weight:800;color:var(--blue)">3.</span><span>Paleta en variables; hoja organizada como en la diapositiva 55 y validada; nada desborda a 375 px</span></li>
+      <li style="display:flex;gap:16px"><span style="font-weight:800;color:var(--blue)">4.</span><span>Sube <code class="en-linea">index.html</code>, <code class="en-linea">estilos.css</code> e <code class="en-linea">img/</code> a tu repositorio y abre la URL en el móvil</span></li>
+      <li style="display:flex;gap:16px"><span style="font-weight:800;color:var(--blue)">5.</span><span><b>Cuaderno</b>: ejercicio 5, la rejilla de personajes responsive, y el pen índice con los cinco enlaces</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 61 Maqueta 3 -->
+<section data-label="2.6 · Maqueta 3" data-seccion="2.6" data-notas="Escritorio a 1280 px y móvil a 375 px. Punto de corte a 48rem. Paleta y tipografía de la maqueta 1. En Classroom a tamaño completo." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <span class="pill">Práctica 2.3</span>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy)">Maqueta 3: escritorio y móvil</h2>
+  <div style="display:grid;grid-template-columns:1.7fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
+    <div style="display:flex;flex-direction:column;gap:16px;min-height:0">
+      <figure class="foto" style="flex:1;border:3px solid var(--line);background:var(--white)">
+        <img src="img/maqueta-3-escritorio.jpg" alt="Maqueta 3 en escritorio: cabecera, menú en fila, dos columnas con galería en rejilla, pie" title="Elaboración propia" style="object-fit:cover;object-position:top">
+        <figcaption class="credito"><b>Maqueta 3, escritorio.</b> Elaboración propia. Capturas del juego de los autores de SuperTuxKart, CC BY-SA 4.0 y CC BY 3.0.</figcaption>
+      </figure>
+      <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.10. A 1280 px: dos columnas, menú en fila, galería con la captura destacada.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;min-height:0">
+      <figure class="foto" style="flex:1;border:3px solid var(--line);background:var(--white)">
+        <img src="img/maqueta-3-movil.jpg" alt="Maqueta 3 en móvil: una columna, menú apilado, el lateral debajo del contenido" title="Elaboración propia" style="object-fit:cover;object-position:top">
+        <figcaption class="credito"><b>Maqueta 3, móvil.</b> Elaboración propia. Capturas del juego de los autores de SuperTuxKart, CC BY-SA 4.0 y CC BY 3.0.</figcaption>
+      </figure>
+      <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.11. A 375 px: una columna, menú apilado, nada desborda. Clic para verla entera.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 62 Subir a GitHub Pages -->
+<section data-label="2.6 · Subir la versión final" data-seccion="2.6" data-notas="Comprobar el procedimiento en docs.github.com antes de la sesión 11: la interfaz cambia. Si la hoja no carga en la web y sí en local, casi siempre es una mayúscula en el nombre del archivo o una ruta distinta en el href." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <span class="pill">Práctica 2.3</span>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Subir la versión final a GitHub Pages</h2>
+    <ol style="padding:0;list-style:none;display:flex;flex-direction:column;gap:20px;margin-top:var(--gap-title);font-size:var(--type-small);line-height:1.35">
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">1.</span><span>Abre tu repositorio <code class="en-linea">tuusuario.github.io</code></span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">2.</span><span><b>Add file</b>, <b>Upload files</b>, y arrastra <code class="en-linea">index.html</code>, <code class="en-linea">estilos.css</code> y la carpeta <code class="en-linea">img</code></span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">3.</span><span><b>Commit changes</b>. Espera un minuto</span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">4.</span><span>Abre la URL en tu móvil. Si la hoja no carga: mayúsculas en el nombre o ruta del <code class="en-linea">href</code> distinta de la del archivo. En el servidor, <code class="en-linea">Estilos.css</code> y <code class="en-linea">estilos.css</code> son archivos distintos</span></li>
+    </ol>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+    <div class="img-slot" style="flex:1">Captura propia de GitHub: el repositorio con el menú Add file abierto en Upload files, o la pantalla de arrastrar archivos. Comprobar la interfaz antes de la sesión 11, con fecha.</div>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.12. Subir archivos desde la web de GitHub. Es lo mismo que hiciste en la UT1 con un solo archivo.</p>
+  </div>
+</section>
+
+<!-- 63 Cómo se empareja (previa) -->
+<section data-label="2.6 · Cómo se empareja" data-seccion="2.6" data-notas="Explicación previa al interactivo de repaso, con dos ejemplos resueltos." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div style="display:flex;flex-direction:column">
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Repaso</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Cómo se empareja</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">A la izquierda, seis propiedades o valores; a la derecha, seis efectos desordenados. Para cada uno, elige en el desplegable lo que hace.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:24px;align-self:center">
+    <div style="background:var(--white);border-radius:20px;padding:32px 40px;box-shadow:0 2px 0 var(--line);display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:center">
+      <code class="en-linea" style="font-size:var(--type-small)">gap</code>
+      <p style="font-size:var(--type-small);line-height:1.4">Espacio entre los hijos de un flex o de un grid, sin márgenes</p>
+    </div>
+    <div style="background:var(--white);border-radius:20px;padding:32px 40px;box-shadow:0 2px 0 var(--line);display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:center">
+      <code class="en-linea" style="font-size:var(--type-small)">position: sticky</code>
+      <p style="font-size:var(--type-small);line-height:1.4">Se queda pegado al llegar al borde de la ventana</p>
+    </div>
+  </div>
+</section>
+
+<!-- 64 Interactivo: emparejar -->
+<section data-label="2.6 · Empareja propiedad y efecto" data-seccion="2.6" data-notas="Cuatro juegos: caja y texto; flexbox y grid; responsive, estados y posición; selectores. Repaso antes del examen." style="display:grid;grid-template-columns:1fr 1.5fr;gap:80px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div>
+    <span class="pill">Ejercicio interactivo</span>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Empareja cada propiedad con su efecto</h2>
+    <p style="font-size:var(--type-small);line-height:1.5;margin-top:var(--gap-title);color:var(--muted)">Cuatro juegos: caja y texto; flexbox y grid; responsive, estados y posición; selectores. <b>Comprobar</b> corrige las seis, <b>Pista</b> resuelve una, <b>Otro ejercicio</b> cambia de juego. Es el repaso de toda la unidad antes del examen.</p>
+  </div>
+  <div class="ej" data-tipo="emparejar" data-banco="emparejarCss" data-enunciado="Une cada propiedad o valor con lo que hace. Los efectos están desordenados."></div>
+</section>
+
+<!-- ═══════════ BLOQUE 2.7 · EXÁMENES Y CIERRE (sesiones 13 y 14) ═══════════ -->
+
+<!-- 65 Examen de teoría -->
+<section data-label="2.7 · Examen de teoría" data-seccion="2.7" data-deck-id="evaluacion" data-deck-section="2.7" data-notas="En la diapositiva no se dice la herramienta, el número de preguntas ni el peso. Cantera: los tres quiz de la unidad, y fragmentos de código de las diapositivas de código y resultado." style="display:grid;grid-template-columns:1fr 1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div>
+    <span class="pill">Examen</span>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Examen de teoría</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">Test de opción múltiple, toda la sesión, sin apuntes ni IA. La mitad de las preguntas llevan un fragmento de código o una captura: «¿qué regla produce esto?», «¿dónde está el error?».</p>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">Para prepararlo: los tres quiz, los cuatro interactivos y las diapositivas de código de esta presentación.</p>
+  </div>
+  <div style="background:var(--white);border-radius:24px;padding:56px;display:flex;flex-direction:column;gap:32px;box-shadow:0 2px 0 var(--line)">
+    <p style="font-size:var(--type-caption);font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Qué entra</p>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:20px;font-size:var(--type-small);line-height:1.4">
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue)">2.1</span><span>Qué es CSS, formas de aplicarlo, selectores, colores, tipografía, unidades, modelo de caja, cascada y herencia</span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue)">2.3</span><span>Display, flexbox, el menú, estados, listas, tablas, formularios e imágenes</span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue)">2.5</span><span>Grid, áreas, position, responsive y media queries, variables, organización de la hoja, lo que ya no se escribe</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 66 Examen práctico -->
+<section data-label="2.7 · Examen práctico: Mi película favorita" data-seccion="2.7" data-notas="Rúbrica: hoja externa enlazada y válida (2), paleta y tipografía (4), cabecera y menú con flexbox y hover (4), dos columnas con grid (4), tabla y formulario (3), media query que apila en móvil (3). Quien no se presenta lo hace en el margen de recuperación de diciembre. Película de licencia libre (Blender Foundation) para poder publicar la maqueta." style="display:grid;grid-template-columns:1fr 1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <div>
+    <span class="pill">Examen práctico</span>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Mi película favorita</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">Recibes un <code class="en-linea">index.html</code> terminado sobre una película, con la misma estructura que tu página, y una maqueta de escritorio y otra de móvil con su paleta. Escribe <code class="en-linea">estilos.css</code> para que se parezca lo más posible. <b>No se toca el HTML.</b></p>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">Reglas: VS Code o CodePen en modo incógnito. Sin IA, sin buscar código ni referencias. Sí esta presentación. Preguntar a un compañero es copiar.</p>
+  </div>
+  <div style="background:var(--white);border-radius:24px;padding:56px;display:flex;flex-direction:column;gap:40px;box-shadow:0 2px 0 var(--line)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;font-size:var(--type-small)">
+      <div><p style="color:var(--muted);font-size:var(--type-caption)">Duración</p><p style="font-weight:700;color:var(--navy);margin-top:6px">1 sesión, 50 minutos</p></div>
+      <div><p style="color:var(--muted);font-size:var(--type-caption)">Modalidad</p><p style="font-weight:700;color:var(--navy);margin-top:6px">Individual, en el aula</p></div>
+      <div><p style="color:var(--muted);font-size:var(--type-caption)">Entrega</p><p style="font-weight:700;color:var(--navy);margin-top:6px"><code class="en-linea">estilos.css</code> en Classroom al acabar</p></div>
+      <div><p style="color:var(--muted);font-size:var(--type-caption)">Material</p><p style="font-weight:700;color:var(--navy);margin-top:6px">VS Code o CodePen y esta presentación. Sin IA</p></div>
+    </div>
+    <div style="height:2px;background:var(--line)"></div>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45">Se valora: hoja enlazada y válida, paleta y tipografía, cabecera y menú con flexbox y <code class="en-linea">:hover</code>, dos columnas con grid, tabla y formulario, y la media query que lo apila en móvil.</p>
+  </div>
+</section>
+
+<!-- 67 La maqueta del examen -->
+<section data-label="2.7 · La maqueta del examen" data-seccion="2.7" data-notas="Se proyecta durante el examen y se sube a Classroom. Película de licencia libre, por ejemplo Sintel o Big Buck Bunny de la Blender Foundation (CC BY), para poder publicar los fotogramas en el repositorio." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <span class="pill">Examen práctico</span>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy)">La maqueta del examen</h2>
+  <div style="display:grid;grid-template-columns:1.7fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
+    <div class="img-slot">Captura propia de la página «Mi película favorita» con estilo, a 1280 px: misma estructura que la del videojuego (cabecera, menú, contenido, lateral con dos figuras, pie, tabla y formulario), con la paleta anotada al margen. Película de licencia libre (Blender Foundation, CC BY). Se elabora antes de la sesión 14.</div>
+    <div class="img-slot">La misma página a 375 px: una columna, menú apilado.</div>
+  </div>
+  <p style="font-size:var(--type-caption);color:var(--muted);margin-top:16px">Figura 2.13. La maqueta se proyecta durante el examen y está en Classroom a tamaño completo.</p>
+</section>
+
+<!-- 68 Resumen -->
+<section data-label="Resumen de la unidad" data-deck-id="cierre" data-deck-section="Fin" data-notas="Seis ideas que resumen la unidad. Si solo recuerdan una: el selector elige, la caja se mide con border-box, flex y grid colocan, y la media query adapta." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Unidad 2</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Resumen de la unidad</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:var(--gap-title)">
+    <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--blue);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">01</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">CSS dice cómo se ve. Va en una hoja externa, con reglas de selector, propiedad y valor, enlazada desde el head.</p></div>
+    <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--cyan);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">02</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">El selector elige (elemento, clase, id, descendiente) y la especificidad decide quién gana; el texto se hereda, la caja no.</p></div>
+    <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--green);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">03</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">Todo es una caja con relleno, borde y margen; box-sizing la hace predecible; rem para texto y espacios, max-width para anchos.</p></div>
+    <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--orange);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">04</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">Flexbox coloca en una dirección, grid en dos con áreas, y position coloca cajas fuera del flujo: sticky para el menú, absolute para una etiqueta.</p></div>
+    <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--navy);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">05</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">Responsive es viewport, unidades relativas, imágenes fluidas y media queries: una hoja, dos maquetas.</p></div>
+    <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--green-dark);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">06</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">DevTools enseña cada regla y el validador avisa de los errores. La hoja se organiza en orden: reset, variables, base, zonas, componentes, media queries.</p></div>
+  </div>
+</section>
+
+<!-- 69 Recursos -->
+<section data-label="Recursos" data-notas="La hoja de estilo de referencia de la maqueta 3 se publica en Classroom después del examen práctico." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1.7fr;gap:80px">
+  <div>
+    <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Para ampliar</p>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Recursos y documentación</h2>
+    <p style="font-size:var(--type-small);color:var(--muted);line-height:1.5;margin-top:var(--gap-title)">Cuando dudes de una propiedad, la respuesta está en MDN. Cuando dudes de si tu hoja está bien, en el validador y en DevTools.</p>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4;margin-top:var(--gap-item)">Enlaces consultados el 12 de septiembre de 2026.</p>
+  </div>
+  <ul style="padding:0;list-style:none;display:flex;flex-direction:column;font-size:var(--type-caption);line-height:1.35;overflow-wrap:anywhere;align-self:center">
+    <li style="display:grid;grid-template-columns:180px 1fr;gap:24px;padding:14px 0;border-bottom:2px solid var(--line)"><span style="font-weight:700;color:var(--blue)">CSS</span><span>MDN Web Docs, referencia de CSS en español: <a href="https://developer.mozilla.org/es/docs/Web/CSS" target="_blank" rel="noopener">developer.mozilla.org/es/docs/Web/CSS</a>. Guías de flexbox y de grid en la misma web.</span></li>
+    <li style="display:grid;grid-template-columns:180px 1fr;gap:24px;padding:14px 0;border-bottom:2px solid var(--line)"><span style="font-weight:700;color:var(--blue)">Validador</span><span>Validador de CSS del W3C: <a href="https://jigsaw.w3.org/css-validator/" target="_blank" rel="noopener">jigsaw.w3.org/css-validator</a></span></li>
+    <li style="display:grid;grid-template-columns:180px 1fr;gap:24px;padding:14px 0;border-bottom:2px solid var(--line)"><span style="font-weight:700;color:var(--blue)">Compatibilidad</span><span>¿Funciona en todos los navegadores? <a href="https://caniuse.com/" target="_blank" rel="noopener">caniuse.com</a> y la marca «Baseline» de MDN.</span></li>
+    <li style="display:grid;grid-template-columns:180px 1fr;gap:24px;padding:14px 0;border-bottom:2px solid var(--line)"><span style="font-weight:700;color:var(--blue)">Colores y fuentes</span><span>Paletas: <a href="https://coolors.co/" target="_blank" rel="noopener">coolors.co</a>, <a href="https://colorhunt.co/" target="_blank" rel="noopener">colorhunt.co</a>. Fuentes: <a href="https://fonts.google.com/" target="_blank" rel="noopener">fonts.google.com</a>.</span></li>
+    <li style="display:grid;grid-template-columns:180px 1fr;gap:24px;padding:14px 0;border-bottom:2px solid var(--line)"><span style="font-weight:700;color:var(--blue)">Publicar</span><span>Subir archivos a un repositorio desde la web de GitHub: <a href="https://docs.github.com/" target="_blank" rel="noopener">docs.github.com</a>, «Adding a file to a repository».</span></li>
+    <li style="display:grid;grid-template-columns:180px 1fr;gap:24px;padding:14px 0;border-bottom:2px solid var(--line)"><span style="font-weight:700;color:var(--blue)">Datos</span><span><a href="https://gs.statcounter.com/" target="_blank" rel="noopener">StatCounter</a>, cuota de móvil y escritorio, agosto de 2026.</span></li>
+    <li style="display:grid;grid-template-columns:180px 1fr;gap:24px;padding:14px 0;border-bottom:2px solid var(--line)"><span style="font-weight:700;color:var(--blue)">Ejemplo</span><span>La página de SuperTuxKart con su hoja de estilo de referencia: se publica en Classroom después del examen práctico.</span></li>
+    <li style="display:grid;grid-template-columns:180px 1fr;gap:24px;padding:14px 0"><span style="font-weight:700;color:var(--blue)">Normativa</span><span>Currículo del ciclo de Sistemas Microinformáticos y Redes en Castilla y León, módulo 0228. BOCyL n.º 173, 9 de septiembre de 2009.</span></li>
+  </ul>
+</section>
+
+<!-- 70 Cierre -->
+<section data-label="Fin de la unidad 2" data-notas="Fin de la primera evaluación. En el esquema de rutas: HTML, CSS y hosting ya están; falta WordPress. En la UT3 no escribirán la página desde cero: el tema trae el CSS y lo personalizan con lo que saben ahora. La web de la UT5 sale de aquí." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+  <span class="mancha arriba-dcha" style="width:560px;color:var(--green)"></span>
+  <span class="mancha abajo-izq" style="width:1000px;color:var(--gray)"></span>
+  <div style="display:flex;align-items:center;gap:20px;position:relative">
+    <span style="width:20px;height:20px;border-radius:50%;background:var(--cyan);display:block"></span>
+    <span style="font-size:var(--type-small);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--navy)">Fin de la unidad 2 · Fin de la primera evaluación</span>
+  </div>
+  <h1 style="font-size:var(--type-hero);font-weight:800;line-height:1.02;letter-spacing:-.02em;max-width:1400px;position:relative;color:var(--navy)">Dudas y preguntas</h1>
+  <div style="display:flex;gap:56px;font-size:var(--type-caption);color:var(--navy);font-weight:600;position:relative">
+    <span>Próxima unidad: UT3. WordPress: el tema incluye su CSS y tú lo personalizas</span>
+    <span>Conserva la carpeta y el repositorio: la web de la UT5 sale de aquí</span>
+  </div>
+</section>
+
+</deck-stage>
+<script src="../assets/deck-stage.js"></script>
+<script src="../assets/aw.js"></script>
+</body>
+</html>

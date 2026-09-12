@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="Plus Jakarta Sans, system-ui, sans-serif">
+  <!-- Modelo de caja: margen, borde, relleno y contenido. Elaboración propia. -->
+  <rect x="30" y="30" width="840" height="560" rx="18" fill="#FEFEFE" stroke="#D6E0EA" stroke-width="4" stroke-dasharray="14 10"/>
+  <text x="60" y="80" font-size="28" font-weight="700" fill="#4A5A7D">margin · margen (transparente)</text>
+  <rect x="120" y="120" width="660" height="380" rx="10" fill="#041C3F"/>
+  <text x="150" y="162" font-size="28" font-weight="700" fill="#FFFFFF">border · borde</text>
+  <rect x="180" y="190" width="540" height="250" rx="6" fill="#A5E070"/>
+  <text x="210" y="232" font-size="28" font-weight="700" fill="#041C3F">padding · relleno (coge el color de fondo)</text>
+  <rect x="240" y="260" width="420" height="120" rx="6" fill="#FFFFFF" stroke="#017CE9" stroke-width="4"/>
+  <text x="450" y="312" font-size="30" font-weight="800" fill="#041C3F" text-anchor="middle">contenido</text>
+  <text x="450" y="352" font-size="24" fill="#4A5A7D" text-anchor="middle">width × height</text>
+  <line x1="240" y1="560" x2="660" y2="560" stroke="#017CE9" stroke-width="4"/>
+  <line x1="240" y1="548" x2="240" y2="572" stroke="#017CE9" stroke-width="4"/>
+  <line x1="660" y1="548" x2="660" y2="572" stroke="#017CE9" stroke-width="4"/>
+  <text x="450" y="590" font-size="24" font-weight="700" fill="#017CE9" text-anchor="middle">width (con box-sizing: border-box incluye relleno y borde)</text>
+</svg>

@@ -18,9 +18,10 @@
  *       <pre class="cod" data-lang="html" id="ej1">…</pre>
  *       <div class="resultado" data-codigo="ej1"></div>
  *  7. Ejercicios interactivos con Comprobar, Pista, Resolver y Otro ejercicio:
- *       <div class="ej" data-tipo="…"></div>
- *     Los tipos de este módulo están pendientes de acordar; el armazón (botones, racha de aciertos,
- *     mensajes) es el mismo que en CL32 y cada tipo se añade en AW.montadores.
+ *       <div class="ej" data-tipo="…" data-banco="…" data-tipos="…" data-enunciado="…"></div>
+ *     Tipos: completar, ordenar, error, emparejar (UT1) y selector (UT2). data-banco elige otro banco
+ *     de AW.bancos (por ejemplo completarCss), data-tipos otra lista de tipos de error (tiposErrorCss)
+ *     y data-enunciado otro texto de cabecera. El armazón (botones, racha, mensajes) es común.
  */
 (function () {
   'use strict';
@@ -315,14 +316,131 @@
       ['target="_blank"', 'El enlace se abre en una pestaña nueva'] ] }
   ];
 
+  /* ---------- bancos de CSS (UT2) ----------
+     Se eligen desde la diapositiva con data-banco="completarCss" (y data-tipos="tiposErrorCss" en el de errores). */
+
+  AW.bancos.completarCss = [
+    { cod: '<link rel="___" href="estilos.css">', ok: ['stylesheet'], pista: 'Dice qué relación tiene el archivo con la página: es una hoja de estilo.', fam: 'enlazar la hoja' },
+    { cod: '<link rel="stylesheet" ___="estilos.css">', ok: ['href'], pista: 'La ruta del archivo, como en los enlaces.', fam: 'enlazar la hoja' },
+    { cod: 'h1 {\n  ___: #041c3f;\n}', ok: ['color'], pista: 'El color del texto.', fam: 'colores' },
+    { cod: 'body {\n  ___: #fefefe;\n}', ok: ['background-color', 'background'], pista: 'El color de fondo.', fam: 'colores' },
+    { cod: 'body {\n  ___: "Segoe UI", system-ui, sans-serif;\n}', ok: ['font-family'], pista: 'La pila de tipos de letra.', fam: 'tipografía' },
+    { cod: 'h1 {\n  font-size: 2.5___;\n}', ok: ['rem', 'em'], pista: 'Unidad relativa al tamaño de letra de la raíz.', fam: 'unidades' },
+    { cod: '.tarjeta {\n  ___: 1rem 2rem;\n}', ok: ['padding', 'margin'], pista: 'Espacio entre el contenido y el borde, dentro de la caja.', fam: 'caja' },
+    { cod: 'main {\n  max-width: 60rem;\n  margin: 0 ___;\n}', ok: ['auto'], pista: 'El valor que reparte el margen y centra la caja.', fam: 'caja' },
+    { cod: '.tarjeta {\n  border-___: 12px;\n}', ok: ['radius'], pista: 'Redondea las esquinas.', fam: 'caja' },
+    { cod: '* {\n  ___: border-box;\n}', ok: ['box-sizing'], pista: 'Hace que el ancho incluya relleno y borde.', fam: 'caja' },
+    { cod: 'img {\n  ___: 100%;\n  height: auto;\n}', ok: ['max-width', 'width'], pista: 'Que la imagen nunca desborde su caja.', fam: 'imágenes' },
+    { cod: 'nav ul {\n  display: ___;\n  gap: 1rem;\n}', ok: ['flex'], pista: 'Coloca a los hijos en fila.', fam: 'flexbox' },
+    { cod: 'header {\n  display: flex;\n  ___: space-between;\n}', ok: ['justify-content'], pista: 'Reparte el espacio en el eje principal.', fam: 'flexbox' },
+    { cod: '.centro {\n  display: flex;\n  justify-content: center;\n  ___: center;\n}', ok: ['align-items'], pista: 'Alinea en el eje cruzado.', fam: 'flexbox' },
+    { cod: 'nav ul {\n  display: flex;\n  ___: 1.5rem;\n}', ok: ['gap'], pista: 'El hueco entre los hijos.', fam: 'flexbox' },
+    { cod: 'nav ul {\n  ___: none;\n  padding: 0;\n}', ok: ['list-style', 'list-style-type'], pista: 'Quita las viñetas de la lista.', fam: 'listas' },
+    { cod: 'nav a {\n  ___: none;\n}', ok: ['text-decoration'], pista: 'Quita el subrayado del enlace.', fam: 'texto' },
+    { cod: 'nav a___ {\n  background: #041c3f;\n}', ok: [':hover', 'hover'], pista: 'Cuando el ratón está encima.', fam: 'estados' },
+    { cod: 'nav a {\n  ___: background-color .2s;\n}', ok: ['transition'], pista: 'Suaviza el cambio de un valor.', fam: 'estados' },
+    { cod: 'table {\n  ___: collapse;\n}', ok: ['border-collapse'], pista: 'Une los bordes de las celdas en uno solo.', fam: 'tablas' },
+    { cod: 'tbody tr:nth-child(___) {\n  background: #e3ecf3;\n}', ok: ['even', '2n'], pista: 'Las filas pares.', fam: 'tablas' },
+    { cod: 'body {\n  display: ___;\n  grid-template-areas: "header" "main";\n}', ok: ['grid'], pista: 'Filas y columnas a la vez.', fam: 'grid' },
+    { cod: '@___ (min-width: 48rem) {\n  body { grid-template-columns: 2fr 1fr; }\n}', ok: ['media'], pista: 'Reglas que solo se aplican a partir de un ancho.', fam: 'responsive' },
+    { cod: 'nav {\n  position: ___;\n  top: 0;\n}', ok: ['sticky'], pista: 'Normal hasta que llega al borde; entonces se queda pegado.', fam: 'posición' },
+    { cod: ':root {\n  --acento: #a5e070;\n}\nh2 {\n  color: ___(--acento);\n}', ok: ['var'], pista: 'La función que lee una variable.', fam: 'variables' }
+  ];
+
+  AW.tiposErrorCss = [
+    'Falta el punto y coma',
+    'Falta una llave { o }',
+    'Clase sin el punto o id sin la almohadilla',
+    'Propiedad mal escrita',
+    'Valor sin unidad o unidad separada',
+    'Color mal escrito',
+    'El link no enlaza la hoja: falta rel o la ruta no coincide',
+    'Propiedad de flexbox o grid en el elemento equivocado',
+    'Media query mal escrita',
+    'Seudoclase mal escrita'
+  ];
+  AW.bancos.errorCss = [
+    { lineas: ['h1 {', '  color: #041c3f', '  font-size: 2rem;', '}'], linea: 1, tipos: [0], exp: 'Sin el punto y coma, el navegador lee «#041c3f font-size: 2rem» como un solo valor y descarta las dos declaraciones.' },
+    { lineas: ['th {', '  background: #a5e070', '  color: #041c3f;', '}'], linea: 1, tipos: [0], exp: 'Falta el punto y coma tras el color de fondo: se pierde también el color del texto.' },
+    { lineas: ['nav a', '  color: white;', '  text-decoration: none;', '}'], linea: 0, tipos: [1], exp: 'Falta la llave de apertura después del selector.' },
+    { lineas: ['<p class="destacado">Novedad</p>', '', 'destacado {', '  font-weight: 700;', '}'], linea: 2, tipos: [2], exp: 'Sin el punto, «destacado» busca una etiqueta llamada así, que no existe. Es .destacado.' },
+    { lineas: ['<div id="ficha">…</div>', '', '.ficha {', '  border: 1px solid #d6e0ea;', '}'], linea: 2, tipos: [2], exp: 'El elemento tiene id, no clase: el selector es #ficha.' },
+    { lineas: ['h1 {', '  font-sise: 2rem;', '}'], linea: 1, tipos: [3], exp: 'La propiedad es font-size. El navegador ignora las que no conoce, sin avisar.' },
+    { lineas: ['h2 {', '  colour: #017ce9;', '}'], linea: 1, tipos: [3], exp: 'La propiedad es color, con la grafía americana.' },
+    { lineas: ['main {', '  max-width: 60;', '  margin: 0 auto;', '}'], linea: 1, tipos: [4], exp: 'Todo tamaño distinto de 0 lleva unidad: 60rem, 60%, 60px.' },
+    { lineas: ['button {', '  padding: 0.75 rem 1.5rem;', '}'], linea: 1, tipos: [4], exp: 'Número y unidad van juntos: 0.75rem. Con espacio son dos valores.' },
+    { lineas: ['header {', '  background: #041c3;', '}'], linea: 1, tipos: [5], exp: 'Un color hexadecimal tiene 3 o 6 dígitos (u 8 con transparencia); 5 no vale.' },
+    { lineas: ['<head>', '  <link href="estilos.css">', '</head>'], linea: 1, tipos: [6], exp: 'Sin rel="stylesheet" el navegador no sabe que ese archivo es una hoja de estilo.' },
+    { lineas: ['<link rel="stylesheet" href="css/Estilos.css">', '<!-- el archivo se llama estilos.css y está junto a index.html -->'], linea: 0, tipos: [6], exp: 'La ruta tiene una carpeta que no existe y una mayúscula: en el servidor no coincide.' },
+    { lineas: ['nav ul {', '  list-style: none;', '}', 'nav li {', '  justify-content: space-between;', '}'], linea: 4, tipos: [7], exp: 'justify-content se pone en el contenedor flex (nav ul con display: flex), no en los hijos.' },
+    { lineas: ['.galeria img {', '  display: grid;', '  grid-template-columns: 1fr 1fr;', '}'], linea: 1, tipos: [7], exp: 'La rejilla se declara en el contenedor (.galeria); las imágenes son los elementos que se colocan.' },
+    { lineas: ['@media min-width: 48rem {', '  body { grid-template-columns: 2fr 1fr; }', '}'], linea: 0, tipos: [8], exp: 'La condición va entre paréntesis: @media (min-width: 48rem).' },
+    { lineas: ['nav a: hover {', '  background: #041c3f;', '}'], linea: 0, tipos: [9], exp: 'La seudoclase va pegada al selector, sin espacio: a:hover. Con espacio busca un descendiente.' }
+  ];
+
+  AW.bancos.emparejarCss = [
+    { titulo: 'Caja y texto', pares: [
+      ['padding', 'Espacio entre el contenido y el borde, dentro de la caja'],
+      ['margin', 'Separación con las cajas de al lado, fuera del borde'],
+      ['border-radius', 'Redondea las esquinas de la caja'],
+      ['font-family', 'Tipo de letra, con su pila de reserva'],
+      ['line-height', 'Altura de cada línea de texto'],
+      ['box-sizing: border-box', 'El ancho incluye relleno y borde'] ] },
+    { titulo: 'Flexbox y grid', pares: [
+      ['display: flex', 'Coloca a los hijos en una fila o en una columna'],
+      ['justify-content', 'Reparte el espacio sobrante en el eje principal'],
+      ['align-items', 'Alinea los hijos en el eje cruzado'],
+      ['gap', 'Hueco entre los hijos, sin márgenes'],
+      ['grid-template-columns', 'Cuántas columnas hay y de qué ancho'],
+      ['grid-template-areas', 'Dibuja la maqueta con nombres de zona'] ] },
+    { titulo: 'Responsive, estados y posición', pares: [
+      ['@media (min-width: 48rem)', 'Reglas que se aplican solo a partir de ese ancho'],
+      ['max-width', 'La caja crece hasta ahí y se encoge si no cabe'],
+      [':hover', 'Cuando el ratón está encima del elemento'],
+      ['transition', 'Suaviza el cambio de un valor'],
+      ['position: sticky', 'Se queda pegado al llegar al borde de la ventana'],
+      ['z-index', 'Qué caja queda encima cuando se solapan'] ] },
+    { titulo: 'Selectores', pares: [
+      ['.aviso', 'Los elementos con esa clase'],
+      ['#ficha', 'El elemento con ese id, único en la página'],
+      ['nav a', 'Los enlaces dentro de nav, a cualquier nivel'],
+      ['ul > li', 'Solo los hijos directos'],
+      ['h1, h2', 'Los dos elementos, con la misma regla'],
+      ['*', 'Todos los elementos'] ] }
+  ];
+
+  // selector: HTML de pocas líneas, líneas objetivo (desde 0) y cuatro selectores; el acierto se calcula
+  // de verdad con querySelectorAll sobre el fragmento, así que solo uno debe alcanzar justo el objetivo
+  AW.bancos.selector = [
+    { html: ['<nav>', '  <ul>', '    <li><a href="#que-es">Qué es</a></li>', '    <li><a href="#ficha" class="activo">Ficha</a></li>', '  </ul>', '</nav>', '<p>Lee <a href="#">más</a>.</p>'], objetivo: [3], opciones: ['nav .activo', 'nav a', '#activo', 'a .activo'], pista: 'El enlace lleva una clase; combínala con nav.' },
+    { html: ['<table id="ficha">', '  <tr>', '    <th>Versión</th>', '    <td>1.4</td>', '  </tr>', '</table>'], objetivo: [2], opciones: ['th', 'td', '#ficha *', 'tr'], pista: 'Es una celda de cabecera.' },
+    { html: ['<header>', '  <h1>SuperTuxKart</h1>', '  <p>¿El mejor juego?</p>', '</header>', '<main>', '  <p>Es un juego libre.</p>', '</main>'], objetivo: [2], opciones: ['header p', 'p', 'main p', 'header > h1'], pista: 'Solo el párrafo de la cabecera: descendiente.' },
+    { html: ['<ul class="menu">', '  <li>Inicio</li>', '  <li class="activo">Ficha</li>', '  <li>Opinión</li>', '</ul>'], objetivo: [2], opciones: ['.activo', 'li', 'activo', '.menu'], pista: 'Selector de clase.' },
+    { html: ['<form>', '  <input type="text" name="nombre">', '  <input type="email" name="correo">', '  <button>Enviar</button>', '</form>'], objetivo: [2], opciones: ['input[type="email"]', 'input', 'form > button', 'email'], pista: 'Selector de atributo.' },
+    { html: ['<section id="personajes">', '  <h3>Personajes</h3>', '  <ul>', '    <li>Tux</li>', '    <li>Gnu</li>', '  </ul>', '</section>'], objetivo: [3, 4], opciones: ['#personajes li', 'personajes li', '#personajes > li', 'ul'], pista: 'Los li no son hijos directos de la sección.' },
+    { html: ['<p>Texto normal.</p>', '<p class="destacado">Texto destacado.</p>', '<div class="destacado">Aviso.</div>'], objetivo: [1], opciones: ['p.destacado', '.destacado', 'p', 'p .destacado'], pista: 'Elemento y clase, pegados.' },
+    { html: ['<footer>', '  <p>Autor: <a href="mailto:x@x.es">Raúl</a></p>', '  <p>© 2026</p>', '</footer>'], objetivo: [1], opciones: ['footer a', 'footer p', 'a footer', 'footer'], pista: 'El enlace que está dentro del pie.' },
+    { html: ['<h1>Título</h1>', '<h2>Sección</h2>', '<h3>Apartado</h3>', '<p>Texto</p>'], objetivo: [0, 1, 2], opciones: ['h1, h2, h3', 'h1 h2 h3', 'h', '*'], pista: 'Agrupación con comas.' },
+    { html: ['<nav>', '  <ul>', '    <li><a href="#">Qué es</a></li>', '    <li><a href="#">Ficha</a></li>', '  </ul>', '</nav>'], objetivo: [1], opciones: ['nav ul', 'nav li', 'nav *', 'nav'], pista: 'La lista, no sus elementos.' },
+    { html: ['<article>', '  <h2>Noticia</h2>', '  <p>Primer párrafo.</p>', '  <p>Segundo párrafo.</p>', '</article>'], objetivo: [2], opciones: ['article p:first-of-type', 'article p', 'article > p:first-child', 'p'], pista: 'El primer párrafo de su tipo; el primer hijo es el h2.' },
+    { html: ['<table>', '  <tr><td>1</td></tr>', '  <tr><td>2</td></tr>', '  <tr><td>3</td></tr>', '  <tr><td>4</td></tr>', '</table>'], objetivo: [2, 4], opciones: ['tr:nth-child(even)', 'tr:nth-child(odd)', 'tr', 'tr:even'], pista: 'Las filas pares: nth-child.' },
+    { html: ['<aside>', '  <h2>Capturas</h2>', '  <figure>', '    <img src="stk1.jpg" alt="Circuito">', '    <figcaption>Circuito</figcaption>', '  </figure>', '</aside>'], objetivo: [3], opciones: ['aside img', 'figure', 'aside figcaption', 'img figure'], pista: 'La imagen dentro del lateral.' },
+    { html: ['<a href="#" class="boton">Ver</a>', '<a href="#" class="boton grande">Descargar</a>', '<button class="grande">Enviar</button>'], objetivo: [1], opciones: ['.boton.grande', '.boton', '.grande', '.boton .grande'], pista: 'Dos clases en el mismo elemento se encadenan sin espacio.' },
+    { html: ['<div id="ficha">', '  <p>Versión 1.4</p>', '</div>', '<div class="ficha">', '  <p>Otra ficha</p>', '</div>'], objetivo: [0], opciones: ['#ficha', '.ficha', 'ficha', 'div'], pista: 'Almohadilla para el id.' },
+    { html: ['<main>', '  <h2>Qué es</h2>', '  <p>Texto</p>', '  <h2>Personajes</h2>', '</main>'], objetivo: [1, 3], opciones: ['main h2', 'main > p', 'h2 main', 'main *'], pista: 'Los dos encabezados de main.' }
+  ];
+
   /* ---------- montadores de los ejercicios ---------- */
-  const norm = (s) => String(s).trim().toLowerCase().replace(/^<\/?|>$/g, '').replace(/^<|>$/g, '').trim();
+  const norm = (s) => String(s).trim().toLowerCase().replace(/^<\/?|>$/g, '').replace(/^<|>$/g, '').replace(/;$/, '').trim();
+  // Cada diapositiva puede elegir su banco (data-banco) y su enunciado (data-enunciado)
+  const bancoDe = (el, def) => AW.bancos[el.dataset.banco] || AW.bancos[def];
 
   function montaCompletar(el) {
-    const st = armazon(el, 'Escribe la etiqueta o el atributo que falta en el hueco. Solo el nombre, sin < >.');
+    const st = armazon(el, el.dataset.enunciado || 'Escribe la etiqueta o el atributo que falta en el hueco. Solo el nombre, sin < >.');
+    const banco = bancoDe(el, 'completar');
     let caso = null;
     function nuevo() {
-      caso = eligeOtro(AW.bancos.completar, caso);
+      caso = eligeOtro(banco, caso);
       const lineas = caso.cod.split('\n').map((l, i) =>
         '<div class="ej-linea"><i>' + (i + 1) + '</i><span>' + esc(l).replace(/___/g, '<span class="hueco">___</span>') + '</span></div>').join('');
       st.cuerpo.innerHTML = '<pre class="ej-cod">' + lineas + '</pre>' +
@@ -351,9 +469,10 @@
 
   function montaOrdenar(el) {
     const st = armazon(el, 'Los pasos están desordenados. Pon a cada uno su número de orden.');
+    const banco = bancoDe(el, 'ordenar');
     let juego = null, orden = [];
     function nuevo() {
-      juego = eligeOtro(AW.bancos.ordenar, juego);
+      juego = eligeOtro(banco, juego);
       orden = baraja(juego.pasos.map((_, i) => i));
       const n = juego.pasos.length;
       st.cuerpo.innerHTML = '<p class="ej-caso-titulo">' + esc(juego.titulo) + '</p><ol class="ej-orden">' +
@@ -383,12 +502,14 @@
   }
 
   function montaError(el) {
-    const st = armazon(el, 'Hay un error en el fragmento. Pulsa la línea donde está y elige de qué tipo es.');
+    const st = armazon(el, el.dataset.enunciado || 'Hay un error en el fragmento. Pulsa la línea donde está y elige de qué tipo es.');
+    const banco = bancoDe(el, 'error');
+    const tiposLista = AW[el.dataset.tipos] || AW.tiposError;
     let caso = null, linea = -1;
     function nuevo() {
-      caso = eligeOtro(AW.bancos.error, caso); linea = -1;
+      caso = eligeOtro(banco, caso); linea = -1;
       st.cuerpo.innerHTML = '<pre class="ej-cod pulsable">' + caso.lineas.map((l, i) => '<div class="ej-linea" data-i="' + i + '"><i>' + (i + 1) + '</i><span>' + esc(l) + '</span></div>').join('') + '</pre>' +
-        '<div class="ej-campos ej-campos-1"><label class="ej-campo"><span>Tipo de error</span>' + selectHtml('tipo', AW.tiposError, 'Elige el tipo…') + '</label></div>' +
+        '<div class="ej-campos ej-campos-1"><label class="ej-campo"><span>Tipo de error</span>' + selectHtml('tipo', tiposLista, 'Elige el tipo…') + '</label></div>' +
         '<div class="ej-respuesta" hidden></div>';
       st.cuerpo.querySelectorAll('.ej-linea').forEach((d) => d.addEventListener('click', () => {
         st.cuerpo.querySelectorAll('.ej-linea').forEach((x) => x.classList.remove('sel', 'ok', 'ko', 'pista'));
@@ -399,7 +520,7 @@
     const sel = () => st.cuerpo.querySelector('select.tipo');
     const fila = (i) => st.cuerpo.querySelector('.ej-linea[data-i="' + i + '"]');
     const marca = (s, clase) => { s.classList.remove('ok', 'ko', 'pista'); s.classList.add(clase); };
-    const explica = () => { const r = st.cuerpo.querySelector('.ej-respuesta'); r.innerHTML = '<b>' + esc(AW.tiposError[caso.tipos[0]]) + '.</b> ' + esc(caso.exp); r.hidden = false; };
+    const explica = () => { const r = st.cuerpo.querySelector('.ej-respuesta'); r.innerHTML = '<b>' + esc(tiposLista[caso.tipos[0]]) + '.</b> ' + esc(caso.exp); r.hidden = false; };
     function comprobar() {
       const s = sel();
       if (linea < 0) { st.mensaje('Pulsa primero la línea del error.'); return; }
@@ -421,10 +542,11 @@
   }
 
   function montaEmparejar(el) {
-    const st = armazon(el, 'Une cada etiqueta o atributo con lo que hace. Las funciones están desordenadas.');
+    const st = armazon(el, el.dataset.enunciado || 'Une cada etiqueta o atributo con lo que hace. Las funciones están desordenadas.');
+    const banco = bancoDe(el, 'emparejar');
     let juego = null, pares = [], opciones = [];
     function nuevo() {
-      juego = eligeOtro(AW.bancos.emparejar, juego);
+      juego = eligeOtro(banco, juego);
       pares = baraja(juego.pares.map((p, i) => ({ izq: p[0], i })));
       opciones = baraja(juego.pares.map((p, i) => ({ txt: p[1], i })));
       st.cuerpo.innerHTML = '<p class="ej-caso-titulo">' + esc(juego.titulo) + '</p><ol class="ej-pares">' + pares.map((p, k) =>
@@ -454,7 +576,79 @@
     nuevo();
   }
 
-  AW.montadores = { completar: montaCompletar, ordenar: montaOrdenar, error: montaError, emparejar: montaEmparejar };
+  /* selector: HTML con líneas objetivo y cuatro selectores; el acierto se calcula con querySelectorAll
+     sobre el propio fragmento (cada etiqueta lleva su número de línea en data-l) */
+  function montaSelector(el) {
+    const st = armazon(el, el.dataset.enunciado || 'Elige el selector que alcanza justo el elemento marcado, y solo ese.');
+    const banco = bancoDe(el, 'selector');
+    let caso = null, elegida = -1, resultados = [];
+    // Devuelve el conjunto de líneas que alcanza un selector, o null si la sintaxis no vale
+    function alcanza(sel) {
+      const t = document.createElement('template');
+      t.innerHTML = caso.html.map((l, i) => l.replace(/<([a-zA-Z][\w-]*)/g, '<$1 data-l="' + i + '"')).join('\n');
+      let nodos;
+      try { nodos = t.content.querySelectorAll(sel); } catch (e) { return null; }
+      const s = new Set();
+      nodos.forEach((n) => { if (n.dataset && n.dataset.l !== undefined) s.add(+n.dataset.l); });
+      return s;
+    }
+    const igual = (a, b) => a.size === b.size && [...a].every((x) => b.has(x));
+    function nuevo() {
+      caso = eligeOtro(banco, caso); elegida = -1;
+      const obj = new Set(caso.objetivo);
+      resultados = caso.opciones.map(alcanza);
+      const orden = baraja(caso.opciones.map((_, k) => k));   // la correcta no siempre en el mismo sitio
+      st.cuerpo.innerHTML = '<pre class="ej-cod">' + caso.html.map((l, i) => '<div class="ej-linea' + (obj.has(i) ? ' objetivo' : '') + '" data-i="' + i + '"><i>' + (i + 1) + '</i><span>' + esc(l) + '</span></div>').join('') + '</pre>' +
+        '<div class="ej-opciones">' + orden.map((k) => '<button type="button" class="ej-opcion" data-k="' + k + '">' + esc(caso.opciones[k]) + '</button>').join('') + '</div>' +
+        '<div class="ej-respuesta" hidden></div>';
+      st.cuerpo.querySelectorAll('.ej-opcion').forEach((b) => b.addEventListener('click', () => {
+        st.cuerpo.querySelectorAll('.ej-opcion').forEach((x) => x.classList.remove('sel'));
+        b.classList.add('sel'); elegida = +b.dataset.k; limpia();
+      }));
+      st.nuevo();
+    }
+    const limpia = () => st.cuerpo.querySelectorAll('.ej-linea').forEach((x) => x.classList.remove('ok', 'ko'));
+    function pinta(k) {
+      limpia();
+      const obj = new Set(caso.objetivo), r = resultados[k];
+      if (!r) return;
+      r.forEach((i) => { const f = st.cuerpo.querySelector('.ej-linea[data-i="' + i + '"]'); if (f) f.classList.add(obj.has(i) ? 'ok' : 'ko'); });
+    }
+    const correcta = () => resultados.findIndex((r) => r && igual(r, new Set(caso.objetivo)));
+    const marca = (k, clase) => { const b = st.cuerpo.querySelector('.ej-opcion[data-k="' + k + '"]'); b.classList.remove('ok', 'ko', 'pista'); b.classList.add(clase); };
+    function comprobar() {
+      if (elegida < 0) { st.mensaje('Elige primero un selector.'); return; }
+      const obj = new Set(caso.objetivo), r = resultados[elegida];
+      pinta(elegida);
+      if (r === null) { marca(elegida, 'ko'); st.fallo('Ese selector no es válido: el navegador no lo entiende y la regla entera se ignora.'); return; }
+      if (igual(r, obj)) { marca(elegida, 'ok'); st.acierto('Correcto: alcanza justo lo marcado.'); return; }
+      marca(elegida, 'ko');
+      if (r.size === 0) st.fallo('No alcanza nada: en este HTML no hay ningún elemento que cumpla ese selector.');
+      else if ([...obj].every((x) => r.has(x))) st.fallo('Alcanza lo marcado, pero también lo que está en rojo. Hace falta uno más concreto.');
+      else st.fallo('Alcanza otra cosa (en rojo), no lo marcado.');
+    }
+    function pista() { st.ayuda(); st.mensaje('Pista: ' + caso.pista); }
+    function resolver() {
+      st.ayuda(); st.resuelto = true;
+      const k = correcta();
+      st.cuerpo.querySelectorAll('.ej-opcion').forEach((x) => x.classList.remove('sel', 'ok', 'ko'));
+      if (k >= 0) { marca(k, 'ok'); pinta(k); }
+      const r = st.cuerpo.querySelector('.ej-respuesta');
+      r.innerHTML = '<b>' + esc(caso.opciones[k]) + '.</b> ' + esc(caso.pista) + ' Los otros: ' + caso.opciones.map((o, i) => {
+        if (i === k) return null;
+        const s = resultados[i];
+        return '<code>' + esc(o) + '</code> ' + (s === null ? 'no es válido' : s.size === 0 ? 'no alcanza nada' : 'alcanza ' + (s.size === 1 ? 'la línea ' : 'las líneas ') + [...s].sort((a, b) => a - b).map((x) => x + 1).join(', '));
+      }).filter(Boolean).join('; ') + '.';
+      r.hidden = false; st.mensaje('');
+    }
+    st.botones.comprobar.addEventListener('click', comprobar);
+    st.botones.pista.addEventListener('click', pista);
+    st.botones.resolver.addEventListener('click', resolver);
+    st.botones.otro.addEventListener('click', nuevo);
+    nuevo();
+  }
+
+  AW.montadores = { completar: montaCompletar, ordenar: montaOrdenar, error: montaError, emparejar: montaEmparejar, selector: montaSelector };
   function montaEjercicio(el) {
     const m = AW.montadores[el.dataset.tipo];
     if (!m) { el.textContent = 'Tipo de ejercicio pendiente: ' + el.dataset.tipo; return; }

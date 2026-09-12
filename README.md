@@ -71,8 +71,9 @@ Cada ejercicio tiene los botones Comprobar, Pista, Resolver y Otro ejercicio, y 
 - `ordenar`: los pasos de un procedimiento desordenados (una petición web, publicar en GitHub Pages, instalar una aplicación).
 - `error`: un fragmento con un error; se marca la línea y se elige el tipo.
 - `emparejar`: seis etiquetas o atributos y sus funciones.
+- `selector`: un HTML con una o varias líneas marcadas y cuatro selectores CSS; el acierto se calcula de verdad con `querySelectorAll` sobre el fragmento y se pinta en el código lo que alcanza el selector elegido.
 
-Los bancos están en `AW.bancos` dentro de `assets/aw.js` y se amplían añadiendo entradas (o desde un `<script>` de la unidad con `AW.bancos.completar.push(…)`), sin tocar los generadores. Los quiz de opción múltiple usan la clase `quiz` con `data-correct`.
+Los bancos están en `AW.bancos` dentro de `assets/aw.js` y se amplían añadiendo entradas (o desde un `<script>` de la unidad con `AW.bancos.completar.push(…)`), sin tocar los generadores. Cada diapositiva puede elegir otro banco con `data-banco` (por ejemplo `data-banco="completarCss"`), otra lista de tipos de error con `data-tipos` y otro enunciado con `data-enunciado`; así la UT2 reutiliza los generadores de la UT1 con contenido de CSS. Los quiz de opción múltiple usan la clase `quiz` con `data-correct`.
 
 ## Pregunta a la clase
 

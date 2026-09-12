@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="Plus Jakarta Sans, system-ui, sans-serif">
+  <!-- Cajas de bloque y cajas de línea. Elaboración propia. -->
+  <rect x="20" y="20" width="860" height="580" rx="18" fill="#FEFEFE" stroke="#D6E0EA" stroke-width="4"/>
+  <text x="50" y="66" font-size="24" font-weight="700" fill="#4A5A7D">body</text>
+  <!-- h1 bloque -->
+  <rect x="50" y="90" width="800" height="80" rx="8" fill="#E3ECF3" stroke="#017CE9" stroke-width="3"/>
+  <text x="70" y="140" font-size="30" font-weight="800" fill="#041C3F">h1 · block: ocupa toda la anchura</text>
+  <!-- p bloque con inlines -->
+  <rect x="50" y="190" width="800" height="150" rx="8" fill="#E3ECF3" stroke="#017CE9" stroke-width="3"/>
+  <text x="70" y="230" font-size="26" fill="#041C3F">p · block. Dentro, el texto fluye y las cajas</text>
+  <text x="70" y="275" font-size="26" fill="#041C3F">de línea van con él:</text>
+  <rect x="300" y="248" width="120" height="38" rx="6" fill="#A5E070"/>
+  <text x="360" y="276" font-size="24" font-weight="700" fill="#041C3F" text-anchor="middle">a</text>
+  <rect x="430" y="248" width="170" height="38" rx="6" fill="#A5E070"/>
+  <text x="515" y="276" font-size="24" font-weight="700" fill="#041C3F" text-anchor="middle">strong</text>
+  <rect x="610" y="248" width="150" height="38" rx="6" fill="#A5E070"/>
+  <text x="685" y="276" font-size="24" font-weight="700" fill="#041C3F" text-anchor="middle">span</text>
+  <text x="70" y="320" font-size="22" fill="#4A5A7D">inline: sin ancho ni alto propios</text>
+  <!-- ul bloque -->
+  <rect x="50" y="360" width="800" height="100" rx="8" fill="#E3ECF3" stroke="#017CE9" stroke-width="3"/>
+  <text x="70" y="400" font-size="26" fill="#041C3F">ul · block</text>
+  <rect x="70" y="415" width="760" height="34" rx="6" fill="#FFFFFF" stroke="#017CE9" stroke-width="2"/>
+  <text x="90" y="440" font-size="22" fill="#041C3F">li · block dentro del bloque</text>
+  <!-- inline-block -->
+  <rect x="50" y="480" width="800" height="100" rx="8" fill="#E3ECF3" stroke="#017CE9" stroke-width="3"/>
+  <text x="70" y="520" font-size="26" fill="#041C3F">p con etiquetas</text>
+  <rect x="290" y="493" width="140" height="56" rx="10" fill="#FE8F46"/>
+  <text x="360" y="529" font-size="24" font-weight="800" fill="#FFFFFF" text-anchor="middle">PEGI 12</text>
+  <rect x="445" y="493" width="120" height="56" rx="10" fill="#FE8F46"/>
+  <text x="505" y="529" font-size="24" font-weight="800" fill="#FFFFFF" text-anchor="middle">−30 %</text>
+  <text x="590" y="529" font-size="22" fill="#4A5A7D">inline-block: en línea, con ancho y relleno</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="Plus Jakarta Sans, system-ui, sans-serif">
+  <!-- Flexbox: contenedor, elementos, eje principal y eje cruzado. Elaboración propia. -->
+  <rect x="20" y="20" width="860" height="580" rx="18" fill="#FEFEFE"/>
+  <!-- contenedor -->
+  <rect x="60" y="110" width="780" height="300" rx="14" fill="#E3ECF3" stroke="#041C3F" stroke-width="4"/>
+  <text x="80" y="90" font-size="28" font-weight="800" fill="#041C3F">contenedor · display: flex</text>
+  <!-- hijos -->
+  <rect x="90" y="150" width="170" height="220" rx="12" fill="#A5E070"/>
+  <text x="175" y="272" font-size="30" font-weight="800" fill="#041C3F" text-anchor="middle">1</text>
+  <rect x="290" y="150" width="170" height="220" rx="12" fill="#A5E070"/>
+  <text x="375" y="272" font-size="30" font-weight="800" fill="#041C3F" text-anchor="middle">2</text>
+  <rect x="490" y="150" width="170" height="220" rx="12" fill="#A5E070"/>
+  <text x="575" y="272" font-size="30" font-weight="800" fill="#041C3F" text-anchor="middle">3</text>
+  <text x="705" y="272" font-size="22" fill="#4A5A7D" text-anchor="middle">espacio</text>
+  <text x="705" y="300" font-size="22" fill="#4A5A7D" text-anchor="middle">libre</text>
+  <!-- eje principal -->
+  <line x1="60" y1="460" x2="820" y2="460" stroke="#017CE9" stroke-width="6"/>
+  <polygon points="840,460 812,446 812,474" fill="#017CE9"/>
+  <text x="450" y="505" font-size="26" font-weight="700" fill="#017CE9" text-anchor="middle">eje principal (flex-direction: row) · justify-content reparte aquí</text>
+  <!-- eje cruzado -->
+  <line x1="875" y1="410" x2="875" y2="130" stroke="#FE8F46" stroke-width="6"/>
+  <polygon points="875,110 861,138 889,138" fill="#FE8F46"/>
+  <text x="450" y="560" font-size="26" font-weight="700" fill="#FE8F46" text-anchor="middle">eje cruzado · align-items alinea aquí</text>
+</svg>

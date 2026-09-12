@@ -390,6 +390,27 @@ deck-stage section:has(> .ej) { grid-template-rows: minmax(0, 1fr); }
 .ej-orden li { display: grid; grid-template-columns: 120px 1fr; gap: 16px; align-items: center; background: var(--bg); border-radius: 14px; padding: 8px 14px; font-size: 22px; line-height: 1.3; color: var(--navy); }
 .ej-orden .ej-select { font-size: 20px; padding: 8px 10px; }
 .ej-par.par-ancho { grid-template-columns: 40px minmax(0, 1fr) 520px; }
+/* selector (UT2): línea objetivo y cuatro selectores para elegir */
+.ej-cod .ej-linea.objetivo { background: rgba(254,143,70,.22); box-shadow: inset 4px 0 0 var(--orange); }
+.ej-cod .ej-linea.objetivo.ok { background: rgba(165,224,112,.32); box-shadow: inset 4px 0 0 var(--green); }
+.ej-opciones { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ej-opcion {
+  font-family: var(--mono);
+  font-size: 22px;
+  text-align: left;
+  padding: 12px 18px;
+  border: 3px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--navy);
+  cursor: pointer;
+  transition: border-color .15s;
+}
+.ej-opcion:hover { border-color: var(--teal); }
+.ej-opcion.sel { border-color: var(--cyan); background: #E4F9FC; }
+.ej-opcion.ok { border-color: var(--ok); background: #E8F6EE; }
+.ej-opcion.ko { border-color: var(--ko); background: #FBEAEA; }
+.ej-respuesta code { font-family: var(--mono); background: var(--white); padding: 1px 8px; border-radius: 6px; }
 .ej-par-texto code { font-family: var(--mono); background: var(--gray); padding: 1px 8px; border-radius: 6px; }
 
 /* ---------- Pregunta a la clase con panel que se revela ---------- */
