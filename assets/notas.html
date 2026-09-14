@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notas · Aplicaciones Web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Ventana de notas del profesor. Se abre con la tecla N desde una presentación (aw.js).
+   Muestra las notas de la diapositiva actual y permite editarlas (pestaña Guion) y llevar
+   una bitácora de clase (pestaña Bitácora). Todo se guarda en localStorage de este navegador
+   y se exporta en JSON con el botón Exportar.
+   El aspecto sigue el de las diapositivas (aw.css y plantilla/index.html): fondo casi blanco,
+   tarjetas blancas con sombra plana, rótulo azul en mayúsculas sobre título navy, píldoras
+   verdes y botones azul y «ghost» con borde de 3 px. */
+:root {
+  /* Paleta de aw.css, los mismos valores que en las diapositivas. */
+  --navy: #041C3F; --ink: #041C3F; --muted: #4A5A7D;
+  --bg: #FEFEFE; --white: #FFFFFF; --gray: #E3ECF3; --line: #D6E0EA;
+  --green: #A5E070; --green-dark: #0A6E1A; --cyan: #1CCFE3; --blue: #017CE9;
+  --orange: #FE8F46; --yellow: #FED92F; --red: #FC565B;
+  --ok: #0A6E1A; --ko: #D63A3F;
+  --mono: 'JetBrains Mono', Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: var(--bg); color: var(--ink); font-size: 16px; line-height: 1.5;
+  display: flex; flex-direction: column;
+}
+button { font: inherit; cursor: pointer; }
+
+
+/* Cabecera: rótulo azul en mayúsculas, título navy, contador en píldora verde y reloj */
+header {
+  padding: 22px 28px 10px; display: flex; align-items: flex-end; gap: 20px; flex: none;
+}
+header .titulo { flex: 1; min-width: 0; }
+header .rotulo { font-size: 12px; font-weight: 600; color: var(--blue); text-transform: uppercase; letter-spacing: .08em; }
+header .titulo .nombre { display: block; font-weight: 800; font-size: 22px; line-height: 1.15; color: var(--navy); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+header .estado { font-size: 13px; font-weight: 600; color: var(--navy); display: flex; align-items: center; gap: 7px; padding-bottom: 4px; }
+header .estado::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--green-dark); }
+header .estado.off { color: var(--ko); }
+header .estado.off::before { background: var(--red); }
+header .reloj { font-weight: 800; font-size: 26px; line-height: 1; color: var(--navy); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+
+/* Fila de navegación: flechas redondas como las de la galería, píldoras y botones */
+.nav {
+  display: flex; align-items: center; gap: 12px; padding: 10px 28px 14px; flex: none; flex-wrap: wrap;
+}
+.nav .flecha {
+  width: 42px; height: 42px; border-radius: 50%; border: 3px solid var(--line); background: var(--white);
+  font-size: 18px; color: var(--navy); padding: 0; line-height: 1; transition: border-color .2s, background .2s;
+}
+.nav .flecha:hover { border-color: var(--cyan); background: var(--bg); }
+.nav .contador { font-weight: 800; font-size: 18px; color: var(--navy); font-variant-numeric: tabular-nums; letter-spacing: .02em; margin: 0 6px 0 2px; white-space: nowrap; }
+.nav .contador i { font-style: normal; color: var(--muted); font-weight: 600; }
+.nav .pill {
+  background: var(--green); color: var(--navy); font-weight: 800; font-size: 13px;
+  padding: 4px 12px 5px; border-radius: 999px; letter-spacing: .04em; line-height: 1.2; white-space: nowrap;
+}
+.nav .pill:empty { display: none; }
+.nav .pill.crit { background: var(--gray); color: var(--muted); }
+.nav .label { font-weight: 800; font-size: 20px; color: var(--navy); flex: 1; min-width: 200px; line-height: 1.2; }
+.nav .acciones { display: flex; align-items: center; gap: 10px; }
+.btn {
+  border: 3px solid var(--line); background: var(--white); color: var(--navy);
+  padding: 7px 16px; border-radius: 14px; font-weight: 700; font-size: 14px;
+  transition: transform .1s, background .2s, border-color .2s;
+}
+.btn:hover { border-color: var(--cyan); }
+.btn:active { transform: scale(.97); }
+.btn.primario { background: var(--blue); color: var(--white); border-color: var(--blue); }
+.btn.primario:hover { background: var(--navy); border-color: var(--navy); }
+.pendientes { font-size: 13px; color: var(--muted); }
+.pendientes b { color: var(--ko); }
+
+/* Pestañas: píldoras, la activa en verde */
+.tabs { display: flex; gap: 8px; padding: 0 28px 12px; flex: none; }
+.tab {
+  border: 3px solid var(--line); background: var(--white); color: var(--muted);
+  padding: 6px 18px; border-radius: 999px; font-weight: 700; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;
+  transition: border-color .2s, background .2s, color .2s;
+}
+.tab:hover { border-color: var(--cyan); }
+.tab[aria-selected="true"] { background: var(--green); border-color: var(--green); color: var(--navy); }
+.tab .n { display: inline-block; min-width: 22px; padding: 0 7px; border-radius: 999px; background: var(--blue); color: var(--white); font-size: 12px; line-height: 20px; text-align: center; }
+.tab[aria-selected="true"] .n { background: var(--navy); color: var(--green); }
+.tab .n:empty { display: none; }
+
+/* Panel de cada pestaña: tarjeta blanca con sombra plana, como las de los ejercicios */
+.panel {
+  flex: 1; min-height: 0; margin: 0 28px 16px; background: var(--white);
+  border-radius: 24px; box-shadow: 0 2px 0 var(--line); display: flex; flex-direction: column; overflow: hidden;
+}
+.panel[hidden] { display: none; }
+.barra { display: flex; align-items: center; gap: 4px; padding: 10px 16px; border-bottom: 2px solid var(--line); flex: none; flex-wrap: wrap; }
+.barra button {
+  border: 0; background: transparent; color: var(--navy); border-radius: 10px;
+  min-width: 36px; height: 36px; padding: 0 12px; font-weight: 700; transition: background .15s;
+}
+.barra button:hover { background: var(--gray); }
+.barra .sep { width: 2px; height: 22px; background: var(--line); margin: 0 6px; border-radius: 2px; }
+.barra .espacio { flex: 1; }
+.barra .editado { font-size: 13px; color: var(--green-dark); font-weight: 700; }
+.barra .editado:empty { display: none; }
+.editor {
+  flex: 1; min-height: 120px; overflow: auto; padding: 22px 28px; outline: none;
+  font-size: 21px; line-height: 1.55; color: var(--ink);
+}
+.editor:focus { box-shadow: inset 4px 0 0 var(--cyan); }
+.editor:empty::before { content: attr(data-vacio); color: var(--muted); opacity: .55; }
+.editor p { margin: 0 0 .6em; }
+.editor ul, .editor ol { margin: 0 0 .6em; padding-left: 1.4em; }
+.editor a { color: var(--blue); }
+.editor a:hover { color: var(--navy); }
+.editor b, .editor strong { color: var(--navy); font-weight: 800; }
+.editor code { font-family: var(--mono); font-size: .85em; background: var(--gray); padding: 1px 8px; border-radius: 6px; }
+.editor sup { font-size: .7em; }
+.subtitulo { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); padding: 14px 28px 0; }
+.bitacora { display: grid; grid-template-rows: auto 1fr auto 1fr; flex: 1; min-height: 0; }
+.bitacora .editor { font-size: 18px; }
+.bitacora .editor + .subtitulo { border-top: 2px solid var(--line); }
+
+/* Siguiente diapositiva: como el bloque de caso de los ejercicios (borde cian a la izquierda) */
+.siguiente {
+  margin: 0 28px 20px; padding: 12px 20px; border-radius: 0 16px 16px 0;
+  background: var(--gray); border-left: 6px solid var(--cyan); color: var(--muted); flex: none;
+}
+.siguiente .eti { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); }
+.siguiente .lab { font-weight: 800; color: var(--navy); }
+.siguiente .txt { font-size: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+.aviso { margin: 24px 28px; padding: 28px 32px; background: var(--white); border-radius: 24px; box-shadow: 0 2px 0 var(--line); font-size: 18px; color: var(--navy); }
+.aviso[hidden] { display: none; }
+.aviso kbd {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 34px; height: 34px; padding: 0 10px;
+  border-radius: 8px; border: 2px solid var(--line); border-bottom-width: 4px; background: var(--white);
+  color: var(--navy); font-family: inherit; font-size: 16px; font-weight: 700; vertical-align: middle;
+}
+input[type=file] { display: none; }
+@media (max-width: 640px) {
+  header .titulo .nombre { font-size: 18px; }
+  .editor { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="titulo">
+    <div class="rotulo">Notas del profesor</div>
+    <span class="nombre" id="titulo">Aplicaciones Web</span>
+  </div>
+  <div class="estado" id="estado">Buscando la presentación…</div>
+  <div class="reloj" id="reloj">00:00</div>
+</header>
+
+<div class="aviso" id="aviso" hidden>
+  No hay ninguna presentación conectada. Abre esta ventana pulsando <kbd>N</kbd> desde una presentación.
+</div>
+
+<div class="nav">
+  <button class="flecha" id="ant" title="Diapositiva anterior (←)">◀</button>
+  <button class="flecha" id="sig" title="Diapositiva siguiente (→)">▶</button>
+  <span class="contador" id="contador">— / —</span>
+  <span class="pill" id="seccion"></span>
+  <span class="pill crit" id="criterio" title="Criterio de evaluación del RA"></span>
+  <span class="label" id="label">—</span>
+  <div class="acciones">
+    <span class="pendientes" id="pendientes"></span>
+    <button class="btn" id="importar" title="Cargar un JSON exportado antes y fusionarlo con lo de este navegador">Importar</button>
+    <button class="btn primario" id="exportar" title="Descargar todas las notas y la bitácora de esta unidad en JSON">Exportar</button>
+    <input type="file" id="archivo" accept="application/json,.json">
+  </div>
+</div>
+
+<div class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-tab="guion">Guion <span class="n" id="n-guion"></span></button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="bitacora">Bitácora <span class="n" id="n-bitacora"></span></button>
+</div>
+
+<section class="panel" id="panel-guion">
+  <div class="barra">
+    <button data-cmd="bold" title="Negrita (Ctrl+B)"><b>B</b></button>
+    <button data-cmd="italic" title="Cursiva (Ctrl+I)"><i>I</i></button>
+    <button data-cmd="insertUnorderedList" title="Lista">•≡</button>
+    <button data-cmd="createLink" title="Enlace">🔗</button>
+    <button data-cmd="removeFormat" title="Quitar formato">Tx</button>
+    <span class="sep"></span>
+    <button id="restaurar" title="Volver a las notas que están en el repositorio">Restaurar original</button>
+    <span class="espacio"></span>
+    <span class="editado" id="editado"></span>
+  </div>
+  <div class="editor" id="ed-guion" contenteditable="true" data-vacio="Sin notas. Escribe aquí el guion de esta diapositiva."></div>
+</section>
+
+<section class="panel bitacora" id="panel-bitacora" hidden>
+  <div class="subtitulo">Esta diapositiva</div>
+  <div class="editor" id="ed-bit-diapo" contenteditable="true" data-vacio="Qué cambiar, qué ha funcionado, qué preguntan…"></div>
+  <div class="subtitulo">Toda la unidad</div>
+  <div class="editor" id="ed-bit-unidad" contenteditable="true" data-vacio="Notas generales de la unidad: ritmo, orden, huecos, ideas…"></div>
+</section>
+
+<div class="siguiente" id="siguiente">
+  <div class="eti">Siguiente</div>
+  <div class="lab" id="sig-label">—</div>
+  <div class="txt" id="sig-txt"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+
+  /* ---------- estado ---------- */
+  let deck = null;          // {deck, titulo, diapos:[{n,label,seccion,notas}]}
+  let index = 0;
+  let datos = null;         // lo guardado en localStorage para este deck
+  let conectado = false;
+  let ultimoMensaje = 0;
+
+  const CLAVE = (id) => 'aw.notas.' + id;
+  const UNIDAD = '__unidad';
+
+  function carga(id) {
+    try { datos = JSON.parse(localStorage.getItem(CLAVE(id))) || null; } catch (e) { datos = null; }
+    if (!datos || typeof datos !== 'object') datos = {};
+    datos.guion = datos.guion || {};
+    datos.bitacora = datos.bitacora || {};
+    datos.exportado = datos.exportado || 0;
+  }
+  function guarda() {
+    if (!deck) return;
+    try { localStorage.setItem(CLAVE(deck.deck), JSON.stringify(datos)); } catch (e) { $('estado').textContent = 'No se puede guardar (localStorage)'; }
+    pintaPendientes();
+  }
+
+  const actual = () => (deck && deck.diapos[index]) || null;
+  const limpiaHtml = (h) => String(h || '').replace(/^(\s|<br\s*\/?>|&nbsp;)+|(\s|<br\s*\/?>|&nbsp;)+$/g, '').trim();
+  const texto = (h) => { const d = document.createElement('div'); d.innerHTML = String(h || '').replace(/<\/(p|li|div|h\d)>/gi, ' '); return d.textContent.replace(/\s+/g, ' ').trim(); };
+  const guionDe = (d) => (d && datos.guion[d.label]) ? datos.guion[d.label].html : (d ? d.notas : '');
+
+  /* ---------- pintar ---------- */
+  function pintaCabecera() {
+    $('titulo').textContent = deck ? deck.titulo.replace(/\s*·\s*Aplicaciones Web\s*$/, '') : 'Aplicaciones Web';
+    $('contador').innerHTML = deck ? (index + 1) + ' <i>/</i> ' + deck.diapos.length : '— <i>/</i> —';
+    const d = actual();
+    $('label').textContent = d ? d.label : '—';
+    $('seccion').textContent = d ? d.seccion : '';
+    $('criterio').textContent = d && d.criterio ? 'Criterio ' + d.criterio : '';
+    const s = deck && deck.diapos[index + 1];
+    $('sig-label').textContent = s ? (index + 2) + ' · ' + s.label : 'Fin de la presentación';
+    $('sig-txt').textContent = s ? texto(guionDe(s)) : '';
+  }
+  function pintaEditores() {
+    const d = actual();
+    $('ed-guion').innerHTML = d ? guionDe(d) : '';
+    $('editado').textContent = d && datos.guion[d.label] ? 'Editado en este navegador' : '';
+    $('ed-bit-diapo').innerHTML = d && datos.bitacora[d.label] ? datos.bitacora[d.label].html : '';
+    $('ed-bit-unidad').innerHTML = datos.bitacora[UNIDAD] ? datos.bitacora[UNIDAD].html : '';
+  }
+  function pintaPendientes() {
+    const desde = datos.exportado || 0;
+    const cuenta = (obj) => Object.values(obj).filter((v) => v.t > desde).length;
+    const g = Object.keys(datos.guion).length, b = Object.keys(datos.bitacora).length;
+    $('n-guion').textContent = g ? String(g) : '';
+    $('n-bitacora').textContent = b ? String(b) : '';
+    const p = cuenta(datos.guion) + cuenta(datos.bitacora);
+    $('pendientes').innerHTML = p ? '<b>' + p + '</b> sin exportar' : (g + b ? 'Todo exportado' : '');
+  }
+  function pinta() { pintaCabecera(); pintaEditores(); pintaPendientes(); }
+
+  /* ---------- edición ---------- */
+  const temporizadores = {};   // uno por editor: editar en otro no cancela el guardado pendiente
+  function alEditar(cual) {
+    clearTimeout(temporizadores[cual]);
+    temporizadores[cual] = setTimeout(() => {
+      const d = actual();
+      if (!d) return;
+      const t = Date.now();
+      if (cual === 'guion') {
+        const html = limpiaHtml($('ed-guion').innerHTML);
+        if (html === limpiaHtml(d.notas)) delete datos.guion[d.label];
+        else datos.guion[d.label] = { n: d.n, html, t };
+        $('editado').textContent = datos.guion[d.label] ? 'Editado en este navegador' : '';
+      } else {
+        const clave = cual === 'unidad' ? UNIDAD : d.label;
+        const html = limpiaHtml($(cual === 'unidad' ? 'ed-bit-unidad' : 'ed-bit-diapo').innerHTML);
+        if (!html) delete datos.bitacora[clave];
+        else datos.bitacora[clave] = { n: cual === 'unidad' ? 0 : d.n, html, t };
+      }
+      guarda();
+      if (cual === 'guion') pintaCabecera();
+    }, 300);
+  }
+  $('ed-guion').addEventListener('input', () => alEditar('guion'));
+  $('ed-bit-diapo').addEventListener('input', () => alEditar('diapo'));
+  $('ed-bit-unidad').addEventListener('input', () => alEditar('unidad'));
+
+  // Pegar siempre como texto plano: evita arrastrar estilos de Word o de la web.
+  document.querySelectorAll('.editor').forEach((ed) => {
+    ed.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const t = (e.clipboardData || window.clipboardData).getData('text/plain');
+      document.execCommand('insertText', false, t);
+    });
+  });
+
+  document.querySelectorAll('.barra [data-cmd]').forEach((b) => {
+    b.addEventListener('mousedown', (e) => e.preventDefault()); // no robar el foco al editor
+    b.addEventListener('click', () => {
+      const cmd = b.dataset.cmd;
+      if (cmd === 'createLink') {
+        const url = prompt('Dirección del enlace:');
+        if (url) document.execCommand('createLink', false, url);
+      } else document.execCommand(cmd, false, null);
+      const ed = document.activeElement;
+      if (ed && ed.classList.contains('editor')) ed.dispatchEvent(new Event('input'));
+    });
+  });
+  $('restaurar').addEventListener('click', () => {
+    const d = actual();
+    if (!d || !datos.guion[d.label]) return;
+    if (!confirm('¿Volver a las notas originales de esta diapositiva? Se pierde lo editado aquí.')) return;
+    delete datos.guion[d.label];
+    guarda();
+    pinta();
+  });
+
+  /* ---------- pestañas ---------- */
+  document.querySelectorAll('.tab').forEach((t) => t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach((x) => x.setAttribute('aria-selected', x === t ? 'true' : 'false'));
+    $('panel-guion').hidden = t.dataset.tab !== 'guion';
+    $('panel-bitacora').hidden = t.dataset.tab !== 'bitacora';
+    try { localStorage.setItem('aw.notas.tab', t.dataset.tab); } catch (e) {}
+  }));
+  try {
+    const t = localStorage.getItem('aw.notas.tab');
+    if (t === 'bitacora') document.querySelector('.tab[data-tab="bitacora"]').click();
+  } catch (e) {}
+
+  /* ---------- navegación del deck desde aquí ---------- */
+  function envia(msg) {
+    if (!window.opener || window.opener.closed) return;
+    try { window.opener.postMessage(msg, '*'); } catch (e) {}
+  }
+  const ir = (i) => { if (deck && i >= 0 && i < deck.diapos.length) envia({ aw: 'ir', index: i }); };
+  $('ant').addEventListener('click', () => ir(index - 1));
+  $('sig').addEventListener('click', () => ir(index + 1));
+  window.addEventListener('keydown', (e) => {
+    const t = e.target;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); ir(index + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); ir(index - 1); }
+  });
+
+  /* ---------- mensajes del deck ---------- */
+  window.addEventListener('message', (e) => {
+    const d = e.data;
+    if (!d || typeof d !== 'object' || !d.aw) return;
+    ultimoMensaje = Date.now();
+    if (d.aw === 'estado') {
+      const cambioDeck = !deck || deck.deck !== d.deck;
+      const cambioIndex = index !== d.index;
+      deck = d;
+      index = d.index;
+      if (cambioDeck) { carga(deck.deck); pinta(); }
+      else if (cambioIndex) pinta();
+      else { pintaCabecera(); pintaPendientes(); }
+      pon(true);
+    } else if (d.aw === 'diapo' && deck) {
+      if (index !== d.index) { index = d.index; pinta(); }
+    }
+  });
+  function pon(ok) {
+    conectado = ok;
+    $('estado').textContent = ok ? 'Conectado' : 'Sin presentación';
+    $('estado').classList.toggle('off', !ok);
+    $('aviso').hidden = ok;
+  }
+  // Pide el estado al abrir y cada segundo: así sigue funcionando si el deck se recarga
+  // o si en la misma pestaña se pasa a otra unidad.
+  function saluda() {
+    if (!window.opener || window.opener.closed) { if (conectado) pon(false); return; }
+    envia({ aw: 'hola' });
+    if (conectado && Date.now() - ultimoMensaje > 4000) pon(false);
+  }
+  saluda();
+  setInterval(saluda, 1000);
+
+  /* ---------- reloj ---------- */
+  function reloj() {
+    const d = new Date();
+    $('reloj').textContent = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  }
+  reloj();
+  setInterval(reloj, 15000);
+
+  /* ---------- exportar / importar ---------- */
+  const fechaCorta = () => new Date().toISOString().slice(0, 10);
+  $('exportar').addEventListener('click', () => {
+    if (!deck) return;
+    const guion = deck.diapos
+      .filter((d) => datos.guion[d.label])
+      .map((d) => ({ n: d.n, label: d.label, original: d.notas, nuevo: datos.guion[d.label].html, t: datos.guion[d.label].t }));
+    const diapos = deck.diapos
+      .filter((d) => datos.bitacora[d.label])
+      .map((d) => ({ n: d.n, label: d.label, html: datos.bitacora[d.label].html, texto: texto(datos.bitacora[d.label].html), t: datos.bitacora[d.label].t }));
+    const unidad = datos.bitacora[UNIDAD] || null;
+    const out = {
+      formato: 'aw-notas/1',
+      deck: deck.deck,
+      titulo: deck.titulo,
+      fecha: new Date().toISOString(),
+      guion,
+      bitacora: { unidad: unidad ? { html: unidad.html, texto: texto(unidad.html), t: unidad.t } : null, diapos },
+    };
+    const blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'notas-' + deck.deck + '-' + fechaCorta() + '.json';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    datos.exportado = Date.now();
+    guarda();
+  });
+
+  $('importar').addEventListener('click', () => $('archivo').click());
+  $('archivo').addEventListener('change', () => {
+    const f = $('archivo').files[0];
+    $('archivo').value = '';
+    if (!f || !deck) return;
+    f.text().then((txt) => {
+      const j = JSON.parse(txt);
+      if (!j || j.formato !== 'aw-notas/1') throw new Error('formato');
+      if (j.deck !== deck.deck && !confirm('El archivo es de "' + j.deck + '" y la presentación abierta es "' + deck.deck + '". ¿Importar igualmente?')) return;
+      let n = 0;
+      const masNuevo = (obj, clave, entrada) => {
+        if (!entrada || !entrada.html) return;
+        if (!obj[clave] || (entrada.t || 0) > (obj[clave].t || 0)) { obj[clave] = { n: entrada.n || 0, html: entrada.html, t: entrada.t || Date.now() }; n++; }
+      };
+      (j.guion || []).forEach((g) => masNuevo(datos.guion, g.label, { n: g.n, html: g.nuevo, t: g.t }));
+      ((j.bitacora || {}).diapos || []).forEach((b) => masNuevo(datos.bitacora, b.label, b));
+      if (j.bitacora && j.bitacora.unidad) masNuevo(datos.bitacora, UNIDAD, j.bitacora.unidad);
+      guarda();
+      pinta();
+      alert(n ? n + ' entradas importadas (se conserva la versión más reciente de cada una).' : 'Nada nuevo que importar.');
+    }).catch(() => alert('No se ha podido leer el archivo: no es un JSON de notas de Aplicaciones Web.'));
+  });
+})();
+</script>
+</body>
+</html>

@@ -50,6 +50,10 @@ body {
 a { color: var(--blue); }
 a:hover { color: var(--navy); }
 
+/* Notas del profesor: <aside class="notas"> como primer hijo de cada sección.
+   No se ven en la diapositiva; las muestra la ventana de notas (tecla N, aw.js). */
+deck-stage section > aside.notas { display: none; }
+
 /* Píldora pequeña en línea ("PRÁCTICA" en el índice) */
 .pill-mini {
   display: inline-block;

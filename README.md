@@ -24,6 +24,7 @@ Sesiones de 50 minutos, tres a la semana.
 index.html          Portada con las unidades de trabajo
 assets/             Motor de diapositivas (deck-stage.js), estilos y ejercicios (aw.css, aw.js), iconos y manchas de color (SVG)
 plantilla/          Un ejemplo de cada tipo de diapositiva y la paleta del módulo
+herramientas/       Scripts de mantenimiento (aplica-notas.py vuelca las notas editadas en clase)
 ut00/               Presentación del módulo (primera sesión)
 ut01/ ... ut06/     Una presentación por unidad (index.html + img/)
 ```
@@ -38,7 +39,7 @@ ut01/ ... ut06/     Una presentación por unidad (index.html + img/)
 
 ## Tipos de diapositiva
 
-Cada `<section>` lleva `data-label` (nombre en el carril de miniaturas) y `data-notas` (notas del orador). En `plantilla/index.html` hay un ejemplo de cada tipo: portada de módulo, portada de unidad, índice, objetivos, texto con imagen, definición, pasos, tabla, comparativa, código, código y resultado, imagen completa, dos imágenes, galería, vídeo, quiz, pregunta a la clase (texto o imagen), cifra destacada, cita, ejercicio, ejercicio interactivo, nota, resumen, recursos y cierre.
+Cada `<section>` lleva `data-label` (nombre en el carril de miniaturas, único en la unidad) y, como primer hijo, un `<aside class="notas">` con las notas del profesor. En `plantilla/index.html` hay un ejemplo de cada tipo: portada de módulo, portada de unidad, índice, objetivos, texto con imagen, definición, pasos, tabla, comparativa, código, código y resultado, imagen completa, dos imágenes, galería, vídeo, quiz, pregunta a la clase (texto o imagen), cifra destacada, cita, ejercicio, ejercicio interactivo, nota, resumen, recursos y cierre.
 
 ## Código con resaltado y resultado
 
@@ -122,9 +123,27 @@ python -m http.server 8000
 
 y abre `http://localhost:8000/`.
 
+## Notas del profesor
+
+Cada diapositiva lleva sus notas en un `<aside class="notas">` como primer hijo de la sección (admite HTML: negritas, listas, enlaces). No se ven en la diapositiva; la tecla **N** abre `assets/notas.html` en una ventana aparte, que muestra las notas de la diapositiva actual, la siguiente y un reloj, y se actualiza al cambiar de diapositiva. Desde esa ventana también se puede avanzar y retroceder.
+
+La ventana tiene dos pestañas:
+
+- **Guion**: las notas publicadas. Se pueden editar en clase; los cambios se guardan en el `localStorage` del navegador y se marcan como "Editado en este navegador".
+- **Bitácora**: notas privadas de clase (qué cambiar, qué ha funcionado), por diapositiva y para toda la unidad. No se publican nunca.
+
+Lo guardado vive solo en ese navegador y en ese ordenador: al acabar la clase, **Exportar** descarga un JSON con todo (`notas-utNN-fecha.json`); **Importar** fusiona un JSON en otro ordenador conservando la versión más reciente de cada nota. Al terminar la unidad, el script vuelca el JSON al repositorio:
+
+```
+python herramientas/aplica-notas.py notas-ut01-2026-10-15.json --ver   # muestra el antes y el después
+python herramientas/aplica-notas.py notas-ut01-2026-10-15.json         # escribe en ut01/index.html
+```
+
+Las notas de guion cambiadas se escriben en su `<aside>` (localizado por `data-label`, que debe ser único en la unidad) y la bitácora se guarda como Markdown junto al JSON, fuera del repositorio.
+
 ## Navegación
 
-Flechas o espacio para avanzar, Inicio y Fin para ir al principio o al final, R para volver a la primera. Ctrl+P imprime una página por diapositiva.
+Flechas o espacio para avanzar, Inicio y Fin para ir al principio o al final, R para volver a la primera. Ctrl+P imprime una página por diapositiva. N abre la ventana de notas del profesor.
 
 ## Licencia
 

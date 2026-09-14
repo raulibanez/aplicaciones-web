@@ -12,7 +12,8 @@
 <deck-stage width="1920" height="1080">
 
 <!-- 01 Portada de módulo -->
-<section class="portada" data-label="Portada módulo" data-notas="Portada del módulo. Sustituir curso y subtítulo. La imagen es ut00/img/portada.webp (opaca, fondo #fefefe). El vector gris va encima en modo multiplicar para respetar las sombras; el verde va encima de la imagen y el globo recortado (portada-globo.webp) lo tapa." style="position:relative;padding:0;overflow:hidden;background:var(--bg)">
+<section class="portada" data-label="Portada módulo" style="position:relative;padding:0;overflow:hidden;background:var(--bg)">
+  <aside class="notas">Portada del módulo. Sustituir curso y subtítulo. La imagen es ut00/img/portada.webp (opaca, fondo #fefefe). El vector gris va encima en modo multiplicar para respetar las sombras; el verde va encima de la imagen y el globo recortado (portada-globo.webp) lo tapa.</aside>
   <img src="../ut00/img/portada.webp" alt="" style="position:absolute;left:0;top:0;width:1920px;height:1080px">
   <span class="mancha abajo-izq" style="width:558px;left:676px;color:var(--gray);mix-blend-mode:multiply"></span>
   <span class="mancha arriba-dcha" style="width:397px;color:var(--green)"></span>
@@ -33,7 +34,8 @@
 </section>
 
 <!-- 02 Portada de unidad -->
-<section data-label="Portada unidad" data-notas="Separador de unidad de trabajo. Cambiar número, título y subtítulo. Los nombres de unidad de esta plantilla son de ejemplo: los definitivos salen de la propuesta de RA y temas." style="display:flex;flex-direction:column;justify-content:flex-end;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);position:relative;overflow:hidden">
+<section data-label="Portada unidad" style="display:flex;flex-direction:column;justify-content:flex-end;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);position:relative;overflow:hidden">
+  <aside class="notas">Separador de unidad de trabajo. Cambiar número, título y subtítulo. Los nombres de unidad de esta plantilla son de ejemplo: los definitivos salen de la propuesta de RA y temas.</aside>
   <span class="mancha arriba-dcha" style="width:640px;color:var(--green)"></span>
   <span class="mancha abajo-izq" style="width:980px;color:var(--gray)"></span>
   <span class="mancha abajo-izq volteada" style="width:460px;color:var(--cyan)"></span>
@@ -43,7 +45,8 @@
 </section>
 
 <!-- 03 Índice -->
-<section data-label="Índice" data-notas="Índice de contenidos de la unidad. Las sesiones de práctica van intercaladas entre los bloques." style="display:grid;grid-template-columns:1fr 1.4fr;gap:120px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+<section data-label="Índice" style="display:grid;grid-template-columns:1fr 1.4fr;gap:120px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <aside class="notas">Índice de contenidos de la unidad. Las sesiones de práctica van intercaladas entre los bloques.</aside>
   <div>
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Unidad 2</p>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Contenidos de la unidad</h2>
@@ -60,7 +63,8 @@
 </section>
 
 <!-- 04 Objetivos -->
-<section data-label="Objetivos" data-notas="Criterios de evaluación en lenguaje de alumno. Qué va a saber hacer al terminar la unidad." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="Objetivos" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <aside class="notas">Criterios de evaluación en lenguaje de alumno. Qué va a saber hacer al terminar la unidad.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Lenguajes de marcas utilizados en la web</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Qué vas a saber hacer</h2>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:var(--gap-title)">
@@ -83,7 +87,8 @@
 </section>
 
 <!-- 05 Texto + imagen -->
-<section data-label="Texto + imagen" data-notas="Plantilla estándar de contenido con una figura a la derecha. La figura lleva crédito al pasar el ratón y se amplía con clic. Las capturas de webs llevan la fecha de consulta." style="display:grid;grid-template-columns:1fr 760px;gap:100px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+<section data-label="Texto + imagen" style="display:grid;grid-template-columns:1fr 760px;gap:100px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <aside class="notas">Plantilla estándar de contenido con una figura a la derecha. La figura lleva crédito al pasar el ratón y se amplía con clic. Las capturas de webs llevan la fecha de consulta.</aside>
   <div style="display:flex;flex-direction:column">
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">2.2 HTML</p>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Un documento HTML es texto con etiquetas</h2>
@@ -104,7 +109,8 @@
 </section>
 
 <!-- 06 Definición -->
-<section data-label="Definición" data-notas="Concepto clave en grande. Definición de la RAE en una tarjeta tipo nota adhesiva; la fuente va debajo." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:center;position:relative;overflow:hidden">
+<section data-label="Definición" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:center;position:relative;overflow:hidden">
+  <aside class="notas">Concepto clave en grande. Definición de la RAE en una tarjeta tipo nota adhesiva; la fuente va debajo.</aside>
   <span class="mancha abajo-izq volteada" style="width:620px;color:var(--gray)"></span>
   <div style="position:relative">
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Concepto clave</p>
@@ -117,7 +123,8 @@
 </section>
 
 <!-- 07 Pasos -->
-<section data-label="Pasos" data-notas="Procedimiento en pasos numerados. Aquí, publicar una web en GitHub Pages. Comprobar el procedimiento en la documentación de GitHub antes de usarlo en clase." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="Pasos" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <aside class="notas">Procedimiento en pasos numerados. Aquí, publicar una web en GitHub Pages. Comprobar el procedimiento en la documentación de GitHub antes de usarlo en clase.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">2.6 Publicar</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Publicar tu web en GitHub Pages</h2>
   <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:32px;margin-top:var(--gap-title)">
@@ -150,7 +157,8 @@
 </section>
 
 <!-- 08 Tabla -->
-<section data-label="Tabla" data-notas="Plantilla de tabla. La fuente de los datos se cita en el pie." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="Tabla" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <aside class="notas">Plantilla de tabla. La fuente de los datos se cita en el pie.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">2.3 Etiquetas</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Las etiquetas que más vas a usar</h2>
   <table style="width:100%;border-collapse:collapse;margin-top:var(--gap-title);font-size:var(--type-small);background:var(--white);border-radius:20px;overflow:hidden">
@@ -173,7 +181,8 @@
 </section>
 
 <!-- 09 Comparativa -->
-<section data-label="Comparativa" data-notas="Dos columnas enfrentadas, una de color y otra blanca." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="Comparativa" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <aside class="notas">Dos columnas enfrentadas, una de color y otra blanca.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">2.4 CSS</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">HTML frente a CSS</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-title);flex:1">
@@ -197,7 +206,8 @@
 </section>
 
 <!-- 10 Código -->
-<section data-label="Código" data-notas="Bloque de código con resaltado de sintaxis (aw.js, sin librerías externas). data-lang admite html, css y js; data-marca resalta líneas. El código va con &lt; &gt; escapados." style="display:grid;grid-template-columns:1fr 1.25fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+<section data-label="Código" style="display:grid;grid-template-columns:1fr 1.25fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <aside class="notas">Bloque de código con resaltado de sintaxis (aw.js, sin librerías externas). data-lang admite html, css y js; data-marca resalta líneas. El código va con &lt; &gt; escapados.</aside>
   <div>
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">2.2 Estructura</p>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Tu primera página</h2>
@@ -224,7 +234,8 @@
 </section>
 
 <!-- 11 Código y resultado -->
-<section data-label="Código y resultado" data-notas="Tipo nuevo de este módulo: el código a la izquierda y, a la derecha, cómo lo pinta el navegador. El resultado es real: aw.js mete el código en un iframe. Para CSS o JS sueltos, data-html en el resultado aporta el HTML de base." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="Código y resultado" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <aside class="notas">Tipo nuevo de este módulo: el código a la izquierda y, a la derecha, cómo lo pinta el navegador. El resultado es real: aw.js mete el código en un iframe. Para CSS o JS sueltos, data-html en el resultado aporta el HTML de base.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">2.4 CSS</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Una regla CSS cambia el aspecto</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-title);flex:1;min-height:0">
@@ -256,7 +267,8 @@
 </section>
 
 <!-- 12 Imagen completa -->
-<section data-label="Imagen completa" data-notas="Captura a sangre con título en placa. El crédito está en la figura, a la derecha para no quedar bajo la placa." style="position:relative;padding:0;overflow:hidden;background:var(--dark)">
+<section data-label="Imagen completa" style="position:relative;padding:0;overflow:hidden;background:var(--dark)">
+  <aside class="notas">Captura a sangre con título en placa. El crédito está en la figura, a la derecha para no quedar bajo la placa.</aside>
   <figure class="foto credito-dcha" style="position:absolute;inset:0;border-radius:0">
     <img src="img/wordpress.jpg" alt="Página de inicio de wordpress.org" title="Captura de wordpress.org · 10 de septiembre de 2026">
     <figcaption class="credito"><b>wordpress.org</b>. Captura de pantalla, 10 de septiembre de 2026. WordPress es marca registrada de la WordPress Foundation.</figcaption>
@@ -268,7 +280,8 @@
 </section>
 
 <!-- 13 Dos imágenes -->
-<section data-label="Dos imágenes" data-notas="Dos figuras con pie, cada una con su crédito. Aquí, la misma página sin CSS y con CSS." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="Dos imágenes" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <aside class="notas">Dos figuras con pie, cada una con su crédito. Aquí, la misma página sin CSS y con CSS.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">2.4 CSS</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">La misma página, sin CSS y con CSS</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-title);flex:1;min-height:0">
@@ -290,7 +303,8 @@
 </section>
 
 <!-- 14 Galería -->
-<section data-label="Galería" data-notas="Varias capturas en el mismo hueco. Cada elemento de la lista con data-ir salta a su imagen." style="display:grid;grid-template-columns:1fr 760px;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+<section data-label="Galería" style="display:grid;grid-template-columns:1fr 760px;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <aside class="notas">Varias capturas en el mismo hueco. Cada elemento de la lista con data-ir salta a su imagen.</aside>
   <div style="display:flex;flex-direction:column;min-width:0">
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">2.1 Herramientas</p>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Tres webs que vas a visitar mucho</h2>
@@ -327,7 +341,8 @@
 </section>
 
 <!-- 15 Vídeo -->
-<section data-label="Vídeo" data-notas="Vídeo embebido. Sustituir la URL del iframe por el enlace de inserción del vídeo elegido y anotar duración y hasta qué minuto se ve." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:minmax(0,1fr) 560px;gap:80px">
+<section data-label="Vídeo" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:minmax(0,1fr) 560px;gap:80px">
+  <aside class="notas">Vídeo embebido. Sustituir la URL del iframe por el enlace de inserción del vídeo elegido y anotar duración y hasta qué minuto se ve.</aside>
   <div style="display:flex;flex-direction:column;gap:20px;min-width:0">
     <div style="flex:1;background:var(--dark);border-radius:20px;overflow:hidden;position:relative">
       <iframe src="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ" title="Vídeo de la unidad" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
@@ -346,7 +361,8 @@
 </section>
 
 <!-- 16 Quiz -->
-<section data-label="Quiz" data-notas="Pregunta de opción múltiple. data-correct es el índice de la opción correcta, empezando en 0." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1.2fr;gap:96px;align-items:center;position:relative;overflow:hidden">
+<section data-label="Quiz" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1.2fr;gap:96px;align-items:center;position:relative;overflow:hidden">
+  <aside class="notas">Pregunta de opción múltiple. data-correct es el índice de la opción correcta, empezando en 0.</aside>
   <span class="mancha arriba-dcha" style="width:380px;color:var(--cyan)"></span>
   <div class="quiz" data-correct="1" data-ok="Correcto. El enlace es <a> con el atributo href. La etiqueta <link> sirve para enlazar la hoja de estilos desde <head>." data-ko="No. Piensa en la etiqueta que lleva el atributo href hacia otra página." style="display:contents">
     <div style="position:relative">
@@ -365,7 +381,8 @@
 </section>
 
 <!-- 17 Pregunta a la clase (texto) -->
-<section data-label="Pregunta a la clase" data-notas="Lanzar la pregunta, dejar que respondan y revelar las ideas del profesor. Las ideas del panel son para el debate, no materia de examen." style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);align-items:center">
+<section data-label="Pregunta a la clase" style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);align-items:center">
+  <aside class="notas">Lanzar la pregunta, dejar que respondan y revelar las ideas del profesor. Las ideas del panel son para el debate, no materia de examen.</aside>
   <div>
     <img class="icono" src="../assets/question.png" alt="">
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-top:var(--gap-item)">Pregunta a la clase</p>
@@ -387,7 +404,8 @@
 </section>
 
 <!-- 18 Pregunta a la clase (imagen) -->
-<section data-label="Pregunta a la clase (imagen)" data-notas="Variante con una imagen o cifra como respuesta. La primera página web sigue en línea en info.cern.ch; la fecha la da el CERN (home.cern, «The birth of the Web»)." style="display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);gap:var(--gap-title)">
+<section data-label="Pregunta a la clase (imagen)" style="display:flex;flex-direction:column;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);gap:var(--gap-title)">
+  <aside class="notas">Variante con una imagen o cifra como respuesta. La primera página web sigue en línea en info.cern.ch; la fecha la da el CERN (home.cern, «The birth of the Web»).</aside>
   <div style="display:flex;align-items:center;gap:40px">
     <img class="icono" src="../assets/question.png" alt="" style="flex:none;width:120px;height:120px">
     <div>
@@ -411,7 +429,8 @@
 </section>
 
 <!-- 19 Cifra destacada -->
-<section data-label="Cifra destacada" data-notas="Dato destacado en grande, con dos datos secundarios. Fuente: W3Techs, «Usage statistics and market share of WordPress», consultado el 10 de septiembre de 2026. Actualizar la cifra cada curso." style="display:grid;grid-template-columns:1fr 1fr;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);align-items:center;gap:120px">
+<section data-label="Cifra destacada" style="display:grid;grid-template-columns:1fr 1fr;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);align-items:center;gap:120px">
+  <aside class="notas">Dato destacado en grande, con dos datos secundarios. Fuente: W3Techs, «Usage statistics and market share of WordPress», consultado el 10 de septiembre de 2026. Actualizar la cifra cada curso.</aside>
   <div>
     <p style="font-size:220px;font-weight:800;line-height:1;color:var(--blue);letter-spacing:-.04em">40 %</p>
     <p style="font-size:var(--type-subtitle);font-weight:700;color:var(--navy);margin-top:16px">De todos los sitios web del mundo están hechos con WordPress</p>
@@ -427,7 +446,8 @@
 </section>
 
 <!-- 20 Cita -->
-<section data-label="Cita" data-notas="Cita literal con su fuente. Aquí, las orientaciones metodológicas del currículo del módulo." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden">
+<section data-label="Cita" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden">
+  <aside class="notas">Cita literal con su fuente. Aquí, las orientaciones metodológicas del currículo del módulo.</aside>
   <span class="mancha abajo-izq" style="width:720px;color:var(--gray)"></span>
   <span class="mancha arriba-dcha" style="width:360px;color:var(--green)"></span>
   <span style="position:relative;font-size:200px;line-height:.6;color:var(--blue);font-weight:800">“</span>
@@ -436,7 +456,8 @@
 </section>
 
 <!-- 21 Ejercicio -->
-<section data-label="Ejercicio" data-notas="Sesión de práctica. Enunciado para el alumno y ficha con duración, modalidad, entrega y material." style="display:grid;grid-template-columns:1fr 1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+<section data-label="Ejercicio" style="display:grid;grid-template-columns:1fr 1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <aside class="notas">Sesión de práctica. Enunciado para el alumno y ficha con duración, modalidad, entrega y material.</aside>
   <div>
     <span class="pill">Práctica 2.1</span>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Tu primera página: la web de un negocio</h2>
@@ -459,7 +480,8 @@
 </section>
 
 <!-- 22 Ejercicio interactivo -->
-<section data-label="Ejercicio interactivo" data-notas="Hueco para los ejercicios interactivos con Comprobar, Pista, Resolver y Otro ejercicio (div.ej con data-tipo). Los tipos de este módulo están pendientes de acordar; esta diapositiva recoge la propuesta." style="display:grid;grid-template-columns:1fr 1.25fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+<section data-label="Ejercicio interactivo" style="display:grid;grid-template-columns:1fr 1.25fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <aside class="notas">Hueco para los ejercicios interactivos con Comprobar, Pista, Resolver y Otro ejercicio (div.ej con data-tipo). Los tipos de este módulo están pendientes de acordar; esta diapositiva recoge la propuesta.</aside>
   <div>
     <span class="pill">Practica</span>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Ejercicios interactivos</h2>
@@ -485,14 +507,16 @@
 </section>
 
 <!-- 23 Nota -->
-<section data-label="Nota" data-notas="Advertencia o norma importante. Aquí, la política de IA del módulo." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+<section data-label="Nota" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+  <aside class="notas">Advertencia o norma importante. Aquí, la política de IA del módulo.</aside>
   <img class="icono" src="../assets/exclamation.png" alt="">
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:var(--gap-title);color:var(--navy);max-width:1300px;text-wrap:balance">HTML y CSS se aprenden escribiéndolos a mano</h2>
   <p style="font-size:var(--type-body);line-height:1.5;color:var(--muted);margin-top:var(--gap-item);max-width:1200px;text-wrap:pretty">La inteligencia artificial no se usa en clase salvo que se indique expresamente. Cuando se permita, se dice en el enunciado de la práctica y se entrega también el prompt.</p>
 </section>
 
 <!-- 24 Resumen -->
-<section data-label="Resumen" data-notas="Ideas clave de la unidad, una tarjeta por idea." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="Resumen" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <aside class="notas">Ideas clave de la unidad, una tarjeta por idea.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Unidad 2</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Resumen de la unidad</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:var(--gap-title)">
@@ -504,7 +528,8 @@
 </section>
 
 <!-- 25 Recursos -->
-<section data-label="Recursos" data-notas="Documentación oficial y enlaces, con fecha de consulta." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1.4fr;gap:120px">
+<section data-label="Recursos" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1.4fr;gap:120px">
+  <aside class="notas">Documentación oficial y enlaces, con fecha de consulta.</aside>
   <div>
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Para ampliar</p>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Recursos y documentación</h2>
@@ -518,7 +543,8 @@
 </section>
 
 <!-- 26 Cierre -->
-<section data-label="Cierre" data-notas="Cierre de sesión." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+<section data-label="Cierre" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden">
+  <aside class="notas">Cierre de sesión.</aside>
   <span class="mancha arriba-dcha" style="width:560px;color:var(--green)"></span>
   <span class="mancha abajo-izq" style="width:1000px;color:var(--gray)"></span>
   <div style="display:flex;align-items:center;gap:20px;position:relative">
@@ -533,7 +559,8 @@
 </section>
 
 <!-- 27 Identidad visual (referencia para construir unidades) -->
-<section data-label="Paleta" data-notas="Referencia de la paleta y la tipografía del módulo, sacadas de la imagen de portada. No se usa en las unidades." style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;gap:40px">
+<section data-label="Paleta" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column;gap:40px">
+  <aside class="notas">Referencia de la paleta y la tipografía del módulo, sacadas de la imagen de portada. No se usa en las unidades.</aside>
   <div>
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Identidad visual</p>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:16px;color:var(--navy)">Paleta de Aplicaciones Web</h2>

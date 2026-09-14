@@ -22,6 +22,9 @@
  *     Tipos: completar, ordenar, error, emparejar (UT1) y selector (UT2). data-banco elige otro banco
  *     de AW.bancos (por ejemplo completarCss), data-tipos otra lista de tipos de error (tiposErrorCss)
  *     y data-enunciado otro texto de cabecera. El armazón (botones, racha, mensajes) es común.
+ *  8. Notas del profesor: cada sección lleva un <aside class="notas">…</aside> como primer hijo
+ *     (HTML, oculto por CSS). La tecla N abre assets/notas.html en una ventana aparte con las
+ *     notas de la diapositiva actual; se actualiza al cambiar de diapositiva.
  */
 (function () {
   'use strict';
@@ -757,6 +760,69 @@
     });
   }
 
+  /* ---------- notas del profesor (tecla N) ----------
+   * La ventana assets/notas.html se abre con window.open y habla con esta página por postMessage:
+   *   ventana -> deck   {aw:'hola'}             pide el estado (al abrir y cada segundo, por si el deck se recarga)
+   *                     {aw:'ir', index}        salta a una diapositiva
+   *   deck -> ventana   {aw:'estado', ...}      deck, título, índice actual y lista de diapositivas con sus notas
+   *                     {aw:'diapo', index}     ha cambiado la diapositiva actual
+   */
+  const URL_NOTAS = (document.currentScript && document.currentScript.src || '../assets/aw.js').replace(/aw\.js.*$/, 'notas.html');
+  let ventanaNotas = null;
+
+  function idDeck() {
+    // /ut01/, /ut01/index.html o /ut01/otra.html -> 'ut01'
+    return location.pathname.replace(/\/[^/]*\.html?$/, '').replace(/\/$/, '').split('/').pop() || 'deck';
+  }
+
+  function estadoNotas(stage) {
+    const secs = [...stage.querySelectorAll(':scope > section')];
+    return {
+      aw: 'estado',
+      deck: idDeck(),
+      titulo: document.title,
+      index: stage.index || 0,
+      diapos: secs.map((s, i) => {
+        const aside = s.querySelector(':scope > aside.notas');
+        return {
+          n: i + 1,
+          label: s.dataset.label || ('Diapositiva ' + (i + 1)),
+          seccion: s.dataset.seccion || '',
+          criterio: s.dataset.criterio || '',
+          notas: aside ? aside.innerHTML.trim() : '',
+        };
+      }),
+    };
+  }
+
+  function enviaNotas(msg) {
+    if (!ventanaNotas || ventanaNotas.closed) return;
+    try { ventanaNotas.postMessage(msg, '*'); } catch (e) {}
+  }
+
+  function abreNotas() {
+    if (ventanaNotas && !ventanaNotas.closed) { ventanaNotas.focus(); return; }
+    ventanaNotas = window.open(URL_NOTAS, 'aw-notas', 'popup,width=980,height=760');
+  }
+
+  function montaNotas(stage) {
+    window.addEventListener('keydown', (e) => {
+      if ((e.key !== 'n' && e.key !== 'N') || e.ctrlKey || e.metaKey || e.altKey) return;
+      const t = e.composedPath ? e.composedPath()[0] : e.target;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+      e.preventDefault();
+      abreNotas();
+    });
+    window.addEventListener('message', (e) => {
+      const d = e.data;
+      if (!d || typeof d !== 'object' || !d.aw) return;
+      if (d.aw === 'hola') { ventanaNotas = e.source; enviaNotas(estadoNotas(stage)); }
+      else if (d.aw === 'ir' && typeof d.index === 'number') stage.goTo(d.index);
+    });
+    stage.addEventListener('slidechange', (e) => enviaNotas({ aw: 'diapo', index: e.detail.index }));
+  }
+  AW.abreNotas = abreNotas;
+
   function init() {
     const stage = document.querySelector('deck-stage');
     if (!stage) return;
@@ -768,6 +834,7 @@
     document.querySelectorAll('.revela').forEach(montaRevela);
     document.querySelectorAll('.galeria').forEach(montaGaleria);
     document.querySelectorAll('.foto').forEach(montaFoto);
+    montaNotas(stage);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
