@@ -791,6 +791,36 @@
     btn.addEventListener('click', (e) => { e.stopPropagation(); abreSolucion(btn); });
   }
 
+
+  /* ---------- volver: botón «Inicio» en la barra flotante del motor y pastilla de sección clicable ----------
+   * La barra flotante (.overlay, dentro del shadow DOM de deck-stage) aparece al mover el ratón y se oculta en
+   * presentación e impresión: ahí va un enlace a la página principal del módulo (../). La pastilla verde con el
+   * número de sección (data-seccion) pasa a ser un botón que salta al índice de la unidad (la diapositiva cuya
+   * etiqueta empieza por «Índice»; si no hay, la segunda).
+   */
+  function montaVolver(stage) {
+    const overlay = stage.shadowRoot && stage.shadowRoot.querySelector('.overlay');
+    if (overlay && !overlay.querySelector('.inicio')) {
+      const sep = document.createElement('span'); sep.className = 'divider';
+      const a = document.createElement('a');
+      a.className = 'btn inicio'; a.href = '../'; a.title = 'Volver al índice del módulo';
+      a.textContent = 'Inicio';
+      a.style.cssText = 'color:inherit;text-decoration:none;cursor:pointer;padding:0 10px';
+      overlay.append(sep, a);
+    }
+    const secs = [...stage.querySelectorAll(':scope > section')];
+    let idx = secs.findIndex((s) => /^índice/i.test(s.dataset.label || ''));
+    if (idx < 0) idx = Math.min(1, secs.length - 1);
+    secs.forEach((s) => {
+      if (!s.dataset.seccion || s.querySelector(':scope > .seccion-pill')) return;
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'seccion-pill'; b.textContent = s.dataset.seccion;
+      b.title = 'Ir al índice de la unidad';
+      b.addEventListener('click', (e) => { e.stopPropagation(); stage.goTo(idx); });
+      s.appendChild(b);
+    });
+  }
+
   /* ---------- notas del profesor (tecla N) ----------
    * La ventana assets/notas.html se abre con window.open y habla con esta página por postMessage:
    *   ventana -> deck   {aw:'hola'}             pide el estado (al abrir y cada segundo, por si el deck se recarga)
@@ -866,6 +896,7 @@
     document.querySelectorAll('.galeria').forEach(montaGaleria);
     document.querySelectorAll('.foto').forEach(montaFoto);
     document.querySelectorAll('.pill-solucion').forEach(montaSolucion);
+    montaVolver(stage);
     montaNotas(stage);
   }
 

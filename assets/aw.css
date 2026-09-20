@@ -73,10 +73,10 @@ deck-stage section > aside.notas { display: none; }
 }
 
 /* Número de sección: pastilla verde arriba a la derecha de cada diapositiva
-   de contenido (atributo data-seccion en el <section>). Las diapositivas las
+   de contenido (atributo data-seccion en el <section>). La crea aw.js como botón
+   y al pulsarla salta al índice de la unidad. Las diapositivas las
    posiciona deck-stage en absoluto, así que el pseudo-elemento se ancla a ellas. */
-deck-stage section[data-seccion]::after {
-  content: attr(data-seccion);
+deck-stage section > .seccion-pill {
   position: absolute;
   top: 40px;
   right: 48px;
@@ -89,8 +89,13 @@ deck-stage section[data-seccion]::after {
   font-weight: 800;
   letter-spacing: .02em;
   line-height: 1.2;
-  pointer-events: none;
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background .15s ease, transform .15s ease;
 }
+deck-stage section > .seccion-pill:hover { background: var(--cyan); transform: translateY(-1px); }
+@media print { deck-stage section > .seccion-pill { background: var(--green); } }
 
 /* Pista de teclas de la portada */
 .pista-teclas {
