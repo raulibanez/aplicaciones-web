@@ -760,6 +760,37 @@
     });
   }
 
+  /* ---------- píldora «cómo tiene que quedar»: la solución de un ejercicio en un modal ----------
+   * <button class="pill-solucion" data-solucion="soluciones/ej03.html" data-titulo="Ejercicio 3">Cómo tiene que quedar</button>
+   *   data-solucion: página HTML que se muestra renderizada en un iframe (nunca el código).
+   *   data-captura:  en su lugar, una imagen (para el simulacro y el examen, donde no se debe poder inspeccionar).
+   *   data-nota:     frase al pie; por defecto recuerda que sin CSS se ve así de sencillo.
+   */
+  function abreSolucion(btn) {
+    const url = btn.dataset.solucion, captura = btn.dataset.captura;
+    const titulo = esc(btn.dataset.titulo || 'Así tiene que quedar');
+    const nota = esc(btn.dataset.nota || 'Sin CSS se ve así de sencillo: lo que importa es que las etiquetas sean las correctas.');
+    const v = document.createElement('div');
+    v.className = 'visor visor-solucion';
+    v.innerHTML = '<div class="solucion-marco">'
+      + '<div class="resultado-barra"><i></i><i></i><i></i><span class="url">' + titulo + '</span>'
+      + (url ? '<a class="solucion-abrir" target="_blank" rel="noopener">Abrir en una pestaña nueva</a>' : '') + '</div>'
+      + (captura ? '<div class="solucion-scroll"><img alt="Resultado esperado"></div>' : '<iframe title="Resultado esperado" sandbox="allow-same-origin"></iframe>')
+      + '<p class="solucion-nota">' + nota + '</p></div>'
+      + '<button class="visor-cerrar" aria-label="Cerrar">×</button>';
+    if (url) { v.querySelector('iframe').src = url; v.querySelector('.solucion-abrir').href = url; }
+    else v.querySelector('img').src = captura;
+    const cierra = () => { v.remove(); document.removeEventListener('keydown', tecla, true); };
+    const tecla = (e) => { if (e.key === 'Escape') { e.stopPropagation(); cierra(); } };
+    v.addEventListener('click', (e) => { if (!e.target.closest('.solucion-marco') || e.target.closest('.visor-cerrar')) cierra(); });
+    v.querySelector('.visor-cerrar').addEventListener('click', cierra);
+    document.addEventListener('keydown', tecla, true);
+    document.body.appendChild(v);
+  }
+  function montaSolucion(btn) {
+    btn.addEventListener('click', (e) => { e.stopPropagation(); abreSolucion(btn); });
+  }
+
   /* ---------- notas del profesor (tecla N) ----------
    * La ventana assets/notas.html se abre con window.open y habla con esta página por postMessage:
    *   ventana -> deck   {aw:'hola'}             pide el estado (al abrir y cada segundo, por si el deck se recarga)
@@ -834,6 +865,7 @@
     document.querySelectorAll('.revela').forEach(montaRevela);
     document.querySelectorAll('.galeria').forEach(montaGaleria);
     document.querySelectorAll('.foto').forEach(montaFoto);
+    document.querySelectorAll('.pill-solucion').forEach(montaSolucion);
     montaNotas(stage);
   }
 

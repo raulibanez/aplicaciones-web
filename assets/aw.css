@@ -666,6 +666,58 @@ deck-stage section:has(> .ej) { grid-template-rows: minmax(0, 1fr); }
   cursor: pointer;
 }
 
+/* ---------- Píldora «cómo tiene que quedar» y su modal (aw.js, .pill-solucion) ---------- */
+.pill-solucion {
+  display: inline-block;
+  margin: 6px 0 0 2px;
+  vertical-align: middle;
+  border: 0;
+  border-radius: 999px;
+  padding: 7px 20px 8px;
+  background: var(--green);
+  color: var(--navy);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.2;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 2px 0 var(--green-dark);
+}
+.pill-solucion:hover { background: var(--cyan); box-shadow: none; transform: translateY(2px); }
+.pill-solucion::before { content: '👁 '; }
+@media print { .pill-solucion { display: none; } }
+.visor.visor-solucion { cursor: default; }
+.solucion-marco {
+  width: min(1400px, 94vw);
+  height: 90vh;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 30px 80px rgba(0,0,0,.5);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+.solucion-marco .resultado-barra {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px;
+  background: #E9EDF2;
+  font-size: 14px; color: #3A4756;
+}
+.solucion-marco .resultado-barra i { width: 12px; height: 12px; border-radius: 50%; background: #C9D1DB; display: inline-block; }
+.solucion-marco .resultado-barra .url { margin-left: 10px; flex: 1; font-weight: 600; }
+.solucion-marco .solucion-abrir { color: #1B5FB3; font-size: 14px; text-decoration: none; }
+.solucion-marco .solucion-abrir:hover { text-decoration: underline; }
+.solucion-marco iframe { flex: 1; border: 0; width: 100%; background: #fff; }
+.solucion-marco .solucion-scroll { flex: 1; overflow: auto; background: #fff; }
+.solucion-marco .solucion-scroll img { display: block; width: 100%; height: auto; }
+.solucion-marco .solucion-nota {
+  margin: 0; padding: 10px 16px;
+  background: #F3F6F9; color: #3A4756;
+  font-size: 14px; text-align: center;
+  border-top: 1px solid #DDE3EA;
+}
+
 /* ---------- Código con resaltado de sintaxis (aw.js) ----------
    <div class="ventana">
      <div class="ventana-barra"><i></i><i></i><i></i><span>index.html</span></div>
