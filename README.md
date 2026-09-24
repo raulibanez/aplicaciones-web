@@ -141,9 +141,13 @@ python herramientas/aplica-notas.py notas-ut01-2026-10-15.json         # escribe
 
 Las notas de guion cambiadas se escriben en su `<aside>` (localizado por `data-label`, que debe ser único en la unidad) y la bitácora se guarda como Markdown junto al JSON, fuera del repositorio.
 
+## Buscador dentro de la unidad
+
+Tecla **B**, o el botón «Buscar» de la barra flotante, abre un panel que busca en las diapositivas de la presentación abierta (rótulo y texto visible, sin las notas del profesor ni los ejercicios generados). No necesita servidor: el índice se construye en el navegador a partir del propio documento, así que funciona igual en GitHub Pages o abriendo el archivo. Se busca sin distinguir tildes ni mayúsculas; ↑ ↓ para moverse por los resultados, Enter para saltar a la diapositiva y Esc para cerrar. Está en `assets/aw.js` (`montaBuscador`) y `assets/aw.css` (`.buscador`).
+
 ## Navegación
 
-Flechas o espacio para avanzar, Inicio y Fin para ir al principio o al final, R para volver a la primera. Ctrl+P imprime una página por diapositiva. N abre la ventana de notas del profesor.
+Flechas o espacio para avanzar, Inicio y Fin para ir al principio o al final, R para volver a la primera. Ctrl+P imprime una página por diapositiva. N abre la ventana de notas del profesor. B abre el buscador de la unidad.
 
 ## Licencia
 
