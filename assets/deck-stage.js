@@ -1001,10 +1001,20 @@
       // Rewrite :root → :host and mirror <html>'s data-*/class/lang onto
       // each thumb host (see _syncThumbHostAttrs) so the same selectors
       // match inside the thumbnail's shadow tree.
+      // Sheets whose rules can't be read (cross-origin <link>s, and EVERY
+      // <link> when the deck is opened from file:// — Chrome gives each
+      // file its own opaque origin, so aw.css throws SecurityError) are
+      // re-imported by URL inside each thumb's shadow root instead of
+      // being dropped: a constructable sheet can't hold @import, so they
+      // travel in a <style> per thumb (see _syncThumbImports).
+      const unreadable = [];
       const authorCss = Array.from(document.styleSheets).map((sh) => {
         try {
           return Array.from(sh.cssRules).map((r) => r.cssText).join('\n');
-        } catch (e) { return ''; }
+        } catch (e) {
+          if (sh.href && !sh.disabled) unreadable.push(sh.href);
+          return '';
+        }
       }).join('\n')
         // The shadow host is featureless outside the functional :host(...)
         // form, so any compound on :root — [attr], .class, #id, :pseudo —
@@ -1023,6 +1033,9 @@
       // a wrapper div, or the deck-stage element itself all inherit
       // down to getComputedStyle(this)).
       this._authorVars = new Set(authorCss.match(/--[\w-]+/g) || []);
+      this._importCss = unreadable
+        .map((h) => '@import url("' + h.replace(/["\\]/g, '\\$&') + '");')
+        .join('\n');
       try {
         if (!this._adoptedSheet) this._adoptedSheet = new CSSStyleSheet();
         this._adoptedSheet.replaceSync(authorCss);
@@ -1032,7 +1045,27 @@
       }
     }
 
+    /** Keep the per-thumb <style> of @import rules (unreadable sheets, see
+     *  _snapshotAuthorCss) in step with the latest snapshot. Custom
+     *  properties declared on :root in an imported sheet still reach the
+     *  clone by inheritance, and _syncThumbHostAttrs pins their live
+     *  values on the host anyway. */
+    _syncThumbImports(host) {
+      const sr = host.shadowRoot;
+      if (!sr) return;
+      let st = sr.querySelector('style[data-deck-imports]');
+      const css = this._importCss || '';
+      if (!css) { if (st) st.remove(); return; }
+      if (!st) {
+        st = document.createElement('style');
+        st.setAttribute('data-deck-imports', '');
+        sr.insertBefore(st, sr.firstChild);
+      }
+      if (st.textContent !== css) st.textContent = css;
+    }
+
     _syncThumbHostAttrs(host, cs) {
+      this._syncThumbImports(host);
       const de = document.documentElement;
       // setAttribute overwrites but can't delete — an attr removed from
       // <html> (toggleAttribute off, classList emptied) would linger on
@@ -2345,6 +2378,9 @@
       host.inert = true;
       this._syncThumbHostAttrs(host);
       const sr = host.attachShadow({ mode: 'open' });
+      // _syncThumbHostAttrs ran before the shadow root existed — mount the
+      // @import <style> for unreadable sheets now.
+      this._syncThumbImports(host);
       if (this._adoptedSheet) sr.adoptedStyleSheets = [this._adoptedSheet];
       else {
         const st = document.createElement('style');

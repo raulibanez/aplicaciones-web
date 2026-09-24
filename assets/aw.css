@@ -52,7 +52,7 @@ a:hover { color: var(--navy); }
 
 /* Notas del profesor: <aside class="notas"> como primer hijo de cada sección.
    No se ven en la diapositiva; las muestra la ventana de notas (tecla N, aw.js). */
-deck-stage section > aside.notas { display: none; }
+section > aside.notas { display: none; }
 
 /* Píldora pequeña en línea ("PRÁCTICA" en el índice) */
 .pill-mini {
@@ -149,20 +149,22 @@ deck-stage section > .seccion-pill:hover { background: var(--cyan); transform: t
 
 deck-stage:not(:defined) { visibility: hidden; }
 
-deck-stage section {
+/* Sin prefijo deck-stage: estas reglas también tienen que llegar a las miniaturas del carril,
+   donde la sección clonada cuelga directamente del shadow root y no hay deck-stage por encima. */
+section {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   color: var(--ink);
   background: var(--bg);
   box-sizing: border-box;
 }
-deck-stage section * { box-sizing: border-box; }
-deck-stage section.dark { background: var(--dark); color: var(--white); }
-deck-stage section p,
-deck-stage section h1,
-deck-stage section h2,
-deck-stage section h3,
-deck-stage section ul,
-deck-stage section ol { margin: 0; }
+section * { box-sizing: border-box; }
+section.dark { background: var(--dark); color: var(--white); }
+section p,
+section h1,
+section h2,
+section h3,
+section ul,
+section ol { margin: 0; }
 
 /* Numeración de diapositivas (la añade aw.js) */
 [data-slide-num] {
@@ -286,14 +288,14 @@ section.portada [data-slide-num] { color: var(--navy); background: rgba(254, 254
 }
 
 /* Quiz sobre fondo claro (diapositivas sin .dark) */
-deck-stage section:not(.dark) .quiz-opt { background: var(--white); color: var(--navy); border-color: var(--line); box-shadow: 0 2px 0 var(--line); }
-deck-stage section:not(.dark) .quiz-opt .letra { background: var(--blue); color: var(--white); }
-deck-stage section:not(.dark) .quiz-opt:hover { border-color: var(--teal); }
-deck-stage section:not(.dark) .quiz-opt.correct { background: var(--green); border-color: var(--green); color: var(--navy); }
-deck-stage section:not(.dark) .quiz-opt.correct .letra { background: var(--navy); color: var(--green); }
-deck-stage section:not(.dark) .quiz-opt.wrong { background: var(--bg); color: var(--muted); border-color: var(--line); box-shadow: none; }
-deck-stage section:not(.dark) .quiz-opt.wrong .letra { background: var(--line); color: var(--muted); }
-deck-stage section:not(.dark) .quiz-fb { color: var(--muted); }
+section:not(.dark) .quiz-opt { background: var(--white); color: var(--navy); border-color: var(--line); box-shadow: 0 2px 0 var(--line); }
+section:not(.dark) .quiz-opt .letra { background: var(--blue); color: var(--white); }
+section:not(.dark) .quiz-opt:hover { border-color: var(--teal); }
+section:not(.dark) .quiz-opt.correct { background: var(--green); border-color: var(--green); color: var(--navy); }
+section:not(.dark) .quiz-opt.correct .letra { background: var(--navy); color: var(--green); }
+section:not(.dark) .quiz-opt.wrong { background: var(--bg); color: var(--muted); border-color: var(--line); box-shadow: none; }
+section:not(.dark) .quiz-opt.wrong .letra { background: var(--line); color: var(--muted); }
+section:not(.dark) .quiz-fb { color: var(--muted); }
 
 /* ---------- Ejercicios interactivos (clasificar, emparejar, caso) ---------- */
 .ej {
@@ -309,7 +311,7 @@ deck-stage section:not(.dark) .quiz-fb { color: var(--muted); }
   overflow: hidden;
 }
 /* La fila de la rejilla no debe crecer con el contenido de la tarjeta */
-deck-stage section:has(> .ej) { grid-template-rows: minmax(0, 1fr); }
+section:has(> .ej) { grid-template-rows: minmax(0, 1fr); }
 .ej-enunciado { font-size: var(--type-caption); color: var(--muted); line-height: 1.4; }
 .ej-cuerpo { display: flex; flex-direction: column; gap: 20px; flex: 1; min-height: 0; overflow: auto; }
 .ej-caso-titulo { font-size: var(--type-small); font-weight: 800; color: var(--blue); }
