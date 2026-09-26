@@ -1862,19 +1862,22 @@ h1 {
 
 <!-- 62 Subir a GitHub Pages -->
 <section data-label="2.6 · Subir la versión final" data-seccion="2.6" style="display:grid;grid-template-columns:1fr 1.1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
-  <aside class="notas"><b>Comprobar el procedimiento en docs.github.com antes de la sesión 11</b>: la interfaz cambia. Si la hoja no carga en la web y sí en local, <b>casi siempre es una mayúscula en el nombre del archivo</b> o una ruta distinta en el href.</aside>
+  <aside class="notas"><b>Comprobar el procedimiento en docs.github.com antes de la sesión 11</b>: la interfaz cambia. Si la hoja no carga en la web y sí en local, <b>casi siempre es una mayúscula en el nombre del archivo</b> o una ruta distinta en el href. Captura del 26 de septiembre de 2026: el antiguo botón «Add file» es ahora un <b>+</b> junto a Code.</aside>
   <div style="display:flex;flex-direction:column">
     <span class="pill">Práctica 2.3</span>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Subir la versión final a GitHub Pages</h2>
     <ol style="padding:0;list-style:none;display:flex;flex-direction:column;gap:20px;margin-top:var(--gap-title);font-size:var(--type-small);line-height:1.35">
       <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">1.</span><span>Abre tu repositorio <code class="en-linea">tuusuario.github.io</code></span></li>
-      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">2.</span><span><b>Add file</b>, <b>Upload files</b>, y arrastra <code class="en-linea">index.html</code>, <code class="en-linea">estilos.css</code> y la carpeta <code class="en-linea">img</code></span></li>
+      <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">2.</span><span>Botón <b>+</b> junto a <b>Code</b>, <b>Upload files</b>, y arrastra <code class="en-linea">index.html</code>, <code class="en-linea">estilos.css</code> y la carpeta <code class="en-linea">img</code></span></li>
       <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">3.</span><span><b>Commit changes</b>. Espera un minuto</span></li>
       <li style="display:flex;gap:20px"><span style="font-weight:800;color:var(--blue);flex:none">4.</span><span>Abre la URL en tu móvil. Si la hoja no carga: mayúsculas en el nombre o ruta del <code class="en-linea">href</code> distinta de la del archivo. En el servidor, <code class="en-linea">Estilos.css</code> y <code class="en-linea">estilos.css</code> son archivos distintos</span></li>
     </ol>
   </div>
   <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
-    <div class="img-slot" style="flex:1">Captura propia de GitHub: el repositorio con el menú Add file abierto en Upload files, o la pantalla de arrastrar archivos. Comprobar la interfaz antes de la sesión 11, con fecha.</div>
+    <figure class="foto" style="flex:1">
+      <img src="img/github-subir-archivos.webp" alt="Un repositorio de GitHub con el menú del botón + abierto junto a Code: Create new file y Upload files" title="Captura de github.com · 26 de septiembre de 2026" style="object-fit:cover;object-position:top left">
+      <figcaption class="credito"><b>GitHub</b>, menú del botón + de un repositorio con las opciones Create new file y Upload files. Captura de github.com, 26 de septiembre de 2026. © GitHub, Inc.</figcaption>
+    </figure>
     <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.12. Subir archivos desde la web de GitHub. Es lo mismo que hiciste en la UT1 con un solo archivo.</p>
   </div>
 </section>
@@ -1933,7 +1936,7 @@ h1 {
 
 <!-- 66 Examen práctico -->
 <section data-label="2.7 · Examen práctico: Mi película favorita" data-seccion="2.7" style="display:grid;grid-template-columns:1fr 1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
-  <aside class="notas">Rúbrica: hoja externa enlazada y válida (2), paleta y tipografía (4), cabecera y menú con flexbox y hover (4), dos columnas con grid (4), tabla y formulario (3), media query que apila en móvil (3). Quien no se presenta <b>lo hace en el margen de recuperación de diciembre</b>. <b>Película de licencia libre (Blender Foundation)</b> para poder publicar la maqueta.</aside>
+  <aside class="notas">Rúbrica: hoja externa enlazada y válida (2), paleta y tipografía (4), cabecera y menú con flexbox y hover (4), dos columnas con grid (4), tabla y formulario (3), media query que apila en móvil (3). Quien no se presenta <b>lo hace en el margen de recuperación de diciembre</b>. <b>Película: Matrix (1999), con fines educativos.</b> El texto es propio y las dos imágenes son ilustraciones generadas con IA, no fotogramas, para poder publicar la maqueta. El <code>index.html</code> que se entrega y la hoja de referencia están en <code>Ejemplos/ut02-pelicula</code>, fuera del repositorio.</aside>
   <div>
     <span class="pill">Examen práctico</span>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Mi película favorita</h2>
@@ -1954,14 +1957,34 @@ h1 {
 
 <!-- 67 La maqueta del examen -->
 <section data-label="2.7 · La maqueta del examen" data-seccion="2.7" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
-  <aside class="notas"><b>Se proyecta durante el examen y se sube a Classroom.</b> <b>Película de licencia libre</b>, por ejemplo Sintel o Big Buck Bunny de la Blender Foundation (CC BY), para poder publicar los fotogramas en el repositorio.</aside>
+  <aside class="notas"><b>Se proyecta durante el examen y se sube a Classroom</b> a tamaño completo (las dos capturas están en <code>Ejemplos/ut02-pelicula</code>). Película: <b>Matrix (1999), uso educativo</b>; ilustraciones generadas con IA en lugar de fotogramas. Misma estructura que la página del videojuego y misma técnica que la práctica 2.3, con otra paleta: tema oscuro y verde. Tipografía: títulos, menú, cabeceras de la tabla y botón en Consolas, "Courier New", monospace; el texto en Segoe UI, Roboto, system-ui, sans-serif.</aside>
   <span class="pill">Examen práctico</span>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy)">La maqueta del examen</h2>
-  <div style="display:grid;grid-template-columns:1.7fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
-    <div class="img-slot">Captura propia de la página «Mi película favorita» con estilo, a 1280 px: misma estructura que la del videojuego (cabecera, menú, contenido, lateral con dos figuras, pie, tabla y formulario), con la paleta anotada al margen. Película de licencia libre (Blender Foundation, CC BY). Se elabora antes de la sesión 14.</div>
-    <div class="img-slot">La misma página a 375 px: una columna, menú apilado.</div>
+  <div style="display:grid;grid-template-columns:1.5fr .55fr .95fr;gap:40px;margin-top:var(--gap-item);flex:1;min-height:0">
+    <figure class="foto" style="border:3px solid var(--line);background:#0b0f0c">
+      <img src="img/maqueta-examen-escritorio.webp" alt="Maqueta del examen a 1280 px: la página de Matrix en tema oscuro y verde, con cabecera, menú en fila, contenido con lista, tabla y formulario, y un lateral con dos imágenes" title="Elaboración propia · 26 de septiembre de 2026" style="object-fit:cover;object-position:top">
+      <figcaption class="credito"><b>Maqueta del examen, escritorio (1280 px).</b> Elaboración propia con fines educativos. <i>Matrix</i> © 1999 Warner Bros.; las ilustraciones están generadas con IA y no son fotogramas de la película.</figcaption>
+    </figure>
+    <figure class="foto" style="border:3px solid var(--line);background:#0b0f0c">
+      <img src="img/maqueta-examen-movil.webp" alt="La misma página a 375 px: una columna y el menú apilado" title="Elaboración propia · 26 de septiembre de 2026" style="object-fit:cover;object-position:top">
+      <figcaption class="credito"><b>Móvil (375 px).</b> Elaboración propia.</figcaption>
+    </figure>
+    <div style="display:flex;flex-direction:column;min-height:0">
+      <p style="font-size:var(--type-caption);font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">La paleta</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;font-size:19px;font-family:var(--mono)">
+      <div style="background:#0b0f0c;color:#d7f5dc;border-radius:12px;padding:12px 14px"><span style="display:block;font-weight:700">--fondo</span>#0b0f0c</div>
+      <div style="background:#d7f5dc;color:#0b0f0c;border-radius:12px;padding:12px 14px"><span style="display:block;font-weight:700">--texto</span>#d7f5dc</div>
+      <div style="background:#3ddc84;color:#0b0f0c;border-radius:12px;padding:12px 14px"><span style="display:block;font-weight:700">--acento</span>#3ddc84</div>
+      <div style="background:#13241a;color:#d7f5dc;border-radius:12px;padding:12px 14px"><span style="display:block;font-weight:700">--panel</span>#13241a</div>
+      <div style="background:#245236;color:#d7f5dc;border-radius:12px;padding:12px 14px"><span style="display:block;font-weight:700">--linea</span>#245236</div>
+      <div style="background:#7cffb0;color:#0b0f0c;border-radius:12px;padding:12px 14px"><span style="display:block;font-weight:700">--enlace</span>#7cffb0</div>
+      </div>
+      <p style="font-size:var(--type-caption);font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-top:var(--gap-item)">Tipografía</p>
+      <p style="font-size:20px;line-height:1.45;margin-top:10px;color:var(--navy)"><b>Títulos, menú y botón:</b> <code class="en-linea">Consolas, "Courier New", monospace</code><br><b>Texto:</b> la pila del sistema, como en tu página</p>
+      <p style="font-size:18px;line-height:1.45;color:var(--muted);margin-top:auto;padding-top:20px">Página de ejemplo con <b>fines educativos</b>. <i>Matrix</i> © 1999 Warner Bros. Las dos imágenes son ilustraciones generadas con IA, no fotogramas de la película.</p>
+    </div>
   </div>
-  <p style="font-size:var(--type-caption);color:var(--muted);margin-top:16px">Figura 2.13. La maqueta se proyecta durante el examen y está en Classroom a tamaño completo.</p>
+  <p style="font-size:var(--type-caption);color:var(--muted);margin-top:16px">Figura 2.13. La maqueta se proyecta durante el examen y está en Classroom a tamaño completo. Clic en cada captura para verla entera.</p>
 </section>
 
 <!-- 68 Resumen -->
