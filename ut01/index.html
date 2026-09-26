@@ -2232,7 +2232,7 @@ mi-web/
 
 <!-- 82 Verlo llegar: webhook.site -->
 <section data-label="1.7 · Verlo llegar" data-seccion="1.7" style="display:grid;grid-template-columns:1fr 1.3fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
-  <aside class="notas"><b>Demostración del profesor</b>: webhook.site da una URL única que muestra todo lo que le llega. Se pone esa URL en el action, se envía el formulario y en la otra pestaña aparece la petición con los pares nombre=valor. <b>Comprobar que el servicio sigue gratuito y sin registro</b> antes de la sesión (el 11 de septiembre de 2026 respondía). <b>Captura pendiente</b>, hecha en clase.</aside>
+  <aside class="notas"><b>Demostración del profesor</b>: webhook.site da una URL única que muestra todo lo que le llega. Se pone esa URL en el action, se envía el formulario y en la otra pestaña aparece la petición con los pares nombre=valor. <b>Comprobar que el servicio sigue gratuito y sin registro</b> antes de la sesión (el 11 de septiembre de 2026 respondía). La captura de la diapositiva es del 26 de septiembre de 2026, con la IP y la ubicación difuminadas: <b>webhook.site enseña la IP pública y la ciudad de quien envía</b>, cuidado al proyectarlo en directo.</aside>
   <div style="display:flex;flex-direction:column">
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Formularios</p>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Verlo llegar al otro lado</h2>
@@ -2245,8 +2245,11 @@ mi-web/
     </ol>
   </div>
   <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
-    <div class="img-slot" style="flex:1">Captura pendiente: webhook.site mostrando una petición POST recibida con los pares nombre=valor del formulario de la clase.</div>
-    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 1.10. Lo que recibe el servidor cuando pulsas Enviar. El ejercicio 12 del cuaderno apunta a esta URL.</p>
+    <figure class="foto" style="flex:1">
+      <img src="img/webhook-site.webp" alt="webhook.site con la petición POST recibida: en Form values, correo ana@ejemplo.es y nombre Ana García, y en Raw Content el cuerpo nombre=Ana+Garc%C3%ADa&amp;correo=ana%40ejemplo.es" title="Captura de webhook.site · 26 de septiembre de 2026" style="object-fit:cover;object-position:top left">
+      <figcaption class="credito"><b>webhook.site</b> con la petición POST del formulario mínimo: los pares nombre=valor en «Form values» y, abajo, el cuerpo tal como viaja. La IP y la ubicación de quien envía se han difuminado. Captura propia del 26 de septiembre de 2026.</figcaption>
+    </figure>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 1.10. Lo que recibe el servidor cuando pulsas Enviar. El ejercicio 10 del cuaderno apunta a esta URL.</p>
   </div>
 </section>
 

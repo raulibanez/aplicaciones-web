@@ -321,17 +321,25 @@ body {
   <div style="display:flex;flex-direction:column">
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Qué es CSS</p>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Verlo en el navegador: DevTools, pestaña Estilos</h2>
-    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">Selecciona un elemento en <b>Elementos</b> y a la derecha aparecen todas las reglas que le afectan, con el archivo y la línea de cada una.</p>
+    <p style="font-size:var(--type-small);line-height:1.5;margin-top:var(--gap-title)">Selecciona un elemento en <b>Elementos</b> y a la derecha aparecen todas las reglas que le afectan, con el archivo y la línea de cada una.</p>
     <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--gap-item);margin-top:var(--gap-item);font-size:var(--type-small);line-height:1.4">
       <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Tachado</b>: esa declaración perdió frente a otra regla</span></li>
       <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Triángulo amarillo</b>: el navegador no entiende esa propiedad o ese valor</span></li>
-      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>user agent stylesheet</b>: el estilo por defecto del navegador. Por eso un <code class="en-linea">h1</code> se ve grande y en negrita aunque no tengas CSS</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>hoja de estilo de user-agent</b>: el estilo por defecto del navegador. Por eso un <code class="en-linea">h1</code> se ve grande y en negrita aunque no tengas CSS</span></li>
       <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>Puedes editar en vivo para probar; al recargar se pierde</span></li>
     </ul>
   </div>
   <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
-    <div class="img-slot" style="flex:1">Captura propia de Chrome: un h1 de la página de SuperTuxKart seleccionado en Elementos y, a la derecha, la pestaña Estilos con las reglas de estilos.css (con número de línea), una declaración tachada y el bloque «user agent stylesheet» al final. Se hace en el aula con la página de ejemplo.</div>
-    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.1. La pestaña Estilos de las DevTools. Abajo del todo está el dibujo del modelo de caja del elemento seleccionado.</p>
+    <div class="galeria" style="--galeria-alto:780px;--galeria-flex:none">
+      <figure class="foto" data-pie="<b>Figura 2.1a.</b> El h1 seleccionado: sus reglas, con archivo y línea. Clic para ampliar.">
+        <img src="img/devtools-estilos.webp" alt="Chrome con las DevTools abiertas: el h1 de la página de SuperTuxKart seleccionado en Elementos y resaltado en la página, y en la pestaña Estilos las reglas de estilos.css con su número de línea, font-size: 2rem tachado y la hoja de estilo de user-agent" title="Captura de Google Chrome · 26 de septiembre de 2026" style="object-fit:cover;object-position:top left">
+        <figcaption class="credito"><b>Pestaña Estilos de las DevTools de Chrome</b> con el h1 de la página de ejemplo seleccionado. Captura propia del 26 de septiembre de 2026.</figcaption>
+      </figure>
+      <figure class="foto" data-pie="<b>Figura 2.1b.</b> Al final del panel, el modelo de caja del h1. Clic para ampliar.">
+        <img src="img/devtools-estilos-caja.webp" alt="La pestaña Estilos desplazada hasta abajo: reglas heredadas de body y :root y el dibujo del modelo de caja del h1, 922,667 por 48" title="Captura de Google Chrome · 26 de septiembre de 2026" style="object-fit:cover;object-position:top left">
+        <figcaption class="credito"><b>Modelo de caja en la pestaña Estilos</b>, al final del panel. Captura propia del 26 de septiembre de 2026.</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -590,7 +598,10 @@ code  { font-family: monospace; }  /* lo que hacía TT */</pre>
   }
 &lt;/style&gt;</pre>
     </div>
-    <div class="img-slot" style="flex:1;min-height:180px">Captura propia de fonts.google.com con una familia abierta (Nunito o similar) y el botón «Get embed code» o «Download». Con fecha.</div>
+    <figure class="foto" style="flex:1;min-height:180px">
+      <img src="img/google-fonts-nunito.webp" alt="Google Fonts con la familia Nunito seleccionada y el código para insertar: las etiquetas link que van en el head" title="Captura de fonts.google.com · 26 de septiembre de 2026" style="object-fit:cover;object-position:top left">
+      <figcaption class="credito"><b>Google Fonts</b>, código para insertar la familia Nunito (Get embed code). Captura de fonts.google.com, 26 de septiembre de 2026. Nunito se distribuye con licencia SIL Open Font License.</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -1626,8 +1637,11 @@ main, aside {
     </ul>
   </div>
   <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
-    <div class="img-slot" style="flex:1">Captura propia de Chrome con el modo dispositivo activado: la página de SuperTuxKart a 375 px de ancho, con el menú apilado y una sola columna, y el selector de dispositivos arriba. Se hace en el aula con la página de ejemplo.</div>
-    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.8. El modo dispositivo de las DevTools.</p>
+    <figure class="foto" style="flex:1">
+      <img src="img/devtools-dispositivo.webp" alt="Chrome en modo dispositivo con un iPhone SE de 375 por 667: la página de SuperTuxKart en una sola columna, con el menú apilado resaltado, y las DevTools a la derecha" title="Captura de Google Chrome · 26 de septiembre de 2026" style="object-fit:cover;object-position:top left">
+      <figcaption class="credito"><b>Modo dispositivo de las DevTools</b>: la página de ejemplo a 375 px (iPhone SE), con el nav resaltado. Captura propia del 26 de septiembre de 2026.</figcaption>
+    </figure>
+    <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.8. El modo dispositivo de las DevTools. Arriba, el dispositivo y sus medidas. Haz clic para ampliar.</p>
   </div>
 </section>
 
