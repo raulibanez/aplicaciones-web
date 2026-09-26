@@ -16,7 +16,8 @@
 <!-- 01 Portada de unidad -->
 <section data-label="UT2 · Portada" style="display:flex;flex-direction:column;justify-content:flex-end;padding:var(--pad-top) var(--pad-x) var(--pad-bottom);position:relative;overflow:hidden">
   <aside class="notas">Segunda unidad. <b>14 sesiones de 50 minutos</b>, 6 de práctica y 2 de examen. Todo se hace sobre la página «Mi videojuego favorito» de la UT1: <b>no se escribe HTML nuevo, se le da aspecto</b>.</aside>
-  <span class="mancha arriba-dcha" style="width:640px;color:var(--green)"></span>
+  <img src="img/portada.webp" alt="" style="position:absolute;left:0;top:0;width:1920px;height:1080px">
+  <span class="mancha arriba-dcha" style="width:520px;color:var(--green)"></span>
   <span class="mancha abajo-izq" style="width:980px;color:var(--gray)"></span>
   <span class="mancha abajo-izq volteada" style="width:460px;color:var(--cyan)"></span>
   <div style="position:absolute;left:var(--pad-x);top:var(--pad-top);display:flex;align-items:center;gap:20px">
@@ -25,7 +26,7 @@
   </div>
   <p style="position:relative;font-size:180px;font-weight:800;line-height:1;color:var(--blue);letter-spacing:-.04em">UT 2</p>
   <h1 style="position:relative;font-size:var(--type-title);font-weight:800;line-height:1.12;max-width:1200px;margin-top:24px;color:var(--navy);text-wrap:balance">CSS: aspecto y colocación</h1>
-  <p style="position:relative;font-size:var(--type-body);color:var(--muted);margin-top:32px;max-width:1100px;line-height:1.4">Cómo se decide el aspecto de una página y dónde va cada cosa.</p>
+  <p style="position:relative;font-size:var(--type-body);color:var(--muted);margin-top:32px;max-width:900px;line-height:1.4">Cómo se decide el aspecto de una página y dónde va cada cosa.</p>
   <p class="pista-teclas" style="position:relative;margin-top:72px"><kbd>←</kbd><kbd>→</kbd> para moverte <span class="sep">·</span> <kbd>P</kbd> pantalla completa <span class="sep">·</span> rueda del ratón o clic en el índice</p>
 </section>
 
@@ -50,36 +51,60 @@
 
 <!-- 03 Objetivos -->
 <section data-label="Qué vas a saber hacer" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
-  <aside class="notas">En el esquema de rutas del módulo (HOY → HTML, CSS, hosting → WordPress → AW), <b>esta unidad es la segunda pieza</b>. Lo que se aprende aquí es <b>lo que se toca después en un tema de WordPress</b> y en la apariencia de Moodle.</aside>
-  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Unidad 2</p>
-  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Qué vas a saber hacer</h2>
-  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:28px;margin-top:var(--gap-title)">
-    <div style="background:var(--white);border-radius:20px;padding:40px 32px;display:flex;flex-direction:column;gap:20px;box-shadow:0 2px 0 var(--line)">
-      <span style="width:64px;height:64px;border-radius:16px;background:var(--blue);color:var(--white);display:grid;place-items:center;font-size:var(--type-small);font-weight:800">1</span>
-      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Dar color, tipografía y espacio a cualquier página</p>
-      <p style="font-size:22px;color:var(--muted);line-height:1.45">Desde una hoja de estilo externa, sin tocar el HTML.</p>
+  <aside class="notas">Lo que evalúa la unidad, en lenguaje de alumno. <b>Cuatro tarjetas son del contenido «lenguajes de marcas utilizados en la web»</b> del bloque 1 del currículo (CSS entra ahí) y una de «herramientas y servicios básicos». <b>El criterio c del RA1</b>, «Se ha personalizado la interfaz del gestor de contenidos», solo se prepara: se evalúa en la UT3 con el CSS adicional de WordPress, y en la UT4 con el RA2 b (aspecto de Moodle). En el esquema de rutas del módulo (HOY → HTML, CSS, hosting → WordPress → AW), <b>esta unidad es la segunda pieza</b>. Lo que se aprende aquí es <b>lo que se toca después en un tema de WordPress</b> y en la apariencia de Moodle.</aside>
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Resultado de aprendizaje 1</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Qué vas a saber hacer al terminar</h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:var(--gap-title)">
+    <div style="background:var(--white);border-radius:20px;padding:36px 36px 40px;display:grid;grid-template-columns:104px 1fr;gap:28px;align-items:start;box-shadow:0 2px 0 var(--line)">
+      <img class="icono" src="../assets/iconos/color-tipografia.webp" alt="" style="width:104px;height:104px">
+      <div>
+        <p style="font-size:20px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Lenguajes de marcas</p>
+        <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy);margin-top:10px;text-wrap:balance">Dar color, tipografía y espacio a cualquier página</p>
+        <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:12px">Desde una hoja de estilo externa, sin tocar el HTML.</p>
+      </div>
     </div>
-    <div style="background:var(--white);border-radius:20px;padding:40px 32px;display:flex;flex-direction:column;gap:20px;box-shadow:0 2px 0 var(--line)">
-      <span style="width:64px;height:64px;border-radius:16px;background:var(--cyan);color:var(--navy);display:grid;place-items:center;font-size:var(--type-small);font-weight:800">2</span>
-      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Elegir el selector que llega justo al elemento que quieres</p>
-      <p style="font-size:22px;color:var(--muted);line-height:1.45">Y saber qué regla gana cuando hay varias.</p>
+    <div style="background:var(--white);border-radius:20px;padding:36px 36px 40px;display:grid;grid-template-columns:104px 1fr;gap:28px;align-items:start;box-shadow:0 2px 0 var(--line)">
+      <img class="icono" src="../assets/iconos/selector.webp" alt="" style="width:104px;height:104px">
+      <div>
+        <p style="font-size:20px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Lenguajes de marcas</p>
+        <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy);margin-top:10px;text-wrap:balance">Elegir el selector que llega justo al elemento</p>
+        <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:12px">Y saber qué regla gana cuando hay varias.</p>
+      </div>
     </div>
-    <div style="background:var(--white);border-radius:20px;padding:40px 32px;display:flex;flex-direction:column;gap:20px;box-shadow:0 2px 0 var(--line)">
-      <span style="width:64px;height:64px;border-radius:16px;background:var(--green);color:var(--navy);display:grid;place-items:center;font-size:var(--type-small);font-weight:800">3</span>
-      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Colocar cabecera, menú, columnas y pie</p>
-      <p style="font-size:22px;color:var(--muted);line-height:1.45">Con flexbox y grid, como se hace hoy.</p>
+    <div style="background:var(--white);border-radius:20px;padding:36px 36px 40px;display:grid;grid-template-columns:104px 1fr;gap:28px;align-items:start;box-shadow:0 2px 0 var(--line)">
+      <img class="icono" src="../assets/iconos/maquetar.webp" alt="" style="width:104px;height:104px">
+      <div>
+        <p style="font-size:20px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Lenguajes de marcas</p>
+        <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy);margin-top:10px;text-wrap:balance">Colocar cabecera, menú, columnas y pie</p>
+        <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:12px">Con flexbox y grid, como se hace hoy.</p>
+      </div>
     </div>
-    <div style="background:var(--white);border-radius:20px;padding:40px 32px;display:flex;flex-direction:column;gap:20px;box-shadow:0 2px 0 var(--line)">
-      <span style="width:64px;height:64px;border-radius:16px;background:var(--orange);color:var(--white);display:grid;place-items:center;font-size:var(--type-small);font-weight:800">4</span>
-      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Hacer que la misma página se vea bien en el móvil</p>
-      <p style="font-size:22px;color:var(--muted);line-height:1.45">Diseño responsive con media queries.</p>
+    <div style="background:var(--white);border-radius:20px;padding:36px 36px 40px;display:grid;grid-template-columns:104px 1fr;gap:28px;align-items:start;box-shadow:0 2px 0 var(--line)">
+      <img class="icono" src="../assets/iconos/responsive.webp" alt="" style="width:104px;height:104px">
+      <div>
+        <p style="font-size:20px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Lenguajes de marcas</p>
+        <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy);margin-top:10px;text-wrap:balance">Hacer que la misma página se vea bien en el móvil</p>
+        <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:12px">Diseño responsive con media queries.</p>
+      </div>
     </div>
-    <div style="background:var(--white);border-radius:20px;padding:40px 32px;display:flex;flex-direction:column;gap:20px;box-shadow:0 2px 0 var(--line)">
-      <span style="width:64px;height:64px;border-radius:16px;background:var(--navy);color:var(--white);display:grid;place-items:center;font-size:var(--type-small);font-weight:800">5</span>
-      <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy)">Leer la hoja de estilo de cualquier web y entender cada regla</p>
-      <p style="font-size:22px;color:var(--muted);line-height:1.45">En DevTools. Es lo que harás para personalizar un tema de WordPress o de Moodle.</p>
+    <div style="background:var(--white);border-radius:20px;padding:36px 36px 40px;display:grid;grid-template-columns:104px 1fr;gap:28px;align-items:start;box-shadow:0 2px 0 var(--line)">
+      <img class="icono" src="../assets/iconos/inspeccionar.webp" alt="" style="width:104px;height:104px">
+      <div>
+        <p style="font-size:20px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Herramientas</p>
+        <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy);margin-top:10px;text-wrap:balance">Leer y revisar cualquier hoja de estilo</p>
+        <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:12px">Con DevTools y el validador CSS del W3C.</p>
+      </div>
+    </div>
+    <div style="background:var(--white);border-radius:20px;padding:36px 36px 40px;display:grid;grid-template-columns:104px 1fr;gap:28px;align-items:start;box-shadow:0 2px 0 var(--line)">
+      <img class="icono" src="../assets/iconos/personalizar-tema.webp" alt="" style="width:104px;height:104px">
+      <div>
+        <p style="font-size:20px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Prepara el criterio c</p>
+        <p style="font-size:var(--type-small);font-weight:700;line-height:1.25;color:var(--navy);margin-top:10px;text-wrap:balance">Personalizar el aspecto de un gestor de contenidos</p>
+        <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:12px">Es el «CSS adicional» de WordPress en la UT3.</p>
+      </div>
     </div>
   </div>
+  <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.45;margin-top:auto;padding-top:24px">El resultado de aprendizaje 1, instalar gestores de contenidos, empezó en la UT1 con HTML y se completa en la UT3 con WordPress.</p>
 </section>
 
 <!-- ═══════════ BLOQUE 2.1 · QUÉ ES CSS Y CÓMO SE ESCRIBE (sesiones 1 y 2) ═══════════ -->
@@ -584,9 +609,9 @@ code  { font-family: monospace; }  /* lo que hacía TT */</pre>
     <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4;margin-top:var(--gap-item)">DevTools dibuja esta caja al pasar el ratón por cualquier elemento, con sus medidas.</p>
   </div>
   <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
-    <figure class="foto" style="flex:1;background:var(--bg);border:3px solid var(--line)">
-      <img src="img/caja.svg" alt="Esquema del modelo de caja: margen, borde, relleno y contenido" title="Elaboración propia" style="object-fit:contain">
-      <figcaption class="credito"><b>Figura 2.2.</b> Elaboración propia.</figcaption>
+    <figure class="foto" style="flex:1;background:var(--bg)">
+      <img src="img/caja.webp" alt="Esquema del modelo de caja: el margen transparente por fuera, el borde, el relleno con el mismo fondo que el contenido y el contenido con su width y height" title="Elaboración propia con IA" style="object-fit:contain">
+      <figcaption class="credito"><b>Figura 2.2.</b> Elaboración propia, ilustrada con IA generativa (OpenAI gpt-image).</figcaption>
     </figure>
     <p style="font-size:var(--type-caption);color:var(--muted);line-height:1.4">Figura 2.2. El modelo de caja. Es lo que DevTools enseña abajo del todo en la pestaña Estilos.</p>
   </div>
@@ -806,12 +831,12 @@ a        { color: orange; }
   <aside class="notas"><b>Vale para las tres prácticas y para el examen.</b> El validador CSS del W3C es jigsaw.w3.org/css-validator. Los <b>nombres de clase con sentido y los cero atributos style</b> son parte de la rúbrica.</aside>
   <span class="pill">Práctica</span>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy)">Antes de dar por buena una práctica</h2>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px 48px;margin-top:var(--gap-title)">
-    <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--blue);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">1</span><p style="font-size:var(--type-small);line-height:1.4"><b>La hoja pasa el validador CSS</b> sin errores: jigsaw.w3.org/css-validator. Pega el código o sube el archivo.</p></div>
-    <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--cyan);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">2</span><p style="font-size:var(--type-small);line-height:1.4"><b>En DevTools no hay triángulos amarillos</b>: ninguna propiedad ni valor que el navegador no entienda.</p></div>
-    <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--green);color:var(--navy);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">3</span><p style="font-size:var(--type-small);line-height:1.4"><b>Cero atributos <code class="en-linea">style</code> en el HTML.</b> Todo el aspecto está en <code class="en-linea">estilos.css</code>.</p></div>
-    <div style="display:flex;gap:24px;align-items:flex-start"><span style="width:56px;height:56px;border-radius:14px;background:var(--orange);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">4</span><p style="font-size:var(--type-small);line-height:1.4"><b>Los nombres de clase describen el contenido</b>: <code class="en-linea">.galeria</code>, <code class="en-linea">.notas</code>, no <code class="en-linea">.caja1</code>.</p></div>
-    <div style="display:flex;gap:24px;align-items:flex-start;grid-column:1 / -1"><span style="width:56px;height:56px;border-radius:14px;background:var(--navy);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">5</span><p style="font-size:var(--type-small);line-height:1.4"><b>Se ve bien al estrechar la ventana.</b> En la práctica 2.1 basta con que nada desborde; en la 2.3, que la maqueta cambie a una columna.</p></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px 64px;margin-top:72px">
+    <div style="display:flex;gap:32px;align-items:flex-start"><img class="icono" src="../assets/iconos/validador.webp" alt="" style="width:104px;height:104px;flex:none;margin-top:-16px"><p style="font-size:var(--type-small);line-height:1.4"><b>La hoja pasa el validador CSS</b> sin errores: jigsaw.w3.org/css-validator. Pega el código o sube el archivo.</p></div>
+    <div style="display:flex;gap:32px;align-items:flex-start"><img class="icono" src="../assets/iconos/sin-avisos.webp" alt="" style="width:104px;height:104px;flex:none;margin-top:-16px"><p style="font-size:var(--type-small);line-height:1.4"><b>En DevTools no hay triángulos amarillos</b>: ninguna propiedad ni valor que el navegador no entienda.</p></div>
+    <div style="display:flex;gap:32px;align-items:flex-start"><img class="icono" src="../assets/iconos/sin-style.webp" alt="" style="width:104px;height:104px;flex:none;margin-top:-16px"><p style="font-size:var(--type-small);line-height:1.4"><b>Cero atributos <code class="en-linea">style</code> en el HTML.</b> Todo el aspecto está en <code class="en-linea">estilos.css</code>.</p></div>
+    <div style="display:flex;gap:32px;align-items:flex-start"><img class="icono" src="../assets/iconos/nombres-clase.webp" alt="" style="width:104px;height:104px;flex:none;margin-top:-16px"><p style="font-size:var(--type-small);line-height:1.4"><b>Los nombres de clase describen el contenido</b>: <code class="en-linea">.galeria</code>, <code class="en-linea">.notas</code>, no <code class="en-linea">.caja1</code>.</p></div>
+    <div style="display:flex;gap:32px;align-items:flex-start;grid-column:1 / -1"><img class="icono" src="../assets/iconos/ventana-estrecha.webp" alt="" style="width:104px;height:104px;flex:none;margin-top:-16px"><p style="font-size:var(--type-small);line-height:1.4"><b>Se ve bien al estrechar la ventana.</b> En la práctica 2.1 basta con que nada desborde; en la 2.3, que la maqueta cambie a una columna.</p></div>
   </div>
 </section>
 
@@ -1966,6 +1991,7 @@ h1 {
   <aside class="notas"><b>Fin de la primera evaluación.</b> En el esquema de rutas: <b>HTML, CSS y hosting ya están; falta WordPress</b>. En la UT3 no escribirán la página desde cero: <b>el tema trae el CSS y lo personalizan</b> con lo que saben ahora. La web de la UT5 sale de aquí.</aside>
   <span class="mancha arriba-dcha" style="width:560px;color:var(--green)"></span>
   <span class="mancha abajo-izq" style="width:1000px;color:var(--gray)"></span>
+  <img src="img/fin-dudas.webp" alt="" style="position:absolute;right:150px;top:250px;width:620px;filter:drop-shadow(0 24px 40px rgba(21,53,107,.16))">
   <div style="display:flex;align-items:center;gap:20px;position:relative">
     <span style="width:20px;height:20px;border-radius:50%;background:var(--cyan);display:block"></span>
     <span style="font-size:var(--type-small);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--navy)">Fin de la unidad 2 · Fin de la primera evaluación</span>
