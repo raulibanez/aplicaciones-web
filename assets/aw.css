@@ -50,6 +50,12 @@ body {
 a { color: var(--blue); }
 a:hover { color: var(--navy); }
 
+/* JetBrains Mono junta <!-- , --> , != o => en una ligadura y el alumno ve un guion largo
+   donde hay dos. Se desactivan: solo cambia el dibujo, el texto copiado es el mismo. */
+pre, code, kbd, samp, .mono, .ej-opcion, .ventana-barra span, .resultado-barra .url, [style*="--mono"] {
+  font-variant-ligatures: none;
+}
+
 /* Notas del profesor: <aside class="notas"> como primer hijo de cada sección.
    No se ven en la diapositiva; las muestra la ventana de notas (tecla N, aw.js). */
 section > aside.notas { display: none; }
