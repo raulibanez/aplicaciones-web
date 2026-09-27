@@ -1231,7 +1231,7 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
 
 <!-- 46 Normas de escritura -->
 <section data-label="1.3 · Normas de escritura" data-seccion="1.3" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
-  <aside class="notas"><b>HTML no distingue mayúsculas en etiquetas y atributos</b>, pero la convención es minúsculas. Matiz: los nombres de atributos no distinguen mayúsculas, pero sus valores sí pueden (una ruta de archivo, por ejemplo). Comillas siempre. <b>Cerrar lo que se abre y anidar bien</b>: lo último que se abre es lo primero que se cierra. Los espacios y saltos múltiples se colapsan en uno. Indentar: VS Code lo hace con Shift+Alt+F. <b>El navegador ignora lo que no entiende y no avisa</b>: para eso está el validador (diapositiva 71). Bloque y línea: un párrafo ocupa toda la anchura; un enlace o una negrita van dentro del texto; se ve bien en la UT2.</aside>
+  <aside class="notas"><b>HTML no distingue mayúsculas en etiquetas y atributos</b>, pero la convención es minúsculas. Matiz: los nombres de atributos no distinguen mayúsculas, pero sus valores sí pueden (una ruta de archivo, por ejemplo). Comillas siempre. <b>Cerrar lo que se abre y anidar bien</b>: lo último que se abre es lo primero que se cierra. Los espacios y saltos múltiples se colapsan en uno. Indentar: VS Code lo hace con Shift+Alt+F. <b>El navegador ignora lo que no entiende y no avisa</b>: para eso está el validador (diapositiva 72). Bloque y línea: un párrafo ocupa toda la anchura; un enlace o una negrita van dentro del texto; se ve bien en la UT2.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Siete normas para escribir HTML</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px 48px;margin-top:var(--gap-title)">
@@ -1250,6 +1250,7 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
   <aside class="notas"><b>Un solo h1 por página</b> (es el título; lo usan buscadores y lectores de pantalla), sin saltarse niveles. p para párrafos. <b>br solo para saltos dentro de un párrafo</b> (una dirección, un poema). <b>hr marca un cambio de tema, no es decoración.</b></aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Encabezados y párrafos</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Un texto se lee mejor con títulos y párrafos, como un libro. <b style="color:var(--navy)">Los encabezados son el índice de la página</b>: los buscadores y los lectores de pantalla lo usan para saber de qué trata y saltar de un apartado a otro.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>videojuego.html</span></div>
@@ -1257,10 +1258,6 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
 &lt;h1&gt;SuperTuxKart&lt;/h1&gt;
 &lt;p&gt;Carreras de karts con las mascotas
 del software libre.&lt;/p&gt;
-
-&lt;h2&gt;Historia&lt;/h2&gt;
-&lt;p&gt;Nació en 2004 como continuación
-de TuxKart. Sigue actualizándose.&lt;/p&gt;
 
 &lt;h2&gt;Dónde descargarlo&lt;/h2&gt;
 &lt;p&gt;Windows, Linux, macOS y Android.&lt;br&gt;
@@ -1270,12 +1267,12 @@ Gratis y sin anuncios.&lt;/p&gt;
 &lt;p&gt;Página hecha por Ana.&lt;/p&gt;</pre>
     </div>
     <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
-      <div class="resultado" data-codigo="ej-texto" data-url="localhost/videojuego.html" data-zoom="1.5" style="flex:1"></div>
+      <div class="resultado" data-codigo="ej-texto" data-url="localhost/videojuego.html" data-zoom="1.1" style="flex:1"></div>
       <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;h1&gt;</code> a <code class="en-linea">&lt;h6&gt;</code>: títulos por importancia. <b>Un solo h1</b> por página y sin saltarse niveles</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;h1&gt;</code> a <code class="en-linea">&lt;h6&gt;</code>: seis niveles de título. <b>Un solo h1</b> (es el título de la página) y sin saltarse niveles</span></li>
         <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;p&gt;</code>: párrafo. Los saltos de línea del código no cuentan</span></li>
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;br&gt;</code>: salto dentro de un párrafo (una dirección, un poema). No para separar párrafos</span></li>
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;hr&gt;</code>: cambio de tema</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;br&gt;</code>: salto dentro de un párrafo. Para separar párrafos, otro <code class="en-linea">&lt;p&gt;</code></span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;hr&gt;</code>: cambio de tema. Se ve como una raya, pero no es decoración</span></li>
       </ul>
     </div>
   </div>
@@ -1303,13 +1300,15 @@ Gratis y sin anuncios.&lt;/p&gt;
 
 <!-- 49 Énfasis con significado -->
 <section data-label="1.3 · Énfasis con significado" data-seccion="1.3" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
-  <aside class="notas"><b>Estilos lógicos (dicen qué es)</b> frente a físicos (dicen cómo se ve). strong: importante; em: énfasis al leer; small: letra pequeña legal; mark: resaltado; sup y sub; code y kbd; abbr con title; q y blockquote con cite. b, i y u existen y son válidos, pero MDN les da un significado concreto (llamar la atención, voz alternativa como un término técnico, anotación no textual); <b>si quieres negrita por estética, eso es CSS</b>.</aside>
+  <aside class="notas"><b>Estilos lógicos (dicen qué es)</b> frente a físicos (dicen cómo se ve). strong: importante; em: énfasis al leer; small: letra pequeña legal; mark: resaltado; sup y sub; code y kbd; abbr con title; q y blockquote con cite. b, i y u van en la siguiente diapositiva, con la tabla de lógicos y físicos.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Énfasis con significado</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Para que una palabra destaque, en HTML no se elige cómo se ve sino <b style="color:var(--navy)">qué es</b>: importante, con énfasis, una abreviatura, una cita. El navegador le pone un aspecto, pero lo que cuenta es el significado, que usan buscadores y lectores de pantalla.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
-    <div class="ventana">
-      <div class="ventana-barra"><i></i><i></i><i></i><span>enfasis.html</span></div>
-      <pre class="cod compacto" data-lang="html" id="ej-enfasis">
+    <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
+      <div class="ventana" style="flex:1">
+        <div class="ventana-barra"><i></i><i></i><i></i><span>enfasis.html</span></div>
+        <pre class="cod compacto" data-lang="html" id="ej-enfasis">
 &lt;p&gt;Entrega antes del &lt;strong&gt;viernes&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;No es &lt;em&gt;difícil&lt;/em&gt;, es largo.&lt;/p&gt;
 &lt;p&gt;&lt;small&gt;Precios sin IVA.&lt;/small&gt;&lt;/p&gt;
@@ -1320,14 +1319,50 @@ Gratis y sin anuncios.&lt;/p&gt;
 &lt;p&gt;El &lt;abbr title="Sistema de nombres de dominio"&gt;
 DNS&lt;/abbr&gt; traduce nombres.&lt;/p&gt;
 &lt;blockquote cite="https://www.rae.es"&gt;
-  Red informática mundial, descentralizada…
-&lt;/blockquote&gt;</pre>
+  Red informática mundial…&lt;/blockquote&gt;</pre>
+      </div>
+      <ul style="padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;font-size:var(--type-caption);line-height:1.3;color:var(--navy)">
+        <li><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;strong&gt;</span> importante</li>
+        <li><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;em&gt;</span> énfasis al leerlo</li>
+        <li><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;small&gt;</span> letra pequeña legal</li>
+        <li><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;mark&gt;</span> resaltado</li>
+        <li><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;sup&gt; &lt;sub&gt;</span> m², H₂O</li>
+        <li><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;code&gt; &lt;kbd&gt;</span> código, tecla</li>
+        <li><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;abbr&gt;</span> abreviatura (title)</li>
+        <li><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;blockquote&gt;</span> cita larga</li>
+      </ul>
     </div>
     <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
-      <div class="resultado" data-codigo="ej-enfasis" data-url="localhost/enfasis.html" data-zoom="1.4" style="flex:1"></div>
-      <div style="background:#FFF6D1;border-radius:16px;padding:20px 28px;font-size:var(--type-caption);line-height:1.45;color:var(--navy)"><b>¿Y <code class="en-linea">&lt;b&gt;</code>, <code class="en-linea">&lt;i&gt;</code> y <code class="en-linea">&lt;u&gt;</code>?</b> Existen y son válidos, pero tienen un significado concreto (llamar la atención, un término técnico, una anotación). Si solo quieres negrita o cursiva por estética, eso es CSS.</div>
+      <div class="resultado" data-codigo="ej-enfasis" data-url="localhost/enfasis.html" data-zoom="1.3" style="flex:1"></div>
+      <div style="background:#FFF6D1;border-radius:16px;padding:14px 24px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)"><b>¿Y <code class="en-linea">&lt;b&gt;</code>, <code class="en-linea">&lt;i&gt;</code> y <code class="en-linea">&lt;u&gt;</code>?</b> Son los estilos «físicos»: en la siguiente, frente a los lógicos.</div>
     </div>
   </div>
+</section>
+
+<!-- 49b Estilos lógicos y físicos -->
+<section data-label="1.3 · Estilos lógicos y físicos" data-seccion="1.3" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+  <aside class="notas">Los libros de otros años hablan de <b>estilos lógicos</b> (dicen qué es el texto: strong, em, code, kbd, ins, del) y <b>estilos físicos</b> (dicen cómo se ve: b, i, u, s, tt, big). HTML5 hizo dos cosas: <b>quitó los físicos que solo eran aspecto</b> (tt, big y strike, en la siguiente diapositiva) y <b>dio un uso a los que se quedaron</b>. b llama la atención sin darle más importancia (las palabras clave de un resumen, el nombre de un producto en una reseña); i marca otra voz (un término técnico, una palabra en otro idioma, un nombre científico); u, una anotación (la palabra mal escrita que marca un corrector); s, lo que ya no vale (el precio anterior), mientras que del es un cambio en el documento. El subrayado se confunde con un enlace: mejor evitarlo. <b>Regla para el cuaderno y el examen: si el texto significa algo, etiqueta lógica; si solo quieres el aspecto, CSS (UT2).</b> Fuente: MDN Web Docs, referencia de elementos HTML, consultada el 27 de septiembre de 2026.</aside>
+  <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
+  <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Estilos lógicos y físicos</h2>
+  <table style="width:100%;border-collapse:collapse;margin-top:var(--gap-item);font-size:var(--type-caption);background:var(--white);border-radius:20px;overflow:hidden">
+    <thead>
+      <tr style="background:var(--navy);color:var(--white);text-align:left">
+        <th style="padding:16px 28px;font-weight:700;width:250px">Se ve</th>
+        <th style="padding:16px 28px;font-weight:700">Lógico · dice qué es</th>
+        <th style="padding:16px 28px;font-weight:700">Físico · uso que le da HTML5</th>
+        <th style="padding:16px 28px;font-weight:700;width:410px">Solo el aspecto · CSS</th>
+      </tr>
+    </thead>
+    <tbody style="line-height:1.35">
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:12px 28px;font-weight:800">Negrita</td><td style="padding:12px 28px"><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;strong&gt;</span> importante o urgente</td><td style="padding:12px 28px"><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;b&gt;</span> llamar la atención: el nombre de un producto</td><td style="padding:12px 28px"><code class="en-linea">font-weight: bold</code></td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:12px 28px;font-style:italic">Cursiva</td><td style="padding:12px 28px"><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;em&gt;</span> énfasis al leerlo en voz alta</td><td style="padding:12px 28px"><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;i&gt;</span> otra voz: un término técnico, una palabra extranjera</td><td style="padding:12px 28px"><code class="en-linea">font-style: italic</code></td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:12px 28px;text-decoration:underline">Subrayado</td><td style="padding:12px 28px"><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;ins&gt;</span> texto añadido a un documento</td><td style="padding:12px 28px"><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;u&gt;</span> una anotación: la palabra mal escrita</td><td style="padding:12px 28px"><code class="en-linea">text-decoration: underline</code></td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:12px 28px;text-decoration:line-through">Tachado</td><td style="padding:12px 28px"><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;del&gt;</span> texto borrado de un documento</td><td style="padding:12px 28px"><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;s&gt;</span> lo que ya no vale: el precio anterior</td><td style="padding:12px 28px"><code class="en-linea">text-decoration: line-through</code></td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:12px 28px;font-family:var(--mono)">Monoespaciada</td><td style="padding:12px 28px"><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;code&gt; &lt;kbd&gt;</span> código, una tecla</td><td style="padding:12px 28px"><span style="font-family:var(--mono);color:var(--red);font-weight:700">&lt;tt&gt;</span> obsoleta</td><td style="padding:12px 28px"><code class="en-linea">font-family: monospace</code></td></tr>
+      <tr><td style="padding:12px 28px"><span style="font-size:.8em">Letra pequeña</span></td><td style="padding:12px 28px"><span style="font-family:var(--mono);color:var(--blue);font-weight:700">&lt;small&gt;</span> letra pequeña legal</td><td style="padding:12px 28px"><span style="font-family:var(--mono);color:var(--red);font-weight:700">&lt;big&gt;</span> obsoleta</td><td style="padding:12px 28px"><code class="en-linea">font-size</code></td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:var(--type-caption);color:var(--muted);margin-top:20px">Tabla 1.6. Lógico: dice qué es el texto. Físico: decía cómo se ve; HTML5 quitó los que solo eran aspecto y dio un uso a los que quedan. Si solo quieres el aspecto, CSS. Fuente: MDN Web Docs, referencia de elementos HTML, consultada el 27 de septiembre de 2026.</p>
 </section>
 
 <!-- 50 Lo que ya no se usa -->
@@ -1353,7 +1388,7 @@ DNS&lt;/abbr&gt; traduce nombres.&lt;/p&gt;
       <tr><td style="padding:14px 32px;font-family:var(--mono);color:var(--red)">&lt;a name="ancla"&gt;</td><td style="padding:14px 32px">Punto al que saltar dentro de la página</td><td style="padding:14px 32px">El atributo <code class="en-linea">id</code> en cualquier elemento</td></tr>
     </tbody>
   </table>
-  <p style="font-size:var(--type-caption);color:var(--muted);margin-top:20px">Tabla 1.6. HTML 4 mezclaba contenido y aspecto; desde HTML5 el aspecto va en CSS. Fuente: MDN Web Docs, referencia de elementos HTML, apartado de elementos obsoletos, consultada el 11 de septiembre de 2026.</p>
+  <p style="font-size:var(--type-caption);color:var(--muted);margin-top:20px">Tabla 1.7. HTML 4 mezclaba contenido y aspecto; desde HTML5 el aspecto va en CSS. Fuente: MDN Web Docs, referencia de elementos HTML, apartado de elementos obsoletos, consultada el 11 de septiembre de 2026.</p>
 </section>
 
 <!-- 51 Tildes y caracteres especiales -->
@@ -1361,6 +1396,7 @@ DNS&lt;/abbr&gt; traduce nombres.&lt;/p&gt;
   <aside class="notas">Con meta charset utf-8 <b>se escriben tildes, eñes y símbolos directamente</b>; VS Code guarda en UTF-8 por defecto. <b>Las entidades solo para lo que HTML se reservaría</b>: < > & y las comillas dentro de un atributo, más el espacio de no separación y algún símbolo. La tabla de &aacute; de los libros es de cuando se guardaba en ISO-8859-1; <b>hoy es innecesaria</b>.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Tildes, eñes y caracteres reservados</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Con UTF-8 las tildes, las eñes y los símbolos se escriben tal cual. Solo dan problema &lt;, &gt; y &amp;, porque HTML los usa para sus etiquetas: para escribirlos como texto están las <b style="color:var(--navy)">entidades</b>, que empiezan por &amp; y acaban en punto y coma.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>caracteres.html</span></div>
@@ -1378,7 +1414,7 @@ Precio: 12&amp;nbsp;€ (el espacio de no separación
 no se parte al final de la línea).&lt;/p&gt;</pre>
     </div>
     <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
-      <div class="resultado" data-codigo="ej-entidades" data-url="localhost/caracteres.html" data-zoom="1.5" style="flex:1"></div>
+      <div class="resultado" data-codigo="ej-entidades" data-url="localhost/caracteres.html" data-zoom="1.35" style="flex:1"></div>
       <table style="width:100%;border-collapse:collapse;font-size:var(--type-caption);background:var(--white);border-radius:16px;overflow:hidden">
         <tbody>
           <tr style="border-bottom:2px solid var(--line)"><td style="padding:10px 20px;font-family:var(--mono);color:var(--blue)">&amp;lt; &amp;gt;</td><td style="padding:10px 20px">&lt; y &gt; como texto</td><td style="padding:10px 20px;font-family:var(--mono);color:var(--blue)">&amp;amp;</td><td style="padding:10px 20px">&amp;</td></tr>
@@ -1392,23 +1428,30 @@ no se parte al final de la línea).&lt;/p&gt;</pre>
 
 <!-- 52 Texto preformateado -->
 <section data-label="1.3 · Texto preformateado" data-seccion="1.3" style="display:grid;grid-template-columns:1fr 1.25fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
-  <aside class="notas"><b>pre respeta espacios y saltos</b>: para mostrar código o un texto con su formato. Dentro, code si es código. <b>No para firmas ASCII ni dibujos</b>: no se adapta a la pantalla.</aside>
+  <aside class="notas"><b>Objetivo: enseñar un texto tal como está escrito.</b> Empezar por el ejemplo: el mismo fragmento del httpd.conf en un p sale en una sola línea (norma 5: los espacios y saltos se juntan); en pre sale igual que en el código. <b>pre respeta espacios y saltos</b>: es el único sitio donde no se cumple la norma 5. Usa letra monoespaciada, en la que todas las letras ocupan lo mismo; por eso las columnas del ejemplo quedan alineadas. <b>code dice que el texto es código</b>, pero no cambia los espacios: por eso en un bloque va dentro de pre, y en mitad de una frase va suelto (ya salió en la diapositiva de énfasis). <b>No para firmas ASCII ni dibujos</b>: no se adapta al móvil y un lector de pantalla los lee carácter a carácter. Fuente: MDN Web Docs, páginas de pre y code.</aside>
   <div>
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Texto preformateado</h2>
-    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-title)"><code class="en-linea">&lt;pre&gt;</code> es la excepción a la norma 5: respeta los espacios y los saltos de línea tal como los escribas, con letra de ancho fijo.</p>
-    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">Sirve para mostrar código (con <code class="en-linea">&lt;code&gt;</code> dentro) o un texto con formato propio, como un fragmento de configuración. No para dibujos ni firmas: no se adapta a la pantalla del móvil.</p>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-title)">A veces hay que enseñar un texto <b style="color:var(--navy)">tal como está escrito</b>, con sus espacios y sus saltos de línea: un trozo de código o un archivo de configuración como el <code class="en-linea">httpd.conf</code>. En un párrafo no se puede, porque el navegador junta los espacios (norma 5).</p>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--gap-item);margin-top:var(--gap-item);font-size:var(--type-small);line-height:1.4">
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;pre&gt;</code>: deja los espacios y los saltos de línea como los escribes, al revés que un párrafo. Usa letra monoespaciada (la «i» ocupa lo mismo que la «m»): por eso las columnas quedan alineadas</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;code&gt;</code>: dice que es código, pero no respeta los espacios. Por eso se juntan: <code class="en-linea">&lt;pre&gt;</code> pone el formato y <code class="en-linea">&lt;code&gt;</code> dice qué es. En mitad de una frase, <code class="en-linea">&lt;code&gt;</code> va suelto</span></li>
+      <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span>No para dibujos ni firmas: no se adapta a la pantalla del móvil</span></li>
+    </ul>
   </div>
-  <div style="display:grid;grid-template-rows:1fr 1fr;gap:32px;min-height:0">
+  <div style="display:grid;grid-template-rows:auto 1fr;gap:32px;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>pre.html</span></div>
       <pre class="cod compacto" data-lang="html" id="ej-pre">
-&lt;p&gt;Así se arranca el servidor:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Listen 80
-DocumentRoot "C:/xampp/htdocs"
-DirectoryIndex index.html&lt;/code&gt;&lt;/pre&gt;</pre>
+&lt;p&gt;En un párrafo:&lt;/p&gt;
+&lt;p&gt;Listen        80
+DocumentRoot  "C:/xampp/htdocs"&lt;/p&gt;
+
+&lt;p&gt;En pre:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Listen        80
+DocumentRoot  "C:/xampp/htdocs"&lt;/code&gt;&lt;/pre&gt;</pre>
     </div>
-    <div class="resultado" data-codigo="ej-pre" data-url="localhost/pre.html" data-zoom="1.6"></div>
+    <div class="resultado" data-codigo="ej-pre" data-url="localhost/pre.html" data-zoom="1.9"></div>
   </div>
 </section>
 
@@ -1417,6 +1460,7 @@ DirectoryIndex index.html&lt;/code&gt;&lt;/pre&gt;</pre>
   <aside class="notas">ul con li: viñetas. ol: numerada, con start para empezar en otro número y type para letras o romanos. dl con dt y dd: glosario. Se pueden anidar: una lista dentro de un li. <b>Cada li dentro de su lista, nunca suelto.</b></aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Listas: con viñetas, numeradas y de definiciones</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Varias cosas del mismo tipo van en una lista: el navegador pone viñetas o números y el lector de pantalla dice cuántas hay.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>listas.html</span></div>
@@ -1424,34 +1468,26 @@ DirectoryIndex index.html&lt;/code&gt;&lt;/pre&gt;</pre>
 &lt;h2&gt;Personajes&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;Tux, el protagonista&lt;/li&gt;
-  &lt;li&gt;Gnu, su mentor&lt;/li&gt;
   &lt;li&gt;Nolok, el villano
-    &lt;ul&gt;
-      &lt;li&gt;Tiene su propio castillo&lt;/li&gt;
-    &lt;/ul&gt;
+    &lt;ul&gt;&lt;li&gt;Tiene su propio castillo&lt;/li&gt;&lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;h2&gt;Cómo instalarlo&lt;/h2&gt;
-&lt;ol type="A"&gt;
+&lt;ol&gt;
   &lt;li&gt;Descarga el instalador&lt;/li&gt;
-  &lt;li&gt;Ejecútalo&lt;/li&gt;
   &lt;li&gt;Elige un personaje&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;h2&gt;Glosario&lt;/h2&gt;
 &lt;dl&gt;
-  &lt;dt&gt;HTML&lt;/dt&gt;
-  &lt;dd&gt;Lenguaje de marcas de la web.&lt;/dd&gt;
-  &lt;dt&gt;URL&lt;/dt&gt;
-  &lt;dd&gt;Dirección de un recurso.&lt;/dd&gt;
+  &lt;dt&gt;URL&lt;/dt&gt; &lt;dd&gt;Dirección de un recurso.&lt;/dd&gt;
 &lt;/dl&gt;</pre>
     </div>
     <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
-      <div class="resultado" data-codigo="ej-listas" data-url="localhost/listas.html" data-zoom="1.3" style="flex:1"></div>
+      <div class="resultado" data-codigo="ej-listas" data-url="localhost/listas.html" data-zoom="1" style="flex:1"></div>
       <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;ul&gt;</code> sin orden, <code class="en-linea">&lt;ol&gt;</code> numerada (<code class="en-linea">start</code>, <code class="en-linea">type="A"</code> o <code class="en-linea">"I"</code>), <code class="en-linea">&lt;dl&gt;</code> de definiciones con término y definición</span></li>
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Cada <code class="en-linea">&lt;li&gt;</code> va dentro de su lista. Una lista puede ir dentro de un <code class="en-linea">&lt;li&gt;</code></span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;ul&gt;</code>: el orden da igual. <code class="en-linea">&lt;ol&gt;</code>: el orden importa (pasos); <code class="en-linea">start</code> y <code class="en-linea">type</code> cambian la numeración</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;dl&gt;</code>: término (<code class="en-linea">&lt;dt&gt;</code>) y definición (<code class="en-linea">&lt;dd&gt;</code>), como un glosario</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Cada <code class="en-linea">&lt;li&gt;</code> va dentro de su lista; una lista puede ir dentro de un <code class="en-linea">&lt;li&gt;</code></span></li>
       </ul>
     </div>
   </div>
@@ -1459,9 +1495,10 @@ DirectoryIndex index.html&lt;/code&gt;&lt;/pre&gt;</pre>
 
 <!-- 54 Enlaces -->
 <section data-label="1.3 · Enlaces" data-seccion="1.3" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
-  <aside class="notas">href absoluto (otra web), relativo (otra página de tu sitio), mailto y tel, download para forzar la descarga. <b>target _blank abre en pestaña nueva</b>; con rel noopener por seguridad. Anclas: un id en el destino y href con almohadilla; es el fragmento de la URL de la diapositiva 13. El atributo <b>name para anclas es de HTML 4 y está obsoleto</b>.</aside>
+  <aside class="notas">href absoluto (otra web), relativo (otra página de tu sitio), mailto y tel, download para forzar la descarga. <b>target _blank abre en pestaña nueva</b>. Muchos tutoriales añaden rel="noopener" por seguridad: los navegadores actuales ya lo aplican solos con target _blank (MDN, atributo rel, consultado el 27 de septiembre de 2026), así que no hace falta. Anclas: un id en el destino y href con almohadilla; es el fragmento de la URL de la diapositiva 13. El atributo <b>name para anclas es de HTML 4 y está obsoleto</b>.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Enlaces: el hipertexto</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Un enlace lleva a otro sitio al pulsarlo: es lo que convierte muchas páginas sueltas en una web (el hipertexto). Se escribe con <code class="en-linea">&lt;a&gt;</code>: en <code class="en-linea">href</code>, a dónde lleva; entre las etiquetas, <b style="color:var(--navy)">el texto que se pulsa</b>.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>enlaces.html</span></div>
@@ -1472,14 +1509,11 @@ DirectoryIndex index.html&lt;/code&gt;&lt;/pre&gt;</pre>
     A otra web (absoluto)&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="contacto.html"&gt;
     A otra página de mi sitio (relativo)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="mailto:ana@ejemplo.es"&gt;
-    Escríbeme&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="tel:+34600000000"&gt;
-    Llámame&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="mailto:ana@ejemplo.es"&gt;Escríbeme&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="tel:+34600000000"&gt;Llámame&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="manual.pdf" download&gt;
     Descarga el manual&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://supertuxkart.net"
-         target="_blank" rel="noopener"&gt;
+  &lt;li&gt;&lt;a href="https://supertuxkart.net" target="_blank"&gt;
     En pestaña nueva&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="#inicio"&gt;Volver arriba (ancla)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</pre>
@@ -1487,9 +1521,9 @@ DirectoryIndex index.html&lt;/code&gt;&lt;/pre&gt;</pre>
     <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
       <div class="resultado" data-codigo="ej-enlaces" data-url="localhost/enlaces.html" data-zoom="1.4" style="flex:1"></div>
       <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Absoluto</b>: la URL completa. <b>Relativo</b>: la ruta desde la página actual</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Absoluto</b>: la URL completa, para ir a otra web. <b>Relativo</b>: la ruta desde la página actual, para tu propio sitio (en la siguiente)</span></li>
         <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Ancla</b>: pones un <code class="en-linea">id</code> en el destino y enlazas con <code class="en-linea">#id</code>. Es el fragmento de la URL</span></li>
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">target="_blank"</code> abre en pestaña nueva; añade <code class="en-linea">rel="noopener"</code></span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">target="_blank"</code> abre en pestaña nueva y tu página sigue abierta detrás. Úsalo para enlaces a otras webs</span></li>
       </ul>
     </div>
   </div>
@@ -1501,13 +1535,14 @@ DirectoryIndex index.html&lt;/code&gt;&lt;/pre&gt;</pre>
   <div style="display:flex;flex-direction:column">
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Rutas relativas</h2>
-    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:24px;margin-top:var(--gap-title);font-size:var(--type-small);line-height:1.4">
+    <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:var(--gap-item)">Una ruta relativa son <b style="color:var(--navy)">indicaciones desde la página en la que estás</b>: «entra en la carpeta img», «sube un nivel». Por eso la web funciona igual en tu ordenador y en el servidor.</p>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:20px;margin-top:var(--gap-item);font-size:var(--type-small);line-height:1.4">
       <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Mismo nivel</b>: el nombre. <code class="en-linea">contacto.html</code></span></li>
       <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Bajar a una carpeta</b>: <code class="en-linea">img/portada.jpg</code></span></li>
       <li style="display:flex;gap:24px"><span style="color:var(--cyan);font-weight:800">—</span><span><b>Subir un nivel</b>: <code class="en-linea">../index.html</code></span></li>
       <li style="display:flex;gap:24px"><span style="color:var(--red);font-weight:800">—</span><span><b>Nunca</b> <code class="en-linea">C:\Users\ana\...</code>: en el servidor esa ruta no existe</span></li>
     </ul>
-    <div style="display:flex;gap:24px;align-items:center;background:#FFF6D1;border-radius:20px;padding:24px 32px;margin-top:var(--gap-title)">
+    <div style="display:flex;gap:24px;align-items:center;background:#FFF6D1;border-radius:20px;padding:24px 32px;margin-top:var(--gap-item)">
       <img src="../assets/exclamation.png" alt="" style="width:64px;height:64px;object-fit:contain;flex:none">
       <p style="font-size:var(--type-caption);line-height:1.45;color:var(--navy)"><b>Nombres de archivo</b> en minúsculas, sin espacios ni tildes. El servidor suele ser Linux: <code class="en-linea">Foto.JPG</code> y <code class="en-linea">foto.jpg</code> son archivos distintos, y un espacio rompe la ruta.</p>
     </div>
@@ -1591,22 +1626,22 @@ mi-web/
   <aside class="notas">src: la ruta. <b>alt: obligatorio</b>; lo lee el lector de pantalla (screen reader) y se muestra si la imagen falla; si la imagen es decorativa, alt vacío. width y height reservan el hueco antes de que cargue. <b>title no sustituye a alt</b>: title es el globito al pasar el ratón. Imagen como enlace: img dentro de a.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Imágenes, tablas y semántica</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Imágenes</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Una imagen no va dentro del archivo HTML: <b style="color:var(--navy)">es otro archivo</b>. La etiqueta <code class="en-linea">&lt;img&gt;</code> dice dónde está, y el navegador la pide aparte, con otra petición al servidor. Por eso, si la ruta está mal, la imagen no sale.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>imagenes.html</span></div>
       <pre class="cod compacto" data-lang="html" id="ej-img">
 &lt;h2&gt;Capturas&lt;/h2&gt;
-
 &lt;img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
-     alt="Pikachu de frente" width="192" height="192"&gt;
+     alt="Pikachu de frente" width="96" height="96"&gt;
 
-&lt;p&gt;Una imagen que es un enlace:&lt;/p&gt;
+&lt;!-- Una imagen que es un enlace --&gt;
 &lt;a href="https://pokeapi.co"&gt;
   &lt;img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
        alt="Bulbasaur de frente" width="96" height="96"&gt;
 &lt;/a&gt;
 
-&lt;p&gt;Si la ruta falla, se ve el texto alternativo:&lt;/p&gt;
+&lt;!-- Si la ruta falla, se ve el texto alternativo --&gt;
 &lt;img src="no-existe.jpg" alt="Foto del circuito"&gt;</pre>
     </div>
     <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
@@ -1642,7 +1677,7 @@ mi-web/
       <tr><td style="padding:20px 36px;font-weight:800;color:var(--blue)">GIF</td><td style="padding:20px 36px">Animaciones cortas</td><td style="padding:20px 36px">Solo 256 colores. Para el resto de usos hay formatos mejores</td></tr>
     </tbody>
   </table>
-  <p style="font-size:var(--type-caption);color:var(--muted);margin-top:28px">Tabla 1.7. Una imagen de una web debería pesar decenas o pocos cientos de kilobytes. La foto del móvil, de varios megabytes, se reduce antes de subirla.</p>
+  <p style="font-size:var(--type-caption);color:var(--muted);margin-top:28px">Tabla 1.8. Una imagen de una web debería pesar decenas o pocos cientos de kilobytes. La foto del móvil, de varios megabytes, se reduce antes de subirla.</p>
 </section>
 
 <!-- 62 Figura con pie -->
@@ -1676,6 +1711,7 @@ mi-web/
   <aside class="notas">video y audio con controls; source para dar varios formatos; poster, muted, loop. <b>Los navegadores bloquean el autoplay con sonido</b>: solo arranca por sí mismo si va con muted. Formatos: MP4 (H.264) y WebM para vídeo; MP3 y OGG para audio. Un vídeo pesa mucho: <b>para YouTube se incrusta, no se sube</b>.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Imágenes, tablas y semántica</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Vídeo y audio</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Desde HTML5 el navegador reproduce vídeo y audio por sí mismo, sin instalar nada (antes hacía falta Flash). <code class="en-linea">&lt;video&gt;</code> y <code class="en-linea">&lt;audio&gt;</code> se escriben igual: el archivo, los botones y, si quieres, varios formatos para que cada navegador elija el suyo.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>multimedia.html</span></div>
@@ -1712,6 +1748,7 @@ mi-web/
   <aside class="notas"><b>iframe: una ventana a otra página dentro de la tuya.</b> Se usa con el código para insertar (embed) que dan YouTube (Compartir, Insertar) y OpenStreetMap o Google Maps (Compartir, Insertar un mapa). Solo src, width, height, title y allowfullscreen; <b>frameborder y scrolling son de los obsoletos</b>. Los frames y framesets de HTML 4 dividían toda la ventana: historia.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Imágenes, tablas y semántica</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Incrustar un vídeo o un mapa de otra web</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Si lo que quieres mostrar ya está en otra web, como un vídeo de YouTube o un mapa, no se copia: <b style="color:var(--navy)">se incrusta</b> con <code class="en-linea">&lt;iframe&gt;</code>, una ventana a esa página dentro de la tuya. La propia web te da el código en Compartir, Insertar.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>incrustar.html</span></div>
@@ -1734,8 +1771,8 @@ mi-web/
     <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
       <div class="resultado" data-codigo="ej-iframe" data-url="localhost/incrustar.html" data-zoom="1.2" style="flex:1"></div>
       <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Un <code class="en-linea">&lt;iframe&gt;</code> es una ventana a otra página dentro de la tuya. Copias el código que te da la web y listo</span></li>
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Solo <code class="en-linea">src</code>, <code class="en-linea">width</code>, <code class="en-linea">height</code>, <code class="en-linea">title</code> y <code class="en-linea">allowfullscreen</code>. <code class="en-linea">frameborder</code> y <code class="en-linea">scrolling</code> son obsoletos</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">title</code> dice qué hay en la ventana: es lo que anuncia el lector de pantalla</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Si el código trae <code class="en-linea">frameborder</code> o <code class="en-linea">scrolling</code>, puedes quitarlos: son obsoletos (el borde se pone con CSS)</span></li>
         <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Los <code class="en-linea">&lt;frameset&gt;</code> que dividían la ventana en frames (marcos) son historia</span></li>
       </ul>
     </div>
@@ -1759,6 +1796,7 @@ mi-web/
   <aside class="notas">table, caption (título), thead con tr y th, tbody con tr y td. <b>Sin bordes ni colores</b>: el navegador la pinta sin líneas y es normal; <b>los bordes son CSS (UT2)</b>. Las tablas son para datos en filas y columnas.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Imágenes, tablas y semántica</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Tablas: datos en filas y columnas</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Una tabla ordena datos en filas y columnas: una ficha técnica, un horario, unas notas. <b style="color:var(--navy)">Se escribe fila a fila</b>: abres la fila con <code class="en-linea">&lt;tr&gt;</code> y dentro pones sus celdas, de izquierda a derecha.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>tabla.html</span></div>
@@ -1766,24 +1804,12 @@ mi-web/
 &lt;table&gt;
   &lt;caption&gt;Ficha técnica&lt;/caption&gt;
   &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Dato&lt;/th&gt;
-      &lt;th&gt;Valor&lt;/th&gt;
-    &lt;/tr&gt;
+    &lt;tr&gt;&lt;th&gt;Dato&lt;/th&gt;&lt;th&gt;Valor&lt;/th&gt;&lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Primera versión&lt;/td&gt;
-      &lt;td&gt;2004&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Plataformas&lt;/td&gt;
-      &lt;td&gt;Windows, Linux, macOS, Android&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Licencia&lt;/td&gt;
-      &lt;td&gt;GPL&lt;/td&gt;
-    &lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Primera versión&lt;/td&gt;&lt;td&gt;2004&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Plataformas&lt;/td&gt;&lt;td&gt;PC y móvil&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;Licencia&lt;/td&gt;&lt;td&gt;GPL&lt;/td&gt;&lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;</pre>
     </div>
@@ -1803,6 +1829,7 @@ mi-web/
   <aside class="notas">colspan: la celda ocupa varias columnas; rowspan: varias filas. <b>Al unir, hay que quitar las celdas que sobran</b> en esa fila o en las siguientes. El ejercicio 7 del cuaderno es <b>el horario real del grupo</b>.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Imágenes, tablas y semántica</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Celdas que ocupan varias columnas o filas</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Es el «combinar celdas» de una hoja de cálculo: una celda que ocupa el sitio de dos. Al unirlas, <b style="color:var(--navy)">la celda que queda tapada sobra y hay que quitarla</b>; si no, esa fila tiene una de más y la tabla se descuadra.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>horario.html</span></div>
@@ -1813,16 +1840,14 @@ mi-web/
     &lt;th&gt;Hora&lt;/th&gt;&lt;th&gt;Módulo&lt;/th&gt;&lt;th&gt;Aula&lt;/th&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-    &lt;td&gt;8:30&lt;/td&gt;&lt;td rowspan="2"&gt;Montaje de equipos&lt;/td&gt;&lt;td&gt;Taller&lt;/td&gt;
+    &lt;td&gt;8:30&lt;/td&gt;&lt;td rowspan="2"&gt;Montaje&lt;/td&gt;
+    &lt;td&gt;Taller&lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
     &lt;td&gt;9:25&lt;/td&gt;&lt;td&gt;Taller&lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
     &lt;td&gt;11:10&lt;/td&gt;&lt;td colspan="2"&gt;Recreo&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;13:10&lt;/td&gt;&lt;td&gt;Aplicaciones Web&lt;/td&gt;&lt;td&gt;Aula 2&lt;/td&gt;
   &lt;/tr&gt;
 &lt;/table&gt;</pre>
     </div>
@@ -1846,12 +1871,13 @@ mi-web/
 </section>
 
 <!-- 69 El mapa de una página -->
-<section data-label="1.5 · El mapa de una página" data-seccion="1.5" style="display:grid;grid-template-columns:1fr 900px;gap:80px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+<section data-label="1.5 · El mapa de una página" data-seccion="1.5" style="display:grid;grid-template-columns:1fr 760px;gap:72px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
   <aside class="notas">Etiquetas semánticas: header (cabecera con logotipo y título), nav (menú), <b>main (el contenido principal, uno por página)</b>, section (una parte con su encabezado), article (contenido con sentido propio: una noticia, un producto), aside (lo lateral), footer (pie). <b>div y span cuando ninguna encaja.</b> id (único) y class (repetible) para nombrar zonas: CSS los usará en la UT2. <b>No cambian el aspecto</b>: dan significado a buscadores, lectores de pantalla y a quien lea el código.</aside>
   <div style="display:flex;flex-direction:column">
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Imágenes, tablas y semántica</p>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">El mapa de una página: etiquetas semánticas</h2>
-    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;margin-top:var(--gap-title);font-size:var(--type-caption);line-height:1.4">
+    <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:var(--gap-item)">Dividen la página en zonas y dicen qué es cada una. <b style="color:var(--navy)">No cambian el aspecto</b>: dan significado a los buscadores, a los lectores de pantalla y a quien lea tu código.</p>
+    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:var(--gap-item);font-size:var(--type-caption);line-height:1.4">
       <li style="display:flex;gap:20px"><code class="en-linea" style="flex:none;min-width:160px">&lt;header&gt;</code><span>Cabecera: logotipo, título, a veces el menú</span></li>
       <li style="display:flex;gap:20px"><code class="en-linea" style="flex:none;min-width:160px">&lt;nav&gt;</code><span>El menú de navegación</span></li>
       <li style="display:flex;gap:20px"><code class="en-linea" style="flex:none;min-width:160px">&lt;main&gt;</code><span>El contenido principal. Uno por página</span></li>
@@ -1861,7 +1887,7 @@ mi-web/
       <li style="display:flex;gap:20px"><code class="en-linea" style="flex:none;min-width:160px">&lt;footer&gt;</code><span>El pie: autor, aviso legal, contacto</span></li>
       <li style="display:flex;gap:20px"><code class="en-linea" style="flex:none;min-width:160px">&lt;div&gt; &lt;span&gt;</code><span>Cajas sin significado, para cuando ninguna encaja</span></li>
     </ul>
-    <p style="font-size:var(--type-caption);line-height:1.45;color:var(--muted);margin-top:var(--gap-item)">No cambian el aspecto: dan significado a los buscadores, a los lectores de pantalla y a quien lea tu código. Con <code class="en-linea">id</code> (único) y <code class="en-linea">class</code> (repetible) se nombran las zonas para que CSS las encuentre.</p>
+    <p style="font-size:var(--type-caption);line-height:1.45;color:var(--muted);margin-top:var(--gap-item)">Con <code class="en-linea">id</code> (único) y <code class="en-linea">class</code> (repetible) se nombran las zonas para que CSS las encuentre.</p>
   </div>
   <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
     <figure class="foto" style="flex:1;background:var(--bg);border:3px solid var(--line)">
@@ -2006,6 +2032,7 @@ mi-web/
   <aside class="notas">form con action (a dónde van los datos) y method. <b>enctype solo hace falta cuando el formulario sube archivos</b> (multipart/form-data); si no, no se pone. label con for e input con id: la etiqueta se hace clicable y el lector de pantalla sabe qué es el campo. name es lo que viaja: <b>sin name, el dato no se envía</b> aunque el campo se vea. button envía. El action apunta a webhook.site: <b>la URL la da el profesor</b> el día de la práctica.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Formularios</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">El formulario mínimo</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Un formulario es una caja, <code class="en-linea">&lt;form&gt;</code>, con campos para rellenar y un botón para enviarlos. Cada campo lleva su <b style="color:var(--navy)">etiqueta</b>, el texto que ve quien lo rellena, y su <b style="color:var(--navy)">nombre</b>, con el que el dato viaja al servidor.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>contacto.html</span></div>
@@ -2038,6 +2065,7 @@ mi-web/
   <aside class="notas"><b>Cada type cambia lo que hace el navegador</b>: teclado numérico en el móvil, selector de fecha, validación del formato del correo, ocultar la contraseña. Si el navegador no conoce un tipo, <b>lo trata como text</b>. El tipo datetime se eliminó de la especificación; queda datetime-local.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Formularios</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Tipos de campo</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Casi todos los campos son el mismo elemento, <code class="en-linea">&lt;input&gt;</code>: lo que cambia es su atributo <b style="color:var(--navy)">type</b>. Con el tipo adecuado el navegador ayuda solo: teclado numérico en el móvil, un calendario, comprobar que el correo lleva @, ocultar la contraseña.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>tipos.html</span></div>
@@ -2057,11 +2085,11 @@ mi-web/
 &lt;/form&gt;</pre>
     </div>
     <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
-      <div class="resultado" data-codigo="ej-tipos" data-url="localhost/tipos.html" data-zoom="1.3" style="flex:1"></div>
+      <div class="resultado" data-codigo="ej-tipos" data-url="localhost/tipos.html" data-zoom="1.2" style="flex:1"></div>
       <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Cada <code class="en-linea">type</code> cambia lo que hace el navegador: teclado numérico en el móvil, calendario, comprobar que el correo tiene @, ocultar la contraseña</span></li>
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Un <code class="en-linea">&lt;input&gt;</code> dentro del <code class="en-linea">&lt;label&gt;</code> no necesita <code class="en-linea">for</code> ni <code class="en-linea">id</code></span></li>
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>También: <code class="en-linea">search</code>, <code class="en-linea">hidden</code>, <code class="en-linea">datetime-local</code></span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Si el navegador no conoce un tipo, lo trata como <code class="en-linea">text</code>: el campo sigue funcionando</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Un <code class="en-linea">&lt;input&gt;</code> dentro de su <code class="en-linea">&lt;label&gt;</code> no necesita <code class="en-linea">for</code> ni <code class="en-linea">id</code>: la etiqueta ya sabe cuál es su campo</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>También: <code class="en-linea">search</code>, <code class="en-linea">hidden</code> (un dato que viaja sin verse), <code class="en-linea">datetime-local</code></span></li>
       </ul>
     </div>
   </div>
@@ -2130,6 +2158,7 @@ mi-web/
   <aside class="notas">radio: una sola opción del grupo; <b>el grupo lo forma el mismo name</b>; cada uno con su value; checked preselecciona. checkbox: varias; cada uno con su name, o el mismo name para enviar una lista. select con option (y optgroup para agrupar): lista desplegable. Es <b>el formulario de valoración que pide la página del aula</b>.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Formularios</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Elegir una opción o varias</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Cuando las respuestas ya están decididas, no se escriben: <b style="color:var(--navy)">se eligen</b>, una o varias.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>opciones.html</span></div>
@@ -2139,14 +2168,12 @@ mi-web/
   &lt;label&gt;&lt;input type="radio" name="nota" value="5"&gt; 5&lt;/label&gt;
   &lt;label&gt;&lt;input type="radio" name="nota" value="7" checked&gt; 7&lt;/label&gt;
   &lt;label&gt;&lt;input type="radio" name="nota" value="10"&gt; 10&lt;/label&gt;
-
   &lt;p&gt;¿En qué plataformas lo has jugado?&lt;/p&gt;
   &lt;label&gt;&lt;input type="checkbox" name="plataforma" value="pc"&gt; PC&lt;/label&gt;
   &lt;label&gt;&lt;input type="checkbox" name="plataforma" value="movil"&gt; Móvil&lt;/label&gt;
 
   &lt;p&gt;&lt;label for="fav"&gt;Personaje favorito&lt;/label&gt;
   &lt;select id="fav" name="favorito"&gt;
-    &lt;option value=""&gt;Elige…&lt;/option&gt;
     &lt;optgroup label="Héroes"&gt;
       &lt;option value="tux"&gt;Tux&lt;/option&gt;
       &lt;option value="gnu"&gt;Gnu&lt;/option&gt;
@@ -2158,9 +2185,9 @@ mi-web/
     <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
       <div class="resultado" data-codigo="ej-opciones" data-url="localhost/opciones.html" data-zoom="1.4" style="flex:1"></div>
       <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">radio</code>: una sola opción. El grupo lo forma el <b>mismo name</b>; cada una lleva su <code class="en-linea">value</code></span></li>
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">checkbox</code>: varias a la vez. <code class="en-linea">checked</code> preselecciona</span></li>
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;select&gt;</code> con <code class="en-linea">&lt;option&gt;</code>: lista desplegable; <code class="en-linea">&lt;optgroup&gt;</code> agrupa</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">radio</code>: una sola opción. El grupo lo forma el <b>mismo name</b>: al marcar una se desmarca la otra. Cada una lleva su <code class="en-linea">value</code>, que es lo que viaja</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">checkbox</code>: varias a la vez. <code class="en-linea">checked</code> deja una marcada de entrada</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;select&gt;</code> con <code class="en-linea">&lt;option&gt;</code>: una sola opción, como radio, en una lista desplegable que ocupa menos; <code class="en-linea">&lt;optgroup&gt;</code> agrupa</span></li>
       </ul>
     </div>
   </div>
@@ -2171,6 +2198,7 @@ mi-web/
   <aside class="notas">textarea con rows y cols: texto de varias líneas. fieldset y legend agrupan campos relacionados. <b>button type submit envía; reset borra</b>; button no hace nada sin JavaScript (UT6). <b>Se puede tener más de un submit con distinto name</b> para saber cuál se pulsó.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Formularios</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Texto largo, grupos de campos y botones</h2>
+  <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Para lo que no cabe en una línea, como un comentario, está <code class="en-linea">&lt;textarea&gt;</code>. Y cuando un formulario tiene muchos campos, <b style="color:var(--navy)">se agrupan por temas con un título</b>, como los apartados de un impreso en papel.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>opinion.html</span></div>
@@ -2195,7 +2223,7 @@ mi-web/
       <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
         <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;textarea&gt;</code>: varias líneas. Se abre y se cierra; el texto inicial va dentro</span></li>
         <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">&lt;fieldset&gt;</code> y <code class="en-linea">&lt;legend&gt;</code> agrupan campos relacionados con un título</span></li>
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">submit</code> envía, <code class="en-linea">reset</code> borra, <code class="en-linea">button</code> espera a JavaScript (UT6)</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Botones: <code class="en-linea">submit</code> envía, <code class="en-linea">reset</code> borra lo escrito y <code class="en-linea">button</code> no hace nada hasta que le pongas JavaScript (UT6)</span></li>
       </ul>
     </div>
   </div>
