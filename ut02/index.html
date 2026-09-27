@@ -420,7 +420,7 @@ input[type="email"] { border: 2px solid #017ce9; }</pre>
 <section data-label="2.1 · Quiz: el selector del menú" data-seccion="2.1" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1.2fr;gap:96px;align-items:center;position:relative;overflow:hidden">
   <aside class="notas"><b>A también pinta el enlace del párrafo.</b> C busca una clase que no existe: <b>nav es una etiqueta, no una clase</b>. D busca un nav dentro de un enlace, al revés.</aside>
   <span class="mancha arriba-dcha" style="width:380px;color:var(--cyan)"></span>
-  <div class="quiz" data-correct="1" data-ok="Correcto. El descendiente nav a alcanza solo los enlaces que están dentro del nav." data-ko="No. Piensa qué elementos alcanza cada selector: ¿solo los del menú, o también el del párrafo, o ninguno?" style="display:contents">
+  <div class="quiz" data-preguntas="selectores" data-correct="1" data-ok="Correcto. El descendiente nav a alcanza solo los enlaces que están dentro del nav." data-ko="No. Piensa qué elementos alcanza cada selector: ¿solo los del menú, o también el del párrafo, o ninguno?" style="display:contents">
     <div style="position:relative">
       <span class="pill">Comprueba lo aprendido</span>
       <h2 style="font-size:var(--type-subtitle);font-weight:800;line-height:1.2;margin-top:32px;color:var(--navy);text-wrap:balance">¿Qué regla pone en verde solo los enlaces del menú?</h2>
@@ -1074,7 +1074,7 @@ a:visited    { color: inherit; }
 <section data-label="2.3 · Quiz: logo y menú" data-seccion="2.3" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1.2fr;gap:96px;align-items:center;position:relative;overflow:hidden">
   <aside class="notas"><b>D también funciona</b>: un margen automático en flexbox se lleva todo el espacio libre. <b>Pero no es lo explicado.</b> <b>A no existe como valor de align-items.</b> C invierte el orden, no reparte.</aside>
   <span class="mancha arriba-dcha" style="width:380px;color:var(--cyan)"></span>
-  <div class="quiz" data-correct="1" data-ok="Correcto. justify-content reparte el espacio libre en el eje principal; space-between lo pone todo en medio." data-ko="No. Piensa en qué eje está el espacio que sobra y qué propiedad lo reparte." style="display:contents">
+  <div class="quiz" data-preguntas="flexbox" data-correct="1" data-ok="Correcto. justify-content reparte el espacio libre en el eje principal; space-between lo pone todo en medio." data-ko="No. Piensa en qué eje está el espacio que sobra y qué propiedad lo reparte." style="display:contents">
     <div style="position:relative">
       <span class="pill">Comprueba lo aprendido</span>
       <h2 style="font-size:var(--type-subtitle);font-weight:800;line-height:1.2;margin-top:32px;color:var(--navy);text-wrap:balance">Una cabecera con <code class="en-linea">display: flex</code>. ¿Qué propiedad deja el logo a la izquierda y el menú a la derecha?</h2>
@@ -1518,7 +1518,7 @@ nav { position: sticky; top: 0; z-index: 10;
 <section data-label="2.5 · Quiz: el menú pegado" data-seccion="2.5" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:grid;grid-template-columns:1fr 1.2fr;gap:96px;align-items:center;position:relative;overflow:hidden">
   <aside class="notas"><b>B también lo deja fijo</b>, pero desde el principio y tapando lo que hay debajo: hay que compensarlo con un margen. <b>sticky solo actúa cuando el scroll llega a él.</b></aside>
   <span class="mancha arriba-dcha" style="width:380px;color:var(--cyan)"></span>
-  <div class="quiz" data-correct="2" data-ok="Correcto. sticky se comporta como normal hasta que el scroll lo lleva al borde; entonces se queda pegado." data-ko="No del todo. fixed también lo fija, pero desde el principio y tapando lo que hay debajo; absolute y relative no lo pegan a nada." style="display:contents">
+  <div class="quiz" data-preguntas="grid" data-correct="2" data-ok="Correcto. sticky se comporta como normal hasta que el scroll lo lleva al borde; entonces se queda pegado." data-ko="No del todo. fixed también lo fija, pero desde el principio y tapando lo que hay debajo; absolute y relative no lo pegan a nada." style="display:contents">
     <div style="position:relative">
       <span class="pill">Comprueba lo aprendido</span>
       <h2 style="font-size:var(--type-subtitle);font-weight:800;line-height:1.2;margin-top:32px;color:var(--navy);text-wrap:balance">¿Qué valor de <code class="en-linea">position</code> deja el menú pegado arriba cuando haces scroll, sin tapar la cabecera al principio?</h2>

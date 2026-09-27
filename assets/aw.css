@@ -285,6 +285,7 @@ section.portada [data-slide-num] { color: var(--navy); background: rgba(254, 254
 .quiz-opt.correct { background: var(--green); border-color: var(--green); color: var(--navy); }
 .quiz-opt.correct .letra { background: rgba(4,28,63,.15); }
 .quiz-opt.wrong { border-color: var(--sky); background: rgba(255,255,255,.06); color: #9FB8C2; }
+.quiz-otra { margin: var(--gap-item) 0 0 16px; }
 .quiz-fb {
   font-size: var(--type-small);
   line-height: 1.5;

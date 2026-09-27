@@ -7,6 +7,7 @@
  *         <div class="quiz-opts"> <button class="quiz-opt">…</button> … </div>
  *         <button class="btn btn-ghost quiz-reset">Reiniciar</button>
  *       </div>
+ *     Con data-preguntas="clave" se añade «Otra pregunta», que pasa por las de AW.preguntas.clave.
  *  3. Panel que se revela (pregunta a la clase):
  *       <div class="revela"> <div class="revela-cuerpo">…</div> <button class="btn btn-primary revela-btn">Ver ideas</button> </div>
  *  4. Galería de fotos en el mismo hueco, con flechas y pie que cambia:
@@ -435,6 +436,110 @@
     { html: ['<main>', '  <h2>Qué es</h2>', '  <p>Texto</p>', '  <h2>Personajes</h2>', '</main>'], objetivo: [1, 3], opciones: ['main h2', 'main > p', 'h2 main', 'main *'], pista: 'Los dos encabezados de main.' }
   ];
 
+  /* ---------- preguntas de repaso de los quiz («Otra pregunta») ----------
+     Un quiz con data-preguntas="clave" pasa por las preguntas de AW.preguntas.clave, sobre lo visto
+     justo antes. p: enunciado; o: opciones; c: índice de la correcta (desde 0); exp: explicación, que
+     sale al responder, se acierte o no. Lo que va entre `acentos graves` se pinta como código.
+     cod (opcional): código que se enseña en la ventana del quiz; lang: html (defecto) o css. */
+  AW.preguntas = AW.preguntas || {};
+
+  // UT1 · 1.1 Internet y la web (diapositiva 18)
+  AW.preguntas.peticion = [
+    { p: '¿Qué es una aplicación web?', o: ['Un programa al que se accede desde el navegador, sin instalar nada', 'Un programa que se instala en el ordenador', 'Cualquier app que se descarga en el móvil', 'Una página hecha solo con HTML'], c: 0, exp: 'Se usa desde el navegador, a través de una red, sin instalar nada en el equipo: el correo web, Classroom, un gestor de contenidos.' },
+    { p: '¿Es lo mismo Internet que la web?', o: ['Sí, son dos nombres de lo mismo', 'No: la web es uno de los servicios que funcionan sobre Internet', 'No: Internet es uno de los servicios de la web', 'Sí, desde que existe HTTPS'], c: 1, exp: 'Internet es la infraestructura: cables, routers y protocolos. La web es uno de sus servicios, como el correo.' },
+    { p: '¿Quién puso en marcha la web, y dónde?', o: ['Tim Berners-Lee, en el CERN, en 1990', 'ARPANET, en cuatro universidades, en 1969', 'Google, en 1998', 'Microsoft, con Internet Explorer, en 1995'], c: 0, exp: 'Tim Berners-Lee la propuso en el CERN en 1989 y la puso en marcha en diciembre de 1990. ARPANET, de 1969, es el origen de Internet, no de la web.' },
+    { p: 'HTML y HTTP, ¿en qué se diferencian?', o: ['Son lo mismo con otro nombre', 'HTTP es la versión nueva de HTML', 'HTML es el lenguaje de la página; HTTP, el protocolo para pedirla', 'HTML cifra lo que envía HTTP'], c: 2, exp: 'HTML es el lenguaje en que se escribe la página; HTTP, el protocolo con que el navegador se la pide al servidor. Es la confusión típica del examen.' },
+    { p: '¿Qué añade HTTPS a HTTP?', o: ['Más velocidad', 'Cifrado: el candado del navegador', 'Imágenes y vídeo', 'Nada, es otro nombre'], c: 1, exp: 'HTTPS es HTTP cifrado con TLS. Hoy es lo normal y los navegadores avisan si falta.' },
+    { p: 'En una URL, ¿qué parte no llega al servidor?', o: ['Lo que va tras `#`, el fragmento', 'Lo que va tras `?`, la consulta', 'El dominio', 'La ruta de carpetas'], c: 0, exp: 'Lo que va tras # es un punto dentro de la página y solo lo usa el navegador. Lo que va tras ? son datos para el servidor.' },
+    { p: 'El servidor responde con un 404. ¿Qué ha pasado?', o: ['Todo ha ido bien', 'No encuentra esa página: dirección mal escrita o página borrada', 'No tienes permiso para verla', 'El programa del servidor ha fallado'], c: 1, exp: '404 Not Found: el servidor no encuentra el recurso. 200 es éxito, 403 es sin permiso y 500, un fallo del servidor.' },
+    { p: 'Un error 500, ¿de quién es la culpa?', o: ['Del navegador', 'De una dirección mal escrita', 'Del programa del servidor', 'De tu conexión a Internet'], c: 2, exp: '500 Internal Server Error: el programa del servidor ha fallado al generar la página. Los 4xx son errores del cliente; los 5xx, del servidor.' },
+    { p: '¿Por qué hoy se usa SSH y no Telnet para administrar un servidor?', o: ['SSH es más rápido', 'Telnet enviaba usuario y contraseña sin cifrar', 'Telnet solo funciona en Windows', 'SSH no necesita Internet'], c: 1, exp: 'Telnet mandaba todo en claro, contraseña incluida; SSH cifra. Lo mismo pasa con FTP y SFTP.' },
+    { p: 'Tu correo, tu banco o Classroom, que piden iniciar sesión, forman parte de…', o: ['La surface web', 'La deep web', 'La dark web', 'Ninguna: no son web'], c: 1, exp: 'La deep web es lo que los buscadores no indexan porque hace falta iniciar sesión. Es la mayor parte de la web y es legítima. A la dark web solo se llega con software como Tor.' },
+    { p: 'Pulsas F12 y abres la pestaña Red. ¿Qué ves al recargar?', o: ['El HTML de la página con colores', 'Tus contraseñas guardadas', 'Cada archivo que ha viajado, con su código de estado', 'Los avisos del antivirus'], c: 2, exp: 'La pestaña Red (Network) enseña cada petición: el archivo, su código de estado, su tipo y su tamaño.' }
+  ];
+
+  // UT1 · 1.3 HTML: estructura y texto (diapositiva 49)
+  AW.preguntas.html = [
+    { p: '¿Qué tipo de lenguaje es HTML?', o: ['De programación', 'De marcas: etiquetas que dicen qué es cada cosa', 'De estilos', 'De bases de datos'], c: 1, exp: 'HTML marca qué es cada cosa: un título, un párrafo, un enlace. No toma decisiones, así que no es un lenguaje de programación.' },
+    { p: '¿Qué lenguaje decide cómo se ve la página: colores, letra, columnas?', o: ['HTML', 'CSS', 'JavaScript', 'HTTP'], c: 1, exp: 'HTML dice qué hay; CSS, cómo se ve; JavaScript, qué hace. CSS llega en la unidad 2.' },
+    { p: '¿Qué va dentro del `<head>`?', o: ['Lo que se ve: títulos y párrafos', 'Lo que no se ve: charset, title, description', 'Solo el `<h1>`', 'Los comentarios'], c: 1, exp: 'El head lleva los datos de la página que no se pintan. Lo que se ve va en el body.' },
+    { p: '¿Para qué sirve `<meta charset="utf-8">`?', o: ['Para que el móvil no encoja la página', 'Para que se vean bien las tildes y las eñes', 'Para el título de la pestaña', 'Para el idioma de la página'], c: 1, exp: 'Es la codificación y va siempre. El móvil es cosa del viewport; la pestaña, del title; el idioma, del lang.' },
+    { p: '¿Dónde se indica el idioma de la página?', o: ['`<html lang="es">`', '`<meta charset="es">`', '`<body idioma="es">`', '`<title>es</title>`'], c: 0, exp: 'Con el atributo lang de la etiqueta html. Lo usan los buscadores y los lectores de pantalla.' },
+    { p: '¿Cuál está bien anidado?', o: ['`<p><strong>así</strong></p>`', '`<p><strong>así</p></strong>`', '`<strong><p>así</strong></p>`', '`<p><strong>así</p>`'], c: 0, exp: 'Lo último que se abre es lo primero que se cierra: primero </strong> y luego </p>.' },
+    { p: 'Escribes diez espacios seguidos entre dos palabras de un párrafo. ¿Qué se ve?', o: ['Diez espacios', 'Un espacio', 'Un salto de línea', 'Un error'], c: 1, exp: 'Los espacios y los saltos de línea se colapsan en uno. Para separar párrafos, <p>; para un salto, <br>.' },
+    { p: '¿Cuál es un elemento vacío, sin contenido ni etiqueta de cierre?', o: ['`<p>`', '`<br>`', '`<h1>`', '`<a>`'], c: 1, exp: 'br, hr, img, meta e input no tienen contenido ni cierre.' },
+    { p: 'Después del `<h1>`, ¿qué encabezado toca para las secciones?', o: ['Otro `<h1>`', '`<h2>`', '`<h3>`', 'Da igual: solo cambia el tamaño'], c: 1, exp: 'Sin saltarse niveles: h1 es el título, h2 las secciones y h3 lo que va dentro de ellas.' },
+    { p: '¿Cómo separas dos párrafos?', o: ['Con dos `<br>`', 'Con un `<p>` para cada uno', 'Con un `<hr>`', 'Con una línea en blanco en el código'], c: 1, exp: 'Cada párrafo en su <p>. <br> es un salto dentro del párrafo, <hr> un cambio de tema, y las líneas en blanco del código no se ven.' },
+    { p: 'Tu página tiene un error de HTML. ¿Qué hace el navegador?', o: ['Enseña un mensaje de error', 'No carga la página', 'Ignora lo que no entiende y pinta lo que puede', 'Lo corrige en tu archivo'], c: 2, exp: 'El navegador no avisa: una página con errores puede verse casi bien. Por eso se pasa por el validador.' },
+    { p: 'Lo que escribes en un comentario `<!-- -->`…', o: ['Se ve en gris en la página', 'No se ve en la página, pero sí en «ver código fuente»', 'No lo puede ver nadie', 'Solo se ve en el móvil'], c: 1, exp: 'El comentario no se pinta, pero viaja con el HTML y cualquiera lo lee en el código fuente. Nada privado.' },
+    { p: 'En esta línea, ¿qué es `href`?', cod: '<a href="https://www.rae.es">Diccionario</a>', o: ['El contenido', 'Un atributo', 'La etiqueta de cierre', 'Un elemento vacío'], c: 1, exp: 'Un atributo: nombre="valor", dentro de la etiqueta de apertura y con comillas. «Diccionario» es el contenido.' }
+  ];
+
+  // UT1 · 1.7 Formularios (diapositiva 78)
+  AW.preguntas.formularios = [
+    { p: '¿Qué atributo del `<form>` dice a dónde van los datos?', o: ['`action`', '`method`', '`name`', '`href`'], c: 0, exp: 'action es a dónde; method, cómo: GET o POST.' },
+    { p: '¿Qué indica el atributo `method` del formulario?', o: ['A dónde van los datos', 'Cómo se envían: GET o POST', 'El tipo de cada campo', 'El texto del botón'], c: 1, exp: 'method es cómo se envían; action, a dónde.' },
+    { p: 'Con `<label for="correo">`, ¿qué consigues?', o: ['Que el correo se envíe', 'Conectar la etiqueta con el campo que tiene `id="correo"`', 'Que el campo sea obligatorio', 'Que el navegador compruebe la @'], c: 1, exp: 'for apunta al id del campo: el texto se hace clicable y el lector de pantalla sabe qué es ese campo.' },
+    { p: '¿Qué `type` oculta lo que se escribe?', o: ['`password`', '`hidden`', '`text`', '`secret`'], c: 0, exp: 'password enseña puntos en lugar de letras. hidden es otra cosa: un campo que no se ve en absoluto.' },
+    { p: '¿Qué hace `required`?', o: ['No deja enviar el campo vacío: el navegador avisa', 'Pone el cursor en ese campo', 'Pone un texto de ejemplo en gris', 'Guarda lo escrito para la próxima vez'], c: 0, exp: 'required obliga a rellenar el campo. El cursor es autofocus y el texto de ejemplo, placeholder.' },
+    { p: '¿Por qué `placeholder` no sustituye al `<label>`?', o: ['Porque desaparece al escribir', 'Porque no funciona en el móvil', 'Porque solo admite números', 'Porque ya no se usa'], c: 0, exp: 'El texto de ejemplo se borra en cuanto escribes y ya no se sabe qué pedía el campo. El label se queda.' },
+    { p: '¿Qué atributo pone un valor inicial en el campo?', o: ['`value`', '`placeholder`', '`name`', '`autofocus`'], c: 0, exp: 'value es el valor que ya trae el campo, y se envía si no lo cambias. placeholder es solo un ejemplo en gris y no se envía.' },
+    { p: 'Un `type` que el navegador no conoce se trata como…', o: ['`text`', '`hidden`', 'Un error: el formulario no se envía', '`number`'], c: 0, exp: 'Si el navegador no conoce un tipo, lo trata como text. Por eso un tipo nuevo no rompe nada en un navegador viejo.' },
+    { p: 'Un `<input>` metido dentro de su `<label>`…', o: ['Necesita for e id', 'No necesita for ni id', 'No se envía', 'No es válido'], c: 1, exp: 'Si el campo va dentro del label, ya están conectados: no hacen falta for ni id.' },
+    { p: '¿Qué ganas con `type="email"` frente a `type="text"`?', o: ['Que se envíe un correo al pulsar el botón', 'Que el navegador compruebe que tiene @ antes de enviar', 'Que el dato viaje cifrado', 'Nada: solo cambia el nombre'], c: 1, exp: 'Cada type cambia lo que hace el navegador: email comprueba el formato, number saca el teclado numérico en el móvil y date, un calendario.' }
+  ];
+
+  // UT2 · 2.1 CSS y selectores (diapositiva 14)
+  AW.preguntas.selectores = [
+    { p: '¿Qué quiere decir «en cascada» en CSS?', o: ['Que hay un orden para decidir qué regla gana si varias afectan al mismo elemento', 'Que las reglas se leen de abajo arriba', 'Que una hoja enlaza con la siguiente', 'Que solo sirve para listas'], c: 0, exp: 'Cuando varias reglas afectan al mismo elemento, la cascada decide cuál gana. Lo tachado en DevTools es lo que perdió.' },
+    { p: '¿Qué forma de aplicar CSS usamos en el módulo?', o: ['Una hoja externa enlazada con `<link>`', 'El atributo `style` en cada etiqueta', 'Un `<style>` en cada página', 'Los atributos `font` y `align`'], c: 0, exp: 'Una hoja para todo el sitio: se cambia una vez y cambian todas las páginas. style en línea mezcla contenido y aspecto.' },
+    { p: '¿Dónde va el `<link rel="stylesheet">`?', o: ['Dentro del `<head>`', 'Al final del `<body>`', 'Dentro del archivo CSS', 'Antes del `<!DOCTYPE html>`'], c: 0, exp: 'En el head, con href apuntando al archivo. Si no cambia nada, revisa la ruta y el nombre: minúsculas y sin espacios.' },
+    { p: 'Se te olvida cerrar la llave de una regla. ¿Qué pasa?', o: ['El navegador avisa con un error', 'Deja de funcionar lo que viene después, sin aviso', 'Nada: el navegador la cierra', 'Solo falla esa regla'], c: 1, exp: 'Es el error más común de la unidad: todo lo que viene detrás deja de funcionar y el navegador no avisa. Indentar ayuda a verlo.' },
+    { p: '¿Qué selector alcanza todo lo que lleva `class="precio"`?', o: ['`.precio`', '`#precio`', '`precio`', '`*precio`'], c: 0, exp: 'El punto es para las clases y la almohadilla para el id. precio a secas buscaría una etiqueta <precio>, que no existe.' },
+    { p: 'Clase e id, ¿en qué se diferencian?', o: ['La clase se repite; el id es único en la página', 'El id se repite; la clase es única', 'La clase es para CSS; el id, solo para JavaScript', 'No hay diferencia'], c: 0, exp: 'La clase se pone en todos los elementos que haga falta y es la que más se usa. El id es único y lo reservamos para las anclas.' },
+    { p: '¿A qué alcanza `ul > li`?', o: ['Solo a los `li` hijos directos de la `ul`', 'A todos los `li` de dentro, a cualquier nivel', 'A la `ul` que tenga algún `li`', 'A los `li` y a la `ul`'], c: 0, exp: 'El > solo baja un nivel. Con un espacio, ul li, alcanzaría también los li de las listas anidadas.' },
+    { p: '¿A qué alcanza `.boton.grande`, sin espacio?', o: ['Al elemento que tiene las dos clases', 'A un `.grande` que está dentro de un `.boton`', 'A los `.boton` y a los `.grande`', 'A nada: no es válido'], c: 0, exp: 'Pegadas, las dos clases van en el mismo elemento. Con espacio, .boton .grande, sería un descendiente.' },
+    { p: '¿Qué selector alcanza solo el campo del correo?', cod: '<input type="text" name="nombre">\n<input type="email" name="correo">\n<button>Enviar</button>', o: ['`input[type="email"]`', '`input`', '`.email`', '`#email`'], c: 0, exp: 'El selector de atributo va entre corchetes: los input cuyo type es email. .email y #email buscan una clase y un id que no están.' },
+    { p: '¿Qué nombre de clase es mejor?', o: ['`.precio`', '`.rojo`', '`.estilo1`', '`.caja2`'], c: 0, exp: 'El nombre dice qué es, no cómo se ve: el día que el rojo pase a azul, .rojo miente.' },
+    { p: 'En la pestaña Estilos de DevTools, una declaración sale tachada. ¿Qué significa?', o: ['Que perdió frente a otra regla', 'Que tiene un error de escritura', 'Que está comentada', 'Que se ha borrado del archivo'], c: 0, exp: 'Tachado es que otra regla ganó. Lo que el navegador no entiende lleva un triángulo amarillo.' },
+    { p: 'Sin CSS, un `<h1>` ya se ve grande y en negrita. ¿Por qué?', o: ['Por la hoja de estilo del navegador (user-agent)', 'Porque HTML lleva el tamaño dentro de la etiqueta', 'Por la fuente del sistema', 'Porque el h1 es una imagen'], c: 0, exp: 'Cada navegador trae una hoja con estilos por defecto. En DevTools aparece como hoja de estilo de user-agent.' },
+    { p: '¿Existe CSS4?', o: ['No: desde 2000 CSS avanza por módulos, cada uno con su nivel', 'Sí, desde 2020', 'Sí, pero solo en Chrome', 'No: CSS dejó de actualizarse en CSS3'], c: 0, exp: 'Tras CSS2 se dejó de numerar: Flexbox, Grid o Selectores tienen cada uno su nivel. No existe ni existirá un CSS4.' }
+  ];
+
+  // UT2 · 2.3 Bloque, línea y flexbox (diapositiva 35)
+  AW.preguntas.flexbox = [
+    { p: '¿Dónde se pone `display: flex`?', o: ['En el contenedor: coloca a sus hijos directos', 'En cada hijo que quieres mover', 'Siempre en el `<body>`', 'En el texto que quieres centrar'], c: 0, exp: 'El contenedor decide la dirección, el reparto y la alineación; los hijos se adaptan.' },
+    { p: '¿Qué propiedad reparte el espacio en el eje principal?', o: ['`justify-content`', '`align-items`', '`flex-direction`', '`text-align`'], c: 0, exp: 'justify-content reparte en el eje principal; align-items alinea en el cruzado.' },
+    { p: 'En una fila flex, ¿qué alinea los hijos en vertical?', o: ['`align-items`', '`justify-content`', '`vertical-align`', '`flex-wrap`'], c: 0, exp: 'En una fila, el eje cruzado es el vertical, y ahí alinea align-items.' },
+    { p: '¿Cómo centras una caja en las dos direcciones?', o: ['`justify-content` y `align-items` en `center`', '`text-align: center`', '`margin: center`', '`align: middle`'], c: 0, exp: 'En el contenedor flex, justify-content: center y align-items: center. Se acabó el meme de cómo centrar un div.' },
+    { p: '¿Qué pone los hijos uno debajo de otro?', o: ['`flex-direction: column`', '`justify-content: column`', '`flex-direction: row`', '`align-items: column`'], c: 0, exp: 'flex-direction cambia el eje principal: row (por defecto) en fila, column en columna.' },
+    { p: 'Con `main { flex: 2; }` y `aside { flex: 1; }`…', o: ['main ocupa el doble que aside', 'aside ocupa el doble que main', 'Ocupan lo mismo', 'main va segundo y aside primero'], c: 0, exp: 'flex reparte el espacio en proporción: 2 frente a 1. Con flex: 1 en todos, a partes iguales.' },
+    { p: 'Los hijos no caben en la fila. ¿Qué les deja saltar de línea?', o: ['`flex-wrap: wrap`', '`flex-direction: column`', '`gap: wrap`', '`white-space: wrap`'], c: 0, exp: 'flex-wrap: wrap los deja saltar a otra línea cuando no caben. column los pondría todos en columna, quepan o no.' },
+    { p: '¿Qué separa los hijos de un flex sin usar márgenes?', o: ['`gap`', '`padding`', '`space`', '`border`'], c: 0, exp: 'gap pone el hueco entre los hijos y solo entre ellos. Funciona igual en grid.' },
+    { p: '`display: none` frente a `visibility: hidden`…', o: ['none quita el elemento; hidden lo oculta pero deja el hueco', 'Son lo mismo', 'hidden lo quita; none deja el hueco', 'none solo funciona en flex'], c: 0, exp: 'none lo quita del todo, como si no estuviera. hidden lo hace invisible, pero sigue ocupando su sitio.' },
+    { p: '¿Qué valor de `display` va dentro del texto y no acepta ancho ni alto?', o: ['`inline`', '`block`', '`inline-block`', '`flex`'], c: 0, exp: 'inline va en la línea, como a, strong o span. inline-block también, pero con ancho, alto y relleno.' },
+    { p: 'En el menú, ¿por qué el `ul` lleva `padding: 0`?', o: ['Para quitar la sangría que el navegador pone a las listas', 'Para quitar las viñetas', 'Para poner los li en fila', 'Para que el enlace sea clicable'], c: 0, exp: 'Las listas traen sangría por defecto. Las viñetas se quitan con list-style: none y la fila la hace display: flex.' },
+    { p: '¿Por qué `nav a` lleva `display: block`?', o: ['Para que toda la caja del enlace sea clicable', 'Para poner los enlaces en fila', 'Para quitar el subrayado', 'Para que cambie al pasar el ratón'], c: 0, exp: 'Como bloque, el relleno forma parte del enlace y se puede pulsar en toda la caja, no solo en las letras.' },
+    { p: '¿Qué seudoclase se activa al llegar a un enlace con el tabulador?', o: ['`:focus`', '`:hover`', '`:active`', '`:visited`'], c: 0, exp: ':hover es el ratón encima, :active mientras pulsas y :visited si ya lo visitaste. No quites el outline del :focus sin poner otro.' }
+  ];
+
+  // UT2 · 2.5 Grid y position (diapositiva 49)
+  AW.preguntas.grid = [
+    { p: 'Grid o flexbox: ¿cuál es la regla práctica?', o: ['Grid reparte la página; flex ordena lo de dentro de cada zona', 'Flex reparte la página; grid ordena cada zona', 'Grid ha sustituido a flexbox', 'Flexbox solo sirve para centrar'], c: 0, exp: 'Flexbox trabaja en una dirección; grid, en dos: filas y columnas a la vez.' },
+    { p: '¿Qué significa `fr` en grid?', o: ['Una fracción del espacio libre', 'Una fila', 'El tamaño de la fuente', 'Un marco (frame)'], c: 0, exp: '1fr 1fr 1fr son tres partes iguales del espacio que queda libre.' },
+    { p: '`repeat(3, 1fr)` es lo mismo que…', o: ['`1fr 1fr 1fr`', '`3fr`', '`1fr 3`', '`33%`'], c: 0, exp: 'repeat escribe tres veces 1fr: tres columnas iguales. 3fr sería una sola columna.' },
+    { p: 'Con `grid-template-columns`, un lateral fijo de 12rem a la izquierda y el resto para el contenido:', o: ['`12rem 1fr`', '`1fr 12rem`', '`12rem`', '`12rem 100%`'], c: 0, exp: 'Las columnas se dicen de izquierda a derecha: el lateral fijo y luego 1fr, el resto. Con 100 % se saldría de la página.' },
+    { p: '¿Qué hace esta rejilla?', lang: 'css', cod: '.galeria {\n  display: grid;\n  grid-template-columns:\n    repeat(auto-fit, minmax(14rem, 1fr));\n}', o: ['Mete tantas columnas como quepan, sin media query', 'Hace 14 columnas', 'Hace una sola columna de 14rem', 'Repite la fila de arriba'], c: 0, exp: 'Cada columna mide al menos 14rem y caben más o menos según el ancho. Es la rejilla responsive sin media query.' },
+    { p: '¿Para qué sirve `grid-template-areas`?', o: ['Para dibujar la maqueta con el nombre de cada zona', 'Para poner nombre a las clases', 'Para contar las celdas de la rejilla', 'Para hacer la página responsive sola'], c: 0, exp: 'Se ve el dibujo de la página en el propio CSS: cambiar la maqueta es cambiar las comillas. Cada zona se asigna con grid-area.' },
+    { p: 'La captura destacada de la galería tiene que ocupar dos columnas:', o: ['`grid-column: span 2`', '`grid-row: span 2`', '`column-span: 2`', '`width: 200%`'], c: 0, exp: 'span 2 cuenta celdas. grid-row: span 2 la haría más alta, no más ancha.' },
+    { p: '`grid-column: 1 / 3` ocupa…', o: ['Dos columnas: de la línea 1 a la línea 3', 'Tres columnas', 'La columna 1 y la 3', 'Un tercio de la fila'], c: 0, exp: 'Con la barra se cuentan líneas de la rejilla, no celdas: de la línea 1 a la 3 hay dos columnas.' },
+    { p: '¿Qué hace que una imagen llene su celda sin deformarse?', o: ['`object-fit: cover`', '`object-fit: fill`', '`display: block`', '`float: left`'], c: 0, exp: 'Con width y height al 100 %, object-fit: cover recorta lo que sobra en vez de estirar la imagen. fill la estira.' },
+    { p: 'Una caja con `position: absolute` se coloca respecto a…', o: ['El ancestro más cercano posicionado; si no hay, la página', 'Siempre la página', 'La ventana, aunque hagas scroll', 'Su sitio normal, dejando el hueco'], c: 0, exp: 'Sale del flujo y busca el ancestro más cercano con position distinto de static. Respecto a la ventana es fixed; desde su sitio, relative.' },
+    { p: 'Pones una etiqueta con `absolute` sobre una foto. ¿Qué necesita el `figure`?', o: ['`position: relative`', '`position: absolute`', '`display: grid`', '`z-index: 1`'], c: 0, exp: 'relative en el figure lo convierte en la referencia: la etiqueta se coloca respecto a la foto y no respecto a la página.' },
+    { p: 'Un botón «subir» abajo a la derecha que no se mueve con el scroll:', o: ['`position: fixed`', '`position: sticky`', '`position: relative`', '`position: static`'], c: 0, exp: 'fixed se coloca respecto a la ventana y no se mueve. sticky solo se pega al llegar al borde.' },
+    { p: 'Dos cajas posicionadas se tapan. ¿Qué decide cuál queda encima?', o: ['`z-index`', '`top`', '`order`', '`display`'], c: 0, exp: 'top, right, bottom y left dicen dónde; z-index, quién queda encima: gana el número más alto.' }
+  ];
+
   /* ---------- montadores de los ejercicios ---------- */
   const norm = (s) => String(s).trim().toLowerCase().replace(/^<\/?|>$/g, '').replace(/^<|>$/g, '').replace(/;$/, '').trim();
   // Cada diapositiva puede elegir su banco (data-banco) y su enunciado (data-enunciado)
@@ -662,7 +767,6 @@
 
   /* ---------- quiz de opción múltiple ---------- */
   function montaQuiz(q) {
-    const correcta = parseInt(q.dataset.correct, 10);
     const opts = [...q.querySelectorAll('.quiz-opt')];
     const fb = q.querySelector('.quiz-fb');
     const inicial = fb ? fb.textContent : '';
@@ -673,6 +777,8 @@
     };
     opts.forEach((o, i) => o.addEventListener('click', () => {
       if (q.hasAttribute('data-answered')) return;
+      // Se lee al pulsar: «Otra pregunta» cambia la correcta
+      const correcta = parseInt(q.dataset.correct, 10);
       q.setAttribute('data-answered', '');
       opts[correcta].classList.add('correct');
       if (i !== correcta) o.classList.add('wrong');
@@ -680,6 +786,66 @@
     }));
     const r = q.querySelector('.quiz-reset');
     if (r) r.addEventListener('click', reset);
+    const banco = AW.preguntas[q.dataset.preguntas];
+    if (r && banco && banco.length) montaOtraPregunta(q, r, opts, banco, reset);
+  }
+
+  /* «Otra pregunta», a la derecha de Reiniciar: alterna la pregunta de la diapositiva con las del banco,
+     barajadas y con las opciones en otro orden. Una pregunta con cod enseña ese código en la ventana
+     del quiz, que se crea si la diapositiva no la tiene; sin cod, la ventana se oculta. */
+  const fmtQuiz = (s) => esc(s).replace(/`([^`]+)`/g, '<code class="en-linea">$1</code>');
+  function montaOtraPregunta(q, r, opts, banco, reset) {
+    const h2 = q.querySelector('h2');
+    const textos = opts.map((o) => o.querySelector(':scope > span:not(.letra)'));
+    let ventana = q.querySelector('.ventana');
+    const original = {
+      h: h2.innerHTML, o: textos.map((t) => t.innerHTML),
+      c: q.dataset.correct, ok: q.dataset.ok, ko: q.dataset.ko,
+      ventana: ventana && { nombre: ventana.querySelector('.ventana-barra span').textContent, cod: ventana.querySelector('pre').innerHTML }
+    };
+    const ponVentana = (nombre, html) => {
+      if (!ventana) {
+        ventana = document.createElement('div');
+        ventana.className = 'ventana';
+        ventana.style.marginTop = '24px';
+        ventana.innerHTML = '<div class="ventana-barra"><i></i><i></i><i></i><span></span></div><pre class="cod compacto"></pre>';
+        h2.after(ventana);
+      }
+      ventana.style.display = '';
+      ventana.querySelector('.ventana-barra span').textContent = nombre;
+      ventana.querySelector('pre').innerHTML = html;
+    };
+    const quitaVentana = () => { if (ventana) ventana.style.display = 'none'; };
+    const pon = (p) => {
+      if (p === original) {
+        h2.innerHTML = p.h;
+        textos.forEach((t, k) => { t.innerHTML = p.o[k]; opts[k].style.display = ''; });
+        Object.assign(q.dataset, { correct: p.c, ok: p.ok, ko: p.ko });
+        if (p.ventana) ponVentana(p.ventana.nombre, p.ventana.cod); else quitaVentana();
+      } else {
+        const orden = baraja(p.o.map((_, k) => k));
+        h2.innerHTML = fmtQuiz(p.p);
+        opts.forEach((o, k) => {
+          o.style.display = k < orden.length ? '' : 'none';
+          if (k < orden.length) textos[k].innerHTML = fmtQuiz(p.o[orden[k]]);
+        });
+        Object.assign(q.dataset, { correct: orden.indexOf(p.c), ok: 'Correcto. ' + p.exp, ko: 'No. ' + p.exp });
+        const lang = p.lang || 'html';
+        if (p.cod) ponVentana(lang === 'css' ? 'estilos.css' : 'index.html', AW.resalta[lang](p.cod));
+        else quitaVentana();
+      }
+      reset();
+    };
+    let lista = [original].concat(baraja(banco)), i = 0;
+    const b = document.createElement('button');
+    b.className = 'btn btn-primary quiz-otra';
+    b.textContent = 'Otra pregunta';
+    b.addEventListener('click', () => {
+      i = (i + 1) % lista.length;
+      if (i === 0) lista = [original].concat(baraja(banco));
+      pon(lista[i]);
+    });
+    r.after(b);
   }
 
   /* ---------- panel que se revela (pregunta a la clase) ---------- */
