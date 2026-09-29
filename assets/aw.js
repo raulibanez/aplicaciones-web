@@ -28,6 +28,9 @@
  *     notas de la diapositiva actual; se actualiza al cambiar de diapositiva.
  *  9. Buscador dentro de la unidad: la tecla B (o el botón «Buscar» de la barra flotante) abre un panel
  *     que busca en el rótulo y el texto visible de las diapositivas de esta presentación, sin las notas.
+ * 10. Chuleta de etiquetas (<section class="chuleta">, estilos en aw.css): colorea el código de cada
+ *     fila y monta el botón «Modo repaso» (.ch-repaso), que difumina las explicaciones de todas las
+ *     chuletas; pasar el ratón o pulsar una fila la descubre.
  */
 (function () {
   'use strict';
@@ -88,8 +91,11 @@
     // tag: "<a href="x" class='y'>" o "</a>" o "<img … />"
     const m = tag.match(/^(<\/?)([a-zA-Z][\w-]*)([\s\S]*?)(\/?>)$/);
     if (!m) return esc(tag);
-    let out = span('punc', m[1]) + span('tag', m[2]);
-    const attrs = m[3];
+    return span('punc', m[1]) + span('tag', m[2]) + resaltaAtributos(m[3]) + span('punc', m[4]);
+  }
+  function resaltaAtributos(attrs) {
+    // attrs: ' href="x" download' (también sueltos, como en la chuleta)
+    let out = '';
     const re = /([^\s=]+)(\s*=\s*)("(?:[^"]*)"|'(?:[^']*)'|[^\s>]+)|(\S+)/g;
     let i = 0, a;
     while ((a = re.exec(attrs))) {
@@ -97,8 +103,7 @@
       if (a[1]) out += span('attr', a[1]) + span('punc', a[2]) + span('str', a[3]);
       else out += span('attr', a[4]);
     }
-    out += esc(attrs.slice(i));
-    return out + span('punc', m[4]);
+    return out + esc(attrs.slice(i));
   }
   function resaltaHtml(src) {
     let out = '', i = 0;
@@ -966,6 +971,33 @@
    * número de sección (data-seccion) pasa a ser un botón que salta al índice de la unidad (la diapositiva cuya
    * etiqueta empieza por «Índice»; si no hay, la segunda).
    */
+  /* ---------- chuleta de etiquetas ----------
+   * <div class="ch-fila"><code>&lt;p&gt;…&lt;/p&gt;</code><span>Párrafo</span></div>
+   * El código que no empieza por < ni & son atributos sueltos (href="…", required). */
+  function montaChuleta(sec) {
+    sec.querySelectorAll('.ch-fila > code').forEach((c) => {
+      const t = c.textContent;
+      c.innerHTML = /^[<&]/.test(t) ? resaltaHtml(t) : resaltaAtributos(t);
+    });
+    const b = sec.querySelector('.ch-repaso');
+    if (b) b.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const on = document.body.classList.toggle('ch-repasando');
+      document.querySelectorAll('.ch-repaso').forEach((x) => {
+        x.setAttribute('aria-pressed', String(on));
+        x.textContent = on ? 'Ver todo' : 'Modo repaso';
+      });
+      document.querySelectorAll('.chuleta .ch-fila').forEach((f) => {
+        f.classList.remove('visto');
+        if (on) f.setAttribute('role', 'button'); else f.removeAttribute('role');
+      });
+    });
+    sec.addEventListener('click', (e) => {
+      const f = e.target.closest('.ch-fila');
+      if (f && document.body.classList.contains('ch-repasando')) f.classList.toggle('visto');
+    });
+  }
+
   function montaVolver(stage) {
     const overlay = stage.shadowRoot && stage.shadowRoot.querySelector('.overlay');
     if (overlay && !overlay.querySelector('.inicio')) {
@@ -1227,6 +1259,7 @@
     document.querySelectorAll('.galeria').forEach(montaGaleria);
     document.querySelectorAll('.foto').forEach(montaFoto);
     document.querySelectorAll('.pill-solucion').forEach(montaSolucion);
+    document.querySelectorAll('section.chuleta').forEach(montaChuleta);
     montaBuscador(stage);
     montaVolver(stage);
     montaNotas(stage);

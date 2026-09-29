@@ -1201,7 +1201,7 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
 </section>
 
 <!-- 45 El esqueleto de una página, explicado -->
-<section data-label="1.3 · El esqueleto de una página" data-seccion="1.3" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.3 · El esqueleto de una página" data-seccion="1.3" data-deck-id="esqueleto" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <aside class="notas">Línea a línea: <b>doctype (HTML actual, el único que hay que saber</b>; los largos de HTML 4 y XHTML son historia); html con lang (idioma, lo usan buscadores y lectores de pantalla); head, lo que no se ve: <b>charset utf-8 (siempre)</b>, viewport (para que el móvil no encoja la página), title (pestaña y buscadores), description (lo que sale en los resultados); body, lo que se ve. En los libros verán otros meta (author, copyright, keywords): <b>keywords ya no lo usan los buscadores</b>. Comentarios &lt;!-- --&gt; para anotar el código: no se ven en la página, pero sí en «ver código fuente», así que nada privado. El resultado de la derecha es real: el navegador lo pinta.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">El esqueleto de una página, línea a línea</h2>
@@ -1230,7 +1230,7 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
 </section>
 
 <!-- 46 Normas de escritura -->
-<section data-label="1.3 · Normas de escritura" data-seccion="1.3" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.3 · Normas de escritura" data-seccion="1.3" data-deck-id="normas" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <aside class="notas"><b>HTML no distingue mayúsculas en etiquetas y atributos</b>, pero la convención es minúsculas. Matiz: los nombres de atributos no distinguen mayúsculas, pero sus valores sí pueden (una ruta de archivo, por ejemplo). Comillas siempre. <b>Cerrar lo que se abre y anidar bien</b>: lo último que se abre es lo primero que se cierra. Los espacios y saltos múltiples se colapsan en uno. Indentar: VS Code lo hace con Shift+Alt+F. <b>El navegador ignora lo que no entiende y no avisa</b>: para eso está el validador (diapositiva 72). Bloque y línea: un párrafo ocupa toda la anchura; un enlace o una negrita van dentro del texto; se ve bien en la UT2.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Siete normas para escribir HTML</h2>
@@ -1246,7 +1246,7 @@ GET https://pokeapi.co/api/v2/pokemon/pikachu</pre>
 </section>
 
 <!-- 47 Encabezados y párrafos -->
-<section data-label="1.3 · Encabezados y párrafos" data-seccion="1.3" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.3 · Encabezados y párrafos" data-seccion="1.3" data-deck-id="encabezados" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <aside class="notas"><b>Un solo h1 por página</b> (es el título; lo usan buscadores y lectores de pantalla), sin saltarse niveles. p para párrafos. <b>br solo para saltos dentro de un párrafo</b> (una dirección, un poema). <b>hr marca un cambio de tema, no es decoración.</b></aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Encabezados y párrafos</h2>
@@ -1299,7 +1299,7 @@ Gratis y sin anuncios.&lt;/p&gt;
 </section>
 
 <!-- 49 Énfasis con significado -->
-<section data-label="1.3 · Énfasis con significado" data-seccion="1.3" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.3 · Énfasis con significado" data-seccion="1.3" data-deck-id="enfasis" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <aside class="notas"><b>Estilos lógicos (dicen qué es)</b> frente a físicos (dicen cómo se ve). strong: importante; em: énfasis al leer; small: letra pequeña legal; mark: resaltado; sup y sub; code y kbd; abbr con title; q y blockquote con cite. b, i y u van en la siguiente diapositiva, con la tabla de lógicos y físicos.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Énfasis con significado</h2>
@@ -1366,7 +1366,7 @@ DNS&lt;/abbr&gt; traduce nombres.&lt;/p&gt;
 </section>
 
 <!-- 50 Lo que ya no se usa -->
-<section data-label="1.3 · Lo que ya no se usa" data-seccion="1.3" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.3 · Lo que ya no se usa" data-seccion="1.3" data-deck-id="obsoletas" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <aside class="notas">Aquí se explica por qué el material de otros años y muchos libros llevan font, center, align o border en las tablas: <b>HTML 4 mezclaba contenido y aspecto</b>. <b>Desde HTML5 el aspecto va en CSS.</b> Fuente: MDN Web Docs, referencia de elementos HTML, apartado de elementos obsoletos, consultado el 11 de septiembre de 2026. Los verán en páginas viejas: <b>hay que reconocerlos, no escribirlos</b>.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Lo que verás en páginas viejas y no debes escribir</h2>
@@ -1392,7 +1392,7 @@ DNS&lt;/abbr&gt; traduce nombres.&lt;/p&gt;
 </section>
 
 <!-- 51 Tildes y caracteres especiales -->
-<section data-label="1.3 · Tildes y caracteres especiales" data-seccion="1.3" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.3 · Tildes y caracteres especiales" data-seccion="1.3" data-deck-id="caracteres" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <aside class="notas">Con meta charset utf-8 <b>se escriben tildes, eñes y símbolos directamente</b>; VS Code guarda en UTF-8 por defecto. <b>Las entidades solo para lo que HTML se reservaría</b>: < > & y las comillas dentro de un atributo, más el espacio de no separación y algún símbolo. La tabla de &aacute; de los libros es de cuando se guardaba en ISO-8859-1; <b>hoy es innecesaria</b>.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Tildes, eñes y caracteres reservados</h2>
@@ -1456,7 +1456,7 @@ DocumentRoot  "C:/xampp/htdocs"&lt;/code&gt;&lt;/pre&gt;</pre>
 </section>
 
 <!-- 53 Listas -->
-<section data-label="1.3 · Listas" data-seccion="1.3" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.3 · Listas" data-seccion="1.3" data-deck-id="listas" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <aside class="notas">ul con li: viñetas. ol: numerada, con start para empezar en otro número y type para letras o romanos. dl con dt y dd: glosario. Se pueden anidar: una lista dentro de un li. <b>Cada li dentro de su lista, nunca suelto.</b></aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Listas: con viñetas, numeradas y de definiciones</h2>
@@ -1494,7 +1494,7 @@ DocumentRoot  "C:/xampp/htdocs"&lt;/code&gt;&lt;/pre&gt;</pre>
 </section>
 
 <!-- 54 Enlaces -->
-<section data-label="1.3 · Enlaces" data-seccion="1.3" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.3 · Enlaces" data-seccion="1.3" data-deck-id="enlaces" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <aside class="notas">href absoluto (otra web), relativo (otra página de tu sitio), mailto y tel, download para forzar la descarga. <b>target _blank abre en pestaña nueva</b>. Muchos tutoriales añaden rel="noopener" por seguridad: los navegadores actuales ya lo aplican solos con target _blank (MDN, atributo rel, consultado el 27 de septiembre de 2026), así que no hace falta. Anclas: un id en el destino y href con almohadilla; es el fragmento de la URL de la diapositiva 13. El atributo <b>name para anclas es de HTML 4 y está obsoleto</b>.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">HTML</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Enlaces: el hipertexto</h2>
@@ -1792,7 +1792,7 @@ mi-web/
 </section>
 
 <!-- 66 Tablas -->
-<section data-label="1.5 · Tablas" data-seccion="1.5" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.5 · Tablas" data-seccion="1.5" data-deck-id="tablas" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <aside class="notas">table, caption (título), thead con tr y th, tbody con tr y td. <b>Sin bordes ni colores</b>: el navegador la pinta sin líneas y es normal; <b>los bordes son CSS (UT2)</b>. Las tablas son para datos en filas y columnas.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Imágenes, tablas y semántica</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Tablas: datos en filas y columnas</h2>
@@ -1871,7 +1871,7 @@ mi-web/
 </section>
 
 <!-- 69 El mapa de una página -->
-<section data-label="1.5 · El mapa de una página" data-seccion="1.5" style="display:grid;grid-template-columns:1fr 760px;gap:72px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+<section data-label="1.5 · El mapa de una página" data-seccion="1.5" data-deck-id="semantica" style="display:grid;grid-template-columns:1fr 760px;gap:72px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
   <aside class="notas">Etiquetas semánticas: header (cabecera con logotipo y título), nav (menú), <b>main (el contenido principal, uno por página)</b>, section (una parte con su encabezado), article (contenido con sentido propio: una noticia, un producto), aside (lo lateral), footer (pie). <b>div y span cuando ninguna encaja.</b> id (único) y class (repetible) para nombrar zonas: CSS los usará en la UT2. <b>No cambian el aspecto</b>: dan significado a buscadores, lectores de pantalla y a quien lea el código.</aside>
   <div style="display:flex;flex-direction:column">
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Imágenes, tablas y semántica</p>
@@ -2028,7 +2028,7 @@ mi-web/
 </section>
 
 <!-- 75 El formulario mínimo -->
-<section data-label="1.7 · El formulario mínimo" data-seccion="1.7" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.7 · El formulario mínimo" data-seccion="1.7" data-deck-id="formulario" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <aside class="notas">form con action (a dónde van los datos) y method. <b>enctype solo hace falta cuando el formulario sube archivos</b> (multipart/form-data); si no, no se pone. label con for e input con id: la etiqueta se hace clicable y el lector de pantalla sabe qué es el campo. name es lo que viaja: <b>sin name, el dato no se envía</b> aunque el campo se vea. button envía. El action apunta a webhook.site: <b>la URL la da el profesor</b> el día de la práctica.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Formularios</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">El formulario mínimo</h2>
@@ -2061,7 +2061,7 @@ mi-web/
 </section>
 
 <!-- 76 Tipos de campo -->
-<section data-label="1.7 · Tipos de campo" data-seccion="1.7" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.7 · Tipos de campo" data-seccion="1.7" data-deck-id="campos" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <aside class="notas"><b>Cada type cambia lo que hace el navegador</b>: teclado numérico en el móvil, selector de fecha, validación del formato del correo, ocultar la contraseña. Si el navegador no conoce un tipo, <b>lo trata como text</b>. El tipo datetime se eliminó de la especificación; queda datetime-local.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Formularios</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Tipos de campo</h2>
@@ -2096,7 +2096,7 @@ mi-web/
 </section>
 
 <!-- 77 Atributos que ayudan -->
-<section data-label="1.7 · Atributos que ayudan" data-seccion="1.7" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
+<section data-label="1.7 · Atributos que ayudan" data-seccion="1.7" data-deck-id="atributos" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
   <aside class="notas"><b>placeholder: texto de ejemplo, no sustituye al label.</b> <b>required: no se puede enviar vacío</b>; el navegador avisa. value: valor inicial. maxlength, min, max, step. autocomplete ayuda al navegador a rellenar. autofocus pone el cursor. <b>Probar en el resultado: pulsar Enviar con el campo vacío</b> y ver el aviso del navegador.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Formularios</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Atributos que ayudan: el navegador valida antes de enviar</h2>
@@ -2382,7 +2382,7 @@ mi-web/
     <span class="pill">Examen</span>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Examen de teoría de la unidad</h2>
     <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">Preguntas de opción múltiple sobre estas diapositivas, en clase. Sin apuntes, sin presentación y sin IA.</p>
-    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">Para prepararlo: repasa el resumen, vuelve a hacer los cuatro ejercicios interactivos y los tres quiz, y lee el código de tus pens intentando explicar cada etiqueta.</p>
+    <p style="font-size:var(--type-small);line-height:1.5;color:var(--muted);margin-top:var(--gap-item)">Para prepararlo: repasa el resumen y la chuleta de HTML (con su Modo repaso), vuelve a hacer los cuatro ejercicios interactivos y los tres quiz, y lee el código de tus pens intentando explicar cada etiqueta.</p>
   </div>
   <div style="background:var(--white);border-radius:24px;padding:64px;display:grid;grid-template-columns:1fr 1fr;gap:48px 40px;align-content:center;box-shadow:0 2px 0 var(--line)">
     <div><p style="color:var(--muted);font-size:var(--type-small)">Duración</p><p style="font-size:var(--type-body);font-weight:800;color:var(--navy);margin-top:10px">1 sesión (50 min)</p></div>
@@ -2405,6 +2405,205 @@ mi-web/
     <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--navy);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">05</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">Un solo h1, énfasis con significado, imágenes con alt, tablas solo para datos, y etiquetas semánticas para que buscadores y lectores de pantalla entiendan la página.</p></div>
     <div style="display:flex;gap:28px;align-items:flex-start;background:var(--white);border-radius:20px;padding:32px 36px;box-shadow:0 2px 0 var(--line)"><span style="width:64px;height:64px;border-radius:16px;background:var(--green-dark);color:var(--white);display:grid;place-items:center;font-size:var(--type-caption);font-weight:800;flex:none">06</span><p style="font-size:var(--type-small);line-height:1.4;color:var(--navy)">Un formulario recoge datos con label, name y el tipo de campo adecuado; el navegador valida y los envía por GET (en la URL) o POST (en el cuerpo).</p></div>
   </div>
+</section>
+
+<!-- 89b Chuleta 1: la página y el texto -->
+<section class="chuleta" data-label="Chuleta de HTML · 1 de 3" style="padding:64px var(--pad-x) 88px;display:flex;flex-direction:column">
+  <aside class="notas"><b>Chuleta de estudio, 1 de 3.</b> Todas las etiquetas de la unidad con su cierre, agrupadas como se explicaron. Cada encabezado de color salta a la diapositiva que lo explica. <b>Modo repaso</b> difumina las explicaciones: el alumno dice qué hace cada etiqueta y pasa el ratón (o pulsa la fila) para comprobarlo; vale para las tres chuletas a la vez. Se imprimen con Ctrl+P, páginas 91 a 93. Útil antes del examen de teoría y de la prueba práctica, donde sí se puede usar la presentación.</aside>
+  <div class="ch-cabecera">
+    <img class="icono" src="../assets/iconos/html.webp" alt="">
+    <div>
+      <p style="font-size:var(--type-caption);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Chuleta de HTML · 1 de 3</p>
+      <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:8px;color:var(--navy)">La página y el texto</h2>
+    </div>
+    <button type="button" class="btn btn-ghost ch-repaso" aria-pressed="false" title="Tapa las explicaciones: di qué hace cada etiqueta y pasa el ratón por encima para comprobarlo">Modo repaso</button>
+  </div>
+  <p class="ch-intro">Todas las etiquetas de la unidad con su cierre. <b>Pulsa el título de un grupo</b> para ir a su explicación; <b>Modo repaso</b> tapa lo que hace cada una.</p>
+  <div class="ch-grid">
+    <div class="ch-col">
+      <div class="ch-caja" style="--c:var(--navy);--t:var(--white)">
+        <a class="ch-cab" href="#esqueleto" title="Ir a la explicación">El esqueleto<span>1.3</span></a>
+        <div class="ch-fila vacia"><code>&lt;!DOCTYPE html&gt;</code><span>Declara HTML5; va en la primera línea</span></div>
+        <div class="ch-fila"><code>&lt;html lang="es"&gt;…&lt;/html&gt;</code><span>Envuelve toda la página; lang, su idioma</span></div>
+        <div class="ch-fila"><code>&lt;head&gt;…&lt;/head&gt;</code><span>Metadatos, título, estilos y scripts</span></div>
+        <div class="ch-fila vacia"><code>&lt;meta charset="utf-8"&gt;</code><span>Codificación UTF-8: tildes, eñes y símbolos</span></div>
+        <div class="ch-fila vacia"><code>&lt;meta name="viewport" …&gt;</code><span>Ajusta la página al ancho de la pantalla</span></div>
+        <div class="ch-fila vacia"><code>&lt;meta name="…" content="…"&gt;</code><span>Resumen (description) o autor (author)</span></div>
+        <div class="ch-fila"><code>&lt;title&gt;…&lt;/title&gt;</code><span>Título en la pestaña y en los buscadores</span></div>
+        <div class="ch-fila"><code>&lt;body&gt;…&lt;/body&gt;</code><span>Cuerpo: todo el contenido visible</span></div>
+        <div class="ch-fila"><code>&lt;!-- … --&gt;</code><span>Comentario: una nota para quien lee el código</span></div>
+      </div>
+      <div class="ch-caja" style="--c:var(--blue);--t:var(--white)">
+        <a class="ch-cab" href="#encabezados" title="Ir a la explicación">Títulos y bloques de texto<span>1.3</span></a>
+        <div class="ch-fila"><code>&lt;h1&gt;…&lt;/h1&gt;</code><span>Título principal. Uno por página</span></div>
+        <div class="ch-fila"><code>&lt;h2&gt;…&lt;/h2&gt; a &lt;h6&gt;…&lt;/h6&gt;</code><span>Apartados y subapartados, nivel a nivel</span></div>
+        <div class="ch-fila"><code>&lt;p&gt;…&lt;/p&gt;</code><span>Párrafo: un bloque de texto</span></div>
+        <div class="ch-fila vacia"><code>&lt;br&gt;</code><span>Salto de línea dentro de un párrafo</span></div>
+        <div class="ch-fila vacia"><code>&lt;hr&gt;</code><span>Cambio de tema entre dos partes del texto</span></div>
+        <div class="ch-fila"><code>&lt;pre&gt;…&lt;/pre&gt;</code><span>Conserva los espacios y los saltos de línea</span></div>
+        <div class="ch-fila"><code>&lt;blockquote&gt;…&lt;/blockquote&gt;</code><span>Cita larga en bloque; cite, su fuente</span></div>
+      </div>
+    </div>
+    <div class="ch-col">
+      <div class="ch-caja" style="--c:var(--cyan);--w:300px">
+        <a class="ch-cab" href="#enfasis" title="Ir a la explicación">Texto con significado<span>1.3</span></a>
+        <div class="ch-fila"><code>&lt;strong&gt;…&lt;/strong&gt;</code><span>Texto <strong>importante</strong> o urgente</span></div>
+        <div class="ch-fila"><code>&lt;em&gt;…&lt;/em&gt;</code><span><em>Énfasis</em>, como al leerlo en voz alta</span></div>
+        <div class="ch-fila"><code>&lt;small&gt;…&lt;/small&gt;</code><span>Letra pequeña: avisos legales y aclaraciones</span></div>
+        <div class="ch-fila"><code>&lt;mark&gt;…&lt;/mark&gt;</code><span>Resaltado, como con <mark style="background:var(--yellow);color:inherit">rotulador</mark></span></div>
+        <div class="ch-fila"><code>&lt;sup&gt;…&lt;/sup&gt;</code><span>Superíndice: m<sup>2</sup></span></div>
+        <div class="ch-fila"><code>&lt;sub&gt;…&lt;/sub&gt;</code><span>Subíndice: H<sub>2</sub>O</span></div>
+        <div class="ch-fila"><code>&lt;code&gt;…&lt;/code&gt;</code><span>Un fragmento de código</span></div>
+        <div class="ch-fila"><code>&lt;kbd&gt;…&lt;/kbd&gt;</code><span>Una tecla o un atajo: <kbd style="font-family:var(--mono);font-size:.9em;background:var(--gray);border-radius:6px;padding:0 8px">F5</kbd></span></div>
+        <div class="ch-fila"><code>&lt;abbr title="…"&gt;…&lt;/abbr&gt;</code><span>Abreviatura; title, su significado</span></div>
+        <div class="ch-fila"><code>&lt;ins&gt;…&lt;/ins&gt;</code><span>Texto añadido a un documento</span></div>
+        <div class="ch-fila"><code>&lt;del&gt;…&lt;/del&gt;</code><span>Texto borrado de un documento</span></div>
+        <p class="ch-sub">Físicas: HTML5 les dio un uso</p>
+        <div class="ch-fila"><code>&lt;b&gt;…&lt;/b&gt;</code><span>Destacado visual: el nombre de un producto</span></div>
+        <div class="ch-fila"><code>&lt;i&gt;…&lt;/i&gt;</code><span>Otra voz: un término técnico, una palabra extranjera</span></div>
+        <div class="ch-fila"><code>&lt;u&gt;…&lt;/u&gt;</code><span>Una anotación: la palabra mal escrita</span></div>
+        <div class="ch-fila"><code>&lt;s&gt;…&lt;/s&gt;</code><span>Dato superado: el precio <s>anterior</s></span></div>
+      </div>
+      <div class="ch-caja" style="--c:var(--gray)">
+        <a class="ch-cab" href="#normas" title="Ir a la explicación">Normas de escritura<span>1.3</span></a>
+        <div class="ch-chips normas"><span><b>1</b>minúsculas</span><span><b>2</b>valores entre comillas</span><span><b>3</b>cierra lo que abres</span><span><b>4</b>anida bien</span><span><b>5</b>varios espacios cuentan como uno</span><span><b>6</b>indenta</span><span><b>7</b>pasa el validador</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="ch-leyenda"><code class="elipsis">…</code> el contenido <span class="sep">·</span> <code class="vacia">&lt;br&gt;</code> elemento vacío: solo apertura <span class="sep">·</span> <span class="t">etiqueta</span> <span class="a">atributo</span> <span class="v">"valor"</span></p>
+</section>
+
+<!-- 89c Chuleta 2: listas, enlaces, imágenes y tablas -->
+<section class="chuleta" data-label="Chuleta de HTML · 2 de 3" style="padding:64px var(--pad-x) 88px;display:flex;flex-direction:column">
+  <aside class="notas"><b>Chuleta de estudio, 2 de 3.</b> Listas, enlaces, caracteres especiales, imágenes, multimedia y tablas. Los encabezados de color saltan a su explicación. En Modo repaso, pasar el ratón por una fila la descubre.</aside>
+  <div class="ch-cabecera">
+    <img class="icono" src="../assets/iconos/html.webp" alt="">
+    <div>
+      <p style="font-size:var(--type-caption);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Chuleta de HTML · 2 de 3</p>
+      <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:8px;color:var(--navy)">Listas, enlaces, imágenes y tablas</h2>
+    </div>
+    <button type="button" class="btn btn-ghost ch-repaso" aria-pressed="false" title="Tapa las explicaciones: di qué hace cada etiqueta y pasa el ratón por encima para comprobarlo">Modo repaso</button>
+  </div>
+  <p class="ch-intro">Lo que hace de la página una web: listas, enlaces entre páginas, imágenes y datos en tablas. <b>Pulsa el título de un grupo</b> para ir a su explicación.</p>
+  <div class="ch-grid">
+    <div class="ch-col">
+      <div class="ch-caja" style="--c:var(--green);--w:150px">
+        <a class="ch-cab" href="#listas" title="Ir a la explicación">Listas<span>1.3</span></a>
+        <div class="ch-fila"><code>&lt;ul&gt;…&lt;/ul&gt;</code><span>Lista con viñetas, en cualquier orden</span></div>
+        <div class="ch-fila"><code>&lt;ol&gt;…&lt;/ol&gt;</code><span>Lista numerada, para pasos en orden (start, type)</span></div>
+        <div class="ch-fila"><code>&lt;li&gt;…&lt;/li&gt;</code><span>Cada elemento, siempre dentro de su lista</span></div>
+        <div class="ch-fila"><code>&lt;dl&gt;…&lt;/dl&gt;</code><span>Lista de definiciones, como un glosario</span></div>
+        <div class="ch-fila"><code>&lt;dt&gt;…&lt;/dt&gt;</code><span>El término</span></div>
+        <div class="ch-fila"><code>&lt;dd&gt;…&lt;/dd&gt;</code><span>Su definición</span></div>
+      </div>
+      <div class="ch-caja" style="--c:var(--orange);--w:260px">
+        <a class="ch-cab" href="#enlaces" title="Ir a la explicación">Enlaces<span>1.3</span></a>
+        <div class="ch-fila"><code>&lt;a href="…"&gt;…&lt;/a&gt;</code><span>Enlace: href, el destino; dentro, el texto que se pulsa</span></div>
+        <div class="ch-fila"><code>href="https://…"</code><span>Absoluta: la URL completa, para otra web</span></div>
+        <div class="ch-fila"><code>href="img/logo.png"</code><span>Relativa: desde esta página, para tu sitio</span></div>
+        <div class="ch-fila"><code>href="../index.html"</code><span>Relativa: ../ sube un nivel</span></div>
+        <div class="ch-fila"><code>href="#id"</code><span>Ancla: salta al elemento con ese id</span></div>
+        <div class="ch-fila"><code>href="mailto:…"</code><span>Abre el correo; tel: abre la llamada</span></div>
+        <div class="ch-fila"><code>target="_blank"</code><span>Abre el enlace en una pestaña nueva</span></div>
+        <div class="ch-fila"><code>download</code><span>Descarga el archivo al pulsar</span></div>
+      </div>
+      <div class="ch-caja" style="--c:var(--gray)">
+        <a class="ch-cab" href="#caracteres" title="Ir a la explicación">Caracteres reservados<span>1.3</span></a>
+        <div class="ch-chips"><span><code>&amp;lt;</code>&lt;</span><span><code>&amp;gt;</code>&gt;</span><span><code>&amp;amp;</code>&amp;</span><span><code>&amp;quot;</code>"</span><span><code>&amp;nbsp;</code>espacio fijo: une dos palabras en la línea</span><span><code>&amp;copy;</code>©</span><span><code>&amp;euro;</code>€</span></div>
+      </div>
+    </div>
+    <div class="ch-col">
+      <div class="ch-caja" style="--c:var(--blue);--t:var(--white);--w:300px">
+        <a class="ch-cab" href="#imagenes" title="Ir a la explicación">Imágenes y multimedia<span>1.5</span></a>
+        <div class="ch-fila vacia"><code>&lt;img src="…" alt="…"&gt;</code><span>Imagen. alt la describe: obligatorio</span></div>
+        <div class="ch-fila"><code>width="…" height="…"</code><span>Reservan su hueco mientras carga</span></div>
+        <div class="ch-fila"><code>&lt;figure&gt;…&lt;/figure&gt;</code><span>Imagen con su pie</span></div>
+        <div class="ch-fila"><code>&lt;figcaption&gt;…&lt;/figcaption&gt;</code><span>El pie: qué es, autor y licencia</span></div>
+        <div class="ch-fila"><code>&lt;video controls&gt;…&lt;/video&gt;</code><span>Vídeo con botones (poster, muted)</span></div>
+        <div class="ch-fila"><code>&lt;audio controls&gt;…&lt;/audio&gt;</code><span>Audio con botones</span></div>
+        <div class="ch-fila vacia"><code>&lt;source src="…" type="…"&gt;</code><span>Un formato del archivo; el navegador elige</span></div>
+        <div class="ch-fila"><code>&lt;iframe src="…"&gt;&lt;/iframe&gt;</code><span>Ventana a otra web: un vídeo, un mapa</span></div>
+      </div>
+      <div class="ch-caja" style="--c:var(--cyan);--w:270px">
+        <a class="ch-cab" href="#tablas" title="Ir a la explicación">Tablas<span>1.5</span></a>
+        <div class="ch-fila"><code>&lt;table&gt;…&lt;/table&gt;</code><span>Tabla de datos en filas y columnas</span></div>
+        <div class="ch-fila"><code>&lt;caption&gt;…&lt;/caption&gt;</code><span>Título de la tabla</span></div>
+        <div class="ch-fila"><code>&lt;thead&gt;…&lt;/thead&gt;</code><span>Grupo de filas de cabecera</span></div>
+        <div class="ch-fila"><code>&lt;tbody&gt;…&lt;/tbody&gt;</code><span>Grupo de filas con los datos</span></div>
+        <div class="ch-fila"><code>&lt;tr&gt;…&lt;/tr&gt;</code><span>Una fila</span></div>
+        <div class="ch-fila"><code>&lt;th&gt;…&lt;/th&gt;</code><span>Celda de cabecera</span></div>
+        <div class="ch-fila"><code>&lt;td&gt;…&lt;/td&gt;</code><span>Celda de datos</span></div>
+        <div class="ch-fila"><code>colspan="2" rowspan="2"</code><span>Ocupa dos columnas o dos filas</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="ch-leyenda"><code class="elipsis">…</code> el contenido <span class="sep">·</span> <code class="vacia">&lt;img&gt;</code> elemento vacío: solo apertura <span class="sep">·</span> <span class="t">etiqueta</span> <span class="a">atributo</span> <span class="v">"valor"</span></p>
+</section>
+
+<!-- 89d Chuleta 3: zonas de la página y formularios -->
+<section class="chuleta" data-label="Chuleta de HTML · 3 de 3" style="padding:64px var(--pad-x) 88px;display:flex;flex-direction:column">
+  <aside class="notas"><b>Chuleta de estudio, 3 de 3.</b> Etiquetas semánticas, formularios con sus tipos de campo y atributos, y lo obsoleto, tachado en rojo, con su sustituto (CSS; para las anclas, id). Los encabezados de color saltan a su explicación.</aside>
+  <div class="ch-cabecera">
+    <img class="icono" src="../assets/iconos/html.webp" alt="">
+    <div>
+      <p style="font-size:var(--type-caption);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Chuleta de HTML · 3 de 3</p>
+      <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:8px;color:var(--navy)">Zonas de la página y formularios</h2>
+    </div>
+    <button type="button" class="btn btn-ghost ch-repaso" aria-pressed="false" title="Tapa las explicaciones: di qué hace cada etiqueta y pasa el ratón por encima para comprobarlo">Modo repaso</button>
+  </div>
+  <p class="ch-intro">Las zonas dicen qué es cada parte de la página; el formulario, la parte que rellena el visitante. <b>Pulsa el título de un grupo</b> para ir a su explicación.</p>
+  <div class="ch-grid">
+    <div class="ch-col">
+      <div class="ch-caja" style="--c:var(--green);--w:230px">
+        <a class="ch-cab" href="#semantica" title="Ir a la explicación">Zonas de la página<span>1.5</span></a>
+        <div class="ch-fila"><code>&lt;header&gt;…&lt;/header&gt;</code><span>Cabecera: logotipo, título, a veces el menú</span></div>
+        <div class="ch-fila"><code>&lt;nav&gt;…&lt;/nav&gt;</code><span>El menú de navegación</span></div>
+        <div class="ch-fila"><code>&lt;main&gt;…&lt;/main&gt;</code><span>El contenido principal. Uno por página</span></div>
+        <div class="ch-fila"><code>&lt;section&gt;…&lt;/section&gt;</code><span>Una parte, con su propio encabezado</span></div>
+        <div class="ch-fila"><code>&lt;article&gt;…&lt;/article&gt;</code><span>Algo con sentido por sí solo: una noticia</span></div>
+        <div class="ch-fila"><code>&lt;aside&gt;…&lt;/aside&gt;</code><span>Lo lateral: lo más leído, anuncios</span></div>
+        <div class="ch-fila"><code>&lt;footer&gt;…&lt;/footer&gt;</code><span>El pie: autor, aviso legal, contacto</span></div>
+        <div class="ch-fila"><code>&lt;div&gt;…&lt;/div&gt;</code><span>Caja genérica: agrupa bloques para el CSS</span></div>
+        <div class="ch-fila"><code>&lt;span&gt;…&lt;/span&gt;</code><span>Contenedor genérico para un trozo de texto</span></div>
+        <div class="ch-fila"><code>id="…" class="…"</code><span>Nombre único · nombre de grupo, repetible</span></div>
+      </div>
+      <div class="ch-caja" style="--c:var(--yellow)">
+        <a class="ch-cab" href="#campos" title="Ir a la explicación">Tipos de campo: type de input<span>1.7</span></a>
+        <div class="ch-chips"><code>text</code><code>password</code><code>email</code><code>number</code><code>date</code><code>time</code><code>color</code><code>range</code><code>tel</code><code>url</code><code>file</code><code>search</code><code>hidden</code><code>radio</code><code>checkbox</code></div>
+        <p class="ch-nota"><b>radio</b>: una opción (mismo name) · <b>checkbox</b>: varias · <b>hidden</b>: dato oculto que también viaja</p>
+      </div>
+      <div class="ch-caja" style="--c:var(--red)">
+        <a class="ch-cab" href="#obsoletas" title="Ir a la explicación">Obsoleto: hoy se hace con CSS<span>1.3</span></a>
+        <div class="ch-chips mal"><code>&lt;font&gt;</code><code>&lt;center&gt;</code><code>&lt;big&gt;</code><code>&lt;tt&gt;</code><code>&lt;strike&gt;</code><code>&lt;marquee&gt;</code><code>&lt;frameset&gt;</code><code>&lt;frame&gt;</code><code>&lt;a name&gt;</code><code>bgcolor</code><code>align</code><code>border</code><span class="ch-fin">→ el aspecto, con <b>CSS</b></span></div>
+      </div>
+    </div>
+    <div class="ch-col">
+      <div class="ch-caja" style="--c:var(--orange)">
+        <a class="ch-cab" href="#formulario" title="Ir a la explicación">Formularios<span>1.7</span></a>
+        <div class="ch-fila"><code>&lt;form&gt;…&lt;/form&gt;</code><span>Agrupa los campos y envía sus datos</span></div>
+        <div class="ch-fila"><code>action="…"</code><span>A dónde se envían los datos</span></div>
+        <div class="ch-fila"><code>method="post"</code><span>Cómo viajan: get, en la URL; post, en el cuerpo</span></div>
+        <div class="ch-fila"><code>&lt;label for="…"&gt;…&lt;/label&gt;</code><span>Texto del campo; for, el id del campo</span></div>
+        <div class="ch-fila vacia"><code>&lt;input type="…" name="…"&gt;</code><span>Un campo; name es lo que viaja</span></div>
+        <div class="ch-fila"><code>&lt;textarea&gt;…&lt;/textarea&gt;</code><span>Texto de varias líneas</span></div>
+        <div class="ch-fila"><code>&lt;select&gt;…&lt;/select&gt;</code><span>Lista desplegable para elegir una opción</span></div>
+        <div class="ch-fila"><code>&lt;option value="…"&gt;…&lt;/option&gt;</code><span>Cada opción; value es lo que viaja</span></div>
+        <div class="ch-fila"><code>&lt;optgroup&gt;…&lt;/optgroup&gt;</code><span>Agrupa opciones; label, su título</span></div>
+        <div class="ch-fila"><code>&lt;fieldset&gt;…&lt;/fieldset&gt;</code><span>Agrupa campos relacionados</span></div>
+        <div class="ch-fila"><code>&lt;legend&gt;…&lt;/legend&gt;</code><span>El título del grupo</span></div>
+        <div class="ch-fila"><code>&lt;button type="…"&gt;…&lt;/button&gt;</code><span>submit envía; reset borra; button, para JavaScript</span></div>
+      </div>
+      <div class="ch-caja" style="--c:var(--orange);--w:260px">
+        <a class="ch-cab" href="#atributos" title="Ir a la explicación">Atributos de los campos<span>1.7</span></a>
+        <div class="ch-fila"><code>required</code><span>Campo obligatorio: el navegador avisa</span></div>
+        <div class="ch-fila"><code>placeholder="…"</code><span>Texto de ejemplo en gris dentro del campo</span></div>
+        <div class="ch-fila"><code>value="…"</code><span>Valor inicial; en radio, lo que viaja</span></div>
+        <div class="ch-fila"><code>min max maxlength</code><span>Límites de número y de longitud</span></div>
+        <div class="ch-fila"><code>checked autofocus</code><span>Marcada de entrada · el cursor empieza ahí</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="ch-leyenda"><code class="elipsis">…</code> el contenido <span class="sep">·</span> <code class="vacia">&lt;input&gt;</code> elemento vacío: solo apertura <span class="sep">·</span> <span class="t">etiqueta</span> <span class="a">atributo</span> <span class="v">"valor"</span></p>
 </section>
 
 <!-- 90 Recursos -->
