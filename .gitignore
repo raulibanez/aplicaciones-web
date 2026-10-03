@@ -4,8 +4,3 @@ plantilla/_*.html
 Thumbs.db
 
 guiones/*
-
-# Ejemplo de la demostración de IA (UT2, diapositiva 57): sus .html son el HTML de
-# «Mi videojuego favorito», el modelo del examen práctico de la UT1. Quitar esta línea
-# después de ese examen para publicarlo.
-ut02/ejemplos/ia-supertuxkart/*.html

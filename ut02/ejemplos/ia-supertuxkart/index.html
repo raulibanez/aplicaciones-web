@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Página de ejemplo sobre SuperTuxKart, mi videojuego favorito">
+  <meta name="author" content="Raúl Ibáñez">
+  <title>SuperTuxKart, mi videojuego favorito</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>SuperTuxKart</h1>
+    <p>¿El mejor juego de karts libre de la historia?</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#que-es">Qué es</a></li>
+      <li><a href="#personajes">Personajes</a></li>
+      <li><a href="#ficha">Ficha</a></li>
+      <li><a href="#opinion">Opinión</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2 id="que-es">Qué es SuperTuxKart</h2>
+    <p><strong>SuperTuxKart</strong> es un juego de carreras de karts <em>libre y gratuito</em> en el que corren las mascotas del software libre: Tux, Gnu, Konqi y muchas más. Salió por primera vez en 2004 y sigue actualizándose.</p>
+
+    <h3>Historia del juego</h3>
+    <p>Nació como una continuación de <em>TuxKart</em>. Con los años ha añadido circuitos, personajes, un modo historia contra el malvado Nolok y carreras en línea.</p>
+
+    <h3 id="personajes">Personajes principales</h3>
+    <ul>
+      <li><strong>Tux</strong>: el pingüino de Linux y protagonista.</li>
+      <li><strong>Gnu</strong>: el ñu del proyecto GNU, mentor de Tux.</li>
+      <li><strong>Nolok</strong>: el villano que secuestra a Gnu.</li>
+    </ul>
+
+    <h3 id="ficha">Ficha técnica</h3>
+    <table>
+      <caption>Datos del juego</caption>
+      <tr><th>Primera versión</th><td>2004</td></tr>
+      <tr><th>Última versión</th><td>1.4</td></tr>
+      <tr><th>Plataformas</th><td>Windows, Linux, macOS, Android</td></tr>
+      <tr><th>Licencia</th><td>GPL</td></tr>
+    </table>
+
+    <h3>Por qué es mi videojuego favorito</h3>
+    <p>Porque se puede jugar en cualquier ordenador, porque los circuitos están llenos de detalles y porque cualquiera puede ver cómo está hecho y mejorarlo.</p>
+
+    <h3>Véase también</h3>
+    <ol>
+      <li><a href="https://supertuxkart.net/">Página oficial de SuperTuxKart</a></li>
+      <li><a href="https://es.wikipedia.org/wiki/SuperTuxKart">Artículo en Wikipedia</a></li>
+    </ol>
+
+    <h3 id="opinion">Da tu opinión: del 1 al 10, ¿qué te parece este juego?</h3>
+    <form action="https://webhook.site/" method="post">
+      <p class="notas">
+        <label><input type="radio" name="nota" value="1"> 1</label>
+        <label><input type="radio" name="nota" value="2"> 2</label>
+        <label><input type="radio" name="nota" value="3"> 3</label>
+        <label><input type="radio" name="nota" value="4"> 4</label>
+        <label><input type="radio" name="nota" value="5"> 5</label>
+        <label><input type="radio" name="nota" value="6"> 6</label>
+        <label><input type="radio" name="nota" value="7"> 7</label>
+        <label><input type="radio" name="nota" value="8"> 8</label>
+        <label><input type="radio" name="nota" value="9"> 9</label>
+        <label><input type="radio" name="nota" value="10"> 10</label>
+      </p>
+      <p>
+        <label for="comentario">Comentario</label><br>
+        <textarea id="comentario" name="comentario" rows="4" cols="40"></textarea>
+      </p>
+      <p><button type="submit">Enviar opinión</button></p>
+    </form>
+  </main>
+
+  <aside>
+    <h2>Capturas del juego</h2>
+    <p>Aquí hay algunas imágenes de SuperTuxKart:</p>
+    <div class="galeria">
+      <figure class="destacada">
+        <img src="img/stk1.jpg" alt="Un kart en un circuito desértico de SuperTuxKart" width="1000" height="563">
+        <figcaption>Un circuito de la versión 1.3. Captura de los autores de SuperTuxKart, CC BY-SA 4.0.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/stk2.jpg" alt="Gnu y Nolok delante de un templo en el modo historia" width="1000" height="750">
+        <figcaption>Gnu y Nolok en el modo historia. Captura de QwertyChouskie, CC BY-SA 4.0.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/stk3.jpg" alt="Carrera en un circuito nevado" width="1000" height="537">
+        <figcaption>Circuito nevado de la versión 0.9. Captura del equipo de SuperTuxKart, CC BY 3.0.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/stk4.jpg" alt="Karts en una carrera junto a un lago" width="1000" height="537">
+        <figcaption>Carrera de la versión 0.9. Captura del equipo de SuperTuxKart, CC BY 3.0.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/stk5.jpg" alt="Un kart saltando en un circuito de la versión 0.9" width="1000" height="537">
+        <figcaption>Otro circuito de la versión 0.9. Captura del equipo de SuperTuxKart, CC BY 3.0.</figcaption>
+      </figure>
+    </div>
+  </aside>
+
+  <footer>
+    <p><em>Autor de la página: Raúl Ibáñez</em></p>
+    <p><small>Portada: fotogramas del <a href="https://github.com/supertuxkart/trailer">tráiler oficial de SuperTuxKart 1.3</a>, del equipo de SuperTuxKart. Personajes: renders de los modelos 3D del juego. Kart de Tux de Julian Schönbächler (CC BY-SA 3.0); Gnu de ZAQraven y Typhon306 (dominio público); Nolok de Tobias Beyrer, STKRudy85 y Samuncle (CC BY-SA 3.0 y 4.0).</small></p>
+  </footer>
+</body>
+</html>
