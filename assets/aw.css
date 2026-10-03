@@ -725,6 +725,13 @@ section:has(> .ej) { grid-template-rows: minmax(0, 1fr); }
 .solucion-marco iframe { flex: 1; border: 0; width: 100%; background: #fff; }
 .solucion-marco .solucion-scroll { flex: 1; overflow: auto; background: #fff; }
 .solucion-marco .solucion-scroll img { display: block; width: 100%; height: auto; }
+.solucion-marco .solucion-codigo { flex: 1; margin: 0; border-radius: 0; font-size: 15px; line-height: 1.55; padding: 20px 28px; background: var(--dark); }
+.solucion-marco .solucion-falta { flex: 1; display: grid; place-items: center; margin: 0; padding: 40px; text-align: center; font-size: 18px; color: #3A4756; background: #F3F6F9; }
+.abre-modal { cursor: pointer; }
+.solucion-marco [hidden] { display: none; }
+.solucion-vistas { display: inline-flex; margin-right: 14px; background: #fff; border-radius: 999px; padding: 3px; }
+.solucion-vistas button { border: 0; background: none; border-radius: 999px; padding: 6px 16px; font: 600 15px/1.2 'Plus Jakarta Sans', system-ui, sans-serif; color: #3A4756; cursor: pointer; }
+.solucion-vistas button[aria-pressed="true"] { background: var(--blue); color: #fff; }
 .solucion-marco .solucion-nota {
   margin: 0; padding: 10px 16px;
   background: #F3F6F9; color: #3A4756;
@@ -825,6 +832,88 @@ code.en-linea { font-family: var(--mono); font-size: .9em; background: var(--gra
   font-family: var(--mono);
 }
 .resultado iframe { flex: 1; width: 100%; border: 0; background: var(--white); min-height: 0; }
+
+/* ---------- Captura de una página entera: en un navegador o en un móvil ----------
+   <div class="navegador">
+     <div class="resultado-barra"><i></i><i></i><i></i><span class="url">tuusuario.github.io</span></div>
+     <figure class="foto"><div class="captura-scroll"><img …></div><figcaption class="credito">…</figcaption></figure>
+   </div>
+   <div class="movil-hueco"><div class="movil" style="--barra:#041c3f">
+     <div class="movil-estado"><span>9:41</span><span class="movil-iconos"><i></i><i></i><i></i><b></b></span></div>
+     <figure class="foto"><div class="captura-scroll"><img …></div>…</figure>
+   </div></div>
+   La captura se recorre con la rueda del ratón, como la página de verdad (deck-stage deja la rueda al
+   contenido que se desplaza). --barra es el color de la barra de estado: el de la cabecera de la página.
+   El móvil mantiene su forma en cualquier hueco (movil-hueco mide el sitio con container queries).
+   Clic en la captura: el visor; si es un móvil, el mismo teléfono en grande y con scroll (aw.js). */
+.navegador {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  background: var(--white);
+  border: 3px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 0 var(--line);
+}
+.navegador .foto { flex: 1; height: auto; border-radius: 0; }
+.captura-scroll { height: 100%; overflow-y: auto; scrollbar-width: none; }
+.captura-scroll::-webkit-scrollbar { display: none; }
+.captura-scroll img { height: auto; }
+.movil-hueco { flex: 1; min-height: 0; container-type: size; display: grid; place-items: center; }
+.movil {
+  position: relative;
+  width: min(100cqw, 100cqh * 403 / 840);
+  aspect-ratio: 403 / 840;
+  padding: 14px;
+  border-radius: 58px;
+  background: #0B1530;
+  box-shadow: inset 0 0 0 3px #2A3A5E, 0 24px 48px rgba(4, 28, 63, .28);
+  display: flex;
+  flex-direction: column;
+}
+.movil::before {               /* botón lateral */
+  content: '';
+  position: absolute;
+  right: -5px; top: 22%;
+  width: 5px; height: 12%;
+  border-radius: 0 4px 4px 0;
+  background: #0B1530;
+}
+.movil-estado {
+  position: relative;
+  flex: none;
+  height: 44px;
+  padding: 0 28px;
+  border-radius: 44px 44px 0 0;
+  background: var(--barra, var(--navy));
+  color: #fff;
+  font: 600 16px/44px 'Plus Jakarta Sans', system-ui, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.movil-estado::after {         /* la isla */
+  content: '';
+  position: absolute;
+  left: 50%; top: 9px;
+  width: 30%; height: 26px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #000;
+}
+.movil-iconos { display: flex; align-items: flex-end; gap: 3px; height: 13px; }
+.movil-iconos i { display: block; width: 4px; border-radius: 1px; background: currentColor; }
+.movil-iconos i:nth-child(1) { height: 6px; }
+.movil-iconos i:nth-child(2) { height: 9px; }
+.movil-iconos i:nth-child(3) { height: 12px; }
+.movil-iconos b { position: relative; display: block; width: 25px; height: 13px; margin-left: 6px; border: 2px solid currentColor; border-radius: 4px; }
+.movil-iconos b::after { content: ''; position: absolute; inset: 2px 5px 2px 2px; border-radius: 1px; background: currentColor; }
+.movil .foto { flex: 1; height: auto; border-radius: 0 0 44px 44px; background: var(--white); }
+.movil .foto::after, .movil .foto .credito { display: none; }
+.visor-movil .movil { width: auto; height: calc(100vh - 100px); margin-bottom: 44px; }   /* deja sitio al pie */
+.visor-movil .captura-scroll img { width: 100%; height: auto; max-width: none; max-height: none; cursor: auto; }
 
 /* ---------- buscador dentro de la unidad (tecla B, botón «Buscar» en la barra flotante) ----------
    Panel fijo fuera de deck-stage, así que va en píxeles de pantalla, no del lienzo de 1920.

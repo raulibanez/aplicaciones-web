@@ -875,6 +875,14 @@
     const v = document.createElement('div');
     v.className = 'visor';
     v.innerHTML = '<img alt=""><div class="visor-pie"></div><button class="visor-cerrar" aria-label="Cerrar">×</button>';
+    // Captura de móvil: el mismo teléfono, en grande, con la página entera para recorrerla con la rueda
+    const movil = fig.closest('.movil');
+    if (movil) {
+      v.classList.add('visor-movil');
+      v.querySelector('img').outerHTML = '<div class="movil" style="' + esc(movil.getAttribute('style') || '') + '">'
+        + movil.querySelector('.movil-estado').outerHTML
+        + '<figure class="foto"><div class="captura-scroll"><img alt=""></div></figure></div>';
+    }
     v.querySelector('img').src = img.dataset.grande || img.currentSrc || img.src;   // data-grande: versión completa distinta de la miniatura
     v.querySelector('img').alt = img.alt;
     const tarjeta = fig.classList.contains('tarjeta');
@@ -883,7 +891,7 @@
     if (pie) v.querySelector('.visor-pie').innerHTML = pie; else v.querySelector('.visor-pie').remove();
     const cierra = () => { v.remove(); document.removeEventListener('keydown', tecla, true); };
     const tecla = (e) => { if (e.key === 'Escape') { e.stopPropagation(); cierra(); } };
-    v.addEventListener('click', (e) => { if (!e.target.closest('a')) cierra(); });
+    v.addEventListener('click', (e) => { if (!e.target.closest('a') && !e.target.closest('.visor-movil .movil')) cierra(); });
     document.addEventListener('keydown', tecla, true);
     document.body.appendChild(v);
   }
@@ -941,21 +949,60 @@
    *   data-solucion: página HTML que se muestra renderizada en un iframe (nunca el código).
    *   data-captura:  en su lugar, una imagen (para el simulacro y el examen, donde no se debe poder inspeccionar).
    *   data-nota:     frase al pie; por defecto recuerda que sin CSS se ve así de sencillo.
+   *   data-codigo:   en su lugar, el código de un <script type="text/plain" id="…"> con resaltado (data-lang, css por defecto).
+   *   data-falta:    aviso si la página de data-solucion todavía no está publicada (se comprueba por http; por file:// se abre).
+   * Además de la píldora, cualquier elemento con la clase .abre-modal y estos atributos abre el mismo modal.
    */
   function abreSolucion(btn) {
-    const url = btn.dataset.solucion, captura = btn.dataset.captura;
+    const url = btn.dataset.solucion, captura = btn.dataset.captura, codigo = btn.dataset.codigo;
     const titulo = esc(btn.dataset.titulo || 'Así tiene que quedar');
     const nota = esc(btn.dataset.nota || 'Sin CSS se ve así de sencillo: lo que importa es que las etiquetas sean las correctas.');
     const v = document.createElement('div');
     v.className = 'visor visor-solucion';
+    const cuerpo = codigo ? '<pre class="cod solucion-codigo"></pre>'
+      : captura ? '<div class="solucion-scroll"><img alt="Resultado esperado"></div>'
+      : '<iframe title="' + titulo + '" sandbox="allow-same-origin"></iframe>';
     v.innerHTML = '<div class="solucion-marco">'
       + '<div class="resultado-barra"><i></i><i></i><i></i><span class="url">' + titulo + '</span>'
       + (url ? '<a class="solucion-abrir" target="_blank" rel="noopener">Abrir en una pestaña nueva</a>' : '') + '</div>'
-      + (captura ? '<div class="solucion-scroll"><img alt="Resultado esperado"></div>' : '<iframe title="Resultado esperado" sandbox="allow-same-origin"></iframe>')
+      + cuerpo
       + '<p class="solucion-nota">' + nota + '</p></div>'
       + '<button class="visor-cerrar" aria-label="Cerrar">×</button>';
-    if (url) { v.querySelector('iframe').src = url; v.querySelector('.solucion-abrir').href = url; }
-    else v.querySelector('img').src = captura;
+    if (codigo) {
+      const fuente = document.getElementById(codigo);
+      const f = AW.resalta[(btn.dataset.lang || 'css').toLowerCase()] || esc;
+      v.querySelector('pre').innerHTML = fuente ? f(fuente.textContent.replace(/^\n/, '')) : 'No encuentro el código #' + esc(codigo);
+    } else if (url) {
+      // data-alternativa: otra página para comparar (la misma sin CSS, por ejemplo), con un interruptor en la barra.
+      // data-etiquetas="Con CSS|Sin CSS", data-titulo-alternativa, data-nota-alternativa; data-vista="1" abre la alternativa.
+      const iframe = v.querySelector('iframe');
+      const abrir = v.querySelector('.solucion-abrir');
+      const notaEl = v.querySelector('.solucion-nota');
+      const falta = document.createElement('p');
+      falta.className = 'solucion-falta';
+      falta.hidden = true;
+      falta.textContent = btn.dataset.falta || '';
+      iframe.after(falta);
+      const vistas = [{ url, titulo: btn.dataset.titulo || 'Así tiene que quedar', nota: notaEl.textContent }];
+      if (btn.dataset.alternativa) {
+        vistas.push({ url: btn.dataset.alternativa, titulo: btn.dataset.tituloAlternativa || '', nota: btn.dataset.notaAlternativa || '' });
+        const [e0, e1] = (btn.dataset.etiquetas || 'Con CSS|Sin CSS').split('|');
+        abrir.insertAdjacentHTML('beforebegin', '<span class="solucion-vistas"><button type="button">' + esc(e0) + '</button><button type="button">' + esc(e1) + '</button></span>');
+        v.querySelectorAll('.solucion-vistas button').forEach((b, k) => b.addEventListener('click', (e) => { e.stopPropagation(); muestra(k); }));
+      }
+      const muestra = (k) => {
+        const x = vistas[k];
+        v.querySelector('.resultado-barra .url').textContent = x.titulo;
+        iframe.title = x.titulo;
+        notaEl.textContent = x.nota;
+        abrir.href = x.url;
+        v.querySelectorAll('.solucion-vistas button').forEach((b, i) => b.setAttribute('aria-pressed', String(i === k)));
+        const pon = (ok) => { iframe.hidden = !ok; falta.hidden = ok; abrir.hidden = !ok; notaEl.hidden = !ok || !x.nota; if (ok) iframe.src = x.url; };
+        if (btn.dataset.falta && /^https?:$/.test(location.protocol)) fetch(x.url, { method: 'HEAD' }).then((r) => pon(r.ok)).catch(() => pon(true));
+        else pon(true);
+      };
+      muestra(Math.min(parseInt(btn.dataset.vista || '0', 10) || 0, vistas.length - 1));
+    } else v.querySelector('img').src = captura;
     const cierra = () => { v.remove(); document.removeEventListener('keydown', tecla, true); };
     const tecla = (e) => { if (e.key === 'Escape') { e.stopPropagation(); cierra(); } };
     v.addEventListener('click', (e) => { if (!e.target.closest('.solucion-marco') || e.target.closest('.visor-cerrar')) cierra(); });
@@ -1280,7 +1327,7 @@
     document.querySelectorAll('.revela').forEach(montaRevela);
     document.querySelectorAll('.galeria').forEach(montaGaleria);
     document.querySelectorAll('.foto').forEach(montaFoto);
-    document.querySelectorAll('.pill-solucion').forEach(montaSolucion);
+    document.querySelectorAll('.pill-solucion, .abre-modal').forEach(montaSolucion);
     document.querySelectorAll('section.chuleta').forEach(montaChuleta);
     montaBuscador(stage);
     montaVolver(stage);

@@ -1,0 +1,1229 @@
+/* =========================================================
+   SuperTuxKart · al estilo de la web de GTA VI (rockstargames.com/VI)
+
+   Todo con CSS, sin JavaScript:
+   - Temas de color (noche, morado, azul, ciruela, turquesa) que
+     cambian con el scroll, igual que las secciones de GTA VI.
+   - Texto con degradado que cambia de color al desplazarse.
+   - Galería que pasa de "frame" en "frame" con el scroll, como
+     los vídeos que avanzan al bajar en la web de Rockstar.
+   - Botones píldora, tarjetas con brillo y portada con marco.
+
+   Las animaciones con scroll funcionan en Chrome, Edge y Safari
+   recientes; en el resto la página se ve igual pero estática.
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Lexend:wght@400;500;600;700;800&display=swap");
+
+/* ---------- Colores del tema (se animan con el scroll) ---------- */
+@property --fondo-1 { syntax: "<color>"; inherits: true; initial-value: #1f1f38; }
+@property --fondo-2 { syntax: "<color>"; inherits: true; initial-value: #0c0d1b; }
+@property --tarjeta { syntax: "<color>"; inherits: true; initial-value: #38365d; }
+@property --acento { syntax: "<color>"; inherits: true; initial-value: #ffb2c6; }
+@property --acento-hover { syntax: "<color>"; inherits: true; initial-value: #fc97b1; }
+@property --etiqueta { syntax: "<color>"; inherits: true; initial-value: #adb5ff; }
+@property --grad-1 { syntax: "<color>"; inherits: true; initial-value: #ffdf80; }
+@property --grad-2 { syntax: "<color>"; inherits: true; initial-value: #f4717c; }
+@property --grad-3 { syntax: "<color>"; inherits: true; initial-value: #e963c7; }
+
+:root {
+  --texto: #fdfbff;
+  --texto-suave: rgba(253, 251, 255, 0.78);
+  --oscuro: #0f0c1a;
+  --titulo-tarjeta: #fff9cb;
+  --rosa-reserva: #ffb2c6;
+  --marco: #1a0b2e;
+
+  --fuente: "Lexend", "Segoe UI", system-ui, sans-serif;
+  --fuente-condensada: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+
+  --radio: clamp(16px, 1.75vw, 28px);
+  --margen: max(1.5rem, 13vw);
+  --suave: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--fondo-2);
+  scroll-behavior: smooth;
+  scrollbar-color: var(--acento) var(--fondo-2);
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: transparent;
+  color: var(--texto);
+  font-family: var(--fuente);
+  font-size: clamp(1rem, 1.15vw, 1.125rem);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fondo degradado del tema, fijo detrás de todo */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 45% at 50% 0%, color-mix(in srgb, var(--fondo-1) 85%, transparent), transparent),
+    linear-gradient(189deg,
+      var(--fondo-1) 0.55%,
+      color-mix(in srgb, var(--fondo-1) 55%, var(--fondo-2)) 30.38%,
+      color-mix(in srgb, var(--fondo-1) 25%, var(--fondo-2)) 65.19%,
+      var(--fondo-2) 100%);
+}
+
+::selection {
+  background: var(--acento);
+  color: var(--oscuro);
+}
+
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+a {
+  color: var(--acento);
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 4px;
+}
+
+strong {
+  font-weight: 700;
+}
+
+em {
+  color: var(--acento);
+}
+
+/* ---------- Barra superior fija ---------- */
+nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(0.9rem, 2.5vw, 2.25rem);
+  padding-bottom: clamp(1.5rem, 3.5vw, 3rem);
+  background: linear-gradient(180deg, rgba(7, 8, 16, 0.8), rgba(7, 8, 16, 0));
+  pointer-events: none;
+}
+
+/* Logo "STK" como el "VI" de la web */
+nav::before {
+  content: "STK";
+  color: #fff;
+  font-family: var(--fuente-condensada);
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.15rem, 0.8vw, 0.75rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: auto;
+}
+
+nav a {
+  display: block;
+  padding: 0.6rem 0.95rem;
+  border-radius: 1000px;
+  color: #fff;
+  font-size: clamp(0.8rem, 1vw, 0.95rem);
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.5s ease-out, color 0.5s ease-out;
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* El último enlace es la píldora rosa de "Resérvalo ya" */
+nav li:last-child a {
+  background: var(--rosa-reserva);
+  color: var(--oscuro);
+}
+
+nav li:last-child a:hover {
+  background: #fc97b1;
+}
+
+/* ---------- Portada: póster con marco y logo encima ---------- */
+header {
+  --poster-ancho: min(100%, calc((100svh - 15rem) * 16 / 9));
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto auto;
+  gap: clamp(1rem, 2vw, 1.75rem);
+  min-height: 100svh;
+  padding: clamp(5rem, 9vw, 7.5rem) var(--margen) 1.25rem;
+}
+
+/* El "key art": fotogramas del tráiler oficial de SuperTuxKart 1.3.
+   - portada-frames.webp: 36 fotogramas en una cuadrícula de 6 × 6
+     (el primero es transparente para que se vea la imagen nítida).
+   - portada.webp: el primer fotograma a 1920 px, para la portada quieta. */
+header::before {
+  content: "";
+  grid-area: 1 / 1;
+  place-self: center;
+  width: var(--poster-ancho);
+  aspect-ratio: 16 / 9;
+  border: clamp(6px, 1.1vw, 16px) solid var(--marco);
+  border-radius: 6px;
+  background:
+    url("img/portada-frames.webp") 0% 0% / 600% 600% no-repeat,
+    url("img/portada.webp") 50% 50% / cover no-repeat,
+    linear-gradient(180deg, #2a1050, #a33585 45%, #ff8a5c 70%, #120a24);
+  box-shadow:
+    inset 0 0 90px 10px rgba(13, 8, 32, 0.55),
+    0 40px 120px -30px color-mix(in srgb, var(--grad-3) 45%, transparent);
+  animation: poster-entra 1.4s var(--suave) both;
+}
+
+/* Logo: relleno con el degradado de GTA VI y doble contorno */
+header h1 {
+  grid-area: 1 / 1;
+  place-self: center;
+  z-index: 1;
+  margin: 0 0 6%;
+  background: radial-gradient(62.79% 100% at 50% 0%, #ffdf80 0%, #f4717c 50%, #e963c7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: var(--fuente-condensada);
+  font-size: clamp(3rem, 9vw, 9.5rem);
+  font-weight: 800;
+  line-height: 0.85;
+  text-transform: uppercase;
+  filter:
+    drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff)
+    drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff)
+    drop-shadow(4px 0 0 var(--marco)) drop-shadow(-4px 0 0 var(--marco))
+    drop-shadow(0 4px 0 var(--marco)) drop-shadow(0 -4px 0 var(--marco))
+    drop-shadow(0 18px 30px rgba(0, 0, 0, 0.45));
+  animation: logo-entra 1.2s 0.2s var(--suave) both;
+}
+
+/* Como "DISPONIBLE 19 NOVIEMBRE 2026" debajo del póster */
+header p {
+  grid-area: 2 / 1;
+  justify-self: center;
+  width: var(--poster-ancho);
+  margin: 0;
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  text-transform: uppercase;
+  animation: aparece 1s 0.5s var(--suave) both;
+}
+
+/* Flecha rosa que invita a bajar */
+header::after {
+  content: "";
+  grid-area: 3 / 1;
+  justify-self: center;
+  width: 16px;
+  height: 16px;
+  margin-bottom: 0.75rem;
+  border-right: 3px solid var(--rosa-reserva);
+  border-bottom: 3px solid var(--rosa-reserva);
+  border-radius: 2px;
+  rotate: 45deg;
+  animation: rebote 1.8s ease-in-out infinite;
+}
+
+@keyframes poster-entra {
+  from { opacity: 0; transform: scale(1.04); }
+}
+
+@keyframes logo-entra {
+  from { opacity: 0; transform: scale(0.85); }
+}
+
+@keyframes aparece {
+  from { opacity: 0; transform: translateY(1.5rem); }
+}
+
+@keyframes rebote {
+  50% { translate: 0 8px; }
+}
+
+/* ---------- Contenido ---------- */
+main {
+  padding: clamp(5rem, 10vw, 9rem) var(--margen);
+}
+
+/* Títulos de sección como "UNA MIRADA EXTENDIDA" */
+main h2,
+aside h2 {
+  margin: 0 auto 0.75rem;
+  color: #fff;
+  font-size: clamp(1.6rem, 4vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  line-height: 1.1;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+/* Texto grande con degradado, como la sinopsis de "Vice City, EE. UU." */
+main h2 + p,
+main h3 {
+  background-image: linear-gradient(0deg, var(--grad-3) 0%, var(--grad-2) 50%, var(--grad-1) 100%);
+  background-position: 50% 50%;
+  background-size: 100% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+main h2 + p {
+  margin: clamp(2.5rem, 5vw, 4.5rem) 0 0;
+  font-size: clamp(1.35rem, 2.5vw, 2.25rem);
+  font-weight: 500;
+  letter-spacing: -0.0125em;
+  line-height: 1.1;
+}
+
+main h3 {
+  width: fit-content;
+  margin: clamp(5rem, 10vw, 9rem) 0 clamp(1rem, 2vw, 1.75rem);
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  counter-increment: seccion;
+}
+
+/* Etiqueta pequeña encima, como "MÚSICA" o "BONUS POR RESERVAR" */
+main h3::before {
+  content: "Capítulo " counter(seccion, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.6rem;
+  color: var(--etiqueta);
+  -webkit-text-fill-color: var(--etiqueta);
+  font-family: var(--fuente-condensada);
+  font-size: clamp(0.95rem, 1.15vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+main {
+  counter-reset: seccion;
+}
+
+main p {
+  max-width: 62ch;
+  color: var(--texto-suave);
+  font-size: clamp(1.05rem, 1.45vw, 1.35rem);
+  line-height: 1.5;
+}
+
+main h2 + p {
+  max-width: none;
+}
+
+/* ---------- Personajes: tarjetas como "Tráiler 1 / Tráiler 2" ---------- */
+main ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: clamp(0.75rem, 1.4vw, 1.25rem);
+  margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: personaje;
+}
+
+main ul li {
+  --alto-imagen: clamp(10rem, 17vw, 15rem);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: calc(var(--alto-imagen) + 1.75rem) clamp(1.5rem, 3.25vw, 3rem) clamp(1.5rem, 3.25vw, 3rem);
+  border-radius: var(--radio);
+  background:
+    radial-gradient(55% 40% at 50% 30%, color-mix(in srgb, var(--grad-2) 50%, transparent), transparent 75%),
+    radial-gradient(90% 60% at 0% 100%, color-mix(in srgb, var(--grad-3) 22%, transparent), transparent 70%),
+    linear-gradient(189deg, var(--tarjeta) 0%, color-mix(in srgb, var(--tarjeta) 55%, var(--fondo-2)) 100%);
+  color: var(--texto-suave);
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  line-height: 1.5;
+  outline: 4px solid transparent;
+  outline-offset: 4px;
+  transition: outline-color 0.15s ease-out;
+  counter-increment: personaje;
+}
+
+/* Cada tarjeta con su propio tema, como en la web */
+main ul li:nth-child(3n + 1) {
+  --tarjeta: #4b2f54; --acento: #ffd4a8; --etiqueta: #ffc2d0;
+  --grad-1: #ffff99; --grad-2: #f5899b; --grad-3: #e963bc;
+}
+
+main ul li:nth-child(3n + 2) {
+  --tarjeta: #2c3868; --acento: #ffc5b8; --etiqueta: #b8e8ff;
+  --grad-1: #99ccff; --grad-2: #9b89f5; --grad-3: #d263e9;
+}
+
+main ul li:nth-child(3n) {
+  --tarjeta: #5b2742; --acento: #e9c2ff; --etiqueta: #fddda1;
+  --grad-1: #ffcc99; --grad-2: #f59289; --grad-3: #e9639b;
+}
+
+main ul li::before {
+  content: "Personaje " counter(personaje, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--etiqueta);
+  font-family: var(--fuente-condensada);
+  font-size: clamp(0.95rem, 1.25vw, 1.15rem);
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* Render 3D del personaje en su kart (modelos oficiales de SuperTuxKart) */
+main ul li::after {
+  content: "";
+  position: absolute;
+  inset: 1rem 1rem auto;
+  z-index: -1;
+  height: var(--alto-imagen);
+  background: var(--personaje) 50% 100% / contain no-repeat;
+  filter: drop-shadow(0 18px 24px rgba(7, 8, 16, 0.55));
+  transition: transform 0.8s var(--suave);
+}
+
+main ul li:nth-child(1) { --personaje: url("img/tux.webp"); }
+main ul li:nth-child(2) { --personaje: url("img/gnu.webp"); }
+main ul li:nth-child(3) { --personaje: url("img/nolok.webp"); }
+
+main ul li:hover::after {
+  transform: translateY(-6px) scale(1.07);
+}
+
+main ul li strong {
+  display: inline-block;
+  color: var(--titulo-tarjeta);
+  font-family: var(--fuente-condensada);
+  font-size: clamp(2.6rem, 4.5vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: filter 1s ease-out;
+}
+
+main ul li:hover {
+  outline-color: color-mix(in srgb, var(--acento) 60%, transparent);
+}
+
+main ul li:hover strong {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25)) drop-shadow(0 20px 70px var(--fondo-1));
+}
+
+/* ---------- Ficha técnica: tarjeta como las de "Noticias destacadas" ---------- */
+table {
+  width: 100%;
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--radio);
+  background: linear-gradient(
+    var(--tarjeta) 0%,
+    color-mix(in srgb, var(--tarjeta) 70%, var(--fondo-1)) 30%,
+    color-mix(in srgb, var(--tarjeta) 35%, var(--fondo-1)) 65%,
+    var(--fondo-1) 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+caption {
+  caption-side: top;
+  padding-bottom: 0.9rem;
+  color: var(--etiqueta);
+  font-family: var(--fuente-condensada);
+  font-size: clamp(0.95rem, 1.15vw, 1.1rem);
+  font-weight: 700;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+th,
+td {
+  padding: clamp(1rem, 1.6vw, 1.5rem) clamp(1.1rem, 2.4vw, 2.25rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+  vertical-align: top;
+  transition: background-color 0.4s ease-out;
+}
+
+tr:last-child > * {
+  border-bottom: 0;
+}
+
+tr:hover > * {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+tr:first-child > :first-child { border-top-left-radius: var(--radio); }
+tr:first-child > :last-child { border-top-right-radius: var(--radio); }
+tr:last-child > :first-child { border-bottom-left-radius: var(--radio); }
+tr:last-child > :last-child { border-bottom-right-radius: var(--radio); }
+
+th {
+  width: 40%;
+  color: var(--etiqueta);
+  font-family: var(--fuente-condensada);
+  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+td {
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-weight: 500;
+}
+
+/* ---------- Botones píldora ("Más información →") ---------- */
+main ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+main ol a,
+button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: clamp(2.6rem, 2.9vw, 3rem);
+  padding: 0 1.15rem 0 1.5rem;
+  border: 0;
+  border-radius: 1000px;
+  background: var(--acento);
+  color: var(--oscuro);
+  font-family: var(--fuente);
+  font-size: clamp(0.9rem, 1vw, 1rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 1s ease-out, box-shadow 0.6s ease-out, transform 0.3s var(--suave);
+}
+
+main ol a::after {
+  content: "→";
+  transition: transform 0.3s var(--suave);
+}
+
+main ol a:hover,
+button:hover {
+  background: var(--acento-hover);
+}
+
+main ol a:hover::after {
+  transform: translateX(3px);
+}
+
+/* ---------- Formulario ---------- */
+form {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.5rem, 3.25vw, 3rem);
+  border-radius: var(--radio);
+  background:
+    radial-gradient(100% 70% at 50% 0%, color-mix(in srgb, var(--grad-2) 28%, transparent), transparent 70%),
+    linear-gradient(189deg, var(--tarjeta), color-mix(in srgb, var(--tarjeta) 40%, var(--fondo-2)));
+}
+
+form p {
+  max-width: none;
+  margin: 0 0 clamp(1.25rem, 2.2vw, 2rem);
+}
+
+form p:last-child {
+  margin-bottom: 0;
+}
+
+form br {
+  display: none;
+}
+
+.notas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.notas label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  min-width: clamp(2.75rem, 3.6vw, 3.5rem);
+  height: clamp(2.75rem, 3.6vw, 3.5rem);
+  padding: 0 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 1000px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--texto);
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.5s ease-out, color 0.5s ease-out, border-color 0.5s ease-out, transform 0.3s var(--suave);
+}
+
+.notas label:hover {
+  border-color: var(--acento);
+  transform: translateY(-2px);
+}
+
+.notas input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.notas label:has(input:checked) {
+  border-color: transparent;
+  background: var(--acento);
+  color: var(--oscuro);
+  box-shadow: 0 10px 30px -8px var(--acento);
+}
+
+.notas label:has(input:focus-visible) {
+  outline: 3px solid var(--acento);
+  outline-offset: 3px;
+}
+
+/* Navegadores sin :has() siguen viendo el botón de radio */
+@supports not selector(:has(*)) {
+  .notas input {
+    position: static;
+    width: auto;
+    height: auto;
+    opacity: 1;
+    pointer-events: auto;
+    accent-color: var(--acento);
+  }
+}
+
+form label[for] {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: var(--etiqueta);
+  font-family: var(--fuente-condensada);
+  font-size: clamp(0.95rem, 1.15vw, 1.1rem);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  min-height: 8rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: clamp(14px, 1.2vw, 20px);
+  background: rgba(7, 8, 16, 0.45);
+  color: var(--texto);
+  font: inherit;
+  font-size: 1rem;
+  resize: vertical;
+  transition: border-color 0.4s ease-out, box-shadow 0.4s ease-out;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--acento);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--acento) 25%, transparent);
+}
+
+/* Botón principal: la píldora rosa con brillo de "Resérvalo ya" */
+button {
+  min-height: clamp(3rem, 3.6vw, 3.6rem);
+  padding: 0 clamp(1.5rem, 2.4vw, 2.25rem);
+  font-size: clamp(1rem, 1.25vw, 1.2rem);
+  box-shadow: 0 10px 40px -8px color-mix(in srgb, var(--acento) 70%, transparent);
+}
+
+button:hover {
+  box-shadow: 0 14px 50px -6px color-mix(in srgb, var(--acento) 85%, transparent);
+  transform: translateY(-2px);
+}
+
+/* ---------- Galería ---------- */
+aside {
+  padding: clamp(5rem, 10vw, 9rem) var(--margen);
+}
+
+aside > p {
+  margin: 0 auto clamp(2rem, 4vw, 3.5rem);
+  color: #fdfbff;
+  font-size: clamp(0.95rem, 1.5vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.75rem, 1.4vw, 1.25rem);
+  counter-reset: captura;
+}
+
+.galeria figure {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  border-radius: var(--radio);
+  background: linear-gradient(189deg, #2a1050, #a33585 45%, #ff8a5c 75%, #ffcf7a);
+  counter-increment: captura;
+}
+
+/* Fondo de cada "frame" mientras no esté la imagen */
+.galeria figure:nth-child(2) { background: linear-gradient(189deg, #0f1f3a, #2c3868 40%, #9b89f5 75%, #d263e9); }
+.galeria figure:nth-child(3) { background: linear-gradient(189deg, #1c2a4a, #6f8fd6 45%, #c9dcff 80%, #f2f6ff); }
+.galeria figure:nth-child(4) { background: linear-gradient(189deg, #0d2a33, #1f6f7a 45%, #89f5e3 80%, #e6ffa3); }
+.galeria figure:nth-child(5) { background: linear-gradient(189deg, #321532, #e9639b 45%, #f59289 70%, #ffcc99); }
+
+.galeria .destacada {
+  grid-column: 1 / -1;
+}
+
+.galeria img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  color: transparent;
+  transition: transform 1.2s var(--suave);
+}
+
+.galeria figure:hover img {
+  transform: scale(1.05);
+}
+
+/* Degradado oscuro para que se lea el pie de foto */
+.galeria figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(12, 13, 27, 0.9) 0%, rgba(12, 13, 27, 0.35) 35%, transparent 60%);
+  pointer-events: none;
+}
+
+.galeria figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  padding: clamp(1rem, 2.4vw, 2rem);
+  color: var(--texto);
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  line-height: 1.45;
+}
+
+.galeria figcaption::before {
+  content: "Captura " counter(captura, decimal-leading-zero) " / 05";
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--titulo-tarjeta);
+  font-family: var(--fuente-condensada);
+  font-size: clamp(1.3rem, 2vw, 2rem);
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* ---------- Pie ---------- */
+footer {
+  display: grid;
+  justify-items: center;
+  gap: 1.5rem;
+  padding: clamp(4rem, 8vw, 7rem) 1.5rem 3rem;
+  text-align: center;
+}
+
+/* Logo pequeño como el de GTA VI en el pie */
+footer::before {
+  content: "STK";
+  background: radial-gradient(62.79% 100% at 50% 0%, #ffdf80 0%, #f4717c 50%, #e963c7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: var(--fuente-condensada);
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 0.9;
+  filter:
+    drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff)
+    drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)
+    drop-shadow(3px 0 0 var(--marco)) drop-shadow(-3px 0 0 var(--marco))
+    drop-shadow(0 3px 0 var(--marco)) drop-shadow(0 -3px 0 var(--marco));
+}
+
+footer p {
+  margin: 0;
+  padding: 0.95rem 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 1000px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+footer em {
+  color: inherit;
+  font-style: normal;
+}
+
+/* Créditos de las imágenes */
+footer p + p {
+  max-width: 62ch;
+  padding: 0;
+  border: 0;
+  color: rgba(253, 251, 255, 0.55);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-transform: none;
+}
+
+footer small {
+  font-size: 0.75rem;
+}
+
+footer a {
+  color: inherit;
+}
+
+/* ---------- Pantallas pequeñas ---------- */
+@media (max-width: 700px) {
+  :root {
+    --margen: 1.25rem;
+  }
+
+  nav::before {
+    display: none;
+  }
+
+  nav {
+    justify-content: center;
+  }
+
+  nav a {
+    padding: 0.55rem 0.7rem;
+  }
+
+  header {
+    --poster-ancho: 100%;
+  }
+
+  header h1 {
+    font-size: 13vw;
+  }
+
+  .galeria {
+    grid-template-columns: 1fr;
+  }
+
+  .galeria figcaption {
+    position: static;
+    background: #0c0d1b;
+  }
+
+  .galeria figure::after {
+    display: none;
+  }
+}
+
+/* =========================================================
+   Animaciones con el scroll (scroll-driven animations)
+   ========================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    /* --- El tema de colores de la página cambia según la sección --- */
+    html {
+      timeline-scope: --contenido;
+      animation: temas linear both;
+      animation-timeline: --contenido;
+      animation-range: cover 0% cover 100%;
+    }
+
+    main {
+      view-timeline: --contenido block;
+    }
+
+    /* --- Portada: se queda fija mientras el vídeo avanza fotograma a
+       fotograma (como los vídeos de GTA VI); luego el contenido sube por
+       encima y el póster se apaga --- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 0;
+      animation: portada-fuera linear both;
+      animation-timeline: scroll(root);
+      animation-range: 165svh 215svh;
+    }
+
+    main {
+      margin-top: 150svh;
+    }
+
+    main,
+    aside,
+    footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    header::before {
+      animation:
+        poster-entra 1.4s var(--suave) both,
+        fotogramas-x steps(6, jump-none) 6 both,
+        fotogramas-y steps(6, jump-none) both,
+        poster-sale linear both;
+      animation-timeline: auto, scroll(root), scroll(root), scroll(root);
+      animation-range: normal, 0 150svh, 0 150svh, 145svh 195svh;
+    }
+
+    header h1 {
+      animation: logo-entra 1.2s 0.2s var(--suave) both, logo-sale linear both;
+      animation-timeline: auto, scroll(root);
+      animation-range: normal, 140svh 190svh;
+    }
+
+    header p {
+      animation: aparece 1s 0.5s var(--suave) both, desvanece linear both;
+      animation-timeline: auto, scroll(root);
+      animation-range: normal, 0 25svh;
+    }
+
+    header::after {
+      animation: rebote 1.8s ease-in-out infinite, desvanece linear both;
+      animation-timeline: auto, scroll(root);
+      animation-range: normal, 0 20svh;
+    }
+
+    /* --- Títulos que aparecen escalando, como "UNA MIRADA EXTENDIDA" --- */
+    main h2 {
+      animation: titulo-entra linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 40%;
+    }
+
+    /* --- Texto que cambia de color al moverse por la pantalla --- */
+    main h2 + p,
+    main h3 {
+      animation: color-scroll linear both, sube linear both;
+      animation-timeline: view(), view();
+      animation-range: cover 0% cover 100%, entry 0% cover 30%;
+    }
+
+    main > p:not(h2 + p),
+    main ol,
+    table,
+    form {
+      animation: sube linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 25%;
+    }
+
+    /* --- Tarjetas que suben una detrás de otra --- */
+    main ul li {
+      animation: tarjeta-sube linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+
+    main ul li:nth-child(2) { animation-range: entry 10% cover 36%; }
+    main ul li:nth-child(3) { animation-range: entry 20% cover 42%; }
+
+    /* --- Galería: "frames" que avanzan con el scroll ---
+       La galería se vuelve un escenario a pantalla completa que se
+       queda fijo mientras bajas; cada captura entra encima de la
+       anterior con un fundido y un zoom, como los vídeos de la web. */
+    aside {
+      display: grid;
+      grid-template-columns: 100%;
+      grid-template-rows: auto auto 1fr;
+      padding: 0;
+      timeline-scope: --galeria;
+    }
+
+    aside > h2,
+    aside > p {
+      grid-column: 1;
+      align-self: start;
+      z-index: 2;
+      padding-inline: var(--margen);
+      text-shadow: 0 2px 30px rgba(0, 0, 0, 0.45);
+      animation: titulo-entra linear both, titulo-sale linear forwards;
+      animation-timeline: --galeria, --galeria;
+      animation-range: entry 30% entry 100%, contain 2% contain 12%;
+    }
+
+    aside > h2 {
+      grid-row: 1;
+      padding-top: 22svh;
+    }
+
+    aside > p {
+      grid-row: 2;
+    }
+
+    .galeria {
+      grid-row: 1 / -1;
+      grid-column: 1;
+      grid-template-columns: 100%;
+      gap: 0;
+      height: 500svh;
+      view-timeline: --galeria block;
+    }
+
+    .galeria figure,
+    .galeria .destacada {
+      grid-area: 1 / 1;
+      align-self: start;
+      position: sticky;
+      top: 0;
+      height: 100svh;
+      border-radius: 0;
+    }
+
+    .galeria figure::after {
+      background:
+        linear-gradient(180deg, rgba(12, 13, 27, 0.65) 0%, transparent 35%),
+        linear-gradient(0deg, rgba(12, 13, 27, 0.9) 0%, rgba(12, 13, 27, 0.3) 35%, transparent 60%);
+    }
+
+    .galeria img {
+      height: 100%;
+      aspect-ratio: auto;
+      transition: none;
+      animation: frame-zoom linear both;
+      animation-timeline: --galeria;
+      animation-range: var(--zoom);
+    }
+
+    .galeria figure:hover img {
+      transform: none;
+    }
+
+    .galeria figcaption {
+      inset: auto var(--margen) 9svh var(--margen);
+      max-width: 36rem;
+      padding: 0;
+      font-size: clamp(0.95rem, 1.3vw, 1.25rem);
+      animation: pie-entra linear both, pie-sale linear forwards;
+      animation-timeline: --galeria, --galeria;
+      animation-range: var(--pie), var(--pie-fuera);
+    }
+
+    .galeria figcaption::before {
+      font-size: clamp(2.2rem, 4.5vw, 4.25rem);
+    }
+
+    /* Cuándo entra cada frame (el escenario dura 4 pantallas) */
+    .galeria figure:nth-child(1) {
+      --zoom: entry 40% contain 25%;
+      --pie: entry 70% contain 4%;
+      --pie-fuera: contain 11% contain 16%;
+      animation: frame-ilumina linear both;
+      animation-timeline: --galeria;
+      animation-range: entry 40% entry 100%;
+    }
+
+    .galeria figure:nth-child(2) { --entra: contain 15% contain 25%; --zoom: contain 15% contain 45%; --pie: contain 21% contain 28%; --pie-fuera: contain 31% contain 36%; }
+    .galeria figure:nth-child(3) { --entra: contain 35% contain 45%; --zoom: contain 35% contain 65%; --pie: contain 41% contain 48%; --pie-fuera: contain 51% contain 56%; }
+    .galeria figure:nth-child(4) { --entra: contain 55% contain 65%; --zoom: contain 55% contain 85%; --pie: contain 61% contain 68%; --pie-fuera: contain 71% contain 76%; }
+    .galeria figure:nth-child(5) { --entra: contain 75% contain 85%; --zoom: contain 75% contain 100%; --pie: contain 81% contain 88%; --pie-fuera: exit 10% exit 50%; }
+
+    .galeria figure:nth-child(n + 2) {
+      animation: frame-entra linear both;
+      animation-timeline: --galeria;
+      animation-range: var(--entra);
+    }
+
+    /* El último frame se oscurece al salir, como el vídeo al final */
+    .galeria figure:nth-child(5) {
+      animation: frame-entra linear both, frame-apaga linear forwards;
+      animation-timeline: --galeria, --galeria;
+      animation-range: var(--entra), exit 0% exit 70%;
+    }
+
+    @media (max-width: 700px) {
+      .galeria figcaption {
+        position: absolute;
+        background: none;
+      }
+
+      .galeria figure::after {
+        display: block;
+      }
+    }
+  }
+}
+
+@keyframes temas {
+  0%, 6% {
+    --fondo-1: #1f1f38; --fondo-2: #0c0d1b; --tarjeta: #38365d;
+    --acento: #ffb2c6; --acento-hover: #fc97b1; --etiqueta: #adb5ff;
+    --grad-1: #ffdf80; --grad-2: #f4717c; --grad-3: #e963c7;
+  }
+  24%, 32% {
+    --fondo-1: #2d1f36; --fondo-2: #0f0c1a; --tarjeta: #4b2f54;
+    --acento: #ffd4a8; --acento-hover: #ffc080; --etiqueta: #ffc2d0;
+    --grad-1: #ffff99; --grad-2: #f5899b; --grad-3: #e963bc;
+  }
+  46%, 54% {
+    --fondo-1: #16203f; --fondo-2: #0d0c1a; --tarjeta: #2c3868;
+    --acento: #ffc5b8; --acento-hover: #fcae9c; --etiqueta: #b8e8ff;
+    --grad-1: #99ccff; --grad-2: #9b89f5; --grad-3: #d263e9;
+  }
+  66%, 72% {
+    --fondo-1: #321532; --fondo-2: #110b18; --tarjeta: #5b2742;
+    --acento: #e9c2ff; --acento-hover: #dda6fc; --etiqueta: #fddda1;
+    --grad-1: #ffcc99; --grad-2: #f59289; --grad-3: #e9639b;
+  }
+  86%, 90% {
+    --fondo-1: #142242; --fondo-2: #0d0c1a; --tarjeta: #273c5c;
+    --acento: #e6ffa3; --acento-hover: #e1fa9e; --etiqueta: #cebff8;
+    --grad-1: #99ffaa; --grad-2: #89f5e3; --grad-3: #799fec;
+  }
+  100% {
+    --fondo-1: #1f1f38; --fondo-2: #0c0d1b; --tarjeta: #38365d;
+    --acento: #ffb2c6; --acento-hover: #fc97b1; --etiqueta: #adb5ff;
+    --grad-1: #ffdf80; --grad-2: #f4717c; --grad-3: #e963c7;
+  }
+}
+
+@keyframes poster-sale {
+  to { filter: brightness(0.25) saturate(0.8); transform: scale(0.94); }
+}
+
+/* Recorre la cuadrícula de 6 × 6 fotogramas: la columna avanza 6 veces
+   por cada fila (iteraciones) y la fila avanza una vez en todo el tramo.
+   Solo se mueve la primera capa; la imagen fija y el degradado no. */
+@keyframes fotogramas-x {
+  from { background-position-x: 0%, 50%, 0%; }
+  to { background-position-x: 100%, 50%, 0%; }
+}
+
+@keyframes fotogramas-y {
+  from { background-position-y: 0%, 50%, 0%; }
+  to { background-position-y: 100%, 50%, 0%; }
+}
+
+@keyframes portada-fuera {
+  to { opacity: 0; visibility: hidden; }
+}
+
+@keyframes logo-sale {
+  to { opacity: 0; transform: translateY(-8vh) scale(0.8); }
+}
+
+@keyframes desvanece {
+  to { opacity: 0; }
+}
+
+@keyframes titulo-entra {
+  from { opacity: 0; transform: scale(0.9); }
+}
+
+@keyframes titulo-sale {
+  to { opacity: 0; transform: translateY(-6vh) scale(0.96); }
+}
+
+@keyframes color-scroll {
+  from { background-position: 50% 100%; }
+  to { background-position: 50% 0%; }
+}
+
+@keyframes sube {
+  from { opacity: 0; transform: translateY(8vh); }
+}
+
+@keyframes tarjeta-sube {
+  from { opacity: 0; transform: translateY(14vh) scale(0.94); }
+}
+
+@keyframes frame-ilumina {
+  from { opacity: 0; filter: brightness(0.3); }
+}
+
+@keyframes frame-entra {
+  from { opacity: 0; }
+}
+
+@keyframes frame-zoom {
+  from { transform: scale(1.18); }
+  to { transform: scale(1); }
+}
+
+@keyframes frame-apaga {
+  to { filter: brightness(0.25); }
+}
+
+@keyframes pie-entra {
+  from { opacity: 0; transform: translateY(2.5rem); }
+}
+
+@keyframes pie-sale {
+  to { opacity: 0; transform: translateY(-1.5rem); }
+}
+
+/* ---------- Menos movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
