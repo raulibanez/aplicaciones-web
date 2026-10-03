@@ -15,7 +15,7 @@
   <text x="515" y="276" font-size="24" font-weight="700" fill="#041C3F" text-anchor="middle">strong</text>
   <rect x="610" y="248" width="150" height="38" rx="6" fill="#A5E070"/>
   <text x="685" y="276" font-size="24" font-weight="700" fill="#041C3F" text-anchor="middle">span</text>
-  <text x="70" y="320" font-size="22" fill="#4A5A7D">inline: sin ancho ni alto propios</text>
+  <text x="70" y="320" font-size="22" fill="#4A5A7D">inline: miden lo que su contenido</text>
   <!-- ul bloque -->
   <rect x="50" y="360" width="800" height="100" rx="8" fill="#E3ECF3" stroke="#017CE9" stroke-width="3"/>
   <text x="70" y="400" font-size="26" fill="#041C3F">ul · block</text>
@@ -28,5 +28,6 @@
   <text x="360" y="529" font-size="24" font-weight="800" fill="#FFFFFF" text-anchor="middle">PEGI 12</text>
   <rect x="445" y="493" width="120" height="56" rx="10" fill="#FE8F46"/>
   <text x="505" y="529" font-size="24" font-weight="800" fill="#FFFFFF" text-anchor="middle">−30 %</text>
-  <text x="590" y="529" font-size="22" fill="#4A5A7D">inline-block: en línea, con ancho y relleno</text>
+  <text x="590" y="516" font-size="22" fill="#4A5A7D">inline-block: en línea,</text>
+  <text x="590" y="544" font-size="22" fill="#4A5A7D">con ancho y relleno</text>
 </svg>

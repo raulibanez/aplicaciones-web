@@ -1049,6 +1049,7 @@ a.ch-cab:hover span { opacity: 1; transform: translateX(-4px); }
 .chuleta .tok-str, .chuleta .tok-num { color: var(--ch-valor); }
 .chuleta .tok-punc, .chuleta .tok-doctype { color: var(--muted); }
 .chuleta .tok-com { color: #7C8BA5; font-style: italic; }
+.chuleta .tok-kw { color: var(--blue); font-weight: 600; }
 .ch-chips { display: flex; flex-wrap: wrap; gap: 8px 10px; padding: 12px 24px 14px; }
 .ch-chips code, .ch-chips span {
   font-family: var(--mono);

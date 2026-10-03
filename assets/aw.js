@@ -18,6 +18,7 @@
  *  6. Código y resultado: una ventana de navegador que renderiza el código de un <pre class="cod">:
  *       <pre class="cod" data-lang="html" id="ej1">…</pre>
  *       <div class="resultado" data-codigo="ej1"></div>
+ *     Con data-real en el <pre>, el resultado ejecuta ese código en vez del visible (URL recortadas con «…»).
  *  7. Ejercicios interactivos con Comprobar, Pista, Resolver y Otro ejercicio:
  *       <div class="ej" data-tipo="…" data-banco="…" data-tipos="…" data-enunciado="…"></div>
  *     Tipos: completar, ordenar, error, emparejar (UT1) y selector (UT2). data-banco elige otro banco
@@ -30,7 +31,7 @@
  *     que busca en el rótulo y el texto visible de las diapositivas de esta presentación, sin las notas.
  * 10. Chuleta de etiquetas (<section class="chuleta">, estilos en aw.css): colorea el código de cada
  *     fila y monta el botón «Modo repaso» (.ch-repaso), que difumina las explicaciones de todas las
- *     chuletas; pasar el ratón o pulsar una fila la descubre.
+ *     chuletas; pasar el ratón o pulsar una fila la descubre. Con data-ch="css", chuleta de CSS (UT2).
  */
 (function () {
   'use strict';
@@ -147,7 +148,9 @@
   function montaResultado(div) {
     const pre = document.getElementById(div.dataset.codigo);
     if (!pre) { div.textContent = 'No encuentro el código #' + div.dataset.codigo; return; }
-    const src = pre.dataset.src !== undefined ? pre.dataset.src : pre.textContent;
+    // data-real: el código completo cuando el visible va abreviado (una URL recortada con «…») o lleva
+    // estilos de presentación que no se enseñan
+    const src = pre.dataset.real !== undefined ? pre.dataset.real : pre.dataset.src !== undefined ? pre.dataset.src : pre.textContent;
     const lang = (pre.dataset.lang || 'html').toLowerCase();
     let doc;
     if (lang === 'css') doc = '<!DOCTYPE html><meta charset="utf-8"><style>' + src + '</style>' + (div.dataset.html || '');
@@ -223,7 +226,7 @@
     { cod: '<___ href="contacto.html">Contacto</___>', ok: ['a'], pista: 'La etiqueta de los enlaces.', fam: 'enlaces' },
     { cod: '<a href="___:info@ejemplo.es">Escríbenos</a>', ok: ['mailto'], pista: 'Abre el programa de correo.', fam: 'enlaces' },
     { cod: '<h2 ___="personajes">Personajes</h2>\n<a href="#personajes">Ir a personajes</a>', ok: ['id'], pista: 'Identificador único al que apunta el ancla.', fam: 'enlaces' },
-    { cod: '<a href="https://ejemplo.es" ___="_blank" rel="noopener">Abrir en pestaña nueva</a>', ok: ['target'], pista: 'Dónde se abre el enlace.', fam: 'enlaces' },
+    { cod: '<a href="https://ejemplo.es" ___="_blank">\n  Abrir en pestaña nueva</a>', ok: ['target'], pista: 'Dónde se abre el enlace.', fam: 'enlaces' },
     { cod: '<img src="portada.jpg" ___="Portada del juego">', ok: ['alt'], pista: 'Texto alternativo: obligatorio por accesibilidad.', fam: 'imágenes' },
     { cod: '<img ___="img/logo.png" alt="Logotipo">', ok: ['src'], pista: 'La ruta del archivo de imagen.', fam: 'imágenes' },
     { cod: '<figure>\n  <img src="foto.jpg" alt="Isla Mêlée">\n  <___>La isla al anochecer</___>\n</figure>', ok: ['figcaption'], pista: 'El pie de una figura.', fam: 'imágenes' },
@@ -289,7 +292,7 @@
     { lineas: ['<html lang="es">', '<head>', '  <title>Mi página</title>', '</head>'], linea: 0, tipos: [8], exp: 'Falta <!DOCTYPE html> antes de html (y la meta charset en head).' },
     { lineas: ['<p align="center">Bienvenidos</p>'], linea: 0, tipos: [5], exp: 'align ya no se usa. Centrar el texto es cosa de CSS (text-align).' },
     { lineas: ['<h1>Mi libro favorito<h1>', '<p>El señor de los anillos</p>'], linea: 0, tipos: [0], exp: 'La segunda etiqueta debería ser de cierre: </h1>. Falta la barra.' },
-    { lineas: ['<input type="checkbox" id="parchis" value="parchis"> Parchís', '<input type="checkbox" id="ajedrez" value="ajedrez"> Ajedrez'], linea: 0, tipos: [7], exp: 'Las casillas llevan id pero no name. Sin name no se envían. (Error copiado de un libro de texto.)' },
+    { lineas: ['<p>¿A qué juegas?</p>', '<input type="checkbox" id="parchis"> Parchís', '<button>Enviar</button>'], linea: 1, tipos: [7], exp: 'La casilla lleva id, pero le falta name, que es lo que viaja al servidor: name="juegos" y su value.' },
     { lineas: ['<ol>', '  <li><a href="#inicio">Inicio</li></a>', '</ol>'], linea: 1, tipos: [1], exp: 'El enlace se abre dentro del li: hay que cerrar a antes que li.' },
     { lineas: ['<img src="logo.png" alt="Logotipo" width=200>'], linea: 0, tipos: [2], exp: 'El valor de width va entre comillas: width="200".' },
     { lineas: ['<font color="red">Oferta</font>'], linea: 0, tipos: [5], exp: 'font es un elemento obsoleto. El color se pone con CSS.' }
@@ -382,7 +385,7 @@
     { lineas: ['button {', '  padding: 0.75 rem 1.5rem;', '}'], linea: 1, tipos: [4], exp: 'Número y unidad van juntos: 0.75rem. Con espacio son dos valores.' },
     { lineas: ['header {', '  background: #041c3;', '}'], linea: 1, tipos: [5], exp: 'Un color hexadecimal tiene 3 o 6 dígitos (u 8 con transparencia); 5 no vale.' },
     { lineas: ['<head>', '  <link href="estilos.css">', '</head>'], linea: 1, tipos: [6], exp: 'Sin rel="stylesheet" el navegador no sabe que ese archivo es una hoja de estilo.' },
-    { lineas: ['<link rel="stylesheet" href="css/Estilos.css">', '<!-- el archivo se llama estilos.css y está junto a index.html -->'], linea: 0, tipos: [6], exp: 'La ruta tiene una carpeta que no existe y una mayúscula: en el servidor no coincide.' },
+    { lineas: ['<link rel="stylesheet" href="css/Estilos.css">', '<!-- el archivo es estilos.css, junto a index.html -->'], linea: 0, tipos: [6], exp: 'La ruta tiene una carpeta que no existe y una mayúscula: en el servidor no coincide.' },
     { lineas: ['nav ul {', '  list-style: none;', '}', 'nav li {', '  justify-content: space-between;', '}'], linea: 4, tipos: [7], exp: 'justify-content se pone en el contenedor flex (nav ul con display: flex), no en los hijos.' },
     { lineas: ['.galeria img {', '  display: grid;', '  grid-template-columns: 1fr 1fr;', '}'], linea: 1, tipos: [7], exp: 'La rejilla se declara en el contenedor (.galeria); las imágenes son los elementos que se colocan.' },
     { lineas: ['@media min-width: 48rem {', '  body { grid-template-columns: 2fr 1fr; }', '}'], linea: 0, tipos: [8], exp: 'La condición va entre paréntesis: @media (min-width: 48rem).' },
@@ -973,11 +976,30 @@
    */
   /* ---------- chuleta de etiquetas ----------
    * <div class="ch-fila"><code>&lt;p&gt;…&lt;/p&gt;</code><span>Párrafo</span></div>
-   * El código que no empieza por < ni & son atributos sueltos (href="…", required). */
+   * El código que no empieza por < ni & son atributos sueltos (href="…", required).
+   * Con data-ch="css" en la sección (chuleta de CSS), «propiedad: valor» se colorea como atributo y valor,
+   * una regla entera como selector y declaraciones, y lo demás como selector. class="v" marca un valor
+   * suelto (px, #dc143c) y class="at" un atributo de HTML (style="…"). */
+  function resaltaDecl(d) {
+    const m = d.match(/^(\s*)(--[\w-]+|[a-z-]+)(\s*:\s*)([\s\S]*)$/);
+    return m ? esc(m[1]) + span('attr', m[2]) + span('punc', m[3]) + span('str', m[4]) : esc(d);
+  }
+  function resaltaChCss(t) {
+    if (/^\/\*/.test(t)) return span('com', t);
+    const r = t.match(/^([^{]*?)(\s*\{\s*)([\s\S]*?)(\s*\}\s*)$/);
+    if (r) return span(r[1].startsWith('@') ? 'kw' : 'tag', r[1]) + span('punc', r[2]) +
+      r[3].split(/(;\s*)/).map((p, i) => (i % 2 ? span('punc', p) : resaltaDecl(p))).join('') + span('punc', r[4]);
+    if (/^(--[\w-]+|[a-z-]+)\s*:\s/.test(t)) return resaltaDecl(t);
+    return span('tag', t);
+  }
   function montaChuleta(sec) {
+    const css = sec.dataset.ch === 'css';
     sec.querySelectorAll('.ch-fila > code').forEach((c) => {
       const t = c.textContent;
-      c.innerHTML = /^[<&]/.test(t) ? resaltaHtml(t) : resaltaAtributos(t);
+      if (/^[<&]/.test(t)) c.innerHTML = resaltaHtml(t);
+      else if (!css || c.classList.contains('at')) c.innerHTML = resaltaAtributos(t);
+      else if (c.classList.contains('v')) c.innerHTML = span('str', t);
+      else c.innerHTML = resaltaChCss(t);
     });
     const b = sec.querySelector('.ch-repaso');
     if (b) b.addEventListener('click', (e) => {
