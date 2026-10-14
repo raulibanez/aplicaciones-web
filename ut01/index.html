@@ -1733,54 +1733,55 @@ mi-web/
 
 <!-- 63 Vídeo y audio -->
 <section data-label="1.5 · Vídeo y audio" data-seccion="1.5" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
-  <aside class="notas">video y audio con controls; source para dar varios formatos; poster, muted, loop. <b>Los navegadores bloquean el autoplay con sonido</b>: solo arranca por sí mismo si va con muted. Formatos: MP4 (H.264) y WebM para vídeo; MP3 y OGG para audio. Un vídeo pesa mucho: <b>para YouTube se incrusta, no se sube</b>.</aside>
+  <aside class="notas">video y audio con controls; source para dar varios formatos; poster, muted, loop. <b>Los navegadores bloquean el autoplay con sonido</b>: solo arranca por sí mismo si va con muted. Formatos: MP4 (H.264) y WebM para vídeo; MP3 y OGG para audio. Un vídeo pesa mucho: <b>para YouTube se incrusta, no se sube</b>. Los archivos son de verdad y están en <code>ut01/media</code>: 8 s del benchmark de SuperTuxKart (unos 300 KB por formato) y 25 s del tema del menú en MP3 (300 KB). Se pueden reproducir en clase y abrir con DevTools, pestaña Red, para ver lo que pesa cada uno.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Imágenes, tablas y semántica</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Vídeo y audio</h2>
   <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Desde HTML5 el navegador reproduce vídeo y audio por sí mismo, sin instalar nada (antes hacía falta Flash). <code class="en-linea">&lt;video&gt;</code> y <code class="en-linea">&lt;audio&gt;</code> se escriben igual: el archivo, los botones y, si quieres, varios formatos para que cada navegador elija el suyo.</p>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div class="ventana">
       <div class="ventana-barra"><i></i><i></i><i></i><span>multimedia.html</span></div>
-      <pre class="cod compacto" data-lang="html" id="ej-video" data-real="&lt;style&gt;h2{margin:.2em 0}video{height:120px;vertical-align:middle}&lt;/style&gt;
+      <pre class="cod compacto" data-lang="html" id="ej-video" data-real="&lt;style&gt;body{display:grid;grid-template-columns:auto auto;gap:0 24px;justify-content:start;align-content:start}h2{margin:.2em 0}h2,audio,video[controls]{grid-column:1}video[autoplay]{grid-column:2;grid-row:2}&lt;/style&gt;
 &lt;h2&gt;Tráiler&lt;/h2&gt;
-&lt;video controls width=&quot;320&quot; poster=&quot;portada.jpg&quot;&gt;
-  &lt;source src=&quot;trailer.webm&quot; type=&quot;video/webm&quot;&gt;
-  &lt;source src=&quot;trailer.mp4&quot; type=&quot;video/mp4&quot;&gt;
+&lt;video controls width=&quot;320&quot; poster=&quot;media/portada.jpg&quot;&gt;
+  &lt;source src=&quot;media/trailer.webm&quot; type=&quot;video/webm&quot;&gt;
+  &lt;source src=&quot;media/trailer.mp4&quot; type=&quot;video/mp4&quot;&gt;
   Tu navegador no reproduce vídeo.
 &lt;/video&gt;
 
 &lt;h2&gt;Banda sonora&lt;/h2&gt;
 &lt;audio controls&gt;
-  &lt;source src=&quot;tema.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
+  &lt;source src=&quot;media/tema.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
 &lt;/audio&gt;
 
 &lt;!-- Arranca sin pulsar nada solo si va sin sonido --&gt;
 &lt;video autoplay muted loop width=&quot;320&quot;
-       src=&quot;fondo.mp4&quot;&gt;&lt;/video&gt;">
+       src=&quot;media/fondo.mp4&quot;&gt;&lt;/video&gt;">
 &lt;h2&gt;Tráiler&lt;/h2&gt;
-&lt;video controls width="320" poster="portada.jpg"&gt;
-  &lt;source src="trailer.webm" type="video/webm"&gt;
-  &lt;source src="trailer.mp4" type="video/mp4"&gt;
+&lt;video controls width="320" poster="media/portada.jpg"&gt;
+  &lt;source src="media/trailer.webm" type="video/webm"&gt;
+  &lt;source src="media/trailer.mp4" type="video/mp4"&gt;
   Tu navegador no reproduce vídeo.
 &lt;/video&gt;
 
 &lt;h2&gt;Banda sonora&lt;/h2&gt;
 &lt;audio controls&gt;
-  &lt;source src="tema.mp3" type="audio/mpeg"&gt;
+  &lt;source src="media/tema.mp3" type="audio/mpeg"&gt;
 &lt;/audio&gt;
 
 &lt;!-- Arranca sin pulsar nada solo si va sin sonido --&gt;
 &lt;video autoplay muted loop width="320"
-       src="fondo.mp4"&gt;&lt;/video&gt;</pre>
+       src="media/fondo.mp4"&gt;&lt;/video&gt;</pre>
     </div>
     <div style="display:flex;flex-direction:column;gap:24px;min-height:0">
-      <div class="resultado" data-codigo="ej-video" data-url="localhost/multimedia.html" data-zoom="0.95" style="flex:1"></div>
+      <div class="resultado" data-codigo="ej-video" data-url="localhost/multimedia.html" data-zoom="0.8" style="flex:1"></div>
       <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
         <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span><code class="en-linea">controls</code> pone los botones; <code class="en-linea">poster</code>, la imagen de portada; <code class="en-linea">&lt;source&gt;</code> ofrece varios formatos y el navegador elige</span></li>
         <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Los navegadores <b>bloquean el autoplay con sonido</b>: solo arranca por sí mismo si lleva <code class="en-linea">muted</code></span></li>
-        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Formatos: MP4 y WebM; MP3 y OGG. Un vídeo pesa mucho: los de YouTube se incrustan, no se suben</span></li>
+        <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Formatos: MP4 y WebM; MP3 y OGG. Un vídeo pesa mucho (estos 8&nbsp;s, unos 300&nbsp;KB): los de YouTube se incrustan, no se suben</span></li>
       </ul>
     </div>
   </div>
+  <p style="font-size:var(--type-caption);line-height:1.4;color:var(--muted);margin-top:12px">Vídeo: autores de SuperTuxKart, Wikimedia Commons, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>. Música: «SuperTuxKart Theme», de Claude Werner, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</p>
 </section>
 
 <!-- 64 Incrustar algo de otra web -->
