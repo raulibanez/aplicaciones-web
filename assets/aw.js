@@ -339,7 +339,7 @@
     { cod: 'h1 {\n  ___: #041c3f;\n}', ok: ['color'], pista: 'El color del texto.', fam: 'colores' },
     { cod: 'body {\n  ___: #fefefe;\n}', ok: ['background-color', 'background'], pista: 'El color de fondo.', fam: 'colores' },
     { cod: 'body {\n  ___: "Segoe UI", system-ui, sans-serif;\n}', ok: ['font-family'], pista: 'La pila de tipos de letra.', fam: 'tipografía' },
-    { cod: 'h1 {\n  font-size: 2.5___;\n}', ok: ['rem', 'em'], pista: 'Unidad relativa al tamaño de letra de la raíz.', fam: 'unidades' },
+    { cod: 'h1 {\n  font-size: 2.5___;\n}', ok: ['rem', 'em'], pista: 'La unidad del curso para el texto: la letra de la página.', fam: 'unidades' },
     { cod: '.tarjeta {\n  ___: 1rem 2rem;\n}', ok: ['padding', 'margin'], pista: 'Espacio entre el contenido y el borde, dentro de la caja.', fam: 'caja' },
     { cod: 'main {\n  max-width: 60rem;\n  margin: 0 ___;\n}', ok: ['auto'], pista: 'El valor que reparte el margen y centra la caja.', fam: 'caja' },
     { cod: '.tarjeta {\n  border-___: 12px;\n}', ok: ['radius'], pista: 'Redondea las esquinas.', fam: 'caja' },
@@ -352,7 +352,7 @@
     { cod: 'nav ul {\n  ___: none;\n  padding: 0;\n}', ok: ['list-style', 'list-style-type'], pista: 'Quita las viñetas de la lista.', fam: 'listas' },
     { cod: 'nav a {\n  ___: none;\n}', ok: ['text-decoration'], pista: 'Quita el subrayado del enlace.', fam: 'texto' },
     { cod: 'nav a___ {\n  background: #041c3f;\n}', ok: [':hover', 'hover'], pista: 'Cuando el ratón está encima.', fam: 'estados' },
-    { cod: 'nav a {\n  ___: background-color .2s;\n}', ok: ['transition'], pista: 'Suaviza el cambio de un valor.', fam: 'estados' },
+    { cod: 'nav a {\n  ___: background-color 0.2s;\n}', ok: ['transition'], pista: 'Suaviza el cambio de un valor.', fam: 'estados' },
     { cod: 'table {\n  ___: collapse;\n}', ok: ['border-collapse'], pista: 'Une los bordes de las celdas en uno solo.', fam: 'tablas' },
     { cod: 'tbody tr:nth-child(___) {\n  background: #e3ecf3;\n}', ok: ['even', '2n'], pista: 'Las filas pares.', fam: 'tablas' },
     { cod: 'body {\n  display: ___;\n  grid-template-areas: "header" "main";\n}', ok: ['grid'], pista: 'Filas y columnas a la vez.', fam: 'grid' },
@@ -383,7 +383,7 @@
     { lineas: ['h2 {', '  colour: #017ce9;', '}'], linea: 1, tipos: [3], exp: 'La propiedad es color, con la grafía americana.' },
     { lineas: ['main {', '  max-width: 60;', '  margin: 0 auto;', '}'], linea: 1, tipos: [4], exp: 'Todo tamaño distinto de 0 lleva unidad: 60rem, 60%, 60px.' },
     { lineas: ['button {', '  padding: 0.75 rem 1.5rem;', '}'], linea: 1, tipos: [4], exp: 'Número y unidad van juntos: 0.75rem. Con espacio son dos valores.' },
-    { lineas: ['header {', '  background: #041c3;', '}'], linea: 1, tipos: [5], exp: 'Un color hexadecimal tiene 3 o 6 dígitos (u 8 con transparencia); 5 no vale.' },
+    { lineas: ['header {', '  background: #041c3;', '}'], linea: 1, tipos: [5], exp: 'Un color hexadecimal tiene 3 o 6 dígitos; 5 no vale.' },
     { lineas: ['<head>', '  <link href="estilos.css">', '</head>'], linea: 1, tipos: [6], exp: 'Sin rel="stylesheet" el navegador no sabe que ese archivo es una hoja de estilo.' },
     { lineas: ['<link rel="stylesheet" href="css/Estilos.css">', '<!-- el archivo es estilos.css, junto a index.html -->'], linea: 0, tipos: [6], exp: 'La ruta tiene una carpeta que no existe y una mayúscula: en el servidor no coincide.' },
     { lineas: ['nav ul {', '  list-style: none;', '}', 'nav li {', '  justify-content: space-between;', '}'], linea: 4, tipos: [7], exp: 'justify-content se pone en el contenedor flex (nav ul con display: flex), no en los hijos.' },
@@ -418,7 +418,7 @@
       ['.aviso', 'Los elementos con esa clase'],
       ['#ficha', 'El elemento con ese id, único en la página'],
       ['nav a', 'Los enlaces dentro de nav, a cualquier nivel'],
-      ['ul > li', 'Solo los hijos directos'],
+      ['p.destacado', 'Los p que llevan esa clase'],
       ['h1, h2', 'Los dos elementos, con la misma regla'],
       ['*', 'Todos los elementos'] ] }
   ];
@@ -428,20 +428,20 @@
   AW.bancos.selector = [
     { html: ['<nav>', '  <ul>', '    <li><a href="#que-es">Qué es</a></li>', '    <li><a href="#ficha" class="activo">Ficha</a></li>', '  </ul>', '</nav>', '<p>Lee <a href="#">más</a>.</p>'], objetivo: [3], opciones: ['nav .activo', 'nav a', '#activo', 'a .activo'], pista: 'El enlace lleva una clase; combínala con nav.' },
     { html: ['<table id="ficha">', '  <tr>', '    <th>Versión</th>', '    <td>1.4</td>', '  </tr>', '</table>'], objetivo: [2], opciones: ['th', 'td', '#ficha *', 'tr'], pista: 'Es una celda de cabecera.' },
-    { html: ['<header>', '  <h1>SuperTuxKart</h1>', '  <p>¿El mejor juego?</p>', '</header>', '<main>', '  <p>Es un juego libre.</p>', '</main>'], objetivo: [2], opciones: ['header p', 'p', 'main p', 'header > h1'], pista: 'Solo el párrafo de la cabecera: descendiente.' },
+    { html: ['<header>', '  <h1>SuperTuxKart</h1>', '  <p>¿El mejor juego?</p>', '</header>', '<main>', '  <p>Es un juego libre.</p>', '</main>'], objetivo: [2], opciones: ['header p', 'p', 'main p', 'header h1'], pista: 'Solo el párrafo de la cabecera: descendiente.' },
     { html: ['<ul class="menu">', '  <li>Inicio</li>', '  <li class="activo">Ficha</li>', '  <li>Opinión</li>', '</ul>'], objetivo: [2], opciones: ['.activo', 'li', 'activo', '.menu'], pista: 'Selector de clase.' },
-    { html: ['<form>', '  <input type="text" name="nombre">', '  <input type="email" name="correo">', '  <button>Enviar</button>', '</form>'], objetivo: [2], opciones: ['input[type="email"]', 'input', 'form > button', 'email'], pista: 'Selector de atributo.' },
-    { html: ['<section id="personajes">', '  <h3>Personajes</h3>', '  <ul>', '    <li>Tux</li>', '    <li>Gnu</li>', '  </ul>', '</section>'], objetivo: [3, 4], opciones: ['#personajes li', 'personajes li', '#personajes > li', 'ul'], pista: 'Los li no son hijos directos de la sección.' },
+    { html: ['<form>', '  <label>Nombre</label>', '  <input type="text">', '  <button>Enviar</button>', '</form>', '<button>Volver</button>'], objetivo: [3], opciones: ['form button', 'button', 'button form', '.button'], pista: 'Solo el botón que está dentro del formulario: descendiente.' },
+    { html: ['<section id="personajes">', '  <h3>Personajes</h3>', '  <ul>', '    <li>Tux</li>', '    <li>Gnu</li>', '  </ul>', '</section>'], objetivo: [3, 4], opciones: ['#personajes li', 'personajes li', '#personajes h3', 'ul'], pista: 'Los li que están dentro de la sección, con su id.' },
     { html: ['<p>Texto normal.</p>', '<p class="destacado">Texto destacado.</p>', '<div class="destacado">Aviso.</div>'], objetivo: [1], opciones: ['p.destacado', '.destacado', 'p', 'p .destacado'], pista: 'Elemento y clase, pegados.' },
     { html: ['<footer>', '  <p>Autor: <a href="mailto:x@x.es">Raúl</a></p>', '  <p>© 2026</p>', '</footer>'], objetivo: [1], opciones: ['footer a', 'footer p', 'a footer', 'footer'], pista: 'El enlace que está dentro del pie.' },
     { html: ['<h1>Título</h1>', '<h2>Sección</h2>', '<h3>Apartado</h3>', '<p>Texto</p>'], objetivo: [0, 1, 2], opciones: ['h1, h2, h3', 'h1 h2 h3', 'h', '*'], pista: 'Agrupación con comas.' },
     { html: ['<nav>', '  <ul>', '    <li><a href="#">Qué es</a></li>', '    <li><a href="#">Ficha</a></li>', '  </ul>', '</nav>'], objetivo: [1], opciones: ['nav ul', 'nav li', 'nav *', 'nav'], pista: 'La lista, no sus elementos.' },
-    { html: ['<article>', '  <h2>Noticia</h2>', '  <p>Primer párrafo.</p>', '  <p>Segundo párrafo.</p>', '</article>'], objetivo: [2], opciones: ['article p:first-of-type', 'article p', 'article > p:first-child', 'p'], pista: 'El primer párrafo de su tipo; el primer hijo es el h2.' },
+    { html: ['<article>', '  <h2>Noticia</h2>', '  <p class="entradilla">Primer párrafo.</p>', '  <p>Segundo párrafo.</p>', '</article>'], objetivo: [2], opciones: ['.entradilla', 'article p', 'p', 'entradilla'], pista: 'El párrafo que lleva una clase.' },
     { html: ['<table>', '  <tr><td>1</td></tr>', '  <tr><td>2</td></tr>', '  <tr><td>3</td></tr>', '  <tr><td>4</td></tr>', '</table>'], objetivo: [2, 4], opciones: ['tr:nth-child(even)', 'tr:nth-child(odd)', 'tr', 'tr:even'], pista: 'Las filas pares: nth-child.' },
     { html: ['<aside>', '  <h2>Capturas</h2>', '  <figure>', '    <img src="stk1.jpg" alt="Circuito">', '    <figcaption>Circuito</figcaption>', '  </figure>', '</aside>'], objetivo: [3], opciones: ['aside img', 'figure', 'aside figcaption', 'img figure'], pista: 'La imagen dentro del lateral.' },
-    { html: ['<a href="#" class="boton">Ver</a>', '<a href="#" class="boton grande">Descargar</a>', '<button class="grande">Enviar</button>'], objetivo: [1], opciones: ['.boton.grande', '.boton', '.grande', '.boton .grande'], pista: 'Dos clases en el mismo elemento se encadenan sin espacio.' },
+    { html: ['<a href="#" class="boton">Ver</a>', '<a href="#" class="boton">Descargar</a>', '<span class="boton">Nuevo</span>'], objetivo: [0, 1], opciones: ['a.boton', '.boton', 'span.boton', 'a .boton'], pista: 'Los enlaces con la clase: elemento y clase, pegados.' },
     { html: ['<div id="ficha">', '  <p>Versión 1.4</p>', '</div>', '<div class="ficha">', '  <p>Otra ficha</p>', '</div>'], objetivo: [0], opciones: ['#ficha', '.ficha', 'ficha', 'div'], pista: 'Almohadilla para el id.' },
-    { html: ['<main>', '  <h2>Qué es</h2>', '  <p>Texto</p>', '  <h2>Personajes</h2>', '</main>'], objetivo: [1, 3], opciones: ['main h2', 'main > p', 'h2 main', 'main *'], pista: 'Los dos encabezados de main.' }
+    { html: ['<main>', '  <h2>Qué es</h2>', '  <p>Texto</p>', '  <h2>Personajes</h2>', '</main>'], objetivo: [1, 3], opciones: ['main h2', 'main p', 'h2 main', 'main *'], pista: 'Los dos encabezados de main.' }
   ];
 
   /* ---------- preguntas de repaso de los quiz («Otra pregunta») ----------
@@ -497,7 +497,7 @@
     { p: '¿Qué ganas con `type="email"` frente a `type="text"`?', o: ['Que se envíe un correo al pulsar el botón', 'Que el navegador compruebe que tiene @ antes de enviar', 'Que el dato viaje cifrado', 'Nada: solo cambia el nombre'], c: 1, exp: 'Cada type cambia lo que hace el navegador: email comprueba el formato, number saca el teclado numérico en el móvil y date, un calendario.' }
   ];
 
-  // UT2 · 2.1 CSS y selectores (diapositiva 14)
+  // UT2 · 2.1 CSS y selectores (diapositiva 13)
   AW.preguntas.selectores = [
     { p: '¿Qué quiere decir «en cascada» en CSS?', o: ['Que hay un orden para decidir qué regla gana si varias afectan al mismo elemento', 'Que las reglas se leen de abajo arriba', 'Que una hoja enlaza con la siguiente', 'Que solo sirve para listas'], c: 0, exp: 'Cuando varias reglas afectan al mismo elemento, la cascada decide cuál gana. Lo tachado en DevTools es lo que perdió.' },
     { p: '¿Qué forma de aplicar CSS usamos en el módulo?', o: ['Una hoja externa enlazada con `<link>`', 'El atributo `style` en cada etiqueta', 'Un `<style>` en cada página', 'Los atributos `font` y `align`'], c: 0, exp: 'Una hoja para todo el sitio: se cambia una vez y cambian todas las páginas. style en línea mezcla contenido y aspecto.' },
@@ -505,33 +505,33 @@
     { p: 'Se te olvida cerrar la llave de una regla. ¿Qué pasa?', o: ['El navegador avisa con un error', 'Deja de funcionar lo que viene después, sin aviso', 'Nada: el navegador la cierra', 'Solo falla esa regla'], c: 1, exp: 'Es el error más común de la unidad: todo lo que viene detrás deja de funcionar y el navegador no avisa. Indentar ayuda a verlo.' },
     { p: '¿Qué selector alcanza todo lo que lleva `class="precio"`?', o: ['`.precio`', '`#precio`', '`precio`', '`*precio`'], c: 0, exp: 'El punto es para las clases y la almohadilla para el id. precio a secas buscaría una etiqueta <precio>, que no existe.' },
     { p: 'Clase e id, ¿en qué se diferencian?', o: ['La clase se repite; el id es único en la página', 'El id se repite; la clase es única', 'La clase es para CSS; el id, solo para JavaScript', 'No hay diferencia'], c: 0, exp: 'La clase se pone en todos los elementos que haga falta y es la que más se usa. El id es único y lo reservamos para las anclas.' },
-    { p: '¿A qué alcanza `ul > li`?', o: ['Solo a los `li` hijos directos de la `ul`', 'A todos los `li` de dentro, a cualquier nivel', 'A la `ul` que tenga algún `li`', 'A los `li` y a la `ul`'], c: 0, exp: 'El > solo baja un nivel. Con un espacio, ul li, alcanzaría también los li de las listas anidadas.' },
-    { p: '¿A qué alcanza `.boton.grande`, sin espacio?', o: ['Al elemento que tiene las dos clases', 'A un `.grande` que está dentro de un `.boton`', 'A los `.boton` y a los `.grande`', 'A nada: no es válido'], c: 0, exp: 'Pegadas, las dos clases van en el mismo elemento. Con espacio, .boton .grande, sería un descendiente.' },
-    { p: '¿Qué selector alcanza solo el campo del correo?', cod: '<input type="text" name="nombre">\n<input type="email" name="correo">\n<button>Enviar</button>', o: ['`input[type="email"]`', '`input`', '`.email`', '`#email`'], c: 0, exp: 'El selector de atributo va entre corchetes: los input cuyo type es email. .email y #email buscan una clase y un id que no están.' },
+    { p: '¿A qué alcanza `header p`?', o: ['A los `p` que están dentro del `header`', 'Al `header` y a todos los `p`', 'A los `header` que están dentro de un `p`', 'A nada: falta una coma'], c: 0, exp: 'Con un espacio, el segundo selector es un descendiente del primero: los p de dentro del header, a cualquier nivel. Con coma, header, p, serían los dos.' },
+    { p: '`p.destacado` y `p .destacado`, ¿en qué se diferencian?', o: ['Pegados, un `p` con la clase; con espacio, un elemento con la clase dentro de un `p`', 'Son lo mismo', 'Pegados no es válido', 'Con espacio, un `p` dentro de un `.destacado`'], c: 0, exp: 'Sin espacio, las dos condiciones van en el mismo elemento. Con espacio, el segundo es un descendiente del primero.' },
+    { p: '¿Qué selector alcanza solo el enlace del pie?', cod: '<p>Lee <a href="#">más</a>.</p>\n<footer>\n  <a href="#">Aviso legal</a>\n</footer>', o: ['`footer a`', '`a`', '`a footer`', '`.footer a`'], c: 0, exp: 'footer a: los a que están dentro del footer. a, solo, alcanza también el del párrafo; .footer busca una clase que no hay.' },
     { p: '¿Qué nombre de clase es mejor?', o: ['`.precio`', '`.rojo`', '`.estilo1`', '`.caja2`'], c: 0, exp: 'El nombre dice qué es, no cómo se ve: el día que el rojo pase a azul, .rojo miente.' },
     { p: 'En la pestaña Estilos de DevTools, una declaración sale tachada. ¿Qué significa?', o: ['Que perdió frente a otra regla', 'Que tiene un error de escritura', 'Que está comentada', 'Que se ha borrado del archivo'], c: 0, exp: 'Tachado es que otra regla ganó. Lo que el navegador no entiende lleva un triángulo amarillo.' },
     { p: 'Sin CSS, un `<h1>` ya se ve grande y en negrita. ¿Por qué?', o: ['Por la hoja de estilo del navegador (user-agent)', 'Porque HTML lleva el tamaño dentro de la etiqueta', 'Por la fuente del sistema', 'Porque el h1 es una imagen'], c: 0, exp: 'Cada navegador trae una hoja con estilos por defecto. En DevTools aparece como hoja de estilo de user-agent.' },
-    { p: '¿Existe CSS4?', o: ['No: desde 2000 CSS avanza por módulos, cada uno con su nivel', 'Sí, desde 2020', 'Sí, pero solo en Chrome', 'No: CSS dejó de actualizarse en CSS3'], c: 0, exp: 'Tras CSS2 se dejó de numerar: Flexbox, Grid o Selectores tienen cada uno su nivel. No existe ni existirá un CSS4.' }
+    { p: '¿Existe CSS4?', o: ['No: desde 2000 CSS avanza por módulos, cada uno con su nivel', 'Sí, desde 2020', 'Sí, pero solo en Chrome', 'No: CSS dejó de actualizarse en CSS3'], c: 0, exp: 'Tras CSS2 se dejó de numerar: Flexbox, Grid o Selectores tienen cada uno su nivel. No hay un CSS4.' }
   ];
 
   // UT2 · 2.3 Bloque, línea y flexbox (diapositiva 35)
   AW.preguntas.flexbox = [
     { p: '¿Dónde se pone `display: flex`?', o: ['En el contenedor: coloca a sus hijos directos', 'En cada hijo que quieres mover', 'Siempre en el `<body>`', 'En el texto que quieres centrar'], c: 0, exp: 'El contenedor decide la dirección, el reparto y la alineación; los hijos se adaptan.' },
     { p: '¿Qué propiedad reparte el espacio en el eje principal?', o: ['`justify-content`', '`align-items`', '`flex-direction`', '`text-align`'], c: 0, exp: 'justify-content reparte en el eje principal; align-items alinea en el cruzado.' },
-    { p: 'En una fila flex, ¿qué alinea los hijos en vertical?', o: ['`align-items`', '`justify-content`', '`vertical-align`', '`flex-wrap`'], c: 0, exp: 'En una fila, el eje cruzado es el vertical, y ahí alinea align-items.' },
+    { p: 'En una fila flex, ¿qué alinea los hijos en vertical?', o: ['`align-items`', '`justify-content`', '`text-align`', '`flex-wrap`'], c: 0, exp: 'En una fila, el eje cruzado es el vertical, y ahí alinea align-items.' },
     { p: '¿Cómo centras una caja en las dos direcciones?', o: ['`justify-content` y `align-items` en `center`', '`text-align: center`', '`margin: center`', '`align: middle`'], c: 0, exp: 'En el contenedor flex, justify-content: center y align-items: center. Se acabó el meme de cómo centrar un div.' },
     { p: '¿Qué pone los hijos uno debajo de otro?', o: ['`flex-direction: column`', '`justify-content: column`', '`flex-direction: row`', '`align-items: column`'], c: 0, exp: 'flex-direction cambia el eje principal: row (por defecto) en fila, column en columna.' },
-    { p: 'Con `main { flex: 2; }` y `aside { flex: 1; }`…', o: ['main ocupa el doble que aside', 'aside ocupa el doble que main', 'Ocupan lo mismo', 'main va segundo y aside primero'], c: 0, exp: 'flex reparte el espacio en proporción: 2 frente a 1. Con flex: 1 en todos, a partes iguales.' },
+    { p: 'En una fila flex, con `.grande { flex: 2; }` y `.normal { flex: 1; }`…', o: ['.grande ocupa el doble que .normal', '.normal ocupa el doble que .grande', 'Ocupan lo mismo', '.grande va segundo y .normal primero'], c: 0, exp: 'flex reparte el espacio en proporción: 2 frente a 1. Con flex: 1 en todos, a partes iguales.' },
     { p: 'Los hijos no caben en la fila. ¿Qué les deja saltar de línea?', o: ['`flex-wrap: wrap`', '`flex-direction: column`', '`gap: wrap`', '`white-space: wrap`'], c: 0, exp: 'flex-wrap: wrap los deja saltar a otra línea cuando no caben. column los pondría todos en columna, quepan o no.' },
     { p: '¿Qué separa los hijos de un flex sin usar márgenes?', o: ['`gap`', '`padding`', '`space`', '`border`'], c: 0, exp: 'gap pone el hueco entre los hijos y solo entre ellos. Funciona igual en grid.' },
     { p: '`display: none` frente a `visibility: hidden`…', o: ['none quita el elemento; hidden lo oculta pero deja el hueco', 'Son lo mismo', 'hidden lo quita; none deja el hueco', 'none solo funciona en flex'], c: 0, exp: 'none lo quita del todo, como si no estuviera. hidden lo hace invisible, pero sigue ocupando su sitio.' },
     { p: '¿Qué valor de `display` va dentro del texto y no acepta ancho ni alto?', o: ['`inline`', '`block`', '`inline-block`', '`flex`'], c: 0, exp: 'inline va en la línea, como a, strong o span. inline-block también, pero con ancho, alto y relleno.' },
     { p: 'En el menú, ¿por qué el `ul` lleva `padding: 0`?', o: ['Para quitar la sangría que el navegador pone a las listas', 'Para quitar las viñetas', 'Para poner los li en fila', 'Para que el enlace sea clicable'], c: 0, exp: 'Las listas traen sangría por defecto. Las viñetas se quitan con list-style: none y la fila la hace display: flex.' },
     { p: '¿Por qué `nav a` lleva `display: block`?', o: ['Para que toda la caja del enlace sea clicable', 'Para poner los enlaces en fila', 'Para quitar el subrayado', 'Para que cambie al pasar el ratón'], c: 0, exp: 'Como bloque, el relleno forma parte del enlace y se puede pulsar en toda la caja, no solo en las letras.' },
-    { p: '¿Qué seudoclase se activa al llegar a un enlace con el tabulador?', o: ['`:focus`', '`:hover`', '`:active`', '`:visited`'], c: 0, exp: ':hover es el ratón encima, :active mientras pulsas y :visited si ya lo visitaste. No quites el outline del :focus sin poner otro.' }
+    { p: '¿Qué seudoclase se activa al llegar a un enlace con el tabulador?', o: ['`:focus`', '`:hover`', '`:tab`', '`:teclado`'], c: 0, exp: ':hover es el ratón encima; :focus, el elemento elegido con el teclado. :tab y :teclado no existen. No quites el outline del :focus sin poner otro.' }
   ];
 
-  // UT2 · 2.5 Grid y position (diapositiva 49)
+  // UT2 · 2.5 Grid y position (diapositiva 47)
   AW.preguntas.grid = [
     { p: 'Grid o flexbox: ¿cuál es la regla práctica?', o: ['Grid reparte la página; flex ordena lo de dentro de cada zona', 'Flex reparte la página; grid ordena cada zona', 'Grid ha sustituido a flexbox', 'Flexbox solo sirve para centrar'], c: 0, exp: 'Flexbox trabaja en una dirección; grid, en dos: filas y columnas a la vez.' },
     { p: '¿Qué significa `fr` en grid?', o: ['Una fracción del espacio libre', 'Una fila', 'El tamaño de la fuente', 'Un marco (frame)'], c: 0, exp: '1fr 1fr 1fr son tres partes iguales del espacio que queda libre.' },
@@ -540,11 +540,11 @@
     { p: '¿Qué hace esta rejilla?', lang: 'css', cod: '.galeria {\n  display: grid;\n  grid-template-columns:\n    repeat(auto-fit, minmax(14rem, 1fr));\n}', o: ['Mete tantas columnas como quepan, sin media query', 'Hace 14 columnas', 'Hace una sola columna de 14rem', 'Repite la fila de arriba'], c: 0, exp: 'Cada columna mide al menos 14rem y caben más o menos según el ancho. Es la rejilla responsive sin media query.' },
     { p: '¿Para qué sirve `grid-template-areas`?', o: ['Para dibujar la maqueta con el nombre de cada zona', 'Para poner nombre a las clases', 'Para contar las celdas de la rejilla', 'Para hacer la página responsive sola'], c: 0, exp: 'Se ve el dibujo de la página en el propio CSS: cambiar la maqueta es cambiar las comillas. Cada zona se asigna con grid-area.' },
     { p: 'La captura destacada de la galería tiene que ocupar dos columnas:', o: ['`grid-column: span 2`', '`grid-row: span 2`', '`column-span: 2`', '`width: 200%`'], c: 0, exp: 'span 2 cuenta celdas. grid-row: span 2 la haría más alta, no más ancha.' },
-    { p: '`grid-column: 1 / 3` ocupa…', o: ['Dos columnas: de la línea 1 a la línea 3', 'Tres columnas', 'La columna 1 y la 3', 'Un tercio de la fila'], c: 0, exp: 'Con la barra se cuentan líneas de la rejilla, no celdas: de la línea 1 a la 3 hay dos columnas.' },
+    { p: 'Móvil primero: ¿qué va fuera de la media query?', o: ['La versión de una columna, la del móvil', 'La versión de escritorio', 'Nada: todo va dentro', 'Solo los colores'], c: 0, exp: 'La base de la hoja es la pantalla estrecha; la media query con min-width añade las columnas cuando la pantalla crece.' },
     { p: '¿Qué hace que una imagen llene su celda sin deformarse?', o: ['`object-fit: cover`', '`object-fit: fill`', '`display: block`', '`float: left`'], c: 0, exp: 'Con width y height al 100 %, object-fit: cover recorta lo que sobra en vez de estirar la imagen. fill la estira.' },
-    { p: 'Una caja con `position: absolute` se coloca respecto a…', o: ['El ancestro más cercano posicionado; si no hay, la página', 'Siempre la página', 'La ventana, aunque hagas scroll', 'Su sitio normal, dejando el hueco'], c: 0, exp: 'Sale del flujo y busca el ancestro más cercano con position distinto de static. Respecto a la ventana es fixed; desde su sitio, relative.' },
+    { p: 'Una caja con `position: absolute` se coloca respecto a…', o: ['La caja con `relative` más cercana que la contiene', 'Siempre la página', 'La ventana, aunque hagas scroll', 'Su sitio normal, dejando el hueco'], c: 0, exp: 'Sale del flujo y se coloca respecto a la caja con relative más cercana que la contiene; si no hay ninguna, respecto a la página. Respecto a la ventana es fixed.' },
     { p: 'Pones una etiqueta con `absolute` sobre una foto. ¿Qué necesita el `figure`?', o: ['`position: relative`', '`position: absolute`', '`display: grid`', '`z-index: 1`'], c: 0, exp: 'relative en el figure lo convierte en la referencia: la etiqueta se coloca respecto a la foto y no respecto a la página.' },
-    { p: 'Un botón «subir» abajo a la derecha que no se mueve con el scroll:', o: ['`position: fixed`', '`position: sticky`', '`position: relative`', '`position: static`'], c: 0, exp: 'fixed se coloca respecto a la ventana y no se mueve. sticky solo se pega al llegar al borde.' },
+    { p: 'Un botón «subir» abajo a la derecha que no se mueve con el scroll:', o: ['`position: fixed`', '`position: sticky`', '`position: relative`', '`position: absolute`'], c: 0, exp: 'fixed se coloca respecto a la ventana y no se mueve. sticky solo se pega al llegar al borde.' },
     { p: 'Dos cajas posicionadas se tapan. ¿Qué decide cuál queda encima?', o: ['`z-index`', '`top`', '`order`', '`display`'], c: 0, exp: 'top, right, bottom y left dicen dónde; z-index, quién queda encima: gana el número más alto.' }
   ];
 
