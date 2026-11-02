@@ -2376,32 +2376,47 @@ mi-web/
 <!-- ═══════════ BLOQUE I · PRUEBA PRÁCTICA, EXAMEN Y CIERRE (sesiones 16 a 18) ═══════════ -->
 
 <!-- 86 Mi videojuego favorito -->
-<section data-label="1.9 · Mi videojuego favorito" data-seccion="1.9" data-deck-id="evaluacion" data-deck-section="1.9" style="display:grid;grid-template-columns:1fr 1fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
-  <aside class="notas"><b>Sesión 16, prueba práctica con nota</b> (20 % de la unidad, dentro del 60 % de pruebas; el examen de teoría vale el otro 40 %). VS Code o CodePen en modo incógnito. <b>Sin IA, sin buscar código ni referencias</b>; sí la presentación. Solo pueden buscar imágenes e información del juego. Preguntar a un compañero es copiar. La captura de la diapositiva siguiente se proyecta y se sube a Classroom. <b>Entrega: index.html al acabar la sesión.</b> Quien no la termine la repite en la sesión 18 con otro tema (una película). Rúbrica: estructura válida 4, encabezados y párrafos 3, listas 2, tabla 3, imágenes con alt 2, enlaces 2, formulario 3, limpieza y validador 1; sobre 20.</aside>
-  <div>
-    <span class="pill">Prueba práctica</span>
-    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Mi videojuego favorito</h2>
-    <p style="font-size:var(--type-body);line-height:1.5;margin-top:var(--gap-title)">Haz una página con la misma estructura que la captura de la diapositiva siguiente, sobre tu videojuego favorito. Todo en un solo <code class="en-linea">index.html</code>, sin CSS.</p>
-    <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:var(--gap-item);font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
-      <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Cabecera con título y subtítulo; contenido principal con encabezados, párrafos con énfasis, lista de personajes, tabla de datos, lista de enlaces y formulario de valoración</span></li>
-      <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Lateral con dos capturas del juego con pie y crédito; pie de página con el autor</span></li>
-      <li style="display:flex;gap:16px"><span style="color:var(--cyan);font-weight:800">—</span><span>Etiquetas semánticas (header, main, aside, footer), un solo h1, imágenes con alt, formulario con label y name</span></li>
-    </ul>
-  </div>
-  <div style="background:var(--white);border-radius:24px;padding:48px 56px;display:flex;flex-direction:column;gap:32px;box-shadow:0 2px 0 var(--line)">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;font-size:var(--type-small)">
-      <div><p style="color:var(--muted);font-size:var(--type-caption)">Duración</p><p style="font-weight:700;color:var(--navy);margin-top:6px">1 sesión (50 min)</p></div>
-      <div><p style="color:var(--muted);font-size:var(--type-caption)">Modalidad</p><p style="font-weight:700;color:var(--navy);margin-top:6px">Individual, en el aula</p></div>
-      <div><p style="color:var(--muted);font-size:var(--type-caption)">Entrega</p><p style="font-weight:700;color:var(--navy);margin-top:6px">index.html en Classroom al acabar</p></div>
-      <div><p style="color:var(--muted);font-size:var(--type-caption)">Vale</p><p style="font-weight:700;color:var(--navy);margin-top:6px">20 % de la unidad</p></div>
+<section data-label="1.9 · Mi videojuego favorito" data-seccion="1.9" data-deck-id="evaluacion" data-deck-section="1.9" style="display:grid;grid-template-columns:1.35fr 1fr;gap:72px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
+  <aside class="notas"><b>Sesión 16, prueba práctica con nota</b> (20 % de la unidad, dentro del 60 % de pruebas; el examen de teoría vale el otro 40 %). Individual, en el aula. La captura de la diapositiva siguiente se proyecta y se sube a Classroom. Quien no la termine la repite en la sesión 18 con otro tema (una película). Rúbrica orientativa: estructura válida 4, encabezados y párrafos 3, listas 2, tabla 3, imágenes con alt 2, enlaces 2, formulario 3, limpieza y validador 1; sobre 20. <b>header, main, aside y footer son opcionales y suben nota</b>, a criterio del profe.</aside>
+  <div style="display:flex;flex-direction:column">
+    <span class="pill" style="align-self:flex-start">Prueba práctica</span>
+    <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:28px;color:var(--navy)">Mi videojuego favorito</h2>
+    <p style="font-size:var(--type-small);line-height:1.45;margin-top:20px">Haz una página sobre tu videojuego favorito con la misma estructura que la captura de la diapositiva siguiente. Un solo <code class="en-linea">index.html</code>, sin CSS.</p>
+    <p style="font-size:var(--type-caption);font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-top:var(--gap-item)">Lo que tiene que tener</p>
+    <ol style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;margin-top:14px;font-size:var(--type-caption);line-height:1.35;color:var(--navy)">
+      <li style="display:flex;gap:16px"><span style="color:var(--ok);font-weight:800">✓</span><span><b>La estructura de la página:</b> <code class="en-linea">&lt;!DOCTYPE html&gt;</code>, <code class="en-linea">&lt;head&gt;</code>, <code class="en-linea">&lt;title&gt;</code>, <code class="en-linea">&lt;body&gt;</code></span></li>
+      <li style="display:flex;gap:16px"><span style="color:var(--ok);font-weight:800">✓</span><span><b>Un título y subtítulos:</b> un solo <code class="en-linea">&lt;h1&gt;</code>, y <code class="en-linea">&lt;h2&gt;</code> y <code class="en-linea">&lt;h3&gt;</code></span></li>
+      <li style="display:flex;gap:16px"><span style="color:var(--ok);font-weight:800">✓</span><span><b>Párrafos con negrita y cursiva:</b> <code class="en-linea">&lt;p&gt;</code>, <code class="en-linea">&lt;strong&gt;</code>, <code class="en-linea">&lt;em&gt;</code></span></li>
+      <li style="display:flex;gap:16px"><span style="color:var(--ok);font-weight:800">✓</span><span><b>Una lista de personajes:</b> <code class="en-linea">&lt;ul&gt;</code></span></li>
+      <li style="display:flex;gap:16px"><span style="color:var(--ok);font-weight:800">✓</span><span><b>Una tabla con los datos del juego:</b> <code class="en-linea">&lt;table&gt;</code>, <code class="en-linea">&lt;th&gt;</code>, <code class="en-linea">&lt;td&gt;</code></span></li>
+      <li style="display:flex;gap:16px"><span style="color:var(--ok);font-weight:800">✓</span><span><b>Una lista ordenada de enlaces:</b> <code class="en-linea">&lt;ol&gt;</code> con <code class="en-linea">&lt;a href&gt;</code></span></li>
+      <li style="display:flex;gap:16px"><span style="color:var(--ok);font-weight:800">✓</span><span><b>Dos imágenes con texto alternativo y pie:</b> <code class="en-linea">&lt;img alt&gt;</code>, <code class="en-linea">&lt;figcaption&gt;</code></span></li>
+      <li style="display:flex;gap:16px"><span style="color:var(--ok);font-weight:800">✓</span><span><b>Un formulario de valoración:</b> <code class="en-linea">&lt;form&gt;</code>, <code class="en-linea">&lt;label&gt;</code>, <code class="en-linea">&lt;input type="radio"&gt;</code>, <code class="en-linea">&lt;textarea&gt;</code>, <code class="en-linea">&lt;button&gt;</code></span></li>
+    </ol>
+    <div style="margin-top:var(--gap-item);border:3px dashed var(--cyan);border-radius:16px;padding:16px 24px;font-size:var(--type-caption);line-height:1.35;color:var(--navy)">
+      <p><b>Para subir nota (opcional):</b> las zonas de la página con sus etiquetas, <code class="en-linea">&lt;header&gt;</code>, <code class="en-linea">&lt;main&gt;</code>, <code class="en-linea">&lt;aside&gt;</code> y <code class="en-linea">&lt;footer&gt;</code></p>
     </div>
-    <div style="height:2px;background:var(--line)"></div>
-    <div style="display:flex;gap:20px;align-items:flex-start">
-      <img src="../assets/exclamation.png" alt="" style="width:56px;height:56px;object-fit:contain;flex:none">
-      <ul style="padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:var(--type-caption);line-height:1.4;color:var(--navy)">
-        <li><b>Permitido:</b> VS Code o CodePen en modo incógnito, esta presentación, buscar imágenes e información del juego.</li>
-        <li><b>No permitido:</b> IA, buscar código o referencias de HTML, preguntar a un compañero (se considera copiar).</li>
-        <li>Quien no la termine la repite en la sesión 18 con otro tema.</li>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:24px;justify-content:center">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div style="background:var(--white);border-radius:20px;padding:24px 28px;box-shadow:0 2px 0 var(--line)"><p style="color:var(--muted);font-size:var(--type-caption)">Tiempo</p><p style="font-size:var(--type-small);font-weight:800;color:var(--navy);margin-top:6px">50 minutos</p></div>
+      <div style="background:var(--white);border-radius:20px;padding:24px 28px;box-shadow:0 2px 0 var(--line)"><p style="color:var(--muted);font-size:var(--type-caption)">Entrega</p><p style="font-size:var(--type-small);font-weight:800;color:var(--navy);margin-top:6px"><code class="en-linea">index.html</code> en Classroom</p></div>
+    </div>
+    <div style="background:#E6F6D5;border-radius:20px;padding:28px 32px;border-left:10px solid var(--ok)">
+      <p style="font-size:var(--type-small);font-weight:800;color:var(--navy)"><span style="color:var(--ok)">✓</span> Puedes usar</p>
+      <ul style="list-style:none;padding:0;margin-top:14px;display:flex;flex-direction:column;gap:10px;font-size:var(--type-small);line-height:1.35;color:var(--navy)">
+        <li>Bloc de notas o VS Code</li>
+        <li>CodePen, en modo incógnito</li>
+        <li>Esta presentación</li>
+        <li>Buscar imágenes e información de tu juego</li>
+      </ul>
+    </div>
+    <div style="background:#FFE9EA;border-radius:20px;padding:28px 32px;border-left:10px solid var(--ko)">
+      <p style="font-size:var(--type-small);font-weight:800;color:var(--navy)"><span style="color:var(--ko)">✗</span> No puedes usar</p>
+      <ul style="list-style:none;padding:0;margin-top:14px;display:flex;flex-direction:column;gap:10px;font-size:var(--type-small);line-height:1.35;color:var(--navy)">
+        <li>IA</li>
+        <li>Buscar código o ejemplos de HTML</li>
+        <li>Preguntar a un compañero</li>
       </ul>
     </div>
   </div>

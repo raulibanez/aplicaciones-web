@@ -649,6 +649,10 @@ section:has(> .ej) { grid-template-rows: minmax(0, 1fr); }
   text-align: center;
 }
 .visor .visor-pie a { color: #A5E070; }
+/* Captura muy alta (aw.js, .visor-larga): a su ancho, con scroll vertical */
+.visor.visor-larga { display: block; overflow-y: auto; padding: 24px 0 72px; }
+.visor.visor-larga img { width: min(1280px, 92vw); max-width: none; max-height: none; margin: 0 auto; }
+.visor.visor-larga .visor-pie, .visor.visor-larga .visor-cerrar { position: fixed; }
 /* Tarjeta del taller (figure.foto.tarjeta): la imagen grande es 16:9 y ya lleva su texto,
    así que llena la pantalla y el crédito queda en una etiqueta pequeña arriba. */
 .visor.visor-tarjeta img {
@@ -718,6 +722,7 @@ section:has(> .ej) { grid-template-rows: minmax(0, 1fr); }
 .pill-enlace:hover { background: var(--cyan); box-shadow: none; transform: translateY(2px); }
 .pill-enlace::before { content: '↗ '; }
 .pill-enlace.codigo::before { content: '</> '; font-family: 'JetBrains Mono', monospace; font-size: 18px; }
+.pill-enlace.descarga::before { content: '↓ '; }
 .foto > .pill-enlace { position: absolute; top: 18px; right: 18px; z-index: 2; }
 @media print { .pill-enlace { display: none; } }
 .visor.visor-solucion { cursor: default; }

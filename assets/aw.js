@@ -943,6 +943,12 @@
     }
     v.querySelector('img').src = img.dataset.grande || img.currentSrc || img.src;   // data-grande: versión completa distinta de la miniatura
     v.querySelector('img').alt = img.alt;
+    // Captura muy alta (una página entera): a su ancho, y se recorre con la rueda
+    if (!movil) {
+      const im = v.querySelector('img');
+      const larga = () => { if (im.naturalHeight > im.naturalWidth * 1.4) v.classList.add('visor-larga'); };
+      if (im.complete) larga(); else im.addEventListener('load', larga);
+    }
     const tarjeta = fig.classList.contains('tarjeta');
     if (tarjeta) v.classList.add('visor-tarjeta');
     const pie = cred ? (tarjeta ? (cred.querySelector('small') || cred).innerHTML : cred.innerHTML) : '';
