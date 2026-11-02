@@ -333,44 +333,36 @@
   /* ---------- bancos de CSS (UT2) ----------
      Se eligen desde la diapositiva con data-banco="completarCss" (y data-tipos="tiposErrorCss" en el de errores). */
 
+  // Solo lo visto hasta la sesión 3 (bloques 2.1 a 2.3): el interactivo va al final de ese bloque
   AW.bancos.completarCss = [
-    { cod: '<link rel="___" href="estilos.css">', ok: ['stylesheet'], pista: 'Dice qué relación tiene el archivo con la página: es una hoja de estilo.', fam: 'enlazar la hoja' },
-    { cod: '<link rel="stylesheet" ___="estilos.css">', ok: ['href'], pista: 'La ruta del archivo, como en los enlaces.', fam: 'enlazar la hoja' },
+    { cod: '<link rel="___" href="style.css">', ok: ['stylesheet'], pista: 'Dice qué es el archivo: una hoja de estilo.', fam: 'enlazar la hoja' },
+    { cod: '<link rel="stylesheet" ___="style.css">', ok: ['href'], pista: 'La ruta del archivo, como en los enlaces.', fam: 'enlazar la hoja' },
+    { cod: '___destacado {\n  background: #a5e070;\n}', ok: ['.'], pista: 'Lo que va delante de una clase en el CSS.', fam: 'selectores' },
+    { cod: 'nav ___ {\n  color: white;\n}\n/* los enlaces de dentro del nav */', ok: ['a'], pista: 'La etiqueta de los enlaces.', fam: 'selectores' },
     { cod: 'h1 {\n  ___: #041c3f;\n}', ok: ['color'], pista: 'El color del texto.', fam: 'colores' },
-    { cod: 'body {\n  ___: #fefefe;\n}', ok: ['background-color', 'background'], pista: 'El color de fondo.', fam: 'colores' },
-    { cod: 'body {\n  ___: "Segoe UI", system-ui, sans-serif;\n}', ok: ['font-family'], pista: 'La pila de tipos de letra.', fam: 'tipografía' },
-    { cod: 'h1 {\n  font-size: 2.5___;\n}', ok: ['rem', 'em'], pista: 'La unidad del curso para el texto: la letra de la página.', fam: 'unidades' },
+    { cod: 'body {\n  ___: #fefefe;\n}', ok: ['background', 'background-color'], pista: 'El color de fondo.', fam: 'colores' },
+    { cod: ':root {\n  --accent: #a5e070;\n}\nh2 {\n  color: ___(--accent);\n}', ok: ['var'], pista: 'Lo que usa un color guardado en la paleta.', fam: 'paleta' },
+    { cod: 'body {\n  ___: Arial, sans-serif;\n}', ok: ['font-family'], pista: 'El tipo de letra.', fam: 'letra' },
+    { cod: 'h1 {\n  font-size: 2.5___;\n}', ok: ['rem'], pista: 'La unidad del curso para el texto: 1 vale 16 px.', fam: 'medidas' },
+    { cod: 'h1 {\n  font-weight: ___;\n}', ok: ['bold', '700'], pista: 'Negrita.', fam: 'letra' },
+    { cod: 'h1 {\n  ___: center;\n}', ok: ['text-align'], pista: 'Centra el texto.', fam: 'letra' },
+    { cod: 'p {\n  ___: 1.6;\n}', ok: ['line-height'], pista: 'El espacio entre las líneas.', fam: 'letra' },
     { cod: '.tarjeta {\n  ___: 1rem 2rem;\n}', ok: ['padding', 'margin'], pista: 'Espacio entre el contenido y el borde, dentro de la caja.', fam: 'caja' },
-    { cod: 'main {\n  max-width: 60rem;\n  margin: 0 ___;\n}', ok: ['auto'], pista: 'El valor que reparte el margen y centra la caja.', fam: 'caja' },
+    { cod: '.ficha {\n  border: 2px ___ #041c3f;\n}', ok: ['solid', 'dashed', 'dotted'], pista: 'El estilo de la línea: continua.', fam: 'caja' },
+    { cod: 'h2 {\n  margin-___: 2rem;\n}\n/* solo el margen de arriba */', ok: ['top'], pista: 'Arriba, en inglés.', fam: 'caja' },
+    { cod: 'td {\n  border-___: 1px solid #d6e0ea;\n}\n/* solo la línea de abajo */', ok: ['bottom'], pista: 'Abajo, en inglés.', fam: 'caja' },
     { cod: '.tarjeta {\n  border-___: 12px;\n}', ok: ['radius'], pista: 'Redondea las esquinas.', fam: 'caja' },
-    { cod: '* {\n  ___: border-box;\n}', ok: ['box-sizing'], pista: 'Hace que el ancho incluya relleno y borde.', fam: 'caja' },
-    { cod: 'img {\n  ___: 100%;\n  height: auto;\n}', ok: ['max-width', 'width'], pista: 'Que la imagen nunca desborde su caja.', fam: 'imágenes' },
-    { cod: 'nav ul {\n  display: ___;\n  gap: 1rem;\n}', ok: ['flex'], pista: 'Coloca a los hijos en fila.', fam: 'flexbox' },
-    { cod: 'header {\n  display: flex;\n  ___: space-between;\n}', ok: ['justify-content'], pista: 'Reparte el espacio en el eje principal.', fam: 'flexbox' },
-    { cod: '.centro {\n  display: flex;\n  justify-content: center;\n  ___: center;\n}', ok: ['align-items'], pista: 'Alinea en el eje cruzado.', fam: 'flexbox' },
-    { cod: 'nav ul {\n  display: flex;\n  ___: 1.5rem;\n}', ok: ['gap'], pista: 'El hueco entre los hijos.', fam: 'flexbox' },
-    { cod: 'nav ul {\n  ___: none;\n  padding: 0;\n}', ok: ['list-style', 'list-style-type'], pista: 'Quita las viñetas de la lista.', fam: 'listas' },
-    { cod: 'nav a {\n  ___: none;\n}', ok: ['text-decoration'], pista: 'Quita el subrayado del enlace.', fam: 'texto' },
-    { cod: 'nav a___ {\n  background: #041c3f;\n}', ok: [':hover', 'hover'], pista: 'Cuando el ratón está encima.', fam: 'estados' },
-    { cod: 'nav a {\n  ___: background-color 0.2s;\n}', ok: ['transition'], pista: 'Suaviza el cambio de un valor.', fam: 'estados' },
-    { cod: 'table {\n  ___: collapse;\n}', ok: ['border-collapse'], pista: 'Une los bordes de las celdas en uno solo.', fam: 'tablas' },
-    { cod: 'tbody tr:nth-child(___) {\n  background: #e3ecf3;\n}', ok: ['even', '2n'], pista: 'Las filas pares.', fam: 'tablas' },
-    { cod: 'body {\n  display: ___;\n  grid-template-areas: "header" "main";\n}', ok: ['grid'], pista: 'Filas y columnas a la vez.', fam: 'grid' },
-    { cod: '@___ (min-width: 48rem) {\n  body { grid-template-columns: 2fr 1fr; }\n}', ok: ['media'], pista: 'Reglas que solo se aplican a partir de un ancho.', fam: 'responsive' },
-    { cod: 'nav {\n  position: ___;\n  top: 0;\n}', ok: ['sticky'], pista: 'Normal hasta que llega al borde; entonces se queda pegado.', fam: 'posición' },
-    { cod: ':root {\n  --acento: #a5e070;\n}\nh2 {\n  color: ___(--acento);\n}', ok: ['var'], pista: 'La función que lee una variable.', fam: 'variables' }
+    { cod: 'main {\n  max-width: 60rem;\n  margin: 0 ___;\n}', ok: ['auto'], pista: 'El valor que centra la caja.', fam: 'caja' }
   ];
 
   AW.tiposErrorCss = [
     'Falta el punto y coma',
     'Falta una llave { o }',
-    'Clase sin el punto o id sin la almohadilla',
+    'Clase sin el punto',
     'Propiedad mal escrita',
     'Valor sin unidad o unidad separada',
     'Color mal escrito',
     'El link no enlaza la hoja: falta rel o la ruta no coincide',
-    'Propiedad de flexbox o grid en el elemento equivocado',
-    'Media query mal escrita',
     'Seudoclase mal escrita'
   ];
   AW.bancos.errorCss = [
@@ -378,70 +370,61 @@
     { lineas: ['th {', '  background: #a5e070', '  color: #041c3f;', '}'], linea: 1, tipos: [0], exp: 'Falta el punto y coma tras el color de fondo: se pierde también el color del texto.' },
     { lineas: ['nav a', '  color: white;', '  text-decoration: none;', '}'], linea: 0, tipos: [1], exp: 'Falta la llave de apertura después del selector.' },
     { lineas: ['<p class="destacado">Novedad</p>', '', 'destacado {', '  font-weight: 700;', '}'], linea: 2, tipos: [2], exp: 'Sin el punto, «destacado» busca una etiqueta llamada así, que no existe. Es .destacado.' },
-    { lineas: ['<div id="ficha">…</div>', '', '.ficha {', '  border: 1px solid #d6e0ea;', '}'], linea: 2, tipos: [2], exp: 'El elemento tiene id, no clase: el selector es #ficha.' },
     { lineas: ['h1 {', '  font-sise: 2rem;', '}'], linea: 1, tipos: [3], exp: 'La propiedad es font-size. El navegador ignora las que no conoce, sin avisar.' },
     { lineas: ['h2 {', '  colour: #017ce9;', '}'], linea: 1, tipos: [3], exp: 'La propiedad es color, con la grafía americana.' },
-    { lineas: ['main {', '  max-width: 60;', '  margin: 0 auto;', '}'], linea: 1, tipos: [4], exp: 'Todo tamaño distinto de 0 lleva unidad: 60rem, 60%, 60px.' },
+    { lineas: ['main {', '  max-width: 60;', '  margin: 0 auto;', '}'], linea: 1, tipos: [4], exp: 'Todo tamaño distinto de 0 lleva unidad: 60rem.' },
     { lineas: ['button {', '  padding: 0.75 rem 1.5rem;', '}'], linea: 1, tipos: [4], exp: 'Número y unidad van juntos: 0.75rem. Con espacio son dos valores.' },
-    { lineas: ['header {', '  background: #041c3;', '}'], linea: 1, tipos: [5], exp: 'Un color hexadecimal tiene 3 o 6 dígitos; 5 no vale.' },
-    { lineas: ['<head>', '  <link href="estilos.css">', '</head>'], linea: 1, tipos: [6], exp: 'Sin rel="stylesheet" el navegador no sabe que ese archivo es una hoja de estilo.' },
-    { lineas: ['<link rel="stylesheet" href="css/Estilos.css">', '<!-- el archivo es estilos.css, junto a index.html -->'], linea: 0, tipos: [6], exp: 'La ruta tiene una carpeta que no existe y una mayúscula: en el servidor no coincide.' },
-    { lineas: ['nav ul {', '  list-style: none;', '}', 'nav li {', '  justify-content: space-between;', '}'], linea: 4, tipos: [7], exp: 'justify-content se pone en el contenedor flex (nav ul con display: flex), no en los hijos.' },
-    { lineas: ['.galeria img {', '  display: grid;', '  grid-template-columns: 1fr 1fr;', '}'], linea: 1, tipos: [7], exp: 'La rejilla se declara en el contenedor (.galeria); las imágenes son los elementos que se colocan.' },
-    { lineas: ['@media min-width: 48rem {', '  body { grid-template-columns: 2fr 1fr; }', '}'], linea: 0, tipos: [8], exp: 'La condición va entre paréntesis: @media (min-width: 48rem).' },
-    { lineas: ['nav a: hover {', '  background: #041c3f;', '}'], linea: 0, tipos: [9], exp: 'La seudoclase va pegada al selector, sin espacio: a:hover. Con espacio busca un descendiente.' }
+    { lineas: ['header {', '  background: #041c3;', '}'], linea: 1, tipos: [5], exp: 'Un color hexadecimal lleva seis cifras (o tres); cinco no vale.' },
+    { lineas: ['<head>', '  <link href="style.css">', '</head>'], linea: 1, tipos: [6], exp: 'Sin rel="stylesheet" el navegador no sabe que ese archivo es una hoja de estilo.' },
+    { lineas: ['<link rel="stylesheet" href="css/Style.css">', '<!-- el archivo es style.css, junto a index.html -->'], linea: 0, tipos: [6], exp: 'La ruta tiene una carpeta que no existe y una mayúscula: en el servidor no coincide.' },
+    { lineas: ['nav a: hover {', '  background: #041c3f;', '}'], linea: 0, tipos: [7], exp: 'La seudoclase va pegada al selector, sin espacio: a:hover. Con espacio busca un elemento dentro del enlace.' }
   ];
 
   AW.bancos.emparejarCss = [
-    { titulo: 'Caja y texto', pares: [
+    { titulo: 'Caja y letra', pares: [
       ['padding', 'Espacio entre el contenido y el borde, dentro de la caja'],
       ['margin', 'Separación con las cajas de al lado, fuera del borde'],
       ['border-radius', 'Redondea las esquinas de la caja'],
-      ['font-family', 'Tipo de letra, con su pila de reserva'],
-      ['line-height', 'Altura de cada línea de texto'],
-      ['box-sizing: border-box', 'El ancho incluye relleno y borde'] ] },
-    { titulo: 'Flexbox y grid', pares: [
-      ['display: flex', 'Coloca a los hijos en una fila o en una columna'],
-      ['justify-content', 'Reparte el espacio sobrante en el eje principal'],
-      ['align-items', 'Alinea los hijos en el eje cruzado'],
+      ['font-family', 'El tipo de letra'],
+      ['line-height', 'El espacio entre las líneas de texto'],
+      ['text-align', 'Alinea el texto: izquierda, centro o derecha'] ] },
+    { titulo: 'Las recetas', pares: [
+      ['display: flex', 'Pone en fila lo que hay dentro: el menú'],
+      ['justify-content', 'Decide dónde va la fila: al principio, al centro o al final'],
       ['gap', 'Hueco entre los hijos, sin márgenes'],
       ['grid-template-columns', 'Cuántas columnas hay y de qué ancho'],
-      ['grid-template-areas', 'Dibuja la maqueta con nombres de zona'] ] },
-    { titulo: 'Responsive, estados y posición', pares: [
-      ['@media (min-width: 48rem)', 'Reglas que se aplican solo a partir de ese ancho'],
+      ['grid-template-areas', 'Dibuja la maqueta con nombres de zona'],
+      ['@media (min-width: 48rem)', 'Reglas que se aplican solo a partir de ese ancho'] ] },
+    { titulo: 'Colores y medidas', pares: [
+      ['color', 'El color del texto'],
+      ['background', 'El color de fondo'],
+      ['var(--accent)', 'Usa el color guardado en la paleta'],
+      ['1rem', '16 px: la letra de la página'],
       ['max-width', 'La caja crece hasta ahí y se encoge si no cabe'],
-      [':hover', 'Cuando el ratón está encima del elemento'],
-      ['transition', 'Suaviza el cambio de un valor'],
-      ['position: sticky', 'Se queda pegado al llegar al borde de la ventana'],
-      ['z-index', 'Qué caja queda encima cuando se solapan'] ] },
+      [':hover', 'Cuando el ratón está encima del elemento'] ] },
     { titulo: 'Selectores', pares: [
-      ['.aviso', 'Los elementos con esa clase'],
-      ['#ficha', 'El elemento con ese id, único en la página'],
-      ['nav a', 'Los enlaces dentro de nav, a cualquier nivel'],
-      ['p.destacado', 'Los p que llevan esa clase'],
+      ['.aviso', 'Los elementos con la clase aviso'],
+      ['nav a', 'Los enlaces que están dentro del nav'],
       ['h1, h2', 'Los dos elementos, con la misma regla'],
-      ['*', 'Todos los elementos'] ] }
+      ['p', 'Todos los párrafos de la página'],
+      ['header p', 'Solo los párrafos de la cabecera'],
+      ['body', 'La página entera: su letra y su color los heredan todos'] ] }
   ];
 
   // selector: HTML de pocas líneas, líneas objetivo (desde 0) y cuatro selectores; el acierto se calcula
   // de verdad con querySelectorAll sobre el fragmento, así que solo uno debe alcanzar justo el objetivo
   AW.bancos.selector = [
-    { html: ['<nav>', '  <ul>', '    <li><a href="#que-es">Qué es</a></li>', '    <li><a href="#ficha" class="activo">Ficha</a></li>', '  </ul>', '</nav>', '<p>Lee <a href="#">más</a>.</p>'], objetivo: [3], opciones: ['nav .activo', 'nav a', '#activo', 'a .activo'], pista: 'El enlace lleva una clase; combínala con nav.' },
-    { html: ['<table id="ficha">', '  <tr>', '    <th>Versión</th>', '    <td>1.4</td>', '  </tr>', '</table>'], objetivo: [2], opciones: ['th', 'td', '#ficha *', 'tr'], pista: 'Es una celda de cabecera.' },
-    { html: ['<header>', '  <h1>SuperTuxKart</h1>', '  <p>¿El mejor juego?</p>', '</header>', '<main>', '  <p>Es un juego libre.</p>', '</main>'], objetivo: [2], opciones: ['header p', 'p', 'main p', 'header h1'], pista: 'Solo el párrafo de la cabecera: descendiente.' },
+    { html: ['<nav>', '  <ul>', '    <li><a href="#que-es">Qué es</a></li>', '    <li><a href="#ficha" class="activo">Ficha</a></li>', '  </ul>', '</nav>', '<p>Lee <a href="#">más</a>.</p>'], objetivo: [3], opciones: ['nav .activo', 'nav a', 'activo', 'a .activo'], pista: 'El enlace lleva una clase; combínala con nav.' },
+    { html: ['<table>', '  <tr>', '    <th>Versión</th>', '    <td>1.4</td>', '  </tr>', '</table>'], objetivo: [2], opciones: ['th', 'td', 'table', 'tr'], pista: 'Es una celda de cabecera.' },
+    { html: ['<header>', '  <h1>SuperTuxKart</h1>', '  <p>¿El mejor juego?</p>', '</header>', '<main>', '  <p>Es un juego libre.</p>', '</main>'], objetivo: [2], opciones: ['header p', 'p', 'main p', 'header h1'], pista: 'Solo el párrafo de la cabecera: uno dentro de otro.' },
     { html: ['<ul class="menu">', '  <li>Inicio</li>', '  <li class="activo">Ficha</li>', '  <li>Opinión</li>', '</ul>'], objetivo: [2], opciones: ['.activo', 'li', 'activo', '.menu'], pista: 'Selector de clase.' },
-    { html: ['<form>', '  <label>Nombre</label>', '  <input type="text">', '  <button>Enviar</button>', '</form>', '<button>Volver</button>'], objetivo: [3], opciones: ['form button', 'button', 'button form', '.button'], pista: 'Solo el botón que está dentro del formulario: descendiente.' },
-    { html: ['<section id="personajes">', '  <h3>Personajes</h3>', '  <ul>', '    <li>Tux</li>', '    <li>Gnu</li>', '  </ul>', '</section>'], objetivo: [3, 4], opciones: ['#personajes li', 'personajes li', '#personajes h3', 'ul'], pista: 'Los li que están dentro de la sección, con su id.' },
-    { html: ['<p>Texto normal.</p>', '<p class="destacado">Texto destacado.</p>', '<div class="destacado">Aviso.</div>'], objetivo: [1], opciones: ['p.destacado', '.destacado', 'p', 'p .destacado'], pista: 'Elemento y clase, pegados.' },
+    { html: ['<form>', '  <label>Nombre</label>', '  <input type="text">', '  <button>Enviar</button>', '</form>', '<button>Volver</button>'], objetivo: [3], opciones: ['form button', 'button', 'button form', '.button'], pista: 'Solo el botón que está dentro del formulario.' },
     { html: ['<footer>', '  <p>Autor: <a href="mailto:x@x.es">Raúl</a></p>', '  <p>© 2026</p>', '</footer>'], objetivo: [1], opciones: ['footer a', 'footer p', 'a footer', 'footer'], pista: 'El enlace que está dentro del pie.' },
-    { html: ['<h1>Título</h1>', '<h2>Sección</h2>', '<h3>Apartado</h3>', '<p>Texto</p>'], objetivo: [0, 1, 2], opciones: ['h1, h2, h3', 'h1 h2 h3', 'h', '*'], pista: 'Agrupación con comas.' },
-    { html: ['<nav>', '  <ul>', '    <li><a href="#">Qué es</a></li>', '    <li><a href="#">Ficha</a></li>', '  </ul>', '</nav>'], objetivo: [1], opciones: ['nav ul', 'nav li', 'nav *', 'nav'], pista: 'La lista, no sus elementos.' },
+    { html: ['<h1>Título</h1>', '<h2>Sección</h2>', '<h3>Apartado</h3>', '<p>Texto</p>'], objetivo: [0, 1, 2], opciones: ['h1, h2, h3', 'h1 h2 h3', 'h', 'p'], pista: 'Varios a la vez, con comas.' },
+    { html: ['<nav>', '  <ul>', '    <li><a href="#">Qué es</a></li>', '    <li><a href="#">Ficha</a></li>', '  </ul>', '</nav>'], objetivo: [1], opciones: ['nav ul', 'nav li', 'nav a', 'nav'], pista: 'La lista, no sus elementos.' },
     { html: ['<article>', '  <h2>Noticia</h2>', '  <p class="entradilla">Primer párrafo.</p>', '  <p>Segundo párrafo.</p>', '</article>'], objetivo: [2], opciones: ['.entradilla', 'article p', 'p', 'entradilla'], pista: 'El párrafo que lleva una clase.' },
-    { html: ['<table>', '  <tr><td>1</td></tr>', '  <tr><td>2</td></tr>', '  <tr><td>3</td></tr>', '  <tr><td>4</td></tr>', '</table>'], objetivo: [2, 4], opciones: ['tr:nth-child(even)', 'tr:nth-child(odd)', 'tr', 'tr:even'], pista: 'Las filas pares: nth-child.' },
     { html: ['<aside>', '  <h2>Capturas</h2>', '  <figure>', '    <img src="stk1.jpg" alt="Circuito">', '    <figcaption>Circuito</figcaption>', '  </figure>', '</aside>'], objetivo: [3], opciones: ['aside img', 'figure', 'aside figcaption', 'img figure'], pista: 'La imagen dentro del lateral.' },
-    { html: ['<a href="#" class="boton">Ver</a>', '<a href="#" class="boton">Descargar</a>', '<span class="boton">Nuevo</span>'], objetivo: [0, 1], opciones: ['a.boton', '.boton', 'span.boton', 'a .boton'], pista: 'Los enlaces con la clase: elemento y clase, pegados.' },
-    { html: ['<div id="ficha">', '  <p>Versión 1.4</p>', '</div>', '<div class="ficha">', '  <p>Otra ficha</p>', '</div>'], objetivo: [0], opciones: ['#ficha', '.ficha', 'ficha', 'div'], pista: 'Almohadilla para el id.' },
-    { html: ['<main>', '  <h2>Qué es</h2>', '  <p>Texto</p>', '  <h2>Personajes</h2>', '</main>'], objetivo: [1, 3], opciones: ['main h2', 'main p', 'h2 main', 'main *'], pista: 'Los dos encabezados de main.' }
+    { html: ['<main>', '  <h2>Qué es</h2>', '  <p>Texto</p>', '  <h2>Personajes</h2>', '</main>'], objetivo: [1, 3], opciones: ['main h2', 'main p', 'h2 main', 'main'], pista: 'Los dos encabezados de main.' }
   ];
 
   /* ---------- preguntas de repaso de los quiz («Otra pregunta») ----------
@@ -497,55 +480,32 @@
     { p: '¿Qué ganas con `type="email"` frente a `type="text"`?', o: ['Que se envíe un correo al pulsar el botón', 'Que el navegador compruebe que tiene @ antes de enviar', 'Que el dato viaje cifrado', 'Nada: solo cambia el nombre'], c: 1, exp: 'Cada type cambia lo que hace el navegador: email comprueba el formato, number saca el teclado numérico en el móvil y date, un calendario.' }
   ];
 
-  // UT2 · 2.1 CSS y selectores (diapositiva 13)
+  // UT2 · 2.2 Selectores (quiz «el selector del menú»)
   AW.preguntas.selectores = [
-    { p: '¿Qué quiere decir «en cascada» en CSS?', o: ['Que hay un orden para decidir qué regla gana si varias afectan al mismo elemento', 'Que las reglas se leen de abajo arriba', 'Que una hoja enlaza con la siguiente', 'Que solo sirve para listas'], c: 0, exp: 'Cuando varias reglas afectan al mismo elemento, la cascada decide cuál gana. Lo tachado en DevTools es lo que perdió.' },
-    { p: '¿Qué forma de aplicar CSS usamos en el módulo?', o: ['Una hoja externa enlazada con `<link>`', 'El atributo `style` en cada etiqueta', 'Un `<style>` en cada página', 'Los atributos `font` y `align`'], c: 0, exp: 'Una hoja para todo el sitio: se cambia una vez y cambian todas las páginas. style en línea mezcla contenido y aspecto.' },
-    { p: '¿Dónde va el `<link rel="stylesheet">`?', o: ['Dentro del `<head>`', 'Al final del `<body>`', 'Dentro del archivo CSS', 'Antes del `<!DOCTYPE html>`'], c: 0, exp: 'En el head, con href apuntando al archivo. Si no cambia nada, revisa la ruta y el nombre: minúsculas y sin espacios.' },
-    { p: 'Se te olvida cerrar la llave de una regla. ¿Qué pasa?', o: ['El navegador avisa con un error', 'Deja de funcionar lo que viene después, sin aviso', 'Nada: el navegador la cierra', 'Solo falla esa regla'], c: 1, exp: 'Es el error más común de la unidad: todo lo que viene detrás deja de funcionar y el navegador no avisa. Indentar ayuda a verlo.' },
-    { p: '¿Qué selector alcanza todo lo que lleva `class="precio"`?', o: ['`.precio`', '`#precio`', '`precio`', '`*precio`'], c: 0, exp: 'El punto es para las clases y la almohadilla para el id. precio a secas buscaría una etiqueta <precio>, que no existe.' },
-    { p: 'Clase e id, ¿en qué se diferencian?', o: ['La clase se repite; el id es único en la página', 'El id se repite; la clase es única', 'La clase es para CSS; el id, solo para JavaScript', 'No hay diferencia'], c: 0, exp: 'La clase se pone en todos los elementos que haga falta y es la que más se usa. El id es único y lo reservamos para las anclas.' },
-    { p: '¿A qué alcanza `header p`?', o: ['A los `p` que están dentro del `header`', 'Al `header` y a todos los `p`', 'A los `header` que están dentro de un `p`', 'A nada: falta una coma'], c: 0, exp: 'Con un espacio, el segundo selector es un descendiente del primero: los p de dentro del header, a cualquier nivel. Con coma, header, p, serían los dos.' },
-    { p: '`p.destacado` y `p .destacado`, ¿en qué se diferencian?', o: ['Pegados, un `p` con la clase; con espacio, un elemento con la clase dentro de un `p`', 'Son lo mismo', 'Pegados no es válido', 'Con espacio, un `p` dentro de un `.destacado`'], c: 0, exp: 'Sin espacio, las dos condiciones van en el mismo elemento. Con espacio, el segundo es un descendiente del primero.' },
-    { p: '¿Qué selector alcanza solo el enlace del pie?', cod: '<p>Lee <a href="#">más</a>.</p>\n<footer>\n  <a href="#">Aviso legal</a>\n</footer>', o: ['`footer a`', '`a`', '`a footer`', '`.footer a`'], c: 0, exp: 'footer a: los a que están dentro del footer. a, solo, alcanza también el del párrafo; .footer busca una clase que no hay.' },
-    { p: '¿Qué nombre de clase es mejor?', o: ['`.precio`', '`.rojo`', '`.estilo1`', '`.caja2`'], c: 0, exp: 'El nombre dice qué es, no cómo se ve: el día que el rojo pase a azul, .rojo miente.' },
-    { p: 'En la pestaña Estilos de DevTools, una declaración sale tachada. ¿Qué significa?', o: ['Que perdió frente a otra regla', 'Que tiene un error de escritura', 'Que está comentada', 'Que se ha borrado del archivo'], c: 0, exp: 'Tachado es que otra regla ganó. Lo que el navegador no entiende lleva un triángulo amarillo.' },
-    { p: 'Sin CSS, un `<h1>` ya se ve grande y en negrita. ¿Por qué?', o: ['Por la hoja de estilo del navegador (user-agent)', 'Porque HTML lleva el tamaño dentro de la etiqueta', 'Por la fuente del sistema', 'Porque el h1 es una imagen'], c: 0, exp: 'Cada navegador trae una hoja con estilos por defecto. En DevTools aparece como hoja de estilo de user-agent.' },
-    { p: '¿Existe CSS4?', o: ['No: desde 2000 CSS avanza por módulos, cada uno con su nivel', 'Sí, desde 2020', 'Sí, pero solo en Chrome', 'No: CSS dejó de actualizarse en CSS3'], c: 0, exp: 'Tras CSS2 se dejó de numerar: Flexbox, Grid o Selectores tienen cada uno su nivel. No hay un CSS4.' }
+    { p: '¿Dónde va el CSS de tu página?', o: ['En una hoja aparte, `style.css`, enlazada con `<link>`', 'En el atributo `style` de cada etiqueta', 'Dentro de cada párrafo', 'En los atributos `font` y `align`'], c: 0, exp: 'Una hoja aparte vale para todas las páginas: se cambia una vez y cambia todo el sitio.' },
+    { p: '¿Dónde va el `<link rel="stylesheet">`?', o: ['Dentro del `<head>`', 'Al final del `<body>`', 'Dentro del archivo CSS', 'Antes del `<!DOCTYPE html>`'], c: 0, exp: 'En el head, con href apuntando al archivo. Si no cambia nada, revisa la ruta y el nombre: minúsculas, sin espacios.' },
+    { p: 'Se te olvida cerrar la llave de una regla. ¿Qué pasa?', o: ['El navegador avisa con un error', 'Deja de funcionar lo que viene después, sin aviso', 'Nada: el navegador la cierra', 'Solo falla esa regla'], c: 1, exp: 'El navegador no avisa: descarta lo que no entiende. Sin la llave, se pierde todo lo que viene detrás.' },
+    { p: '¿Qué selector alcanza todo lo que lleva `class="precio"`?', o: ['`.precio`', '`precio`', '`*precio`', '`(precio)`'], c: 0, exp: 'La clase se escribe con un punto delante. precio a secas buscaría una etiqueta <precio>, que no existe.' },
+    { p: '¿A qué alcanza `header p`?', o: ['A los `p` que están dentro del `header`', 'Al `header` y a todos los `p`', 'A los `header` que están dentro de un `p`', 'A nada: falta una coma'], c: 0, exp: 'Con un espacio, el segundo está dentro del primero. Con una coma serían los dos: header y todos los p.' },
+    { p: '¿Qué selector alcanza solo el enlace del pie?', cod: '<p>Lee <a href="#">más</a>.</p>\n<footer>\n  <a href="#">Aviso legal</a>\n</footer>', o: ['`footer a`', '`a`', '`a footer`', '`.footer a`'], c: 0, exp: 'footer a: los enlaces dentro del footer. a los alcanza todos; a footer, un footer dentro de un enlace; .footer busca una clase que no hay.' },
+    { p: '`h1, h2 { color: navy; }`, ¿qué hace?', o: ['Pone en azul marino los h1 y los h2', 'Pone en azul marino los h2 que están dentro de un h1', 'Solo los h1', 'Nada: falta un punto'], c: 0, exp: 'Con comas, la misma regla vale para varios selectores a la vez.' },
+    { p: 'En la pestaña Estilos de DevTools, una declaración sale tachada. ¿Qué significa?', o: ['Que perdió frente a otra regla', 'Que tiene un error de escritura', 'Que está comentada', 'Que se ha borrado del archivo'], c: 0, exp: 'Lo tachado perdió: otra regla más concreta, o escrita después, le gana. Un error de escritura sale con un triángulo amarillo.' },
+    { p: 'Sin CSS, un `<h1>` ya se ve grande y en negrita. ¿Por qué?', o: ['Por la hoja de estilo del navegador (user-agent)', 'Porque HTML lleva el tamaño dentro de la etiqueta', 'Por la fuente del sistema', 'Porque el h1 es una imagen'], c: 0, exp: 'Cada navegador trae su hoja de estilo por defecto. DevTools la enseña como «hoja de estilo de user-agent».' },
+    { p: 'Cambias un color en DevTools y recargas la página. ¿Qué pasa?', o: ['Vuelve el color de antes: DevTools es para probar', 'El cambio se guarda en style.css', 'El cambio se publica en GitHub', 'La página da error'], c: 0, exp: 'Lo que tocas en DevTools se pierde al recargar. Si te gusta, lo escribes en tu hoja.' }
   ];
 
-  // UT2 · 2.3 Bloque, línea y flexbox (diapositiva 35)
+  // UT2 · 2.5 Las recetas (quiz «el menú a la derecha»)
   AW.preguntas.flexbox = [
-    { p: '¿Dónde se pone `display: flex`?', o: ['En el contenedor: coloca a sus hijos directos', 'En cada hijo que quieres mover', 'Siempre en el `<body>`', 'En el texto que quieres centrar'], c: 0, exp: 'El contenedor decide la dirección, el reparto y la alineación; los hijos se adaptan.' },
-    { p: '¿Qué propiedad reparte el espacio en el eje principal?', o: ['`justify-content`', '`align-items`', '`flex-direction`', '`text-align`'], c: 0, exp: 'justify-content reparte en el eje principal; align-items alinea en el cruzado.' },
-    { p: 'En una fila flex, ¿qué alinea los hijos en vertical?', o: ['`align-items`', '`justify-content`', '`text-align`', '`flex-wrap`'], c: 0, exp: 'En una fila, el eje cruzado es el vertical, y ahí alinea align-items.' },
-    { p: '¿Cómo centras una caja en las dos direcciones?', o: ['`justify-content` y `align-items` en `center`', '`text-align: center`', '`margin: center`', '`align: middle`'], c: 0, exp: 'En el contenedor flex, justify-content: center y align-items: center. Se acabó el meme de cómo centrar un div.' },
-    { p: '¿Qué pone los hijos uno debajo de otro?', o: ['`flex-direction: column`', '`justify-content: column`', '`flex-direction: row`', '`align-items: column`'], c: 0, exp: 'flex-direction cambia el eje principal: row (por defecto) en fila, column en columna.' },
-    { p: 'En una fila flex, con `.grande { flex: 2; }` y `.normal { flex: 1; }`…', o: ['.grande ocupa el doble que .normal', '.normal ocupa el doble que .grande', 'Ocupan lo mismo', '.grande va segundo y .normal primero'], c: 0, exp: 'flex reparte el espacio en proporción: 2 frente a 1. Con flex: 1 en todos, a partes iguales.' },
-    { p: 'Los hijos no caben en la fila. ¿Qué les deja saltar de línea?', o: ['`flex-wrap: wrap`', '`flex-direction: column`', '`gap: wrap`', '`white-space: wrap`'], c: 0, exp: 'flex-wrap: wrap los deja saltar a otra línea cuando no caben. column los pondría todos en columna, quepan o no.' },
-    { p: '¿Qué separa los hijos de un flex sin usar márgenes?', o: ['`gap`', '`padding`', '`space`', '`border`'], c: 0, exp: 'gap pone el hueco entre los hijos y solo entre ellos. Funciona igual en grid.' },
-    { p: '`display: none` frente a `visibility: hidden`…', o: ['none quita el elemento; hidden lo oculta pero deja el hueco', 'Son lo mismo', 'hidden lo quita; none deja el hueco', 'none solo funciona en flex'], c: 0, exp: 'none lo quita del todo, como si no estuviera. hidden lo hace invisible, pero sigue ocupando su sitio.' },
-    { p: '¿Qué valor de `display` va dentro del texto y no acepta ancho ni alto?', o: ['`inline`', '`block`', '`inline-block`', '`flex`'], c: 0, exp: 'inline va en la línea, como a, strong o span. inline-block también, pero con ancho, alto y relleno.' },
-    { p: 'En el menú, ¿por qué el `ul` lleva `padding: 0`?', o: ['Para quitar la sangría que el navegador pone a las listas', 'Para quitar las viñetas', 'Para poner los li en fila', 'Para que el enlace sea clicable'], c: 0, exp: 'Las listas traen sangría por defecto. Las viñetas se quitan con list-style: none y la fila la hace display: flex.' },
-    { p: '¿Por qué `nav a` lleva `display: block`?', o: ['Para que toda la caja del enlace sea clicable', 'Para poner los enlaces en fila', 'Para quitar el subrayado', 'Para que cambie al pasar el ratón'], c: 0, exp: 'Como bloque, el relleno forma parte del enlace y se puede pulsar en toda la caja, no solo en las letras.' },
-    { p: '¿Qué seudoclase se activa al llegar a un enlace con el tabulador?', o: ['`:focus`', '`:hover`', '`:tab`', '`:teclado`'], c: 0, exp: ':hover es el ratón encima; :focus, el elemento elegido con el teclado. :tab y :teclado no existen. No quites el outline del :focus sin poner otro.' }
-  ];
-
-  // UT2 · 2.5 Grid y position (diapositiva 47)
-  AW.preguntas.grid = [
-    { p: 'Grid o flexbox: ¿cuál es la regla práctica?', o: ['Grid reparte la página; flex ordena lo de dentro de cada zona', 'Flex reparte la página; grid ordena cada zona', 'Grid ha sustituido a flexbox', 'Flexbox solo sirve para centrar'], c: 0, exp: 'Flexbox trabaja en una dirección; grid, en dos: filas y columnas a la vez.' },
-    { p: '¿Qué significa `fr` en grid?', o: ['Una fracción del espacio libre', 'Una fila', 'El tamaño de la fuente', 'Un marco (frame)'], c: 0, exp: '1fr 1fr 1fr son tres partes iguales del espacio que queda libre.' },
-    { p: '`repeat(3, 1fr)` es lo mismo que…', o: ['`1fr 1fr 1fr`', '`3fr`', '`1fr 3`', '`33%`'], c: 0, exp: 'repeat escribe tres veces 1fr: tres columnas iguales. 3fr sería una sola columna.' },
-    { p: 'Con `grid-template-columns`, un lateral fijo de 12rem a la izquierda y el resto para el contenido:', o: ['`12rem 1fr`', '`1fr 12rem`', '`12rem`', '`12rem 100%`'], c: 0, exp: 'Las columnas se dicen de izquierda a derecha: el lateral fijo y luego 1fr, el resto. Con 100 % se saldría de la página.' },
-    { p: '¿Qué hace esta rejilla?', lang: 'css', cod: '.galeria {\n  display: grid;\n  grid-template-columns:\n    repeat(auto-fit, minmax(14rem, 1fr));\n}', o: ['Mete tantas columnas como quepan, sin media query', 'Hace 14 columnas', 'Hace una sola columna de 14rem', 'Repite la fila de arriba'], c: 0, exp: 'Cada columna mide al menos 14rem y caben más o menos según el ancho. Es la rejilla responsive sin media query.' },
-    { p: '¿Para qué sirve `grid-template-areas`?', o: ['Para dibujar la maqueta con el nombre de cada zona', 'Para poner nombre a las clases', 'Para contar las celdas de la rejilla', 'Para hacer la página responsive sola'], c: 0, exp: 'Se ve el dibujo de la página en el propio CSS: cambiar la maqueta es cambiar las comillas. Cada zona se asigna con grid-area.' },
-    { p: 'La captura destacada de la galería tiene que ocupar dos columnas:', o: ['`grid-column: span 2`', '`grid-row: span 2`', '`column-span: 2`', '`width: 200%`'], c: 0, exp: 'span 2 cuenta celdas. grid-row: span 2 la haría más alta, no más ancha.' },
-    { p: 'Móvil primero: ¿qué va fuera de la media query?', o: ['La versión de una columna, la del móvil', 'La versión de escritorio', 'Nada: todo va dentro', 'Solo los colores'], c: 0, exp: 'La base de la hoja es la pantalla estrecha; la media query con min-width añade las columnas cuando la pantalla crece.' },
-    { p: '¿Qué hace que una imagen llene su celda sin deformarse?', o: ['`object-fit: cover`', '`object-fit: fill`', '`display: block`', '`float: left`'], c: 0, exp: 'Con width y height al 100 %, object-fit: cover recorta lo que sobra en vez de estirar la imagen. fill la estira.' },
-    { p: 'Una caja con `position: absolute` se coloca respecto a…', o: ['La caja con `relative` más cercana que la contiene', 'Siempre la página', 'La ventana, aunque hagas scroll', 'Su sitio normal, dejando el hueco'], c: 0, exp: 'Sale del flujo y se coloca respecto a la caja con relative más cercana que la contiene; si no hay ninguna, respecto a la página. Respecto a la ventana es fixed.' },
-    { p: 'Pones una etiqueta con `absolute` sobre una foto. ¿Qué necesita el `figure`?', o: ['`position: relative`', '`position: absolute`', '`display: grid`', '`z-index: 1`'], c: 0, exp: 'relative en el figure lo convierte en la referencia: la etiqueta se coloca respecto a la foto y no respecto a la página.' },
-    { p: 'Un botón «subir» abajo a la derecha que no se mueve con el scroll:', o: ['`position: fixed`', '`position: sticky`', '`position: relative`', '`position: absolute`'], c: 0, exp: 'fixed se coloca respecto a la ventana y no se mueve. sticky solo se pega al llegar al borde.' },
-    { p: 'Dos cajas posicionadas se tapan. ¿Qué decide cuál queda encima?', o: ['`z-index`', '`top`', '`order`', '`display`'], c: 0, exp: 'top, right, bottom y left dicen dónde; z-index, quién queda encima: gana el número más alto.' }
+    { p: '¿Qué línea de la receta pone los enlaces del menú en fila?', o: ['`display: flex`', '`list-style: none`', '`text-decoration: none`', '`padding: 0`'], c: 0, exp: 'display: flex en el ul pone en fila lo que tiene dentro. list-style quita las viñetas y text-decoration, el subrayado.' },
+    { p: 'En la receta del menú, ¿para qué es `list-style: none`?', o: ['Quita las viñetas de la lista', 'Pone los enlaces en fila', 'Quita el subrayado', 'Quita el color'], c: 0, exp: 'El menú es una lista, y las listas traen viñetas. list-style: none las quita.' },
+    { p: '¿Qué cambias para que el menú quede centrado?', o: ['`justify-content: center`', '`text-align: middle`', '`align: center`', '`margin: center`'], c: 0, exp: 'En un flex, justify-content decide dónde va la fila: flex-start, center o flex-end.' },
+    { p: '¿Qué separa los enlaces del menú sin usar márgenes?', o: ['`gap`', '`space`', '`border`', '`line-height`'], c: 0, exp: 'gap pone el hueco entre los hijos, y solo entre ellos. Funciona igual en la galería.' },
+    { p: 'En la receta de la galería, ¿qué cambias para tener tres columnas?', o: ['`repeat(3, 1fr)`', '`gap: 3`', '`grid-column: span 3`', '`width: 3fr`'], c: 0, exp: 'repeat(3, 1fr) son tres columnas iguales: 1fr es una parte del espacio.' },
+    { p: 'Con `grid-template-columns: 2fr 1fr`, ¿cómo quedan las columnas?', o: ['La primera, el doble de ancha que la segunda', 'La primera mide 2 rem', 'Hay tres columnas', 'Las dos iguales'], c: 0, exp: 'fr es una parte del espacio libre: 2fr y 1fr reparten en tres partes, dos para el main y una para el aside.' },
+    { p: '`.destacada { grid-column: span 2; }`, ¿qué hace?', o: ['La captura ocupa dos columnas', 'La captura se ve dos veces', 'Pone dos capturas en fila', 'Deja dos huecos vacíos'], c: 0, exp: 'span 2 hace que esa caja ocupe dos columnas de la rejilla: así se destaca una captura.' },
+    { p: '¿Qué hace `@media (min-width: 48rem) { … }`?', o: ['Aplica esas reglas solo desde 48rem de ancho', 'Aplica esas reglas solo en el móvil', 'Pone la página a 48rem de ancho', 'Cambia la letra a 48rem'], c: 0, exp: 'Es una media query: sus reglas solo valen cuando la pantalla mide al menos 48rem (768 px). La base, el móvil, va fuera.' },
+    { p: '¿Cómo compruebas en clase cómo se ve tu página en un móvil?', o: ['DevTools, modo dispositivo (Ctrl+Mayús+M)', 'Con el zoom del navegador', 'Cambiando el tamaño de letra del navegador', 'Con el validador de CSS'], c: 0, exp: 'El modo dispositivo enseña la página al ancho de un teléfono, por ejemplo 375 px.' },
+    { p: '`nav a:hover`, ¿cuándo se aplica?', o: ['Con el ratón encima del enlace', 'Al pulsar el enlace', 'Siempre', 'Cuando el enlace ya se ha visitado'], c: 0, exp: ':hover es el estado del elemento con el ratón encima: así el visitante ve que el menú responde.' }
   ];
 
   /* ---------- montadores de los ejercicios ---------- */
@@ -839,7 +799,7 @@
         });
         Object.assign(q.dataset, { correct: orden.indexOf(p.c), ok: 'Correcto. ' + p.exp, ko: 'No. ' + p.exp });
         const lang = p.lang || 'html';
-        if (p.cod) ponVentana(lang === 'css' ? 'estilos.css' : 'index.html', AW.resalta[lang](p.cod));
+        if (p.cod) ponVentana(lang === 'css' ? 'style.css' : 'index.html', AW.resalta[lang](p.cod));
         else quitaVentana();
       }
       reset();
@@ -854,6 +814,104 @@
       pon(lista[i]);
     });
     r.after(b);
+  }
+
+  /* ---------- simulador de la caja: margin, border y padding, lado a lado (UT2) ----------
+     <div class="caja-sim"></div> monta un grupo de deslizadores por propiedad («los 4» y cada lado),
+     con la unidad elegible (rem o px: al cambiarla, los valores se convierten con 1rem = 16px), la ficha
+     técnica de la página de SuperTuxKart entre dos párrafos y el CSS que sale, escrito de la forma más
+     corta (1, 2 o 4 valores). La casilla «Ver las capas» pinta el margen y el relleno con los colores de
+     DevTools. La vista va a 1,5 veces su tamaño para que se lea proyectada. */
+  function montaCaja(el) {
+    const LADOS = ['top', 'right', 'bottom', 'left'];
+    const PROPS = [
+      { p: 'margin', u0: 'rem', ini: 1, rango: { rem: [3, 0.25], px: [48, 4] } },
+      { p: 'border', u0: 'px', ini: 2, rango: { rem: [1, 0.125], px: [16, 1] } },
+      { p: 'padding', u0: 'rem', ini: 1, rango: { rem: [3, 0.25], px: [48, 4] } }
+    ];
+    const ESCALA = 1.5;
+    const val = {};
+    const prop = (p) => PROPS.find((x) => x.p === p);
+    const txt = (n, u) => (n === 0 ? '0' : n + u);
+    const px = (n, u) => n * (u === 'rem' ? 16 : 1) * ESCALA + 'px';
+    const redondea = (n, paso) => parseFloat((Math.round(n / paso) * paso).toFixed(4));
+    const junto = (a, u) => {
+      const [t, r, b, l] = a.map((n) => txt(n, u));
+      if (t === r && r === b && b === l) return t;
+      if (t === b && r === l) return t + ' ' + r;
+      return [t, r, b, l].join(' ');
+    };
+    const fila = (x, lado, i) => '<label class="cs-fila' + (lado ? '' : ' cs-todos') + '"><span>' + (lado || 'los 4') + '</span>'
+      + '<input type="range" min="0" data-p="' + x.p + '" data-i="' + (lado ? i : 'todos') + '"><output></output></label>';
+    el.innerHTML = '<div class="cs-mandos">'
+      + PROPS.map((x) => '<div class="cs-grupo cs-' + x.p + '"><p class="cs-titulo">' + x.p
+        + '<span class="cs-unidad"><button type="button" data-p="' + x.p + '" data-u="rem">rem</button> / <button type="button" data-p="' + x.p + '" data-u="px">px</button></span></p>'
+        + fila(x, '', 0) + LADOS.map((l, i) => fila(x, l, i)).join('') + '</div>').join('')
+      + '</div>'
+      + '<div class="ventana cs-ventana"><div class="ventana-barra"><i></i><i></i><i></i><span>style.css</span></div><pre class="cod compacto"></pre></div>'
+      + '<div class="cs-vista"><div class="cs-lienzo">'
+      + '<p class="cs-texto">SuperTuxKart es un juego de carreras de karts libre y gratuito. Salió en 2004 y sigue actualizándose.</p>'
+      + '<div class="cs-margen"><div class="cs-caja"><div class="cs-contenido"><b>Ficha técnica</b><br>Primera versión: 2004<br>Licencia: GPL</div></div></div>'
+      + '<p class="cs-texto">Se puede jugar en Windows, Linux, macOS y Android.</p></div>'
+      + '<p class="cs-leyenda"><span class="m">margin</span><span class="b">border</span><span class="p">padding</span><span class="c">contenido</span></p>'
+      + '<div class="cs-botones"><label class="cs-ver"><input type="checkbox"> Ver las capas</label>'
+      + '<button type="button" class="btn btn-ghost cs-reinicia">Volver a empezar</button></div></div>';
+    // la unidad de un grupo: el rango de sus deslizadores y cuál de las dos sale en negrita
+    const ponUnidad = (x) => {
+      const [max, paso] = x.rango[x.u];
+      el.querySelectorAll('input[data-p="' + x.p + '"]').forEach((inp) => { inp.max = max; inp.step = paso; });
+      el.querySelectorAll('.cs-unidad button[data-p="' + x.p + '"]').forEach((b) => b.classList.toggle('activa', b.dataset.u === x.u));
+    };
+    const pinta = () => {
+      const m = val.margin, b = val.border, p = val.padding;
+      const um = prop('margin').u, ub = prop('border').u, up = prop('padding').u;
+      el.querySelector('.cs-margen').style.padding = m.map((n) => px(n, um)).join(' ');
+      const caja = el.querySelector('.cs-caja');
+      caja.style.borderWidth = b.map((n) => px(n, ub)).join(' ');
+      caja.style.padding = p.map((n) => px(n, up)).join(' ');
+      el.querySelectorAll('.cs-fila input').forEach((inp) => {
+        const a = val[inp.dataset.p];
+        const u = prop(inp.dataset.p).u;
+        if (inp.dataset.i === 'todos') {
+          inp.value = a[0];
+          inp.nextElementSibling.textContent = a.every((n) => n === a[0]) ? txt(a[0], u) : '—';
+        } else {
+          inp.value = a[+inp.dataset.i];
+          inp.nextElementSibling.textContent = txt(a[+inp.dataset.i], u);
+        }
+      });
+      // los cuatro iguales, en una línea; si no, solo los lados que tienen borde
+      const linea = (n) => (n ? n + ub + ' solid #041c3f' : '0');
+      const bordes = b.every((n) => n === b[0])
+        ? ['  border: ' + linea(b[0]) + ';']
+        : LADOS.map((l, i) => (b[i] ? '  border-' + l + ': ' + linea(b[i]) + ';' : '')).filter(Boolean);
+      const css = ['.ficha {', '  background: #e3ecf3;', '  margin: ' + junto(m, um) + ';', ...bordes, '  padding: ' + junto(p, up) + ';', '}'].join('\n');
+      el.querySelector('pre').innerHTML = AW.resalta.css(css);
+    };
+    const reinicia = () => {
+      PROPS.forEach((x) => { x.u = x.u0; val[x.p] = [x.ini, x.ini, x.ini, x.ini]; ponUnidad(x); });
+      pinta();
+    };
+    el.querySelector('.cs-ver input').addEventListener('change', (e) => el.classList.toggle('cs-capas', e.target.checked));
+    el.querySelectorAll('.cs-unidad button').forEach((btn) => btn.addEventListener('click', () => {
+      const x = prop(btn.dataset.p);
+      if (x.u === btn.dataset.u) return;
+      const factor = btn.dataset.u === 'px' ? 16 : 1 / 16;
+      x.u = btn.dataset.u;
+      val[x.p] = val[x.p].map((n) => Math.min(redondea(n * factor, x.rango[x.u][1]), x.rango[x.u][0]));
+      ponUnidad(x);
+      pinta();
+    }));
+    el.addEventListener('input', (e) => {
+      const inp = e.target.closest('input[type="range"]');
+      if (!inp) return;
+      const a = val[inp.dataset.p];
+      const n = parseFloat(inp.value);
+      if (inp.dataset.i === 'todos') a.fill(n); else a[+inp.dataset.i] = n;
+      pinta();
+    });
+    el.querySelector('.cs-reinicia').addEventListener('click', reinicia);
+    reinicia();
   }
 
   /* ---------- panel que se revela (pregunta a la clase) ---------- */
@@ -1323,6 +1381,7 @@
     document.querySelectorAll('pre.cod[data-lang]').forEach(montaCodigo);
     document.querySelectorAll('.resultado[data-codigo]').forEach(montaResultado);
     document.querySelectorAll('.ej[data-tipo]').forEach(montaEjercicio);
+    document.querySelectorAll('.caja-sim').forEach(montaCaja);
     document.querySelectorAll('.quiz').forEach(montaQuiz);
     document.querySelectorAll('.revela').forEach(montaRevela);
     document.querySelectorAll('.galeria').forEach(montaGaleria);

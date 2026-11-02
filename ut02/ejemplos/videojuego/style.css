@@ -9,18 +9,18 @@ img { max-width: 100%; height: auto; }
 
 /* 2. Paleta (variables) */
 :root {
-  --fondo: #fefefe;
-  --texto: #041c3f;
-  --acento: #a5e070;
-  --acento-claro: #e3ecf3;
-  --linea: #d6e0ea;
-  --enlace: #017ce9;
+  --background: #fefefe;
+  --text: #041c3f;
+  --accent: #a5e070;
+  --accent-light: #e3ecf3;
+  --border: #d6e0ea;
+  --link: #017ce9;
 }
 
 /* 3. Base */
 body {
-  background: var(--fondo);
-  color: var(--texto);
+  background: var(--background);
+  color: var(--text);
   font-family: "Segoe UI", Roboto, system-ui, sans-serif;
   font-size: 1.1rem;
   line-height: 1.6;
@@ -38,23 +38,23 @@ h1, h2, h3 { line-height: 1.2; }
 h1 { font-size: 2rem; }
 h2 { font-size: 1.6rem; margin-top: 0; }
 h3 { font-size: 1.25rem; margin-top: 1.5rem; }
-a { color: var(--enlace); }
-a:hover { color: var(--texto); }
+a { color: var(--link); }
+a:hover { color: var(--text); }
 
 /* 4. Zonas */
 header {
   grid-area: header;
-  background: var(--texto);
-  color: var(--fondo);
+  background: var(--text);
+  color: var(--background);
   padding: 2rem 1.5rem;
   text-align: center;
 }
 header h1 { margin: 0; }
-header p { margin: 0.25rem 0 0; color: var(--acento); font-size: 1.15rem; }
+header p { margin: 0.25rem 0 0; color: var(--accent); font-size: 1.15rem; }
 
 nav {
   grid-area: nav;
-  background: var(--acento);
+  background: var(--accent);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -70,25 +70,25 @@ nav ul {
 nav a {
   display: block;
   padding: 0.75rem 1.25rem;
-  color: var(--texto);
+  color: var(--text);
   text-decoration: none;
   font-weight: 600;
   transition: background-color 0.2s;
 }
-nav a:hover, nav a:focus { background: var(--texto); color: var(--fondo); }
+nav a:hover, nav a:focus { background: var(--text); color: var(--background); }
 
 main { grid-area: main; padding: 1.5rem; }
 aside {
   grid-area: aside;
-  background: var(--acento-claro);
+  background: var(--accent-light);
   padding: 1.5rem;
   margin: 0 1.5rem 1.5rem;
   border-radius: 12px;
 }
 footer {
   grid-area: footer;
-  background: var(--texto);
-  color: var(--fondo);
+  background: var(--text);
+  color: var(--background);
   text-align: center;
   padding: 1.5rem;
 }
@@ -96,9 +96,9 @@ footer {
 /* 5. Componentes */
 table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
 caption { font-size: 0.9rem; color: #4a5a7d; padding-bottom: 0.5rem; }
-th, td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid var(--linea); }
-th { background: var(--acento); color: var(--texto); width: 12rem; }
-tbody tr:nth-child(even) { background: var(--acento-claro); }
+th, td { padding: 0.5rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--accent); color: var(--text); width: 12rem; }
+tbody tr:nth-child(even) { background: var(--accent-light); }
 tbody tr:hover { background: #f3f7c9; }
 
 label { display: block; margin-bottom: 0.25rem; }
@@ -108,21 +108,21 @@ textarea {
   font: inherit;
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid var(--linea);
+  border: 1px solid var(--border);
   border-radius: 6px;
 }
-textarea:focus { outline: 2px solid var(--acento); }
+textarea:focus { outline: 2px solid var(--accent); }
 button {
   font: inherit;
-  background: var(--acento);
-  color: var(--texto);
+  background: var(--accent);
+  color: var(--text);
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
 }
-button:hover { background: var(--texto); color: var(--fondo); }
+button:hover { background: var(--text); color: var(--background); }
 
 /* Galería de capturas en rejilla */
 .galeria {
@@ -144,8 +144,8 @@ button:hover { background: var(--texto); color: var(--fondo); }
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
-  background: var(--acento);
-  color: var(--texto);
+  background: var(--accent);
+  color: var(--text);
   font-size: 0.8rem;
   font-weight: 700;
   padding: 0.2rem 0.6rem;

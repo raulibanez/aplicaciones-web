@@ -81,15 +81,15 @@ writeFileSync(`${destino}/ver-html.html`, pagina({
   codigo: html,
 }));
 
-const css = readFileSync(`${origen}/estilos.css`, 'utf8');
+const css = readFileSync(`${origen}/style.css`, 'utf8');
 writeFileSync(`${destino}/ver-css.html`, pagina({
-  titulo: 'estilos.css · Mi videojuego favorito',
-  archivo: 'estilos.css',
+  titulo: 'style.css · Mi videojuego favorito',
+  archivo: 'style.css',
   nota: 'La hoja de estilo de la parte 3 de la práctica: la página del «después». Va al panel CSS de CodePen.',
   panel: 'CSS',
   codigo: css,
 }));
 
-for (const f of ['index.html', 'estilos.css', 'img']) cpSync(`${origen}/${f}`, `${destino}/${f}`, { recursive: true });
+for (const f of ['index.html', 'style.css', 'img']) cpSync(`${origen}/${f}`, `${destino}/${f}`, { recursive: true });
 
 console.log('ok');
