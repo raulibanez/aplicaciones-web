@@ -111,12 +111,13 @@
 
 <!-- 04 Tu página, antes y después -->
 <section data-label="2.1 · Antes y después" data-seccion="2.1" data-deck-id="que-es-css" data-deck-section="2.1" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
-  <aside class="notas"><b>Mismo HTML, cero cambios en él</b>: solo se añade una línea en el head que enlaza la hoja de estilo. La captura de la derecha es la página final de la parte 3 de la práctica; la de la izquierda, la que entregaron en la UT1. <b>Es lo que van a hacer en tres prácticas.</b></aside>
+  <aside class="notas"><b>Mismo HTML, cero cambios en él</b>: solo se añade una línea en el head que enlaza la hoja de estilo. La captura de la derecha es la página final de la parte 3 de la práctica; la de la izquierda, la que entregaron en la UT1. <b>Es lo que van a hacer en tres prácticas.</b> Las píldoras «Ver HTML» y «Ver CSS» abren el código con un botón Copiar: pega el HTML en un pen nuevo de CodePen (sale el «antes») y después el CSS (sale el «después»), en directo.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Qué es CSS</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Tu página, antes y después. El HTML es el mismo</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:var(--gap-item);flex:1;min-height:0">
     <div style="display:flex;flex-direction:column;gap:16px;min-height:0">
       <figure class="foto" style="flex:1;border:3px solid var(--line);background:var(--white)">
+        <a class="pill-enlace codigo" href="ejemplos/videojuego/ver-html.html" target="_blank" rel="noopener">Ver HTML</a>
         <img src="img/antes-1280x720.png" data-grande="img/antes.jpg" alt="La página de SuperTuxKart sin hoja de estilo: texto en Times, todo seguido en una columna" title="Elaboración propia" style="object-fit:contain;object-position:top">
         <figcaption class="credito"><b>Antes.</b> La página «Mi videojuego favorito» tal como quedó en la UT1, sin CSS. Elaboración propia; capturas del juego de los autores de SuperTuxKart, CC BY-SA 4.0. Clic para ver la página entera.</figcaption>
       </figure>
@@ -124,6 +125,7 @@
     </div>
     <div style="display:flex;flex-direction:column;gap:16px;min-height:0">
       <figure class="foto" style="flex:1;border:3px solid var(--line);background:var(--white)">
+        <a class="pill-enlace codigo" href="ejemplos/videojuego/ver-css.html" target="_blank" rel="noopener">Ver CSS</a>
         <img src="img/despues-1280x720.png" data-grande="img/maqueta-3-escritorio.jpg" alt="La misma página con la hoja de estilo: cabecera azul oscuro, menú verde, dos columnas y galería" title="Elaboración propia" style="object-fit:contain;object-position:top">
         <figcaption class="credito"><b>Después.</b> La misma página con la hoja de estilo de la parte 3 de la práctica. Elaboración propia; capturas del juego de los autores de SuperTuxKart, CC BY-SA 4.0 y CC BY 3.0. Clic para ver la página entera.</figcaption>
       </figure>
@@ -301,7 +303,7 @@ body {
 
 <!-- 10 DevTools: pestaña Estilos -->
 <section data-label="2.1 · DevTools, pestaña Estilos" data-seccion="2.1" style="display:grid;grid-template-columns:1fr 1.3fr;gap:96px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
-  <aside class="notas"><b>F12, o clic derecho, Inspeccionar.</b> Se usa en todas las prácticas y en la corrección. <b>Lo tachado es lo que perdió frente a otra regla</b>; el triángulo amarillo marca una propiedad o un valor que el navegador no entiende. Editar en vivo sirve para probar: <b>al recargar se pierde</b>.</aside>
+  <aside class="notas"><b>F12, o clic derecho, Inspeccionar.</b> Se usa en todas las prácticas y en la corrección. <b>Lo tachado es lo que perdió frente a otra regla</b>; el triángulo amarillo marca una propiedad o un valor que el navegador no entiende. Editar en vivo sirve para probar: <b>al recargar se pierde</b>. «Ver ejemplo» abre en otra pestaña la página de las capturas: pulsa F12, selecciona el <code>h1</code> y enséñales el <code>font-size: 2rem</code> tachado y el modelo de caja en directo.</aside>
   <div style="display:flex;flex-direction:column">
     <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Qué es CSS</p>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy);text-wrap:balance">Verlo en el navegador: DevTools, pestaña Estilos</h2>
@@ -316,10 +318,12 @@ body {
   <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
     <div class="galeria" style="--galeria-alto:780px;--galeria-flex:none">
       <figure class="foto" data-pie="<b>Figura 2.1a.</b> El h1 seleccionado: sus reglas, con archivo y línea. Clic para ampliar.">
+        <a class="pill-enlace" href="ejemplos/videojuego/index.html" target="_blank" rel="noopener">Ver ejemplo</a>
         <img src="img/devtools-estilos.webp" alt="Chrome con las DevTools abiertas: el h1 de la página de SuperTuxKart seleccionado en Elementos y resaltado en la página, y en la pestaña Estilos las reglas de estilos.css con su número de línea, font-size: 2rem tachado y la hoja de estilo de user-agent" title="Captura de Google Chrome · 26 de septiembre de 2026" style="object-fit:cover;object-position:top left">
         <figcaption class="credito"><b>Pestaña Estilos de las DevTools de Chrome</b> con el h1 de la página de ejemplo seleccionado. Captura propia del 26 de septiembre de 2026.</figcaption>
       </figure>
       <figure class="foto" data-pie="<b>Figura 2.1b.</b> Al final del panel, el modelo de caja del h1. Clic para ampliar.">
+        <a class="pill-enlace" href="ejemplos/videojuego/index.html" target="_blank" rel="noopener">Ver ejemplo</a>
         <img src="img/devtools-estilos-caja.webp" alt="La pestaña Estilos desplazada hasta abajo: reglas heredadas de body y :root y el dibujo del modelo de caja del h1, 922,667 por 48" title="Captura de Google Chrome · 26 de septiembre de 2026" style="object-fit:cover;object-position:top left">
         <figcaption class="credito"><b>Modelo de caja en la pestaña Estilos</b>, al final del panel. Captura propia del 26 de septiembre de 2026.</figcaption>
       </figure>
@@ -481,7 +485,7 @@ body { color: #041c3f; background-color: #fefefe; }</pre>
 
 <!-- 16 Variables -->
 <section data-label="2.1 · Variables" data-seccion="2.1" data-deck-id="variables" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
-  <aside class="notas"><b>Cambiar la paleta entera es cambiar cinco líneas.</b> Va justo después de los colores porque la paleta en variables se pide ya en la parte 1 de la práctica. <b>Es lo que hace un tema de WordPress</b> con sus estilos globales: el color de acento que eliges en el personalizador es una variable como esta.</aside>
+  <aside class="notas"><b>Cambiar la paleta entera es cambiar cinco líneas.</b> Va justo después de los colores porque la paleta en variables se pide ya en la parte 1 de la práctica. <b>Es lo que hace un tema de WordPress</b> con sus estilos globales: el color de acento que eliges en el personalizador es una variable como esta. <b>Por qué <code>:root</code></b>: es la raíz del árbol de la página, el elemento <code>&lt;html&gt;</code>; los dos puntos indican pseudoclase, como <code>:hover</code>. Se usa en vez de <code>html</code> porque es el nombre general (vale también en SVG) y pesa más, como una clase. Todo está dentro de él, así que todo hereda las variables.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Estilo visual</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Variables: la paleta en un solo sitio</h2>
   <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Los colores de la paleta se repiten en muchas reglas. Una <b style="color:var(--navy)">variable</b> guarda un valor con nombre: se escribe una vez en <code class="en-linea">:root</code> y se usa con <code class="en-linea">var()</code> donde haga falta.</p>
@@ -516,7 +520,7 @@ aside   { background: var(--acento-claro); }
 
 <!-- 17 Unidades -->
 <section data-label="2.1 · Unidades" data-seccion="2.1" data-deck-id="unidades" style="padding:var(--pad-top) var(--pad-x) var(--pad-bottom);display:flex;flex-direction:column">
-  <aside class="notas">px es el píxel CSS, fijo, no el píxel físico de la pantalla. <b>rem respeta el tamaño que el usuario haya puesto</b> en el navegador: <b>por eso es la unidad del texto</b>. Si preguntan por otras que ven en tutoriales: em es la letra del propio elemento y se acumula; pt, cm e in son medidas de papel, para imprimir. <b>Los decimales llevan punto</b>: 1.5rem, nunca 1,5rem; muchas webs escriben .5rem sin el cero, y es lo mismo que 0.5rem.</aside>
+  <aside class="notas">px es el píxel CSS, fijo, no el píxel físico de la pantalla. <b>rem viene de «root em»</b>: la letra de <code>:root</code>, lo de la diapositiva anterior. <b>rem respeta el tamaño que el usuario haya puesto</b> en el navegador: <b>por eso es la unidad del texto</b>. <b>Demostración de un minuto</b>: abre «Ver ejemplo» (diapositiva 10) y en otra pestaña <code>chrome://settings/appearance</code>, Tamaño de fuente, «Muy grande». 1rem pasa a valer 24 px y la página entera crece; los bordes, en px, se quedan igual. Al acabar, vuelve a «Mediano». Si preguntan por otras que ven en tutoriales: em es la letra del propio elemento y se acumula; pt, cm e in son medidas de papel, para imprimir. <b>Los decimales llevan punto</b>: 1.5rem, nunca 1,5rem; muchas webs escriben .5rem sin el cero, y es lo mismo que 0.5rem.</aside>
   <p style="font-size:var(--type-small);font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.06em">Estilo visual</p>
   <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:20px;color:var(--navy)">Unidades: cuál usar para cada cosa</h2>
   <p style="font-size:var(--type-small);line-height:1.45;color:var(--muted);margin-top:16px">Toda medida lleva su unidad. Unas son <b style="color:var(--navy)">fijas</b> y otras se calculan a partir de algo (la letra, la caja que la contiene, la ventana): por eso cada una sirve para una cosa.</p>
@@ -531,11 +535,17 @@ aside   { background: var(--acento-claro); }
     <tbody style="line-height:1.35">
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy);font-family:var(--mono)">px</td><td style="padding:14px 32px">Píxel CSS: mide siempre lo mismo</td><td style="padding:14px 32px">Bordes, sombras, detalles finos</td></tr>
       <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy);font-family:var(--mono)">%</td><td style="padding:14px 32px">Porcentaje de la caja que lo contiene</td><td style="padding:14px 32px">Anchos: <code class="en-linea">width: 100%</code></td></tr>
-      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy);font-family:var(--mono)">rem</td><td style="padding:14px 32px">El tamaño de letra de la página (el elemento html): 16 px, o el que el usuario elija en su navegador</td><td style="padding:14px 32px"><b>Texto y espaciados generales.</b> La unidad del curso: respeta la letra que elige el usuario</td></tr>
+      <tr style="border-bottom:2px solid var(--line)"><td style="padding:14px 32px;font-weight:700;color:var(--navy);font-family:var(--mono)">rem</td><td style="padding:14px 32px">La letra de la página, la de <code class="en-linea">:root</code>: <b>1rem = 16 px</b>. Si el usuario agranda la letra en su navegador, 1rem vale más</td><td style="padding:14px 32px"><b>Texto y espacios.</b> La unidad del curso: si alguien agranda la letra, tu página crece con ella</td></tr>
       <tr><td style="padding:14px 32px;font-weight:700;color:var(--navy);font-family:var(--mono)">vw, vh</td><td style="padding:14px 32px">1 % del ancho o del alto de la ventana</td><td style="padding:14px 32px">Una portada que ocupa la pantalla entera: <code class="en-linea">min-height: 100vh</code></td></tr>
     </tbody>
   </table>
-  <p style="font-size:var(--type-caption);color:var(--muted);margin-top:20px">Tabla 2.1. Regla del curso: <b>rem</b> para texto y espacios, <b>px</b> para detalles, <b>%</b> para anchos. El cero no lleva unidad: <code class="en-linea">margin: 0</code>. Los decimales se escriben con punto: <code class="en-linea">0.5rem</code> es media letra.</p>
+  <p style="font-size:var(--type-caption);color:var(--muted);margin-top:20px">Tabla 2.1. Regla del curso: <b>rem</b> para texto y espacios, <b>px</b> para detalles, <b>%</b> para anchos. El cero no lleva unidad: <code class="en-linea">margin: 0</code>. Los decimales llevan punto: <code class="en-linea">1.5rem</code>.</p>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:32px;font-size:var(--type-small)">
+    <div style="background:var(--white);border-radius:20px;padding:20px 32px;box-shadow:0 2px 0 var(--line);display:flex;align-items:baseline;justify-content:center;gap:16px"><code style="font-family:var(--mono);font-weight:700;color:var(--blue)">0.5rem</code><span style="color:var(--muted)">=</span><b style="color:var(--navy)">8 px</b></div>
+    <div style="background:var(--green);border-radius:20px;padding:20px 32px;display:flex;align-items:baseline;justify-content:center;gap:16px"><code style="font-family:var(--mono);font-weight:700;color:var(--navy)">1rem</code><span style="color:var(--navy)">=</span><b style="color:var(--navy)">16 px</b></div>
+    <div style="background:var(--white);border-radius:20px;padding:20px 32px;box-shadow:0 2px 0 var(--line);display:flex;align-items:baseline;justify-content:center;gap:16px"><code style="font-family:var(--mono);font-weight:700;color:var(--blue)">1.5rem</code><span style="color:var(--muted)">=</span><b style="color:var(--navy)">24 px</b></div>
+    <div style="background:var(--white);border-radius:20px;padding:20px 32px;box-shadow:0 2px 0 var(--line);display:flex;align-items:baseline;justify-content:center;gap:16px"><code style="font-family:var(--mono);font-weight:700;color:var(--blue)">2rem</code><span style="color:var(--muted)">=</span><b style="color:var(--navy)">32 px</b></div>
+  </div>
 </section>
 
 <!-- 18 Tipografía -->

@@ -700,6 +700,26 @@ section:has(> .ej) { grid-template-rows: minmax(0, 1fr); }
 .pill-solucion:hover { background: var(--cyan); box-shadow: none; transform: translateY(2px); }
 .pill-solucion::before { content: '👁 '; }
 @media print { .pill-solucion { display: none; } }
+
+/* Píldora que abre una página en otra pestaña: «Ver ejemplo» (la página en vivo, para
+   abrir las DevTools en clase) o, con .codigo, «Ver HTML / Ver CSS» (el código con
+   botón Copiar, para pegarlo en CodePen). Dentro de un .foto va arriba a la derecha. */
+.pill-enlace {
+  border-radius: 999px;
+  padding: 10px 24px 11px;
+  background: var(--green);
+  color: var(--navy);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  box-shadow: 0 2px 0 var(--green-dark);
+}
+.pill-enlace:hover { background: var(--cyan); box-shadow: none; transform: translateY(2px); }
+.pill-enlace::before { content: '↗ '; }
+.pill-enlace.codigo::before { content: '</> '; font-family: 'JetBrains Mono', monospace; font-size: 18px; }
+.foto > .pill-enlace { position: absolute; top: 18px; right: 18px; z-index: 2; }
+@media print { .pill-enlace { display: none; } }
 .visor.visor-solucion { cursor: default; }
 .solucion-marco {
   width: min(1400px, 94vw);
