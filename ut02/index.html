@@ -785,11 +785,11 @@ h1 {
 
 <!-- 27 Maqueta 1 -->
 <section data-label="2.4 · Maqueta 1" data-seccion="2.4" style="display:grid;grid-template-columns:1fr 1.3fr;gap:80px;padding:var(--pad-top) var(--pad-x) var(--pad-bottom)">
-  <aside class="notas"><b>Se sube también a Classroom a tamaño completo.</b> Paleta: --background #fefefe, --text #041c3f, --accent #a5e070, --accent-light #e3ecf3, --border #d6e0ea, --link #017ce9. Tipografía: Segoe UI, Roboto, system-ui, sans-serif.</aside>
+  <aside class="notas"><b>Se sube también a Classroom a tamaño completo.</b> Paleta: --background #fefefe, --text #041c3f, --accent #a5e070, --accent-light #e3ecf3, --border #d6e0ea, --link #017ce9. Tipografía: Segoe UI, Roboto, system-ui, sans-serif. Bordes: header { border-bottom: 4px solid var(--accent); }, nav ul con fondo --accent-light y border-radius: 0.75rem, aside img { border-radius: 0.75rem; }; el pie conserva border-top: 1px solid var(--border).</aside>
   <div style="display:flex;flex-direction:column">
     <span class="pill">Práctica · Parte 1</span>
     <h2 style="font-size:var(--type-title);font-weight:800;line-height:1.1;margin-top:32px;color:var(--navy);text-wrap:balance">Maqueta 1: cómo debe quedar</h2>
-    <p style="font-size:var(--type-small);line-height:1.5;margin-top:var(--gap-title)">Una columna de 60rem centrada, el texto en azul marino sobre fondo casi blanco, letra sin serifa y los enlaces en azul. Clic en la imagen para verla entera.</p>
+    <p style="font-size:var(--type-small);line-height:1.5;margin-top:var(--gap-title)">Una columna de 60rem centrada, el texto en azul marino sobre fondo casi blanco, letra sin serifa y los enlaces en azul. Bajo la cabecera, una línea verde (<code class="en-linea">border-bottom</code>); el menú y las capturas, con las esquinas redondeadas (<code class="en-linea">border-radius</code>). Clic en la imagen para verla entera.</p>
     <p style="font-size:var(--type-caption);font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;margin-top:var(--gap-title)">La paleta</p>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px;font-size:20px;font-family:var(--mono)">
       <div style="background:#fefefe;border:2px solid var(--line);border-radius:12px;padding:14px"><span style="display:block;font-weight:700;font-family:inherit">--background</span>#fefefe</div>
