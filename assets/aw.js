@@ -122,7 +122,26 @@
     return out + esc(src.slice(i));
   }
 
-  AW.resalta = { html: resaltaHtml, css: resaltaCss, js: resaltaJs, javascript: resaltaJs };
+  // PHP (UT3, wp-config.php): comentarios, cadenas, variables $…, define() y constantes
+  function resaltaPhp(src) {
+    let out = '', i = 0;
+    const re = /(\/\*[\s\S]*?\*\/|\/\/[^\n]*|#[^\n]*)|('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*")|(\$[A-Za-z_]\w*)|(<\?php|\?>)|(\b\d+(?:\.\d+)?\b)|([A-Za-z_]\w*)(?=\s*\()|(\b(?:true|false|null|TRUE|FALSE|NULL)\b)|([{}()[\];,=])/g;
+    let m;
+    while ((m = re.exec(src))) {
+      out += esc(src.slice(i, m.index)); i = re.lastIndex;
+      if (m[1]) out += span('com', m[1]);
+      else if (m[2]) out += span('str', m[2]);
+      else if (m[3]) out += span('attr', m[3]);
+      else if (m[4]) out += span('tag', m[4]);
+      else if (m[5]) out += span('num', m[5]);
+      else if (m[6]) out += span('fn', m[6]);
+      else if (m[7]) out += span('kw', m[7]);
+      else if (m[8]) out += span('punc', m[8]);
+    }
+    return out + esc(src.slice(i));
+  }
+
+  AW.resalta = { html: resaltaHtml, css: resaltaCss, js: resaltaJs, javascript: resaltaJs, php: resaltaPhp };
 
   function montaCodigo(pre) {
     const lang = (pre.dataset.lang || '').toLowerCase();
@@ -1380,6 +1399,277 @@
   }
   AW.abreBuscador = () => { const s = document.querySelector('deck-stage'); if (s) abreBuscador(s); };
 
+  /* Guía paso a paso (UT3): <div class="guia" data-guia="clave" data-base="img/guias/"></div>
+     Los pasos están en AW.guias[clave] = [{ t: 'texto con <b>', img: 'nombre', m: [[x, y, an, al], …] }, …]
+     (m en % de la captura: lo que hay que pulsar o mirar; z, opcional, los índices de m a los que se acerca). Cada paso enseña la captura acercada a esas
+     zonas, con un foco que oscurece lo demás. «Siguiente», «Anterior», los segmentos de arriba y, en la
+     presentación, las flechas: → avanza paso a paso y solo después del último pasa a la diapositiva siguiente. */
+  function montaGuia(el) {
+    const pasos = (AW.guias || {})[el.dataset.guia];
+    if (!pasos || !pasos.length) { el.textContent = 'Faltan los pasos de la guía ' + el.dataset.guia; return; }
+    const base = el.dataset.base || 'img/guias/';
+    el.innerHTML =
+      '<div class="guia-lado">' +
+        '<div class="guia-barra" role="tablist">' + pasos.map((_, i) => '<button type="button" role="tab" aria-label="Paso ' + (i + 1) + '"></button>').join('') + '</div>' +
+        '<p class="guia-cuenta"></p>' +
+        '<p class="guia-texto" aria-live="polite"></p>' +
+        '<div class="guia-botones"><button type="button" class="btn btn-ghost guia-ant">← Anterior</button><button type="button" class="btn btn-primary guia-sig">Siguiente →</button></div>' +
+        '<button type="button" class="guia-entera" aria-pressed="false">Ver la pantalla entera</button>' +
+      '</div>' +
+      '<div class="guia-pantalla">' +
+        '<div class="guia-capa"><img alt=""></div><div class="guia-capa"><img alt=""></div>' +
+        '<svg class="guia-foco" aria-hidden="true"><defs><mask maskUnits="userSpaceOnUse"><rect class="guia-todo" fill="#fff"></rect><g class="guia-huecos"></g></mask></defs><rect class="guia-velo"></rect><g class="guia-marcos"></g></svg>' +
+      '</div>';
+    const $ = (s) => el.querySelector(s);
+    const segs = [...el.querySelectorAll('.guia-barra button')];
+    const pantalla = $('.guia-pantalla'), capas = [...el.querySelectorAll('.guia-capa')];
+    const foco = $('.guia-foco'), todo = $('.guia-todo'), velo = $('.guia-velo'), huecos = $('.guia-huecos'), marcos = $('.guia-marcos');
+    const mid = 'guia-mask-' + Math.random().toString(36).slice(2, 8);
+    foco.querySelector('mask').id = mid; velo.setAttribute('mask', 'url(#' + mid + ')');
+    let i = 0, entera = false, delante = 0, turno = 0;
+    pasos.forEach((p) => { const im = new Image(); im.src = base + p.img + '.webp'; });
+    // zona que se ve (en % de la captura), con la forma de la pantalla
+    function zona(p, ratio) {
+      const m = p.z ? p.z.map((k) => p.m[k]) : p.m;
+      if (entera || !m.length) return [0, 0, 100];
+      const x0 = Math.min(...m.map((r) => r[0])), y0 = Math.min(...m.map((r) => r[1]));
+      const x1 = Math.max(...m.map((r) => r[0] + r[2])), y1 = Math.max(...m.map((r) => r[1] + r[3]));
+      const forma = (pantalla.clientHeight / pantalla.clientWidth) / ratio;
+      let w = Math.max(x1 - x0 + 16, 42), h = Math.max(y1 - y0 + 16, 30);
+      if (h / w > forma) w = h / forma; else h = w * forma;
+      w = Math.min(w, 100); h = Math.min(h, 100);
+      const x = Math.min(Math.max((x0 + x1) / 2 - w / 2, 0), 100 - w);
+      const y = Math.min(Math.max((y0 + y1) / 2 - h / 2, 0), Math.max(0, 100 - h));
+      return [x, y, w];
+    }
+    // coloca una capa: translate en píxeles de la pantalla y luego escala (así el zoom va en línea recta)
+    function encuadra(capa, p) {
+      const img = capa.querySelector('img');
+      const pw = pantalla.clientWidth, ratio = img.naturalHeight / img.naturalWidth || 0.57;
+      const [x, y, w] = zona(p, ratio), s = 100 / w;
+      capa.style.width = pw + 'px';
+      capa.style.transform = 'translate(' + (-x / 100 * pw * s) + 'px,' + (-y / 100 * pw * ratio * s) + 'px) scale(' + s + ')';
+      return { x, y, s, pw, ph: pw * ratio };
+    }
+    // marcas y foco en píxeles de la pantalla: borde fino y esquinas redondas a cualquier zoom
+    function marca(p, g) {
+      const W = pantalla.clientWidth, H = pantalla.clientHeight;
+      foco.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      for (const r of [todo, velo]) { r.setAttribute('width', W); r.setAttribute('height', H); }
+      const caja = (r) => {
+        let x = (r[0] - g.x) / 100 * g.pw * g.s - 8, y = (r[1] - g.y) / 100 * g.ph * g.s - 8;
+        const w = r[2] / 100 * g.pw * g.s + 16, h = r[3] / 100 * g.ph * g.s + 16;
+        const x2 = Math.min(x + w, W - 3), y2 = Math.min(y + h, H - 3);
+        x = Math.max(x, 3); y = Math.max(y, 3);
+        return [x, y, Math.max(x2 - x, 10), Math.max(y2 - y, 10)];
+      };
+      // marcas apiladas que se tocan (ajustes uno debajo de otro): una sola caja.
+      // marcas una al lado de otra que se tocan: se reparte el hueco y cada una conserva su borde
+      // las marcas que quedan casi fuera del encuadre no se dibujan (solo asomaría un borde suelto)
+      const dentro = (r) => {
+        const x = (r[0] - g.x) / 100 * g.pw * g.s, y = (r[1] - g.y) / 100 * g.ph * g.s, w = r[2] / 100 * g.pw * g.s, h = r[3] / 100 * g.ph * g.s;
+        const vw = Math.min(x + w, W) - Math.max(x, 0), vh = Math.min(y + h, H) - Math.max(y, 0);
+        return vw > 0 && vh > 0 && (vw * vh) / (w * h) >= 0.5;
+      };
+      const ms = p.m.filter(dentro);
+      const orig = ms.map((r) => caja([r[0], r[1], r[2], r[3]]).map((v, k) => k < 2 ? v + 8 : v - 16));
+      const rects = ms.map(caja);
+      const solapa = (a, b, m = 6) => a[0] < b[0] + b[2] + m && b[0] < a[0] + a[2] + m && a[1] < b[1] + b[3] + m && b[1] < a[1] + a[3] + m;
+      const apiladas = (a, b) => (Math.min(a[0] + a[2], b[0] + b[2]) - Math.max(a[0], b[0])) > 0.6 * Math.min(a[2], b[2]);
+      for (let hay = true; hay;) {
+        hay = false;
+        for (let a = 0; a < rects.length && !hay; a++) for (let b = a + 1; b < rects.length && !hay; b++) {
+          const A = rects[a], B = rects[b];
+          if (!solapa(A, B) || !apiladas(A, B)) continue;
+          const x = Math.min(A[0], B[0]), y = Math.min(A[1], B[1]);
+          rects[a] = [x, y, Math.max(A[0] + A[2], B[0] + B[2]) - x, Math.max(A[1] + A[3], B[1] + B[3]) - y];
+          orig[a] = rects[a]; rects.splice(b, 1); orig.splice(b, 1); hay = true;
+        }
+      }
+      for (let a = 0; a < rects.length; a++) for (let b = 0; b < rects.length; b++) {
+        if (a === b || !solapa(rects[a], rects[b], 0) || apiladas(rects[a], rects[b])) continue;
+        const A = rects[a], B = rects[b];
+        if (orig[a][0] + orig[a][2] <= orig[b][0] + 1) {      // A a la izquierda de B
+          const corte = (orig[a][0] + orig[a][2] + orig[b][0]) / 2;
+          A[2] = Math.max(10, corte - 3 - A[0]); const fin = B[0] + B[2]; B[0] = corte + 3; B[2] = Math.max(10, fin - B[0]);
+        }
+      }
+      const rect = (r, extra) => '<rect x="' + r[0] + '" y="' + r[1] + '" width="' + r[2] + '" height="' + r[3] + '" rx="12"' + extra + '></rect>';
+      huecos.innerHTML = rects.map((r) => rect(r, ' fill="#000"')).join('');
+      marcos.innerHTML = rects.map((r) => rect(r, ' class="halo"') + rect(r, ' class="borde"')).join('');
+    }
+    function pinta(cambiaPaso) {
+      const p = pasos[i], mio = ++turno;
+      segs.forEach((s, k) => { s.classList.toggle('hecho', k < i); s.classList.toggle('actual', k === i); s.setAttribute('aria-selected', k === i); });
+      $('.guia-cuenta').textContent = 'Paso ' + (i + 1) + ' de ' + pasos.length;
+      $('.guia-texto').innerHTML = p.t;
+      $('.guia-ant').disabled = i === 0;
+      $('.guia-sig').disabled = i === pasos.length - 1;
+      $('.guia-entera').textContent = entera ? 'Acercar a lo importante' : 'Ver la pantalla entera';
+      $('.guia-entera').setAttribute('aria-pressed', entera);
+      const src = base + p.img + '.webp';
+      const actual = capas[delante];
+      if (!cambiaPaso && actual.querySelector('img').getAttribute('src') === src) {
+        // mismo paso (pantalla entera): zoom en línea recta; las marcas vuelven al terminar
+        foco.classList.remove('visible');
+        actual.classList.add('mueve');
+        const g = encuadra(actual, p);
+        setTimeout(() => { if (mio === turno) { marca(p, g); foco.classList.add('visible'); } }, 650);
+        return;
+      }
+      // paso nuevo: la capa de detrás carga la captura ya encuadrada y aparece con un fundido
+      const nueva = capas[1 - delante], img = nueva.querySelector('img');
+      foco.classList.remove('visible');
+      const listo = () => {
+        if (mio !== turno) return;
+        nueva.classList.remove('mueve');
+        const g = encuadra(nueva, p);
+        void nueva.offsetWidth;
+        nueva.classList.add('visible'); actual.classList.remove('visible');
+        delante = 1 - delante;
+        setTimeout(() => { if (mio === turno) { marca(p, g); foco.classList.add('visible'); } }, 420);
+      };
+      img.alt = p.t.replace(/<[^>]+>/g, '');
+      if (img.getAttribute('src') === src && img.complete) listo(); else { img.onload = listo; img.src = src; }
+    }
+    const ir = (k) => { const n = Math.max(0, Math.min(pasos.length - 1, k)); if (n !== i) { i = n; entera = false; pinta(true); } };
+    $('.guia-ant').addEventListener('click', () => ir(i - 1));
+    $('.guia-sig').addEventListener('click', () => ir(i + 1));
+    segs.forEach((s, k) => s.addEventListener('click', () => ir(k)));
+    const alterna = () => { entera = !entera; pinta(false); };
+    $('.guia-entera').addEventListener('click', alterna);
+    pantalla.addEventListener('click', alterna);
+    // en la presentación, las flechas recorren los pasos antes de cambiar de diapositiva
+    window.addEventListener('keydown', (e) => {
+      const sec = el.closest('section');
+      if (!sec || !sec.hasAttribute('data-deck-active') || e.altKey || e.ctrlKey || e.metaKey) return;
+      if (e.target.closest && e.target.closest('input, textarea, select')) return;
+      const avanza = ['ArrowRight', 'PageDown', ' '].includes(e.key), vuelve = ['ArrowLeft', 'PageUp'].includes(e.key);
+      if (avanza && i < pasos.length - 1) { e.preventDefault(); e.stopImmediatePropagation(); ir(i + 1); }
+      else if (vuelve && i > 0) { e.preventDefault(); e.stopImmediatePropagation(); ir(i - 1); }
+    }, true);
+    // al llegar a la diapositiva o cambiar el tamaño, se recoloca sin animación
+    const recoloca = () => {
+      if (!el.closest('section')?.hasAttribute('data-deck-active')) return;
+      const c = capas[delante]; if (!c.querySelector('img').complete) return;
+      c.classList.remove('mueve'); const g = encuadra(c, pasos[i]); marca(pasos[i], g);
+    };
+    const stage = document.querySelector('deck-stage');
+    if (stage) stage.addEventListener('slidechange', () => setTimeout(recoloca, 50));
+    window.addEventListener('resize', recoloca);
+    pinta(true);
+  }
+
+  /* Anatomía de una página (UT3): <div class="anatomia" data-anatomia="clave" data-base="img/guias/"></div>
+     AW.anatomias[clave] = [{ titulo, img, arbol }], con arbol = { n: 'Contenedor', d: 'en fila · 44 %', c: 1, r: [x, y, an, al], h: [hijos] }
+     (r en % de la captura de la sección). A la izquierda, el árbol de contenedores y widgets; a la derecha, la
+     sección con sus cajas. Señalar un elemento del árbol enciende su caja y al revés. En la presentación, →
+     recorre los elementos uno a uno, luego la sección siguiente y, al final, pasa de diapositiva. */
+  function montaAnatomia(el) {
+    const secs = (AW.anatomias || {})[el.dataset.anatomia];
+    if (!secs || !secs.length) { el.textContent = 'Falta la anatomía ' + el.dataset.anatomia; return; }
+    const base = el.dataset.base || 'img/guias/';
+    // nodos en orden, con nivel; los contenedores iguales a su hermano anterior salen plegados
+    const firma = (n) => n.n + '(' + (n.h || []).map(firma).join(',') + ')';
+    secs.forEach((s) => {
+      s.nodos = [];
+      const recorre = (n, nivel, oculto) => {
+        n.k = s.nodos.length; n.nivel = nivel; n.oculto = oculto; s.nodos.push(n);
+        let previo = null;
+        (n.h || []).forEach((h) => {
+          h.repe = !!(previo && h.c && firma(previo) === firma(h));
+          recorre(h, nivel + 1, oculto || false);
+          previo = h;
+        });
+      };
+      recorre(s.arbol, 0, false);
+    });
+    el.innerHTML = '<div class="an-pestanas" role="tablist">' + secs.map((s, i) => '<button type="button" role="tab"><span>' + (i + 1) + '</span>' + esc(s.titulo) + '</button>').join('') + '</div>' +
+      '<div class="an-cuerpo"><ol class="an-arbol"></ol><div class="an-marco"><div class="an-lienzo"><img alt=""><div class="an-cajas"></div></div></div></div>';
+    const pest = [...el.querySelectorAll('.an-pestanas button')];
+    const arbol = el.querySelector('.an-arbol'), marco = el.querySelector('.an-marco'), lienzo = el.querySelector('.an-lienzo');
+    const img = lienzo.querySelector('img'), cajas = lienzo.querySelector('.an-cajas');
+    let s = 0, sel = 0;
+    const plegados = new Set();
+    function visibles() {
+      // un nodo se ve si ningún antepasado está plegado
+      const S = secs[s], vis = [];
+      const anda = (n, tapado) => { if (!tapado) vis.push(n); const pl = plegados.has(s + ':' + n.k); (n.h || []).forEach((h) => anda(h, tapado || pl)); };
+      anda(S.arbol, false);
+      return vis;
+    }
+    function encaja() {
+      const r = img.naturalWidth / img.naturalHeight || 2;
+      const mw = marco.clientWidth, mh = marco.clientHeight;
+      let w = mw, h = mw / r;
+      if (h > mh) { h = mh; w = mh * r; }
+      lienzo.style.width = w + 'px'; lienzo.style.height = h + 'px';
+    }
+    function seccion(i) {
+      s = i; sel = 0;
+      const S = secs[s];
+      plegados.clear();
+      S.nodos.forEach((n) => { if (n.repe) plegados.add(s + ':' + n.k); });
+      pest.forEach((b, k) => { b.classList.toggle('actual', k === s); b.setAttribute('aria-selected', k === s); });
+      img.onload = () => { encaja(); };
+      img.src = base + S.img + '.webp'; img.alt = 'Sección ' + S.titulo;
+      cajas.innerHTML = S.nodos.map((n) => '<div class="an-caja' + (n.c ? ' contenedor' : '') + '" data-k="' + n.k + '" style="left:' + n.r[0] + '%;top:' + n.r[1] + '%;width:' + n.r[2] + '%;height:' + n.r[3] + '%"><span>' + esc(n.n) + (n.c ? '' : (n.d && /^h\d|^p /.test(n.d) ? ' ' + esc(n.d.split(' · ')[0]) : '')) + '</span></div>').join('');
+      cajas.querySelectorAll('.an-caja').forEach((c) => {
+        c.addEventListener('mouseenter', () => marca(+c.dataset.k));
+        c.addEventListener('click', (e) => { e.stopPropagation(); marca(+c.dataset.k); });
+      });
+      pintaArbol();
+      marca(0);
+    }
+    function pintaArbol() {
+      const S = secs[s];
+      arbol.innerHTML = visibles().map((n) => {
+        const pl = plegados.has(s + ':' + n.k);
+        const flecha = n.c ? (n.d.startsWith('en fila') ? '→' : '↓') : '';
+        return '<li style="--nivel:' + n.nivel + '"><button type="button" class="an-nodo' + (n.c ? ' contenedor' : '') + '" data-k="' + n.k + '">' +
+          '<b>' + esc(n.n) + (flecha ? ' <i>' + flecha + '</i>' : '') + '</b> <small>' + esc(pl ? n.d + ' · igual que la anterior (+)' : (n.d || '')) + '</small></button></li>';
+      }).join('');
+      arbol.querySelectorAll('.an-nodo').forEach((b) => {
+        const k = +b.dataset.k;
+        b.addEventListener('mouseenter', () => marca(k));
+        b.addEventListener('focus', () => marca(k));
+        b.addEventListener('click', () => { const id = s + ':' + k; if (plegados.has(id)) { plegados.delete(id); pintaArbol(); } marca(k); });
+      });
+      marca(sel);
+    }
+    function marca(k) {
+      sel = k;
+      cajas.classList.add('con-foco');
+      cajas.querySelectorAll('.an-caja').forEach((c) => c.classList.toggle('foco', +c.dataset.k === k));
+      arbol.querySelectorAll('.an-nodo').forEach((b) => b.classList.toggle('foco', +b.dataset.k === k));
+      const b = arbol.querySelector('.an-nodo.foco');
+      if (b) b.scrollIntoView({ block: 'nearest' });
+    }
+    pest.forEach((b, i) => b.addEventListener('click', () => seccion(i)));
+    // → recorre los elementos visibles; al final de una sección, la siguiente
+    window.addEventListener('keydown', (e) => {
+      const sec = el.closest('section');
+      if (!sec || !sec.hasAttribute('data-deck-active') || e.altKey || e.ctrlKey || e.metaKey) return;
+      const avanza = ['ArrowRight', 'PageDown', ' '].includes(e.key), vuelve = ['ArrowLeft', 'PageUp'].includes(e.key);
+      if (!avanza && !vuelve) return;
+      const vis = visibles().map((n) => n.k), pos = vis.indexOf(sel);
+      if (avanza) {
+        if (pos < vis.length - 1) marca(vis[pos + 1]);
+        else if (s < secs.length - 1) seccion(s + 1);
+        else return;
+      } else {
+        if (pos > 0) marca(vis[pos - 1]);
+        else if (s > 0) { seccion(s - 1); const v = visibles(); marca(v[v.length - 1].k); }
+        else return;
+      }
+      e.preventDefault(); e.stopImmediatePropagation();
+    }, true);
+    const stage = document.querySelector('deck-stage');
+    if (stage) stage.addEventListener('slidechange', () => { if (el.closest('section')?.hasAttribute('data-deck-active')) encaja(); });
+    window.addEventListener('resize', encaja);
+    seccion(0);
+  }
+
   function init() {
     const stage = document.querySelector('deck-stage');
     if (!stage) return;
@@ -1394,6 +1684,8 @@
     document.querySelectorAll('.foto').forEach(montaFoto);
     document.querySelectorAll('.pill-solucion, .abre-modal').forEach(montaSolucion);
     document.querySelectorAll('section.chuleta').forEach(montaChuleta);
+    document.querySelectorAll('.guia[data-guia]').forEach(montaGuia);
+    document.querySelectorAll('.anatomia[data-anatomia]').forEach(montaAnatomia);
     montaBuscador(stage);
     montaVolver(stage);
     montaNotas(stage);
