@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solución · Mi película favorita</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --navy: #041C3F; --green: #A5E070; --green-dark: #0A6E1A; --cyan: #1CCFE3; --gray: #E3ECF3; --line: #D6E0EA; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--gray); color: var(--navy); font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+  header { position: sticky; top: 0; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; padding: 20px 32px; background: var(--navy); color: #fff; }
+  header h1 { margin: 0; font-size: 26px; font-weight: 800; font-family: 'JetBrains Mono', monospace; }
+  header p { margin: 0; flex: 1; min-width: 280px; font-size: 17px; line-height: 1.4; color: #c9d6e6; }
+  header p code { font-family: 'JetBrains Mono', monospace; color: var(--green); }
+  .botones { display: flex; gap: 12px; }
+  .boton { border: 0; border-radius: 999px; padding: 12px 26px; font: 700 18px 'Plus Jakarta Sans', system-ui, sans-serif; cursor: pointer; text-decoration: none; }
+  .copiar { background: var(--green); color: var(--navy); box-shadow: 0 2px 0 var(--green-dark); }
+  .copiar:hover { background: var(--cyan); box-shadow: none; }
+  .codepen { background: transparent; color: #fff; border: 3px solid rgba(255,255,255,.4); padding: 9px 23px; }
+  .codepen:hover { border-color: var(--cyan); }
+  pre { margin: 24px 32px 48px; padding: 24px 0; background: #fff; border: 3px solid var(--line); border-radius: 16px; overflow-x: auto; font: 19px/1.55 'JetBrains Mono', monospace; counter-reset: l; }
+  .l { display: block; padding: 0 28px 0 0; }
+  .l::before { counter-increment: l; content: counter(l); display: inline-block; width: 4.2em; padding-right: 1.4em; text-align: right; color: #a8b4c4; user-select: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>style.css</h1>
+  <p>La solución: lo que escribes tú.</p>
+  <div class="botones">
+    <button type="button" class="boton copiar" id="copiar">Copiar CSS</button>
+  </div>
+</header>
+<pre id="codigo"><span class="l">/* TAREA 1 */</span><span class="l">:root {</span><span class="l">  --background: #0b0f0c;</span><span class="l">  --text: #d7f5dc;</span><span class="l">  --accent: #3ddc84;</span><span class="l">  --panel: #13241a;</span><span class="l">  --border: #245236;</span><span class="l">  --link: #7cffb0;</span><span class="l">}</span><span class="l">body {</span><span class="l">  background: var(--background);</span><span class="l">  color: var(--text);</span><span class="l">}</span><span class="l"> </span><span class="l">/* TAREA 2 y 3 */</span><span class="l">h1, h2, h3 {</span><span class="l">  font-family: Consolas, "Courier New", monospace;</span><span class="l">  color: var(--accent);</span><span class="l">}</span><span class="l">h1 { font-size: 2.5rem; }</span><span class="l">h2 { font-size: 1.6rem; }</span><span class="l">h3 { font-size: 1.25rem; }</span><span class="l">a { color: var(--link); }</span><span class="l">nav a {</span><span class="l">  color: var(--accent);</span><span class="l">  text-decoration: none;</span><span class="l">}</span><span class="l"> </span><span class="l">/* TAREA 4 */</span><span class="l">header { border-bottom: 3px solid var(--accent); }</span><span class="l">footer {</span><span class="l">  border-top: 3px solid var(--accent);</span><span class="l">  text-align: center;</span><span class="l">}</span><span class="l">aside {</span><span class="l">  background: var(--panel);</span><span class="l">  border: 1px solid var(--border);</span><span class="l">  border-radius: 12px;</span><span class="l">  padding: 1.5rem;</span><span class="l">}</span><span class="l"> </span><span class="l">/* TAREA 5 */</span><span class="l">button {</span><span class="l">  background: transparent;</span><span class="l">  color: var(--accent);</span><span class="l">  border: 2px solid var(--accent);</span><span class="l">  border-radius: 6px;</span><span class="l">}</span></pre>
+<script>
+  const boton = document.getElementById('copiar');
+  const texto = [...document.querySelectorAll('#codigo .l')].map((l) => l.textContent).join('\n') + '\n';
+  function avisa(msg) { const t = boton.textContent; boton.textContent = msg; setTimeout(() => { boton.textContent = t; }, 1800); }
+  boton.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(texto); avisa('Copiado ✓'); }
+    catch {
+      const r = document.createRange(); r.selectNodeContents(document.getElementById('codigo'));
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      avisa(document.execCommand('copy') ? 'Copiado ✓' : 'Pulsa Ctrl+C');
+    }
+  });
+</script>
+</body>
+</html>

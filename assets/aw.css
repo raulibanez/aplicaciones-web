@@ -723,8 +723,7 @@ section:has(> .ej) { grid-template-rows: minmax(0, 1fr); }
 .pill-enlace::before { content: '↗ '; }
 .pill-enlace.codigo::before { content: '</> '; font-family: 'JetBrains Mono', monospace; font-size: 18px; }
 .pill-enlace.descarga::before { content: '↓ '; }
-.foto > .pill-enlace { position: absolute; top: 18px; right: 18px; z-index: 2; }
-@media print { .pill-enlace { display: none; } }
+.foto > .pill-enlace { position: absolute; top: 18px; right: 18px; z-index: 2; }@media print { .pill-enlace { display: none; } }
 .visor.visor-solucion { cursor: default; }
 .solucion-marco {
   width: min(1400px, 94vw);
