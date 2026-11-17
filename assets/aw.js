@@ -1403,50 +1403,59 @@
      Los pasos están en AW.guias[clave] = [{ t: 'texto con <b>', img: 'nombre', m: [[x, y, an, al], …] }, …]
      (m en % de la captura: lo que hay que pulsar o mirar; z, opcional, los índices de m a los que se acerca). Cada paso enseña la captura acercada a esas
      zonas, con un foco que oscurece lo demás. «Siguiente», «Anterior», los segmentos de arriba y, en la
-     presentación, las flechas: → avanza paso a paso y solo después del último pasa a la diapositiva siguiente. */
-  function montaGuia(el) {
-    const pasos = (AW.guias || {})[el.dataset.guia];
-    if (!pasos || !pasos.length) { el.textContent = 'Faltan los pasos de la guía ' + el.dataset.guia; return; }
-    const base = el.dataset.base || 'img/guias/';
-    el.innerHTML =
-      '<div class="guia-lado">' +
-        '<div class="guia-barra" role="tablist">' + pasos.map((_, i) => '<button type="button" role="tab" aria-label="Paso ' + (i + 1) + '"></button>').join('') + '</div>' +
-        '<p class="guia-cuenta"></p>' +
-        '<p class="guia-texto" aria-live="polite"></p>' +
-        '<div class="guia-botones"><button type="button" class="btn btn-ghost guia-ant">← Anterior</button><button type="button" class="btn btn-primary guia-sig">Siguiente →</button></div>' +
-        '<button type="button" class="guia-entera" aria-pressed="false">Ver la pantalla entera</button>' +
-      '</div>' +
-      '<div class="guia-pantalla">' +
-        '<div class="guia-capa"><img alt=""></div><div class="guia-capa"><img alt=""></div>' +
-        '<svg class="guia-foco" aria-hidden="true"><defs><mask maskUnits="userSpaceOnUse"><rect class="guia-todo" fill="#fff"></rect><g class="guia-huecos"></g></mask></defs><rect class="guia-velo"></rect><g class="guia-marcos"></g></svg>' +
-      '</div>';
-    const $ = (s) => el.querySelector(s);
-    const segs = [...el.querySelectorAll('.guia-barra button')];
-    const pantalla = $('.guia-pantalla'), capas = [...el.querySelectorAll('.guia-capa')];
+     presentación, las flechas: → avanza paso a paso y solo después del último pasa a la diapositiva siguiente.
+     Si el primer paso lleva  tramo: {…}, la guía va por tramos (montaGuiaTramos, más abajo). */
+
+  // zona de la captura que se ve (en % de la captura: x, y y ancho), con la forma de la caja de W × H píxeles.
+  // ratio = alto / ancho de la captura. entera: la captura entera; centra: entera y centrada (guías por tramos)
+  function zonaGuia(p, ratio, W, H, entera, centra) {
+    const forma = (H / W) / ratio;
+    const m = p.z ? p.z.map((k) => p.m[k]) : p.m;
+    if (entera || !m.length) {
+      if (!centra) return [0, 0, 100];
+      const w = Math.max(100, 100 / forma);
+      return [(100 - w) / 2, (100 - w * forma) / 2, w];
+    }
+    const x0 = Math.min(...m.map((r) => r[0])), y0 = Math.min(...m.map((r) => r[1]));
+    const x1 = Math.max(...m.map((r) => r[0] + r[2])), y1 = Math.max(...m.map((r) => r[1] + r[3]));
+    if (p.encaja) {
+      // resultado de un tramo: la zona entera con un margen; como mucho, al doble de la pantalla entera
+      // (minw: el ancho mínimo del encuadre). Si cabe, el encuadre no se sale de la captura (así no quedan franjas oscuras)
+      const w = Math.max((x1 - x0) * 1.1, (y1 - y0) * 1.16 / forma, p.minw || 50), h = w * forma;
+      let x = (x0 + x1) / 2 - w / 2, y = (y0 + y1) / 2 - h / 2;
+      x = w <= 100 ? Math.min(Math.max(x, 0), 100 - w) : (100 - w) / 2;
+      y = h <= 100 ? Math.min(Math.max(y, 0), 100 - h) : (100 - h) / 2;
+      // si falta poco para el borde de arriba o el de la izquierda, se pega a él (no queda una barra cortada)
+      if (x > 0 && x < 4 && x1 <= w) x = 0;
+      if (y > 0 && y < 6 && y1 <= h) y = 0;
+      return [x, y, w];
+    }
+    let w = Math.max(x1 - x0 + 16, 42), h = Math.max(y1 - y0 + 16, 30);
+    if (h / w > forma) w = h / forma; else h = w * forma;
+    w = Math.min(w, 100); h = Math.min(h, 100);
+    const x = Math.min(Math.max((x0 + x1) / 2 - w / 2, 0), 100 - w);
+    const y = Math.min(Math.max((y0 + y1) / 2 - h / 2, 0), Math.max(0, 100 - h));
+    return [x, y, w];
+  }
+
+  // la pantalla de una guía: dos capas que se funden, el foco que oscurece y las marcas naranjas.
+  // muestra(p, { entera, cambia }) enseña el paso p; recoloca() lo vuelve a encuadrar sin animación
+  function visorGuia(pantalla, base, extra, centra) {
+    pantalla.innerHTML =
+      '<div class="guia-capa"><img alt=""></div><div class="guia-capa"><img alt=""></div>' +
+      '<svg class="guia-foco" aria-hidden="true"><defs><mask maskUnits="userSpaceOnUse"><rect class="guia-todo" fill="#fff"></rect><g class="guia-huecos"></g></mask></defs><rect class="guia-velo"></rect><g class="guia-marcos"></g></svg>' +
+      (extra || '');
+    const $ = (s) => pantalla.querySelector(s);
+    const capas = [...pantalla.querySelectorAll('.guia-capa')];
     const foco = $('.guia-foco'), todo = $('.guia-todo'), velo = $('.guia-velo'), huecos = $('.guia-huecos'), marcos = $('.guia-marcos');
     const mid = 'guia-mask-' + Math.random().toString(36).slice(2, 8);
     foco.querySelector('mask').id = mid; velo.setAttribute('mask', 'url(#' + mid + ')');
-    let i = 0, entera = false, delante = 0, turno = 0;
-    pasos.forEach((p) => { const im = new Image(); im.src = base + p.img + '.webp'; });
-    // zona que se ve (en % de la captura), con la forma de la pantalla
-    function zona(p, ratio) {
-      const m = p.z ? p.z.map((k) => p.m[k]) : p.m;
-      if (entera || !m.length) return [0, 0, 100];
-      const x0 = Math.min(...m.map((r) => r[0])), y0 = Math.min(...m.map((r) => r[1]));
-      const x1 = Math.max(...m.map((r) => r[0] + r[2])), y1 = Math.max(...m.map((r) => r[1] + r[3]));
-      const forma = (pantalla.clientHeight / pantalla.clientWidth) / ratio;
-      let w = Math.max(x1 - x0 + 16, 42), h = Math.max(y1 - y0 + 16, 30);
-      if (h / w > forma) w = h / forma; else h = w * forma;
-      w = Math.min(w, 100); h = Math.min(h, 100);
-      const x = Math.min(Math.max((x0 + x1) / 2 - w / 2, 0), 100 - w);
-      const y = Math.min(Math.max((y0 + y1) / 2 - h / 2, 0), Math.max(0, 100 - h));
-      return [x, y, w];
-    }
+    let delante = 0, turno = 0, actual = null, entera = false;
     // coloca una capa: translate en píxeles de la pantalla y luego escala (así el zoom va en línea recta)
     function encuadra(capa, p) {
       const img = capa.querySelector('img');
       const pw = pantalla.clientWidth, ratio = img.naturalHeight / img.naturalWidth || 0.57;
-      const [x, y, w] = zona(p, ratio), s = 100 / w;
+      const [x, y, w] = zonaGuia(p, ratio, pw, pantalla.clientHeight, entera, centra), s = 100 / w;
       capa.style.width = pw + 'px';
       capa.style.transform = 'translate(' + (-x / 100 * pw * s) + 'px,' + (-y / 100 * pw * ratio * s) + 'px) scale(' + s + ')';
       return { x, y, s, pw, ph: pw * ratio };
@@ -1498,8 +1507,102 @@
       huecos.innerHTML = rects.map((r) => rect(r, ' fill="#000"')).join('');
       marcos.innerHTML = rects.map((r) => rect(r, ' class="halo"') + rect(r, ' class="borde"')).join('');
     }
+    // Versión 3: la captura de un paso es siempre la suya.
+    // - Si la captura nueva tarda más de 120 ms, la anterior se quita: nunca queda a la vista la captura de otro paso.
+    // - Si la petición falla o se atasca (6 s), se pide otra vez con otra dirección (?r=…), que no se suma a la atascada.
+    // - Si falla tres veces, sale un aviso con un botón para intentarlo otra vez.
+    const aviso = document.createElement('button');
+    aviso.type = 'button'; aviso.className = 'guia-aviso'; aviso.hidden = true;
+    aviso.textContent = 'No se ha cargado la captura de este paso. Pulsa aquí para intentarlo otra vez.';
+    pantalla.appendChild(aviso);
+    let tEspera = 0, tPlazo = 0;
+    aviso.addEventListener('click', (e) => { e.stopPropagation(); if (actual) muestra(actual, { entera, cambia: true }); });
+    function muestra(p, op) {
+      const mio = ++turno, src = base + p.img + '.webp', cap = capas[delante];
+      actual = p; entera = !!op.entera;
+      clearTimeout(tEspera); clearTimeout(tPlazo);
+      aviso.hidden = true;
+      const capImg = cap.querySelector('img');
+      if (!op.cambia && capImg.dataset.cual === src && cap.classList.contains('visible')) {
+        // mismo paso (pantalla entera): zoom en línea recta; las marcas vuelven al terminar
+        foco.classList.remove('visible');
+        cap.classList.add('mueve');
+        const g = encuadra(cap, p);
+        setTimeout(() => { if (mio === turno) { marca(p, g); foco.classList.add('visible'); } }, 650);
+        return;
+      }
+      // paso nuevo: la capa de detrás carga la captura ya encuadrada y aparece con un fundido
+      const nueva = capas[1 - delante], img = nueva.querySelector('img');
+      foco.classList.remove('visible');
+      pantalla.dataset.paso = p.img;
+      tEspera = setTimeout(() => {
+        if (mio !== turno) return;
+        capas.forEach((c) => c.classList.remove('visible'));
+        pantalla.classList.add('cargando');
+      }, 120);
+      let intentos = 0;
+      const listo = () => {
+        if (mio !== turno) return;
+        if (!img.naturalWidth) { falla(); return; }
+        clearTimeout(tEspera); clearTimeout(tPlazo);
+        pantalla.classList.remove('cargando');
+        img.dataset.cual = src;
+        nueva.classList.remove('mueve');
+        const g = encuadra(nueva, p);
+        void nueva.offsetWidth;
+        nueva.classList.add('visible'); cap.classList.remove('visible');
+        delante = 1 - delante;
+        setTimeout(() => { if (mio === turno) { marca(p, g); foco.classList.add('visible'); } }, 420);
+      };
+      const falla = () => {
+        if (mio !== turno) return;
+        clearTimeout(tPlazo);
+        if (++intentos < 3) { carga(src + '?r=' + Date.now() + '-' + intentos); return; }
+        clearTimeout(tEspera);
+        capas.forEach((c) => c.classList.remove('visible'));
+        pantalla.classList.remove('cargando');
+        aviso.hidden = false;
+      };
+      const carga = (url) => {
+        img.dataset.cual = '';
+        img.onload = listo; img.onerror = falla;
+        tPlazo = setTimeout(falla, 6000);
+        img.src = url;
+      };
+      img.alt = (p.t || '').replace(/<[^>]+>/g, '');
+      if (img.dataset.cual === src && img.complete && img.naturalWidth) listo(); else carga(src);
+    }
+    function recoloca() {
+      if (!actual) return;
+      const c = capas[delante]; if (!c.querySelector('img').complete || !pantalla.clientWidth || !c.classList.contains('visible')) return;
+      c.classList.remove('mueve'); const g = encuadra(c, actual); marca(actual, g);
+    }
+    return { muestra, recoloca };
+  }
+
+  function montaGuia(el) {
+    const pasos = (AW.guias || {})[el.dataset.guia];
+    if (!pasos || !pasos.length) { el.textContent = 'Faltan los pasos de la guía ' + el.dataset.guia; return; }
+    if (pasos[0].tramo) { montaGuiaTramos(el, pasos); return; }
+    const base = el.dataset.base || 'img/guias/';
+    el.innerHTML =
+      '<div class="guia-lado">' +
+        '<div class="guia-barra" role="tablist">' + pasos.map((_, i) => '<button type="button" role="tab" aria-label="Paso ' + (i + 1) + '"></button>').join('') + '</div>' +
+        '<p class="guia-cuenta"></p>' +
+        '<p class="guia-texto" aria-live="polite"></p>' +
+        '<div class="guia-botones"><button type="button" class="btn btn-ghost guia-ant">← Anterior</button><button type="button" class="btn btn-primary guia-sig">Siguiente →</button></div>' +
+        '<button type="button" class="guia-entera" aria-pressed="false">Ver la pantalla entera</button>' +
+      '</div>' +
+      '<div class="guia-pantalla"></div>';
+    const $ = (s) => el.querySelector(s);
+    const segs = [...el.querySelectorAll('.guia-barra button')];
+    const pantalla = $('.guia-pantalla'), visor = visorGuia(pantalla, base);
+    let i = 0, entera = false;
+    // las capturas se piden al llegar a la diapositiva, no todas al abrir la presentación (menos peticiones a la vez)
+    let pedidas = false;
+    const precarga = () => { if (pedidas) return; pedidas = true; pasos.forEach((p) => { const im = new Image(); im.src = base + p.img + '.webp'; }); };
     function pinta(cambiaPaso) {
-      const p = pasos[i], mio = ++turno;
+      const p = pasos[i];
       segs.forEach((s, k) => { s.classList.toggle('hecho', k < i); s.classList.toggle('actual', k === i); s.setAttribute('aria-selected', k === i); });
       $('.guia-cuenta').textContent = 'Paso ' + (i + 1) + ' de ' + pasos.length;
       $('.guia-texto').innerHTML = p.t;
@@ -1507,30 +1610,7 @@
       $('.guia-sig').disabled = i === pasos.length - 1;
       $('.guia-entera').textContent = entera ? 'Acercar a lo importante' : 'Ver la pantalla entera';
       $('.guia-entera').setAttribute('aria-pressed', entera);
-      const src = base + p.img + '.webp';
-      const actual = capas[delante];
-      if (!cambiaPaso && actual.querySelector('img').getAttribute('src') === src) {
-        // mismo paso (pantalla entera): zoom en línea recta; las marcas vuelven al terminar
-        foco.classList.remove('visible');
-        actual.classList.add('mueve');
-        const g = encuadra(actual, p);
-        setTimeout(() => { if (mio === turno) { marca(p, g); foco.classList.add('visible'); } }, 650);
-        return;
-      }
-      // paso nuevo: la capa de detrás carga la captura ya encuadrada y aparece con un fundido
-      const nueva = capas[1 - delante], img = nueva.querySelector('img');
-      foco.classList.remove('visible');
-      const listo = () => {
-        if (mio !== turno) return;
-        nueva.classList.remove('mueve');
-        const g = encuadra(nueva, p);
-        void nueva.offsetWidth;
-        nueva.classList.add('visible'); actual.classList.remove('visible');
-        delante = 1 - delante;
-        setTimeout(() => { if (mio === turno) { marca(p, g); foco.classList.add('visible'); } }, 420);
-      };
-      img.alt = p.t.replace(/<[^>]+>/g, '');
-      if (img.getAttribute('src') === src && img.complete) listo(); else { img.onload = listo; img.src = src; }
+      visor.muestra(p, { entera, cambia: cambiaPaso });
     }
     const ir = (k) => { const n = Math.max(0, Math.min(pasos.length - 1, k)); if (n !== i) { i = n; entera = false; pinta(true); } };
     $('.guia-ant').addEventListener('click', () => ir(i - 1));
@@ -1549,12 +1629,351 @@
       else if (vuelve && i > 0) { e.preventDefault(); e.stopImmediatePropagation(); ir(i - 1); }
     }, true);
     // al llegar a la diapositiva o cambiar el tamaño, se recoloca sin animación
+    const recoloca = () => { if (el.closest('section')?.hasAttribute('data-deck-active')) { precarga(); visor.recoloca(); } };
+    const stage = document.querySelector('deck-stage');
+    if (stage) stage.addEventListener('slidechange', () => setTimeout(recoloca, 50));
+    window.addEventListener('resize', recoloca);
+    pinta(true);
+    setTimeout(recoloca, 400);
+  }
+
+  /* Guía por tramos (versión 3). El primer paso de cada tramo lleva
+       tramo: { nombre: 'El menú', corto: 'Menú', resumen: 'una frase con <b>',
+                comprueba: { img: 'captura', zona: [x, y, an, al], lista: ['Lo que se ve.', …], t: 'texto (si no hay lista)' } }
+     (el dato detalle: true de algunos pasos ya no se usa). Aparte, la guía puede llevar
+       AW.guiasPartes[clave] = {
+         partes: { antes, titulo, entradilla, figura, lista: [{ parte, nombre, t }], movil: { titulo, t, figuras } },
+         tramos: [{ forma: 'tira' | 'fila' | 'lado', figuras: [figura, …], pie, texto: ['frase', …] }, …]   (uno por tramo)
+         comprueba: { 8: { figura } }                                                                   (figura de más en la comprobación del tramo 9)
+       }
+     con figura = { img, wh: [ancho, alto], recorte?: [x, y, an, al], velo?, alt, pie?, max?,
+                    zonas: [{ r: [x, y, an, al], tipo: 'foco' | 'caja' | 'marco' | 'punto', parte?, n?, et?, pos?: 'arriba' | 'abajo' | 'izq', al? }] }
+     (todo en % de la captura; las marcas y las etiquetas son capas HTML encima de la captura).
+     Vistas: partes (la cabecera terminada y sus partes) → por cada tramo: entrada (la parte, en grande) → pasos → comprobación.
+     Anterior y Siguiente van siempre abajo a la izquierda, en el mismo sitio en todas las vistas.
+     → recorre la secuencia y, después de la última comprobación, pasa a la diapositiva siguiente.
+     La posición se recuerda solo mientras la presentación está abierta: al recargar, la guía empieza por el principio. */
+  function pliegaCabecera(el) {
+    const sec = el.closest('section');
+    if (!sec) return '';
+    let top = el;
+    while (top.parentElement && top.parentElement !== sec) top = top.parentElement;
+    if (top.parentElement !== sec) return '';
+    const antes = [];
+    for (let n = sec.firstElementChild; n && n !== top; n = n.nextElementSibling) {
+      if (!n.matches('aside.notas, .seccion-pill, [data-slide-num], script, style')) antes.push(n);
+    }
+    const h = antes.map((n) => n.matches('h1, h2') ? n : n.querySelector('h1, h2')).find(Boolean);
+    const k = antes.map((n) => n.matches('p') ? n : n.querySelector('p')).find((x) => x && !(h && h.contains(x)));
+    antes.forEach((n) => n.classList.add('guia-plegado'));
+    sec.classList.add('con-guia-tramos');
+    return (k ? '<span>' + esc(k.textContent.trim()) + '</span>' : '') + (h ? '<b>' + esc(h.textContent.trim()) + '</b>' : '');
+  }
+
+  // Una captura limpia con sus marcas y etiquetas encima (capas HTML, en % de la captura).
+  // recorte: la parte de la captura que se ve; las zonas se dan en % de la captura entera.
+  function lamina(f, base) {
+    const [W, H] = f.wh, rc = f.recorte || [0, 0, 100, 100];
+    const ar = (W * rc[2]) / (H * rc[3]);
+    const pc = (v) => (Math.round(v * 100) / 100) + '%';
+    const q = (r) => [(r[0] - rc[0]) / rc[2] * 100, (r[1] - rc[1]) / rc[3] * 100, r[2] / rc[2] * 100, r[3] / rc[3] * 100];
+    const zs = (f.zonas || []).map((z) => Object.assign({ tipo: 'foco', pos: 'arriba' }, z, { q: q(z.r) }));
+    // sitio para las etiquetas que van fuera de la captura (arriba o abajo) o a su izquierda
+    const pos = new Set(zs.filter((z) => (z.n || z.et) && (z.pos === 'izq' || (z.fuera ?? f.fuera))).map((z) => z.pos));
+    const dp = (z) => z.parte ? ' data-parte="' + z.parte + '"' : '';
+    let h = '<figure class="gl' + [...pos].map((p) => ' con-' + p).join('') + '" data-ar="' + ar.toFixed(4) + '"' + (f.max ? ' data-max="' + f.max + '"' : '') + '>' +
+      '<div class="gl-marco" style="aspect-ratio:' + ar.toFixed(4) + '">' +
+      '<div class="gl-img"><img alt="' + esc(f.alt || '') + '" src="' + esc(base + f.img + '.webp') + '" style="width:' + pc(10000 / rc[2]) + ';left:' + pc(-rc[0] / rc[2] * 100) + ';top:' + pc(-rc[1] / rc[3] * 100) + '"></div>';
+    if (f.velo) {
+      // velo que oscurece lo demás, con un hueco (6 px más grande) en cada foco y en cada caja
+      const id = 'gl-' + Math.random().toString(36).slice(2, 9);
+      const hueco = (z) => '<rect rx="10" fill="#000" style="x:calc(' + pc(z.q[0]) + ' - 6px);y:calc(' + pc(z.q[1]) + ' - 6px);width:calc(' + pc(z.q[2]) + ' + 12px);height:calc(' + pc(z.q[3]) + ' + 12px)"></rect>';
+      h += '<svg class="gl-velo" aria-hidden="true"><defs><mask id="' + id + '" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%"><rect width="100%" height="100%" fill="#fff"></rect>' +
+        zs.filter((z) => z.tipo === 'foco' || z.tipo === 'caja').map(hueco).join('') + '</mask></defs><rect width="100%" height="100%" mask="url(#' + id + ')"></rect></svg>';
+    }
+    zs.forEach((z) => {
+      h += '<span class="gl-zona ' + z.tipo + '"' + dp(z) + ' style="left:' + pc(z.q[0]) + ';top:' + pc(z.q[1]) + ';width:' + pc(z.q[2]) + ';height:' + pc(z.q[3]) + '"></span>';
+    });
+    // etiquetas: arriba, abajo o a la izquierda de su zona, unidas a ella por una raya.
+    // fuera (de la figura o de la zona): la etiqueta va fuera de la captura, en el borde de arriba o de abajo
+    zs.filter((z) => z.n || z.et).forEach((z) => {
+      const cx = z.q[0] + z.q[2] / 2, fuera = z.fuera ?? f.fuera, azul = z.tipo === 'caja' ? ' azul' : '';
+      let al = z.al || (cx < 12 ? 'izq' : cx > 88 ? 'der' : 'centro'), x, y, linea = '';
+      if (z.pos === 'izq') { al = 'centro'; x = z.q[0]; y = z.q[1] + z.q[3] / 2; }
+      else {
+        x = al === 'izq' ? z.q[0] : al === 'der' ? z.q[0] + z.q[2] : cx;
+        const lx = al === 'izq' ? 'calc(' + pc(z.q[0]) + ' + 21px)' : al === 'der' ? 'calc(' + pc(z.q[0] + z.q[2]) + ' - 24px)' : 'calc(' + pc(cx) + ' - 1.5px)';
+        if (z.pos === 'abajo') {
+          const b = z.q[1] + z.q[3]; y = fuera ? 100 : b;
+          linea = 'top:' + pc(b) + ';height:calc(' + pc(y - b) + ' + 14px)';
+        } else {
+          y = fuera ? 0 : z.q[1];
+          linea = 'top:calc(' + pc(y) + ' - 14px);height:calc(' + pc(z.q[1] - y) + ' + 14px)';
+        }
+        h += '<i class="gl-linea' + azul + '"' + dp(z) + ' style="left:' + lx + ';' + linea + '"></i>';
+      }
+      h += '<span class="gl-et ' + z.pos + ' al-' + al + (z.n ? ' num' : '') + azul + '"' + dp(z) + ' style="left:' + pc(x) + ';top:' + pc(y) + '">' +
+        (z.n ? '<b>' + z.n + '</b>' : '') + (z.et ? '<span>' + z.et + '</span>' : '') + '</span>';
+    });
+    return h + '</div>' + (f.pie ? '<figcaption>' + f.pie + '</figcaption>' : '') + '</figure>';
+  }
+  // Esquema de cajas: los contenedores (azul, discontinuo) con lo que llevan dentro, en fila;
+  // con col: true, lo que lleva el contenedor va uno debajo de otro, en cajas bajas (nombre y detalle en una línea).
+  // e = { arbol: { id, n, d?, w?, col?, hijos: [...] }, foco: ['id', …], pie? }; lo que no está en foco sale atenuado
+  // (w, el ancho de la caja, solo cuenta en una fila)
+  function esquema(e) {
+    const foco = new Set(e.foco || []);
+    const nodo = (x, enCol) => {
+      const cont = !!x.hijos, f = foco.has(x.id) ? ' foco' : '';
+      return '<div class="ge ' + (cont ? 'ge-cont' : 'ge-widget') + f + '"' + (x.w && !enCol ? ' style="flex:0 0 ' + x.w + '"' : '') + '>' +
+        '<p class="ge-n">' + x.n + (x.d ? ' <small>' + x.d + '</small>' : '') + '</p>' +
+        (cont ? '<div class="ge-hijos' + (x.col ? ' col' : '') + '">' + x.hijos.map((h) => nodo(h, !!x.col)).join('') + '</div>' : '') + '</div>';
+    };
+    return '<figure class="ge-figura">' + nodo(e.arbol) + (e.pie ? '<figcaption>' + e.pie + '</figcaption>' : '') + '</figure>';
+  }
+  // figuras que van al lado del texto: tan altas como quepan (sin pasar de su max, en px)
+  function ajustaLaminas(caja) {
+    if (!caja || !caja.clientHeight) return;
+    const figs = [...caja.querySelectorAll('.gl')];
+    const pie = caja.querySelector(':scope > figcaption');
+    const alto = caja.clientHeight - (pie ? pie.offsetHeight + 14 : 0);
+    figs.forEach((g) => {
+      const cap = g.querySelector('figcaption'), ar = +g.dataset.ar, max = +g.dataset.max || 1100;
+      const a = alto - (cap ? cap.offsetHeight + 10 : 0) - parseFloat(getComputedStyle(g).paddingTop) - parseFloat(getComputedStyle(g).paddingBottom);
+      g.querySelector('.gl-marco').style.width = Math.round(Math.min(max, a * ar)) + 'px';
+    });
+  }
+
+  function montaGuiaTramos(el, pasos) {
+    const base = el.dataset.base || 'img/guias/';
+    const datos = (AW.guiasPartes || {})[el.dataset.guia] || {};
+    const conPartes = !!datos.partes;
+    const tramos = [];
+    pasos.forEach((p, k) => {
+      if (p.tramo) tramos.push(Object.assign({}, p.tramo, { ks: [], entrada: (datos.tramos || [])[tramos.length] || null }));
+      tramos[tramos.length - 1].ks.push(k);
+    });
+    // ---- estado: solo en memoria ----
+    let pos = conPartes ? { tipo: 'partes', n: -1 } : { tipo: 'entrada', n: 0 }, entera = false;
+    const secuencia = () => {
+      const s = conPartes ? [{ tipo: 'partes', n: -1 }] : [];
+      tramos.forEach((tr, n) => {
+        s.push({ tipo: 'entrada', n });
+        tr.ks.forEach((k) => s.push({ tipo: 'paso', n, k }));
+        if (tr.comprueba) s.push({ tipo: 'comprueba', n });
+      });
+      return s;
+    };
+    const SEC = secuencia();
+    const igual = (a, b) => a.tipo === b.tipo && a.n === b.n && (a.tipo !== 'paso' || a.k === b.k);
+
+    // ---- estructura ----
+    const botones = (sig) => '<div class="gt-botones"><button type="button" class="btn btn-ghost gt-ant">← Anterior</button><button type="button" class="btn btn-primary gt-sig">' + sig + '</button></div>';
+    const pie = (extra, sig) => '<div class="gt-pie">' + (extra || '') + botones(sig || 'Siguiente →') + '</div>';
+    const iconoPartes = '<svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="4" width="18" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="4" y="8" width="3.2" height="4" rx="1"/><rect x="9" y="9" width="3.4" height="2" rx="1"/><rect x="14" y="9" width="3" height="2" rx="1"/></svg>';
+    const titulo = pliegaCabecera(el);
+    const P = datos.partes || {};
+    el.classList.add('con-tramos');
+    el.innerHTML =
+      '<div class="gt-barra"><p class="gt-titulo">' + titulo + '</p></div>' +
+      '<nav class="gt-indice" aria-label="Partes de la guía">' +
+        (conPartes ? '<button type="button" class="gt-i-partes" data-n="-1"><span class="gt-i-num">' + iconoPartes + '</span><span class="gt-i-nombre">' + esc(P.corto || 'Las partes') + '</span></button>' : '') +
+        tramos.map((tr, n) => '<button type="button" data-n="' + n + '"><span class="gt-i-num">' + (n + 1) + '</span><span class="gt-i-nombre">' + esc(tr.corto || tr.nombre) + '</span></button>').join('') +
+      '</nav>' +
+      '<div class="gt-cuerpo">' +
+        (conPartes ?
+        '<div class="gt-partes" hidden>' +
+          '<div class="gt-cabeza"><p class="gt-tramo-n">' + (P.antes || '') + '</p><h3 class="gt-nombre">' + (P.titulo || '') + '</h3>' +
+            (P.entradilla ? '<p class="gt-entradilla">' + P.entradilla + '</p>' : '') + '</div>' +
+          '<div class="gt-partes-figura">' + (P.figura ? lamina(P.figura, base) : '') + '</div>' +
+          '<ol class="gt-lista-partes">' + (P.lista || []).map((x, j) => '<li data-parte="' + x.parte + '"><b class="gt-lp-num">' + (j + 1) + '</b><p><b>' + x.nombre + '</b>. ' + x.t + '</p></li>').join('') + '</ol>' +
+          (P.movil ? '<div class="gt-partes-movil"><p class="gt-sub">' + P.movil.titulo + '</p><p class="gt-movil-t">' + P.movil.t + '</p>' +
+            '<div class="gt-moviles">' + P.movil.figuras.map((f) => lamina(f, base)).join('') + '</div></div>' : '') +
+          pie() +
+        '</div>' : '') +
+        '<div class="gt-entrada" hidden>' +
+          '<div class="gt-cabeza"><p class="gt-tramo-n"></p><h3 class="gt-nombre"></h3></div>' +
+          '<div class="gt-entrada-cuerpo"></div>' +
+          pie('', 'Empezar el tramo →') +
+        '</div>' +
+        '<div class="gt-paso" hidden>' +
+          '<div class="gt-lado">' +
+            '<div class="gt-progreso"><p class="gt-tramo-de"></p><p class="gt-cuenta"></p><div class="gt-puntos"></div></div>' +
+            '<p class="gt-texto" aria-live="polite"></p>' +
+            pie('<button type="button" class="guia-entera" aria-pressed="false">Ver la pantalla entera</button>') +
+          '</div>' +
+          '<div class="guia-pantalla"></div>' +
+        '</div>' +
+        '<div class="gt-comprueba" hidden>' +
+          '<p class="gt-cuenta"><span class="gt-tramo-de"></span><span>Comprueba el resultado</span></p>' +
+          '<div class="gt-comprueba-cuerpo">' +
+            '<div class="guia-pantalla"></div>' +
+            '<div class="gt-comprueba-lado"><ul class="gt-lista"></ul><p class="gt-nota">Si algo no se ve así, repasa los pasos de este tramo.</p><div class="gt-comprueba-extra"></div></div>' +
+          '</div>' +
+          pie() +
+        '</div>' +
+      '</div>';
+    const $ = (s, r) => (r || el).querySelector(s);
+    const $$ = (s, r) => [...(r || el).querySelectorAll(s)];
+    const vPartes = $('.gt-partes'), vEntrada = $('.gt-entrada'), vPaso = $('.gt-paso'), vComp = $('.gt-comprueba');
+    const vistas = { partes: vPartes, entrada: vEntrada, paso: vPaso, comprueba: vComp };
+    const botIndice = $$('.gt-indice button');
+    const puntos = $('.gt-puntos'), lista = $('.gt-lista'), cuerpoEntrada = $('.gt-entrada-cuerpo'), extraComp = $('.gt-comprueba-extra');
+    const visorPaso = visorGuia($('.guia-pantalla', vPaso), base, '', true);
+    const visorComp = visorGuia($('.guia-pantalla', vComp), base, '<p class="guia-rotulo">✓ Así tiene que verse ahora</p>', true);
+    const stage = document.querySelector('deck-stage');
+
+    // las capturas de un tramo se piden al llegar a él (no las 52 de golpe al abrir la presentación)
+    const pedido = new Set(), precarga = {};
+    function pide(n) {
+      if (n < 0 || n >= tramos.length || pedido.has(n)) return;
+      pedido.add(n);
+      const tr = tramos[n];
+      tr.ks.forEach((k) => { const im = new Image(); im.src = base + pasos[k].img + '.webp'; });
+      if (tr.comprueba) { const im = new Image(); im.src = base + tr.comprueba.img + '.webp'; precarga[tr.comprueba.img] = im; }
+    }
+
+    // en la vista de las partes, señalar una parte de la lista la enciende en la captura (y al revés)
+    if (vPartes) {
+      const fig = $('.gt-partes-figura .gl', vPartes);
+      const enciende = (parte) => {
+        if (!fig) return;
+        fig.classList.toggle('hay-activa', !!parte);
+        $$('[data-parte]', vPartes).forEach((x) => x.classList.toggle('activa', !!parte && x.dataset.parte === parte));
+      };
+      $$('[data-parte]', vPartes).forEach((x) => {
+        x.addEventListener('mouseenter', () => enciende(x.dataset.parte));
+        x.addEventListener('mouseleave', () => enciende(null));
+      });
+    }
+
+    // tamaño de la captura de la comprobación: la zona del resultado con un margen, como mucho al 210 %.
+    // Si la zona es estrecha, la captura va a la izquierda y la lista a su derecha (.estrecha); si no, la lista va debajo.
+    // Devuelve el ancho mínimo del encuadre (en % de la captura) que corresponde a ese zoom máximo
+    function encajaComprueba(c) {
+      const pant = $('.guia-pantalla', vComp), im = precarga[c.img], MAX = 2.1;
+      const iw = (im && im.naturalWidth) || 1600, ih = (im && im.naturalHeight) || 911;
+      const ew = c.zona[2] / 100 * iw * 1.25;
+      let eh = c.zona[3] / 100 * ih * 1.6;
+      vComp.classList.remove('estrecha'); pant.style.width = ''; pant.style.height = '';
+      const cuerpo = $('.gt-comprueba-cuerpo', vComp), lado = $('.gt-comprueba-lado', vComp);
+      const W = cuerpo.clientWidth;
+      let A = cuerpo.clientHeight, s = Math.min(MAX, W / ew, A / eh);
+      const ancho = Math.round(Math.max(ew * s, 900));
+      if (ancho <= W - 600) {
+        vComp.classList.add('estrecha');
+        pant.style.width = ancho + 'px';
+        eh = Math.max(eh, Math.min(lado.offsetHeight, 520) / s);   // la captura, al menos tan alta como la lista (hasta 520 px)
+      } else {
+        A -= lado.offsetHeight + 22;
+        s = Math.min(MAX, W / ew, A / eh);
+      }
+      pant.style.height = Math.round(Math.max(Math.min(eh * s, A), Math.min(340, A))) + 'px';
+      return pant.clientWidth / (MAX * iw) * 100;
+    }
+
+    // ---- pintar ----
+    let entradaDe = -1;
+    function pinta(cambia) {
+      const i = SEC.findIndex((x) => igual(x, pos)), tr = tramos[pos.n];
+      el.dataset.pantalla = pos.tipo;
+      for (const t in vistas) if (vistas[t]) vistas[t].hidden = t !== pos.tipo;
+      // índice: el actual en azul oscuro; los anteriores al actual, en verde con ✓ (por posición)
+      botIndice.forEach((b) => {
+        const n = +b.dataset.n, a = n === pos.n, h = n < pos.n;
+        b.classList.toggle('hecho', h); b.classList.toggle('actual', a);
+        if (a) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+        if (n >= 0) $('.gt-i-num', b).textContent = h ? '✓' : n + 1;
+        b.setAttribute('aria-label', n < 0 ? (P.titulo || 'Las partes') : 'Tramo ' + (n + 1) + ': ' + tramos[n].nombre);
+      });
+      const vista = vistas[pos.tipo];
+      $('.gt-ant', vista).disabled = i === 0;
+      if (pos.tipo !== 'entrada') $('.gt-sig', vista).textContent = i === SEC.length - 1 ? 'Diapositiva siguiente →' : 'Siguiente →';
+      if (tr) $$('.gt-tramo-de', vista).forEach((e) => { e.textContent = tr.nombre; });
+      if (pos.n >= 0) { pide(pos.n); pide(pos.n + 1); }
+      if (pos.tipo === 'entrada') {
+        const e = tr.entrada;
+        $('.gt-tramo-n', vEntrada).textContent = 'Tramo ' + (pos.n + 1) + ' de ' + tramos.length + ' · ' + tr.ks.length + (tr.ks.length === 1 ? ' paso' : ' pasos');
+        $('.gt-nombre', vEntrada).textContent = tr.nombre;
+        if (entradaDe !== pos.n) {
+          entradaDe = pos.n;
+          const forma = e && e.figuras ? e.forma || 'tira' : 'sin';
+          vEntrada.className = 'gt-entrada forma-' + forma;
+          const texto = e && e.texto ? e.texto : [tr.resumen || ''];
+          const explica = '<div class="gt-explica">' + texto.map((t) => '<p>' + t + '</p>').join('') + '</div>';
+          cuerpoEntrada.innerHTML =
+            (e && e.figuras ? '<div class="gt-figura">' + e.figuras.map((f) => lamina(f, base)).join('') + (e.pie ? '<figcaption>' + e.pie + '</figcaption>' : '') + '</div>' : '') +
+            (e && e.cerca ? '<div class="gt-fila"><div class="gt-cerca"' + (e.cerca.ancho ? ' style="width:' + e.cerca.ancho + 'px"' : '') + '>' + lamina(e.cerca, base) + '</div>' + explica + '</div>'
+              : e && e.esquema ? '<div class="gt-fila"><div class="gt-cerca">' + esquema(e.esquema) + '</div>' + explica + '</div>' : explica);
+        }
+        ajustaLaminas($('.gt-entrada.forma-lado .gt-figura', el));
+      } else if (pos.tipo === 'paso') {
+        const p = pasos[pos.k], j = tr.ks.indexOf(pos.k);
+        $('.gt-cuenta', vPaso).textContent = 'Paso ' + (j + 1) + ' de ' + tr.ks.length;
+        puntos.innerHTML = tr.ks.map((k, q) => '<button type="button" data-k="' + k + '" aria-label="Paso ' + (q + 1) + '" class="' +
+          (k === pos.k ? 'actual' : q < j ? 'hecho' : '') + '"' + (k === pos.k ? ' aria-current="step"' : '') + '></button>').join('');
+        $('.gt-texto', vPaso).innerHTML = p.t;
+        const ent = $('.guia-entera', vPaso);
+        ent.textContent = entera ? 'Acercar a lo importante' : 'Ver la pantalla entera';
+        ent.setAttribute('aria-pressed', entera);
+        visorPaso.muestra(p, { entera, cambia });
+      } else if (pos.tipo === 'comprueba') {
+        const c = tr.comprueba, l = c.lista && c.lista.length ? c.lista : [c.t || ''];
+        lista.innerHTML = l.map((t, j) => '<li><label><input type="checkbox" data-j="' + j + '"><span>' + t + '</span></label></li>').join('');
+        const x = (datos.comprueba || {})[pos.n];
+        extraComp.innerHTML = x && x.figura ? lamina(x.figura, base) : '';
+        const minw = encajaComprueba(c);
+        visorComp.muestra({ t: '', img: c.img, m: [c.zona], encaja: true, minw }, { entera, cambia });
+      }
+      // si el foco se ha quedado en una vista que ya no se ve, pasa al botón Siguiente de la vista nueva
+      const a = document.activeElement;
+      if (a && el.contains(a) && a.closest('[hidden]')) $('.gt-sig', vista).focus({ preventScroll: true });
+    }
+
+    // ---- moverse ----
+    function ir(p) {
+      if (!p) return;
+      const cambia = !igual(p, pos);
+      pos = p; entera = false;
+      pinta(cambia);
+    }
+    // un paso de la secuencia hacia delante (1) o hacia atrás (-1); false si se sale de la guía
+    function mueve(d) {
+      const j = SEC.findIndex((x) => igual(x, pos)) + d;
+      if (j < 0 || j >= SEC.length) return false;
+      ir(SEC[j]); return true;
+    }
+    $$('.gt-ant').forEach((b) => b.addEventListener('click', () => mueve(-1)));
+    $$('.gt-sig').forEach((b) => b.addEventListener('click', () => { if (!mueve(1) && stage) stage.next(); }));
+    botIndice.forEach((b) => b.addEventListener('click', () => { const n = +b.dataset.n; ir(n < 0 ? { tipo: 'partes', n: -1 } : { tipo: 'entrada', n }); }));
+    puntos.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) ir({ tipo: 'paso', n: pos.n, k: +b.dataset.k }); });
+    const alterna = () => { entera = !entera; pinta(false); };
+    $('.guia-entera', vPaso).addEventListener('click', alterna);
+    $('.guia-pantalla', vPaso).addEventListener('click', alterna);
+    $('.guia-pantalla', vComp).addEventListener('click', alterna);
+
+    // en la presentación, → y ← recorren la guía; al salirse por un extremo, cambian de diapositiva como siempre
+    window.addEventListener('keydown', (e) => {
+      const sec = el.closest('section');
+      if (!sec || !sec.hasAttribute('data-deck-active') || e.altKey || e.ctrlKey || e.metaKey) return;
+      const t = e.target;
+      if (t.closest && t.closest('textarea, select, input:not([type="checkbox"])')) return;
+      const avanza = ['ArrowRight', 'PageDown', ' '].includes(e.key), vuelve = ['ArrowLeft', 'PageUp'].includes(e.key);
+      if (!avanza && !vuelve) return;
+      const dentro = t.closest && el.contains(t);
+      // la barra espaciadora pulsa el botón o la casilla que tiene el foco (y no cambia de diapositiva)
+      if (e.key === ' ' && dentro && t.closest('button, input')) { e.stopImmediatePropagation(); return; }
+      if (mueve(avanza ? 1 : -1)) { e.preventDefault(); e.stopImmediatePropagation(); return; }
+      // en una casilla, deck-stage no atiende las flechas: se le pide el cambio de diapositiva
+      if (dentro && t.matches('input') && stage) { e.preventDefault(); e.stopImmediatePropagation(); if (avanza) stage.next(); else stage.prev(); }
+    }, true);
+    // al llegar a la diapositiva o cambiar el tamaño, se recoloca sin animación
     const recoloca = () => {
       if (!el.closest('section')?.hasAttribute('data-deck-active')) return;
-      const c = capas[delante]; if (!c.querySelector('img').complete) return;
-      c.classList.remove('mueve'); const g = encuadra(c, pasos[i]); marca(pasos[i], g);
+      if (pos.tipo === 'paso') visorPaso.recoloca();
+      else if (pos.tipo === 'comprueba') visorComp.recoloca();
+      else if (pos.tipo === 'entrada') ajustaLaminas($('.gt-entrada.forma-lado .gt-figura', el));
     };
-    const stage = document.querySelector('deck-stage');
     if (stage) stage.addEventListener('slidechange', () => setTimeout(recoloca, 50));
     window.addEventListener('resize', recoloca);
     pinta(true);

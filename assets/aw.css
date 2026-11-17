@@ -1291,6 +1291,179 @@ a.ch-cab:hover span { opacity: 1; transform: translateX(-4px); }
 .guia-marcos .halo { fill: none; stroke: var(--orange); stroke-width: 10; stroke-opacity: .25; animation: guia-halo 1.8s ease-in-out infinite; }
 @keyframes guia-halo { 50% { stroke-opacity: .05; stroke-width: 16; } }
 @media (prefers-reduced-motion: reduce) { .guia-capa, .guia-capa.mueve, .guia-foco { transition: none; } .guia-marcos .halo { animation: none; } }
+/* La captura de un paso, mientras llega (versión 3): la pantalla se queda oscura y, si tarda, lo dice.
+   Si no llega, un aviso con un botón para pedirla otra vez. */
+.guia-pantalla.cargando::after { content: 'Cargando la captura…'; position: absolute; inset: 0; display: grid; place-items: center; color: rgba(255, 255, 255, .85); font-size: 24px; font-weight: 600; animation: guia-aparece .2s .6s both; pointer-events: none; }
+@keyframes guia-aparece { from { opacity: 0; } to { opacity: 1; } }
+.guia-aviso { position: absolute; inset: 0; z-index: 3; margin: auto; width: min(80%, 640px); height: fit-content; padding: 24px 28px; border: 0; border-radius: 14px; background: var(--white); color: var(--navy); font: inherit; font-size: 26px; font-weight: 700; line-height: 1.35; cursor: pointer; }
+.guia-aviso:hover { box-shadow: 0 0 0 4px var(--blue); }
+
+/* Guía por tramos (versión 3): arriba, el título en una línea y el índice (las partes y los tramos);
+   debajo, una de cuatro vistas: las partes de la cabecera, la entrada de un tramo, un paso o la comprobación.
+   En todas, Anterior y Siguiente van abajo a la izquierda, en el mismo sitio.
+   La sección pliega su antetítulo y su título (aw.js les pone .guia-plegado) para dar ese sitio a la guía. */
+section.con-guia-tramos { padding-top: 34px !important; padding-bottom: 36px !important; }
+section.con-guia-tramos > .guia-plegado { display: none !important; }
+section.con-guia-tramos > [data-slide-num] { top: 49px; bottom: auto; right: 176px; }
+.guia.con-tramos { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); gap: 0; margin-top: 0 !important; }
+.guia.con-tramos button:focus-visible, .guia.con-tramos input:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.guia.con-tramos [hidden] { display: none !important; }
+
+/* fila de arriba: el título de la diapositiva (deja sitio al número y a la pastilla de sección) */
+.gt-barra { display: flex; align-items: center; min-height: 52px; padding-right: 190px; }
+.gt-titulo { display: flex; align-items: baseline; gap: 18px; min-width: 0; white-space: nowrap; overflow: hidden; }
+.gt-titulo span { font-size: 20px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .06em; }
+.gt-titulo b { font-size: 30px; font-weight: 800; color: var(--navy); }
+
+/* índice: una línea; los anteriores al actual en verde con ✓, el actual en azul oscuro, los siguientes en gris */
+.gt-indice { display: flex; gap: 4px; margin: 14px 0 24px; padding: 6px; border-radius: 999px; background: var(--gray); }
+.gt-indice button { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 9px; padding: 7px 12px 7px 7px; border: 0; border-radius: 999px; background: transparent; font: inherit; font-size: 21px; font-weight: 700; color: var(--muted); white-space: nowrap; cursor: pointer; }
+.gt-indice button:hover { background: var(--white); color: var(--navy); }
+.gt-i-nombre { overflow: hidden; text-overflow: ellipsis; }
+.gt-i-num { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--white); color: var(--muted); font-size: 18px; font-weight: 800; }
+.gt-i-num svg { width: 20px; height: 20px; fill: currentColor; }
+.gt-indice button.hecho { color: var(--green-dark); }
+.gt-indice button.hecho .gt-i-num { background: var(--green); color: var(--navy); }
+.gt-indice button.actual { background: var(--navy); color: var(--white); }
+.gt-indice button.actual .gt-i-num { background: var(--orange); color: var(--navy); }
+
+.gt-cuerpo { display: grid; min-height: 0; }
+.gt-cuerpo > * { grid-area: 1 / 1; min-height: 0; min-width: 0; }
+
+/* lo común: cabeza de la vista y pie con los botones */
+.gt-tramo-n { font-size: 22px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .06em; }
+.gt-nombre { margin: 4px 0 0; font-size: var(--type-subtitle); font-weight: 800; line-height: 1.1; color: var(--navy); }
+.gt-entradilla { margin-top: 12px; max-width: 1560px; font-size: 28px; line-height: 1.4; color: var(--muted); text-wrap: pretty; }
+.gt-entradilla b { color: var(--navy); }
+.gt-pie { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.gt-botones { display: flex; gap: 14px; flex: none; }
+.gt-botones .btn { font-size: 24px; padding: 14px 26px; }
+.gt-botones .btn:disabled { opacity: .35; cursor: default; }
+.gt-sub { font-size: 22px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: .06em; }
+
+/* ---- capturas limpias con sus marcas (.gl): las marcas y las etiquetas son capas HTML ---- */
+.gl { position: relative; margin: 0; min-width: 0; }
+.gl.con-arriba { padding-top: 60px; }
+.gl.con-abajo { padding-bottom: 60px; }
+.gl.con-izq { padding-left: 72px; }
+.gl-marco { position: relative; width: 100%; }
+.gl-img { position: absolute; inset: 0; overflow: hidden; border-radius: 12px; background: var(--white); box-shadow: 0 0 0 2px var(--line), 0 14px 34px rgba(4, 28, 63, .12); }
+.gl-img img { position: absolute; display: block; max-width: none; height: auto; cursor: default; }
+.gl-velo { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 12px; pointer-events: none; }
+.gl-velo > rect { fill: rgba(4, 28, 63, .55); }
+.gl-zona { position: absolute; border-radius: 8px; }
+.gl-zona.foco { outline: 4px solid var(--orange); outline-offset: 2px; }
+.gl-zona.marco { outline: 3px solid var(--orange); outline-offset: 3px; transition: outline-color .15s, background .15s; }
+.gl-zona.caja { outline: 4px dashed var(--blue); outline-offset: 2px; }
+.gl.hay-activa .gl-zona.marco:not(.activa) { outline-color: rgba(254, 143, 70, .28); }
+.gl-zona.marco.activa { background: rgba(254, 143, 70, .16); }
+.gl-et { position: absolute; z-index: 2; display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; border-radius: 10px; background: var(--navy); color: var(--white); font-size: 23px; font-weight: 700; line-height: 1.2; white-space: nowrap; pointer-events: none; }
+.gl-et.azul { background: var(--blue); }
+.gl-et.num { justify-content: center; width: 46px; height: 46px; padding: 0; border-radius: 50%; font-size: 24px; }
+.gl-et b { font-weight: 800; }
+.gl-et.arriba { transform: translate(-50%, calc(-100% - 14px)); }
+.gl-et.abajo { transform: translate(-50%, 14px); }
+.gl-et.arriba.al-izq { transform: translate(0, calc(-100% - 14px)); }
+.gl-et.arriba.al-der { transform: translate(-100%, calc(-100% - 14px)); }
+.gl-et.abajo.al-izq { transform: translate(0, 14px); }
+.gl-et.abajo.al-der { transform: translate(-100%, 14px); }
+.gl-et.izq { transform: translate(calc(-100% - 18px), -50%); }
+.gl-et.izq::after { content: ''; position: absolute; left: 100%; top: calc(50% - 1.5px); width: 18px; height: 3px; background: inherit; }
+/* la raya que une una etiqueta con su zona */
+.gl-linea { position: absolute; z-index: 2; width: 3px; background: var(--navy); pointer-events: none; }
+.gl-linea.azul { background: var(--blue); }
+.gl.hay-activa .gl-linea:not(.activa) { background: #8C97AA; }
+.gl.hay-activa .gl-et.num:not(.activa) { background: #8C97AA; }
+.gl figcaption { margin-top: 10px; font-size: 22px; font-weight: 600; color: var(--muted); text-align: center; }
+
+/* ---- vista de las partes: la cabecera terminada, sus partes y el móvil ---- */
+.gt-partes { display: grid; grid-template-columns: minmax(0, 1fr) 560px; grid-template-rows: auto auto minmax(0, 1fr) auto; column-gap: 60px; }
+.gt-partes > .gt-cabeza { grid-column: 1 / -1; }
+.gt-partes-figura { grid-column: 1 / -1; margin-top: 14px; }
+.gt-lista-partes { grid-column: 1; grid-row: 3; align-self: start; display: flex; flex-direction: column; gap: 10px; margin: 26px 0 0; padding: 0; list-style: none; }
+.gt-lista-partes li { display: flex; align-items: flex-start; gap: 16px; padding: 3px 10px 3px 0; border-radius: 12px; font-size: 28px; line-height: 1.35; color: var(--navy); transition: background .15s; }
+.gt-lista-partes li.activa { background: #FFF1E6; }
+.gt-lista-partes p b { font-weight: 800; }
+.gt-lp-num { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--navy); color: var(--white); font-size: 22px; font-weight: 800; }
+.gt-partes-movil { grid-column: 2; grid-row: 3 / 5; display: flex; flex-direction: column; gap: 8px; min-height: 0; margin-top: 26px; }
+.gt-movil-t { font-size: 28px; line-height: 1.35; color: var(--navy); text-wrap: pretty; }
+.gt-moviles { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 14px; }
+.gt-partes > .gt-pie { grid-column: 1; grid-row: 4; margin-top: 16px; }
+
+/* ---- entrada de un tramo: la parte que se va a hacer, en grande, y qué es ---- */
+.gt-entrada { display: flex; flex-direction: column; min-height: 0; }
+.gt-entrada-cuerpo { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 30px; margin-top: 26px; }
+.gt-entrada.forma-fila .gt-figura { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 32px; }
+.gt-entrada.forma-fila .gt-figura > figcaption { grid-column: 1 / -1; margin-top: 4px; font-size: 22px; font-weight: 600; color: var(--muted); text-align: center; }
+.gt-entrada.forma-lado .gt-entrada-cuerpo { flex-direction: row; align-items: stretch; gap: 60px; }
+.gt-entrada.forma-lado .gt-figura { flex: none; display: flex; align-items: flex-start; gap: 32px; min-height: 0; }
+.gt-entrada.forma-lado .gt-explica { flex: 1 1 0; min-width: 0; padding-top: 6px; }
+.gt-explica p { max-width: 1400px; margin: 0 0 12px; font-size: 30px; line-height: 1.45; color: var(--navy); text-wrap: pretty; }
+.gt-explica b { font-weight: 800; }
+.gt-entrada > .gt-pie { margin-top: 18px; }
+/* entrada con la parte de cerca: la cabecera entera arriba; debajo, la parte acercada y la explicación */
+.gt-fila { display: flex; align-items: flex-start; gap: 60px; }
+.gt-cerca { flex: none; width: 780px; }
+.gt-fila .gt-explica { flex: 1 1 0; min-width: 0; }
+/* esquema de cajas: contenedores en azul discontinuo, widgets en naranja; lo que no es del tramo, atenuado */
+.ge-figura { margin: 0; }
+.ge-figura figcaption { margin-top: 10px; font-size: 22px; font-weight: 600; color: var(--muted); text-align: center; }
+.ge { min-width: 0; border-radius: 12px; }
+.ge-cont { padding: 10px 14px 14px; border: 3px dashed #A9C6E8; }
+.ge-cont .ge-cont { flex: 1 1 0; }
+.ge-widget { flex: 1 1 0; padding: 12px 14px; border: 3px solid #F6CDB0; background: #FFFBF8; }
+.ge-n { font-size: 22px; font-weight: 800; line-height: 1.25; color: #8C97AA; }
+.ge-n small { display: block; font-size: 20px; font-weight: 600; }
+.ge-hijos { display: flex; gap: 14px; margin-top: 10px; }
+.ge-cont.foco { border: 4px dashed var(--blue); background: rgba(1, 124, 233, .07); }
+.ge-cont.foco > .ge-n { color: var(--blue); }
+.ge-widget.foco { border-color: var(--orange); background: #FFF1E6; }
+.ge-widget.foco > .ge-n { color: var(--navy); }
+/* contenedor en columna (col: true): sus hijos van uno debajo de otro, en cajas bajas; cada widget, con el nombre y el detalle en una línea */
+.ge-hijos.col { flex-direction: column; gap: 6px; margin-top: 6px; }
+.ge-hijos.col > .ge { flex: none; }
+.ge-hijos.col > .ge-widget { padding: 3px 12px; }
+.ge-hijos.col > .ge-cont { padding: 4px 12px 10px; }
+.ge-hijos.col > .ge-widget > .ge-n { text-wrap: wrap; }
+.ge-hijos.col > .ge-widget > .ge-n small { display: inline; white-space: nowrap; }
+.ge-hijos.col > .ge-widget > .ge-n small::before { content: '· '; }
+
+/* ---- vista del paso: texto arriba a la izquierda, los botones abajo del todo; la captura, a la derecha ---- */
+.gt-paso { display: grid; grid-template-columns: 540px minmax(0, 1fr); gap: 44px; }
+.gt-lado { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; min-width: 0; min-height: 0; }
+.gt-progreso { align-self: stretch; display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+.gt-tramo-de { font-size: 22px; font-weight: 700; color: var(--muted); }
+.gt-paso .gt-cuenta { font-size: 30px; font-weight: 800; line-height: 1.15; color: var(--navy); }
+.gt-puntos { display: flex; gap: 6px; margin-top: 6px; }
+.gt-puntos button { flex: 1; height: 14px; padding: 0; border: 0; border-radius: 7px; background: var(--gray); cursor: pointer; }
+.gt-puntos button.hecho { background: var(--green); }
+.gt-puntos button.actual { background: var(--orange); }
+.gt-puntos button:hover { box-shadow: 0 0 0 2px var(--blue); }
+.gt-texto { font-size: 32px; line-height: 1.38; color: var(--navy); text-wrap: pretty; overflow-wrap: anywhere; }
+.gt-texto b { font-weight: 800; }
+.gt-texto code { font-family: var(--mono); font-size: .8em; }
+.gt-lado > .gt-pie { margin-top: auto; padding-top: 10px; }
+
+/* ---- comprobación: la captura del editor acercada al resultado y la lista de cosas que mirar ---- */
+.gt-comprueba { display: flex; flex-direction: column; gap: 18px; min-height: 0; }
+.gt-comprueba .gt-cuenta { display: flex; align-items: baseline; gap: 18px; font-size: 30px; font-weight: 800; color: var(--green-dark); }
+.gt-comprueba .gt-cuenta .gt-tramo-de::after { content: ' ·'; }
+.gt-comprueba .gt-cuenta span:last-child::before { content: '✓ '; }
+.gt-comprueba-cuerpo { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; gap: 22px; }
+.gt-comprueba.estrecha .gt-comprueba-cuerpo { flex-direction: row; align-items: flex-start; gap: 44px; }
+.gt-comprueba.estrecha .gt-comprueba-lado { flex: 1 1 0; min-width: 0; }
+.gt-comprueba .guia-pantalla { flex: none; box-shadow: 0 0 0 4px var(--green), 0 18px 40px rgba(4, 28, 63, .14); }
+.gt-comprueba .guia-rotulo { background: var(--green-dark); }
+.gt-comprueba .guia-marcos .borde { stroke: var(--green); stroke-width: 4; }
+.gt-comprueba .guia-marcos .halo { display: none; }
+.gt-comprueba-extra { margin-top: 22px; }
+.gt-comprueba-extra:empty { display: none; }
+.gt-comprueba > .gt-pie { margin-top: auto; }
+.gt-lista { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.gt-lista label { display: flex; align-items: flex-start; gap: 16px; font-size: 28px; line-height: 1.35; color: var(--navy); cursor: pointer; }
+.gt-lista input { flex: none; width: 32px; height: 32px; margin: 3px 0 0; accent-color: var(--green-dark); cursor: pointer; }
+.gt-lista b { font-weight: 800; }
+.gt-nota { margin-top: 12px; font-size: 22px; color: var(--muted); }
 
 /* ===== Anatomía de una página (UT3): .anatomia con AW.anatomias[clave] ===== */
 .anatomia { display: flex; flex-direction: column; gap: 22px; min-height: 0; }
