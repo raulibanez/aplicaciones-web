@@ -1226,6 +1226,92 @@ a.ch-cab:hover span { opacity: 1; transform: translateX(-4px); }
 .cs-leyenda .c::before { background: var(--white); box-shadow: inset 0 0 0 2px var(--line); }
 .cs-reinicia { padding: 10px 22px; font-size: var(--type-caption); white-space: nowrap; }
 
+/* ---------- Practica CSS (aw.js, .practica-css) ----------
+   Arriba, por dónde vas y el encargo, en una frase. A la izquierda, index.html (se lee) y style.css (se escribe).
+   A la derecha, la página y lo que dice Comprobar. Los tamaños son fijos para que nada salte al escribir. */
+.practica-css {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-areas: "cab cab" "pide pide" "izq der";
+  gap: 12px 32px;
+}
+/* la píldora del bloque (2.3), a la altura de la cabecera */
+deck-stage section:has(> .practica-css) > .seccion-pill { top: 30px; }
+.pc-cab { grid-area: cab; display: flex; align-items: center; gap: 20px; padding-right: 84px; min-height: 48px; }
+.pc-cab .pill { padding: 8px 22px; font-size: 22px; flex: none; }
+.pc-donde { font-size: 22px; color: var(--muted); white-space: nowrap; }
+.pc-bloque { flex: none; font-family: inherit; font-size: 22px; font-weight: 700; color: var(--navy); background: var(--white); border: 3px solid var(--line); border-radius: 12px; padding: 7px 12px; cursor: pointer; }
+.pc-bloque:hover, .pc-bloque:focus { border-color: var(--blue); outline: 0; }
+.pc-puntos { flex: 1; display: flex; align-items: center; gap: 7px; min-width: 0; }
+.pc-puntos button { width: 20px; height: 20px; flex: none; padding: 0; border-radius: 50%; border: 3px solid var(--line); background: var(--white); cursor: pointer; }
+.pc-puntos button.ok { background: var(--green); border-color: var(--green-dark); }
+.pc-puntos button.sol { background: var(--orange); border-color: var(--orange); }
+.pc-puntos button.aqui { box-shadow: 0 0 0 4px var(--blue); }
+.pc-puntos button:hover { border-color: var(--blue); }
+.pc-cab .btn { padding: 9px 20px; font-size: 21px; flex: none; white-space: nowrap; }
+.pc-cab .btn:disabled { opacity: .4; cursor: default; }
+.pc-pide { grid-area: pide; display: flex; align-items: center; gap: 22px; min-height: 100px; padding: 10px 28px; background: var(--white); border-radius: 18px; border-left: 12px solid var(--blue); box-shadow: 0 2px 0 var(--line); }
+.pc-num { flex: none; width: 54px; height: 54px; border-radius: 50%; background: var(--blue); color: var(--white); display: grid; place-items: center; font-size: 26px; font-weight: 800; }
+.pc-pide p { font-size: 32px; font-weight: 700; line-height: 1.25; color: var(--navy); }
+.pc-pide code.en-linea, .pc-fb code.en-linea { white-space: nowrap; }
+.pc-izq { grid-area: izq; display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+.pc-der { grid-area: der; display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+.practica-css .ventana { border-radius: 16px; box-shadow: 0 2px 0 rgba(4, 28, 63, .3); }
+.practica-css .ventana-barra { padding: 9px 20px; font-size: 20px; }
+.practica-css .ventana-barra i { width: 13px; height: 13px; }
+.practica-css .ventana-barra .ruta { color: #9FB0C8; font-size: 19px; }
+.practica-css .ventana-barra .ruta b { color: var(--cyan); font-family: var(--mono); font-weight: 600; }
+.pc-html { flex: none; }
+.pc-html .ej-cod { background: none; border-radius: 0; padding: 8px 0; font-size: 20px; line-height: 1.4; }
+.pc-html .ej-linea { position: relative; grid-template-columns: 30px 1fr; gap: 14px; padding: 0 20px 0 10px; cursor: default; }
+.pc-html .ej-linea:hover, .pc-html .ej-linea.mira { background: rgba(255, 255, 255, .1); }
+.pc-html .ej-linea.alcanza { background: rgba(28, 207, 227, .22); box-shadow: inset 5px 0 0 var(--cyan); }
+/* la línea que señala la pista: número y barra en naranja, a los dos lados para que conviva con el azul */
+.pc-html .ej-linea.objetivo { box-shadow: inset -10px 0 0 var(--orange); }
+.pc-html .ej-linea.objetivo.alcanza { box-shadow: inset 5px 0 0 var(--cyan), inset -10px 0 0 var(--orange); }
+.pc-html .ej-linea.objetivo > i { color: var(--orange); font-weight: 800; }
+.pc-css { flex: 1; min-height: 0; }
+.pc-css:focus-within { box-shadow: 0 0 0 4px var(--cyan); }
+.pc-editor { position: relative; flex: 1; min-height: 0; }
+.pc-editor pre, .pc-editor textarea {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  margin: 0; border: 0; padding: 10px 20px;
+  font-family: var(--mono); font-size: 20px; font-weight: 400; line-height: 1.4; letter-spacing: 0;
+  white-space: pre; tab-size: 2; box-sizing: border-box;
+}
+.pc-editor pre { color: #EAF2F4; overflow: hidden; pointer-events: none; }
+.pc-editor textarea { background: none; color: transparent; caret-color: var(--white); resize: none; outline: 0; overflow: auto; }
+.pc-editor textarea::selection { background: rgba(28, 207, 227, .35); }
+.pc-editor textarea::placeholder { color: #6F82A3; }
+.practica-css .tok-tag, .practica-css .tok-sel, .practica-css .tok-kw { color: var(--cyan); }
+.practica-css .tok-attr, .practica-css .tok-prop, .practica-css .tok-num { color: var(--green); }
+.practica-css .tok-str { color: var(--orange); }
+.practica-css .tok-com { color: #7C8BA5; font-style: italic; }
+.practica-css .tok-punc { color: #9FB0C8; }
+.pc-botones { flex: none; gap: 12px; flex-wrap: nowrap; }
+.pc-botones .btn { padding: 12px 22px; font-size: 22px; white-space: nowrap; }
+.pc-vista { flex: 1; border-radius: 16px; }
+.pc-vista.meta { border-color: var(--green-dark); }
+.pc-pestanas { padding: 8px 12px; gap: 8px; }
+.pc-pestanas button { border: 0; background: none; font-family: inherit; font-size: 20px; font-weight: 700; color: var(--muted); padding: 7px 20px; border-radius: 999px; cursor: pointer; }
+.pc-pestanas button:hover { color: var(--navy); }
+.pc-pestanas button[aria-pressed="true"] { background: var(--white); color: var(--navy); box-shadow: 0 2px 0 var(--line); }
+.pc-vista.meta .pc-pestanas button[aria-pressed="true"] { background: var(--green); }
+.pc-fb { flex: none; height: 172px; overflow: auto; background: var(--white); border-radius: 16px; border-left: 12px solid var(--line); box-shadow: 0 2px 0 var(--line); padding: 14px 24px; font-size: 23px; line-height: 1.4; color: var(--navy); }
+.pc-fb b { display: block; font-size: 24px; font-weight: 800; margin-bottom: 2px; }
+.pc-fb.ok { border-left-color: var(--ok); background: #E8F6EE; }
+.pc-fb.ok b { color: var(--ok); }
+.pc-fb.ko { border-left-color: var(--ko); background: #FBEAEA; }
+.pc-fb.ko b { color: var(--ko); }
+.pc-fb.pista { border-left-color: var(--cyan); background: #E4F9FC; }
+.pc-fb.pista b { color: var(--blue); }
+.pc-fb code.en-linea { background: rgba(4, 28, 63, .08); }
+.pc-banco { position: absolute; left: 0; top: 0; width: 800px; height: 600px; border: 0; visibility: hidden; pointer-events: none; z-index: -1; }
+
 /* Chuleta con pocas filas (UT2): letra más grande, para leerla bien proyectada */
 .chuleta.amplia .ch-cab { font-size: 21px; padding: 8px 28px; }
 .chuleta.amplia .ch-cab span { font-size: 19px; }

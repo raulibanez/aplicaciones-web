@@ -32,6 +32,9 @@
  * 10. Chuleta de etiquetas (<section class="chuleta">, estilos en aw.css): colorea el código de cada
  *     fila y monta el botón «Modo repaso» (.ch-repaso), que difumina las explicaciones de todas las
  *     chuletas; pasar el ratón o pulsar una fila la descubre. Con data-ch="css", chuleta de CSS (UT2).
+ * 11. Practica CSS (UT2): <div class="practica-css" data-bloques="…"></div>. El HTML se lee, el CSS se
+ *     escribe y la página cambia al lado; un encargo cada vez, con Comprobar, Pista y Ver solución.
+ *     Los ejercicios están en AW.practicaCss.
  */
 (function () {
   'use strict';
@@ -931,6 +934,898 @@
     });
     el.querySelector('.cs-reinicia').addEventListener('click', reinicia);
     reinicia();
+  }
+
+  /* ---------- practica CSS: el HTML que se lee, el CSS que se escribe y la página al lado (UT2) ----------
+     <div class="practica-css"></div> monta tres ventanas: index.html (solo se lee), style.css (un editor,
+     siempre vacío al empezar: el alumno escribe la regla entera) y la página, que cambia mientras se escribe.
+     Arriba, un encargo cada vez, en una frase. data-bloques elige bloques de AW.practicaCss (sin él, todos).
+
+     Comprobar no mira el texto ni pide un valor exacto: pinta la página con el CSS del alumno y sin CSS en un
+     iframe oculto, y mira en el estilo calculado si se cumple lo que se pide («quiere») y si nada más ha
+     cambiado. Vale cualquier rojo para «en rojo» y cualquier relleno mayor para «aumenta el espacio». Si no se
+     cumple, primero avisa de lo que el navegador calla: llaves, punto y coma, propiedades o valores que no
+     existen, selectores que no alcanzan nada. Lo de :hover se mira otra vez con todos los elementos «con el
+     ratón encima».
+
+     Ayudas para unir las tres ventanas: en el HTML se marca en azul lo que alcanza el selector de la regla
+     donde está el cursor, y pasar el ratón por una línea del HTML señala ese elemento en la página (y al revés).
+
+     Cada ejercicio: pide (el encargo), sol (una solución, para «Ver solución» y «Así tiene que quedar»),
+     pistas (dos), exp (se lee al acertar) y quiere, la lista de lo que tiene que cumplirse:
+       { en: 'h1', p: 'color', vale: 'rojo' }      en: selector de los elementos; p: propiedad o grupo (padding,
+                                                   margin, border, border-bottom, border-radius, background…)
+       vale: un color por su nombre en español (rojo, naranja, amarillo, verde, azul, gris, blanco, negro),
+             'mayor' (más que sin CSS), 'hay' (un borde que se ve), 'otro' (distinto que sin CSS) o el valor
+             calculado tal cual ('center', '700', 'none', 'arial').
+             También una lista de valores (['inline', 'inline-block']), 'columnas:2' (una rejilla de dos columnas)
+             y 'libre' (ese elemento puede cambiar eso sin que cuente: no se pide ni se castiga).
+       encima: true   se pide con el ratón encima.      deja: 'margin' o una lista   otros grupos que pueden cambiar.
+     formas: varias listas «quiere» cuando hay más de una manera buena. usa: expresiones que el CSS tiene que
+     llevar aunque la página se vea igual (para pedir var()). lineas: las que señala la primera pista.
+     css (en el bloque o en el ejercicio): lo que ya está escrito en style.css al empezar. Solo lo lleva el
+     bloque del examen, que trae la paleta en :root como el examen de verdad; en los demás empieza vacío. */
+  AW.practicaCss = {
+    paginas: {
+      texto: [
+        '<body>',
+        '  <h1>SuperTuxKart</h1>',
+        '  <p class="destacado">Un juego de carreras gratis.</p>',
+        '  <h2>Historia</h2>',
+        '  <p>Salió en 2004.</p>',
+        '  <p>Lee la <a href="#">guía</a>.</p>',
+        '</body>'
+      ],
+      menu: [
+        '<nav>',
+        '  <a href="#">Inicio</a>',
+        '  <a href="#">Personajes</a>',
+        '  <a href="#">Circuitos</a>',
+        '</nav>',
+        '<p>Juega gratis. Lee la <a href="#">guía</a>.</p>'
+      ],
+      ficha: [
+        '<h1>SuperTuxKart</h1>',
+        '<img src="img/stk-mini-1.jpg" alt="Una carrera" width="160">',
+        '<div class="ficha">',
+        '  <h2>Ficha técnica</h2>',
+        '  <p>Licencia: GPL</p>',
+        '</div>',
+        '<button>Jugar</button>'
+      ],
+      pagina: [
+        '<header><h1>SuperTuxKart</h1></header>',
+        '<main>',
+        '  <h2>El juego</h2>',
+        '  <p>Lee la <a href="#">guía</a>.</p>',
+        '</main>',
+        '<aside>',
+        '  <h3>Capturas</h3>',
+        '  <img src="img/stk-mini-1.jpg" alt="Una carrera" width="120">',
+        '</aside>',
+        '<footer><p>Hecho por Ana.</p></footer>'
+      ],
+      tabla: [
+        '<table>',
+        '  <tr><th>Dato</th><th>Valor</th></tr>',
+        '  <tr><td>Año</td><td>2004</td></tr>',
+        '  <tr><td>Licencia</td><td>GPL</td></tr>',
+        '  <tr><td>Precio</td><td>Gratis</td></tr>',
+        '  <tr><td>Jugadores</td><td>De 1 a 8</td></tr>',
+        '</table>'
+      ],
+      lista: [
+        '<nav>',
+        '  <ul>',
+        '    <li><a href="#">Inicio</a></li>',
+        '    <li><a href="#">Personajes</a></li>',
+        '    <li><a href="#">Circuitos</a></li>',
+        '  </ul>',
+        '</nav>'
+      ],
+      galeria: [
+        '<div class="galeria">',
+        '  <img src="img/stk-mini-1.jpg" alt="Captura 1" width="150">',
+        '  <img src="img/stk-mini-2.jpg" alt="Captura 2" width="150">',
+        '  <img src="img/stk-mini-3.jpg" alt="Captura 3" width="150">',
+        '  <img src="img/stk-mini-4.jpg" alt="Captura 4" width="150">',
+        '</div>'
+      ]
+    },
+    // ampliación de la página (1,5 si no se dice): la de la ficha es más alta
+    zoom: { ficha: 1.2, pagina: 1.2 },
+    bloques: [
+      { id: 'etiqueta', nombre: 'Etiqueta y color', pagina: 'texto', ejercicios: [
+        { id: 'titulo',
+          pide: 'Pon el título «SuperTuxKart» en rojo.',
+          sol: 'h1 {\n  color: red;\n}',
+          quiere: [{ en: 'h1', p: 'color', vale: 'rojo' }],
+          pistas: ['El título es la línea 2 del HTML: la etiqueta `h1`. El selector es el nombre de la etiqueta.', 'La propiedad del color del texto es `color`. Rojo es `red`.'],
+          exp: '`h1` elige el título y `color` pinta su texto.' },
+        { id: 'fondo',
+          pide: 'Pon un fondo amarillo al título «SuperTuxKart».',
+          sol: 'h1 {\n  background: yellow;\n}',
+          quiere: [{ en: 'h1', p: 'background', vale: 'amarillo' }],
+          pistas: ['El título es la línea 2 del HTML: la etiqueta `h1`.', 'La propiedad del fondo es `background`. Amarillo es `yellow`.'],
+          exp: '`background` pinta el fondo del elemento.' },
+        { id: 'parrafos',
+          pide: 'Pon todos los párrafos en gris.',
+          sol: 'p {\n  color: gray;\n}',
+          quiere: [{ en: 'p', p: 'color', vale: 'gris' }],
+          pistas: ['Los párrafos son las líneas 3, 5 y 6 del HTML. Su etiqueta es `p`.', 'La propiedad del color del texto es `color`. Gris es `gray`.'],
+          exp: 'El selector `p` llega a todos los párrafos de la página.' },
+        { id: 'enlace',
+          pide: 'Pon el enlace en verde.',
+          sol: 'a {\n  color: green;\n}',
+          quiere: [{ en: 'a', p: 'color', vale: 'verde' }],
+          pistas: ['El enlace está en la línea 6 del HTML, dentro del párrafo. Su etiqueta es `a`.', 'La regla es para `a`, no para `p`. Verde es `green`.'],
+          exp: 'El enlace es la etiqueta `a`. Con el color puesto en `p`, el enlace sigue azul: el navegador da a los enlaces su propio color.' }
+      ] },
+      { id: 'clase', nombre: 'Clase y comas', pagina: 'texto', ejercicios: [
+        { id: 'clase',
+          pide: 'Pon un fondo verde solo al primer párrafo.',
+          sol: '.destacado {\n  background: lightgreen;\n}',
+          quiere: [{ en: '.destacado', p: 'background', vale: 'verde' }],
+          pistas: ['El primer párrafo es la línea 3 del HTML. Es el único que lleva `class="destacado"`.', 'Una clase se escribe en el CSS con un punto delante: `.destacado`. La propiedad del fondo es `background`.'],
+          exp: '`.destacado` llega solo a los elementos que llevan esa clase. `p` habría cambiado los tres párrafos.' },
+        { id: 'comas',
+          pide: 'Pon los dos títulos en azul.',
+          sol: 'h1, h2 {\n  color: blue;\n}',
+          quiere: [{ en: 'h1, h2', p: 'color', vale: 'azul' }],
+          pistas: ['Los títulos son las líneas 2 y 4 del HTML: un `h1` y un `h2`.', 'Con una coma, una sola regla vale para los dos: `h1, h2`. Azul es `blue`.'],
+          exp: 'La coma junta selectores: la regla vale para `h1` y para `h2`.' }
+      ] },
+      { id: 'dentro', nombre: 'Uno dentro de otro', pagina: 'menu', ejercicios: [
+        { id: 'menu',
+          pide: 'Pon en rojo solo los enlaces del menú.',
+          sol: 'nav a {\n  color: red;\n}',
+          quiere: [{ en: 'nav a', p: 'color', vale: 'rojo' }],
+          pistas: ['Los enlaces del menú son las líneas 2, 3 y 4 del HTML. Están dentro de `nav`. El otro enlace está dentro de `p`.', 'Dos selectores separados por un espacio: `nav a` llega a los `a` que están dentro de `nav`.'],
+          exp: '`nav a` llega solo a los enlaces que están dentro de `nav`. `a` habría cambiado también el del párrafo.' },
+        { id: 'parrafo',
+          pide: 'Pon en verde solo el enlace del párrafo.',
+          sol: 'p a {\n  color: green;\n}',
+          quiere: [{ en: 'p a', p: 'color', vale: 'verde' }],
+          pistas: ['Ese enlace está en la línea 6 del HTML, dentro de un `p`.', 'Igual que con el menú, ahora con el párrafo: `p a`.'],
+          exp: '`p a` llega a los enlaces que están dentro de un párrafo.' }
+      ] },
+      { id: 'letra', nombre: 'La letra', pagina: 'texto', ejercicios: [
+        { id: 'familia', lineas: [0],
+          pide: 'Pon toda la página con la letra Arial.',
+          sol: 'body {\n  font-family: Arial, sans-serif;\n}',
+          quiere: [{ en: 'h1, h2, p, a', p: 'font-family', vale: 'arial' }],
+          pistas: ['Toda la página está dentro de `body`: la línea 1 del HTML. Lo que pones en `body` llega a todo el texto.', 'La propiedad que elige la letra es `font-family`.'],
+          exp: 'La letra se pone una vez en `body`. La heredan los títulos, los párrafos y los enlaces.' },
+        { id: 'tamano',
+          pide: 'Haz más grande el título «SuperTuxKart».',
+          sol: 'h1 {\n  font-size: 3rem;\n}',
+          quiere: [{ en: 'h1', p: 'font-size', vale: 'mayor' }],
+          pistas: ['El título es la línea 2 del HTML: la etiqueta `h1`.', 'La propiedad del tamaño de la letra es `font-size`. El número y la unidad van juntos: `3rem`.'],
+          exp: '`font-size` cambia el tamaño de la letra. `1rem` es el tamaño normal del texto; `3rem`, tres veces más.' },
+        { id: 'centrar',
+          pide: 'Centra el título «SuperTuxKart».',
+          sol: 'h1 {\n  text-align: center;\n}',
+          quiere: [{ en: 'h1', p: 'text-align', vale: 'center' }],
+          pistas: ['El título es la línea 2 del HTML: la etiqueta `h1`.', 'La propiedad es `text-align` y el valor, `center`.'],
+          exp: '`text-align` coloca el texto a la izquierda (`left`), en el centro (`center`) o a la derecha (`right`).' },
+        { id: 'negrita',
+          pide: 'Pon en negrita el primer párrafo.',
+          sol: '.destacado {\n  font-weight: bold;\n}',
+          quiere: [{ en: '.destacado', p: 'font-weight', vale: '700' }],
+          pistas: ['El primer párrafo es la línea 3 del HTML y lleva `class="destacado"`. El selector es `.destacado`.', 'La propiedad de la negrita es `font-weight` y el valor, `bold`.'],
+          exp: '`font-weight: bold` pone el texto en negrita.' },
+        { id: 'consolas',
+          pide: 'Pon los dos títulos con la letra Consolas.',
+          sol: 'h1, h2 {\n  font-family: Consolas, monospace;\n}',
+          quiere: [{ en: 'h1, h2', p: 'font-family', vale: 'consolas' }],
+          pistas: ['Los títulos son las líneas 2 y 4 del HTML: `h1` y `h2`. Con una coma, una regla vale para los dos.', 'La propiedad que elige la letra es `font-family`.'],
+          exp: 'La letra se puede cambiar solo en algunos elementos. El resto sigue con la suya.' }
+      ] },
+      { id: 'caja', nombre: 'La caja', pagina: 'ficha', ejercicios: [
+        { id: 'borde',
+          pide: 'Pon un borde a la ficha técnica.',
+          sol: '.ficha {\n  border: 2px solid black;\n}',
+          quiere: [{ en: '.ficha', p: 'border', vale: 'hay' }],
+          pistas: ['La ficha técnica es la línea 3 del HTML: un `div` con `class="ficha"`. El selector es `.ficha`.', 'La propiedad es `border`. Lleva tres valores separados por espacios: el grosor, el tipo de línea y el color. Por ejemplo, `2px solid black`.'],
+          exp: '`border` dibuja la línea de la caja: grosor, tipo y color.' },
+        { id: 'fondo',
+          pide: 'Pon un fondo gris a la ficha técnica.',
+          sol: '.ficha {\n  background: lightgray;\n}',
+          quiere: [{ en: '.ficha', p: 'background', vale: 'gris' }],
+          pistas: ['La ficha técnica es la línea 3 del HTML. El selector es `.ficha`.', 'La propiedad del fondo es `background`. Un gris claro es `lightgray`.'],
+          exp: 'El fondo llega hasta el borde de la caja.' },
+        { id: 'relleno',
+          pide: 'Aumenta el espacio entre el texto del botón y su borde.',
+          sol: 'button {\n  padding: 1rem;\n}',
+          quiere: [{ en: 'button', p: 'padding', vale: 'mayor' }],
+          pistas: ['El botón es la línea 7 del HTML: la etiqueta `button`.', 'El espacio entre el contenido y el borde es el relleno: `padding`. Por ejemplo, `1rem`.'],
+          exp: '`padding` es el espacio entre el contenido y el borde de la caja.' },
+        { id: 'esquinas',
+          pide: 'Redondea las esquinas de la imagen.',
+          sol: 'img {\n  border-radius: 12px;\n}',
+          quiere: [{ en: 'img', p: 'border-radius', vale: 'mayor' }],
+          pistas: ['La imagen es la línea 2 del HTML: la etiqueta `img`.', 'La propiedad de las esquinas redondeadas es `border-radius`. Por ejemplo, `12px`.'],
+          exp: '`border-radius` redondea las esquinas. Cuanto mayor es el número, más redondas.' },
+        { id: 'margen',
+          pide: 'Separa la ficha técnica de la imagen.',
+          sol: '.ficha {\n  margin-top: 2rem;\n}',
+          formas: [[{ en: '.ficha', p: 'margin-top', vale: 'mayor', deja: 'margin' }], [{ en: 'img', p: 'margin-bottom', vale: 'mayor', deja: 'margin' }]],
+          pistas: ['La ficha técnica es la línea 3 del HTML: `.ficha`. La imagen está justo encima.', 'El espacio por fuera de la caja es el margen: `margin`. Solo el lado de arriba es `margin-top`.'],
+          exp: '`margin` aparta la caja de las demás. `margin-top` es solo el lado de arriba.' },
+        { id: 'linea',
+          pide: 'Pon un borde solo debajo del título «SuperTuxKart».',
+          sol: 'h1 {\n  border-bottom: 4px solid green;\n}',
+          quiere: [{ en: 'h1', p: 'border-bottom', vale: 'hay' }],
+          pistas: ['El título es la línea 1 del HTML: la etiqueta `h1`.', 'Es un borde de un solo lado. El lado va en el nombre: `border-bottom` es el de abajo.'],
+          exp: '`border-bottom` dibuja solo la línea de abajo. `border` habría dibujado los cuatro lados.' }
+      ] },
+      { id: 'raton', nombre: 'El menú y el ratón', pagina: 'menu', ejercicios: [
+        { id: 'subrayado',
+          pide: 'Quita el subrayado a los enlaces del menú.',
+          sol: 'nav a {\n  text-decoration: none;\n}',
+          quiere: [{ en: 'nav a', p: 'text-decoration', vale: 'none' }],
+          pistas: ['Los enlaces del menú son las líneas 2, 3 y 4 del HTML. El selector es `nav a`.', 'La propiedad es `text-decoration` y el valor, `none`.'],
+          exp: '`text-decoration: none` quita el subrayado que el navegador pone a los enlaces.' },
+        { id: 'encima',
+          pide: 'Cambia el fondo de los enlaces del menú cuando el ratón está encima.',
+          sol: 'nav a:hover {\n  background: yellow;\n}',
+          quiere: [{ en: 'nav a', p: 'background', vale: 'otro', encima: true }],
+          pistas: ['El selector de los enlaces del menú es `nav a`. Para «con el ratón encima» se le añade `:hover`, sin espacio.', 'El selector es `nav a:hover` y la propiedad del fondo, `background`.'],
+          exp: '`:hover` es el elemento con el ratón encima. Pasa el ratón por el menú de «Tu página» para verlo.' }
+      ] },
+      { id: 'zonas', nombre: 'Las zonas de la página', pagina: 'pagina', ejercicios: [
+        { id: 'fondo', lineas: [],
+          pide: 'Pon el fondo de toda la página en negro y el texto en blanco.',
+          sol: 'body {\n  background: black;\n  color: white;\n}',
+          formas: [[{ en: 'body', p: 'background', vale: 'negro' }, { en: 'h1, h2, h3, p', p: 'color', vale: 'blanco' }, { en: 'a', p: 'color', vale: 'libre' }],
+            [{ en: 'html', p: 'background', vale: 'negro' }, { en: 'h1, h2, h3, p', p: 'color', vale: 'blanco' }, { en: 'a', p: 'color', vale: 'libre' }]],
+          pistas: ['Toda la página está dentro de `body`. Son dos líneas en la regla `body`.', 'El fondo es `background` y el color del texto, `color`. Negro es `black` y blanco, `white`.'],
+          exp: 'El fondo y el color del texto de toda la página se ponen en `body`. Los enlaces siguen con su color.' },
+        { id: 'titulos',
+          pide: 'Pon los tres títulos en verde.',
+          sol: 'h1, h2, h3 {\n  color: green;\n}',
+          quiere: [{ en: 'h1, h2, h3', p: 'color', vale: 'verde' }],
+          pistas: ['Los títulos están en las líneas 1, 3 y 7 del HTML: `h1`, `h2` y `h3`.', 'Con comas, una sola regla vale para los tres: `h1, h2, h3`. La propiedad es `color`.'],
+          exp: 'Las comas juntan tantos selectores como haga falta.' },
+        { id: 'pie',
+          pide: 'Pon un borde solo encima del pie de página.',
+          sol: 'footer {\n  border-top: 2px solid black;\n}',
+          quiere: [{ en: 'footer', p: 'border-top', vale: 'hay' }],
+          pistas: ['El pie de página es la línea 10 del HTML: la etiqueta `footer`.', 'El borde de un solo lado lleva el lado en el nombre: `border-top` es el de arriba.'],
+          exp: '`border-top` dibuja solo el borde de arriba.' },
+        { id: 'centro',
+          pide: 'Centra el texto del pie de página.',
+          sol: 'footer {\n  text-align: center;\n}',
+          quiere: [{ en: 'footer p', p: 'text-align', vale: 'center' }],
+          pistas: ['El pie de página es la línea 10 del HTML: la etiqueta `footer`.', 'La propiedad es `text-align` y el valor, `center`.'],
+          exp: '`text-align` se pone en la zona y lo hereda el texto que hay dentro.' }
+      ] },
+      { id: 'tabla', nombre: 'La tabla', pagina: 'tabla', ejercicios: [
+        { id: 'cabecera',
+          pide: 'Pon un fondo verde a la cabecera de la tabla.',
+          sol: 'th {\n  background: lightgreen;\n}',
+          formas: [[{ en: 'th', p: 'background', vale: 'verde' }], [{ en: 'tr:first-child', p: 'background', vale: 'verde' }]],
+          pistas: ['La cabecera es la línea 2 del HTML. Sus celdas son las etiquetas `th`.', 'El selector es `th` y la propiedad del fondo, `background`.'],
+          exp: '`th` son las celdas de la cabecera; `td`, las demás.' },
+        { id: 'celdas',
+          pide: 'Aumenta el espacio dentro de todas las celdas de la tabla.',
+          sol: 'th, td {\n  padding: 0.5rem 1rem;\n}',
+          quiere: [{ en: 'th, td', p: 'padding', vale: 'mayor' }],
+          pistas: ['Las celdas son `th` (las de la cabecera) y `td` (las demás). Con una coma, una regla vale para las dos.', 'El espacio por dentro es el relleno: `padding`.'],
+          exp: 'Con `padding` en las celdas, la tabla respira y se lee mejor.' },
+        { id: 'lineas',
+          pide: 'Pon un borde debajo de cada celda de la tabla.',
+          sol: 'th, td {\n  border-bottom: 1px solid gray;\n}',
+          quiere: [{ en: 'th, td', p: 'border-bottom', vale: 'hay' }],
+          pistas: ['Las celdas son `th` y `td`. El selector es `th, td`.', 'El borde de abajo es `border-bottom`. Lleva el grosor, el tipo de línea y el color.'],
+          exp: 'Una línea fina bajo cada fila separa los datos sin recargar la tabla.' },
+        { id: 'cebra', lineas: [2, 4],
+          pide: 'Pon un fondo gris a las filas pares de la tabla.',
+          sol: 'tr:nth-child(even) {\n  background: lightgray;\n}',
+          formas: [[{ en: 'tr:nth-child(even)', p: 'background', vale: 'gris' }], [{ en: 'tr:nth-child(even) td', p: 'background', vale: 'gris' }]],
+          pistas: ['Las filas son las etiquetas `tr`. Las pares son la segunda y la cuarta: las líneas 3 y 5 del HTML.', 'A `tr` se le añade `:nth-child(even)`, sin espacio. `even` significa «pares».'],
+          exp: '`tr:nth-child(even)` elige las filas pares. Con `odd`, las impares.' }
+      ] },
+      { id: 'fila', nombre: 'El menú en fila', pagina: 'lista', ejercicios: [
+        { id: 'puntos', lineas: [1],
+          pide: 'Quita los puntos de la lista del menú.',
+          sol: 'nav ul {\n  list-style: none;\n}',
+          quiere: [{ en: 'li', p: 'list-style-type', vale: 'none' }],
+          pistas: ['La lista es la línea 2 del HTML: la etiqueta `ul`, dentro de `nav`.', 'La propiedad de los puntos de una lista es `list-style` y el valor, `none`.'],
+          exp: '`list-style: none` quita los puntos de la lista.' },
+        { id: 'fila', lineas: [1],
+          pide: 'Pon los enlaces del menú en fila.',
+          sol: 'nav ul {\n  display: flex;\n}',
+          formas: [[{ en: 'ul', p: 'display', vale: 'flex', deja: ['padding', 'margin', 'gap', 'justify-content'] }, { en: 'li', p: 'list-style-type', vale: 'libre' }], [{ en: 'li', p: 'display', vale: ['inline', 'inline-block'], deja: ['padding', 'margin'] }, { en: 'li', p: 'list-style-type', vale: 'libre' }]],
+          pistas: ['Los enlaces están dentro de la lista: la etiqueta `ul`, en la línea 2 del HTML. La regla es para la lista.', 'La propiedad es `display` y el valor, `flex`: pone en fila lo que hay dentro.'],
+          exp: '`display: flex` en la lista pone sus elementos en fila.' },
+        { id: 'centrado', lineas: [1],
+          pide: 'Pon el menú en fila y centrado.',
+          sol: 'nav ul {\n  display: flex;\n  justify-content: center;\n}',
+          quiere: [{ en: 'ul', p: 'display', vale: 'flex', deja: ['padding', 'margin', 'gap', 'justify-content'] }, { en: 'li', p: 'list-style-type', vale: 'libre' }, { en: 'ul', p: 'justify-content', vale: 'center' }],
+          pistas: ['Son dos líneas en la regla de la lista, `nav ul`. La primera la pone en fila: `display: flex`.', 'La segunda dice dónde va la fila: `justify-content: center`.'],
+          exp: '`justify-content` coloca la fila: al principio (`flex-start`), en el centro (`center`) o al final (`flex-end`).' },
+        { id: 'separa', lineas: [1],
+          pide: 'Pon el menú en fila y separa los enlaces.',
+          sol: 'nav ul {\n  display: flex;\n  gap: 2rem;\n}',
+          formas: [[{ en: 'ul', p: 'display', vale: 'flex', deja: ['padding', 'margin', 'gap', 'justify-content'] }, { en: 'li', p: 'list-style-type', vale: 'libre' }, { en: 'ul', p: 'gap', vale: 'mayor' }],
+            [{ en: 'ul', p: 'display', vale: 'flex', deja: ['padding', 'margin', 'gap', 'justify-content'] }, { en: 'li', p: 'list-style-type', vale: 'libre' }, { en: 'li', p: 'margin', vale: 'mayor' }],
+            [{ en: 'ul', p: 'display', vale: 'flex', deja: ['padding', 'margin', 'gap', 'justify-content'] }, { en: 'li', p: 'list-style-type', vale: 'libre' }, { en: 'li', p: 'padding', vale: 'mayor' }],
+            [{ en: 'ul', p: 'display', vale: 'flex', deja: ['padding', 'margin', 'gap', 'justify-content'] }, { en: 'li', p: 'list-style-type', vale: 'libre' }, { en: 'a', p: 'margin', vale: 'mayor' }],
+            [{ en: 'ul', p: 'display', vale: 'flex', deja: ['padding', 'margin', 'gap', 'justify-content'] }, { en: 'li', p: 'list-style-type', vale: 'libre' }, { en: 'a', p: 'padding', vale: 'mayor' }]],
+          pistas: ['Son dos líneas en la regla de la lista, `nav ul`. La primera la pone en fila: `display: flex`.', 'El espacio entre los elementos de la fila es `gap`. Por ejemplo, `2rem`.'],
+          exp: '`gap` separa los elementos de la fila sin tocar los márgenes.' }
+      ] },
+      { id: 'variados', nombre: 'Más difíciles', pagina: 'texto', ejercicios: [
+        { id: 'titulo',
+          pide: 'Pon el título «SuperTuxKart» centrado, en blanco y con fondo azul.',
+          sol: 'h1 {\n  text-align: center;\n  color: white;\n  background: blue;\n}',
+          quiere: [{ en: 'h1', p: 'text-align', vale: 'center' }, { en: 'h1', p: 'color', vale: 'blanco' }, { en: 'h1', p: 'background', vale: 'azul' }],
+          pistas: ['Son tres líneas dentro de una sola regla `h1`. Cada línea termina en punto y coma.', 'Las propiedades son `text-align`, `color` y `background`.'],
+          exp: 'Una regla puede llevar varias líneas. Cada una termina en punto y coma.' },
+        { id: 'dos',
+          pide: 'Pon los dos títulos en verde y los párrafos en gris.',
+          sol: 'h1, h2 {\n  color: green;\n}\n\np {\n  color: gray;\n}',
+          quiere: [{ en: 'h1, h2', p: 'color', vale: 'verde' }, { en: 'p', p: 'color', vale: 'gris' }],
+          pistas: ['Son dos reglas, una debajo de la otra: una para los títulos y otra para los párrafos.', 'Los selectores son `h1, h2` y `p`. La propiedad de las dos reglas es `color`.'],
+          exp: 'Cada regla tiene su selector. La hoja de estilo es una lista de reglas.' },
+        { id: 'destacado',
+          pide: 'Pon en negrita y con fondo amarillo solo el primer párrafo.',
+          sol: '.destacado {\n  font-weight: bold;\n  background: yellow;\n}',
+          quiere: [{ en: '.destacado', p: 'font-weight', vale: '700' }, { en: '.destacado', p: 'background', vale: 'amarillo' }],
+          pistas: ['El primer párrafo lleva `class="destacado"`: el selector es `.destacado`. Son dos líneas en la misma regla.', 'Las propiedades son `font-weight` y `background`.'],
+          exp: 'Con la clase, la regla llega solo al párrafo que la lleva.' },
+        { id: 'caja', pagina: 'ficha',
+          pide: 'Haz una caja con la ficha técnica: fondo gris, borde y espacio por dentro.',
+          sol: '.ficha {\n  background: lightgray;\n  border: 2px solid black;\n  padding: 1rem;\n}',
+          quiere: [{ en: '.ficha', p: 'background', vale: 'gris' }, { en: '.ficha', p: 'border', vale: 'hay' }, { en: '.ficha', p: 'padding', vale: 'mayor' }],
+          pistas: ['Son tres líneas dentro de la regla `.ficha`.', 'Las propiedades son `background`, `border` y `padding`. El espacio por dentro es el relleno.'],
+          exp: 'Fondo, borde y relleno: las tres cosas que hacen una caja.' },
+        { id: 'boton', pagina: 'ficha',
+          pide: 'Haz el botón más grande: letra más grande, más espacio por dentro y esquinas redondeadas.',
+          sol: 'button {\n  font-size: 1.5rem;\n  padding: 1rem;\n  border-radius: 12px;\n}',
+          quiere: [{ en: 'button', p: 'font-size', vale: 'mayor' }, { en: 'button', p: 'padding', vale: 'mayor' }, { en: 'button', p: 'border-radius', vale: 'mayor' }],
+          pistas: ['El botón es la línea 7 del HTML: la etiqueta `button`. Son tres líneas en la misma regla.', 'Las propiedades son `font-size`, `padding` y `border-radius`.'],
+          exp: 'Con tres líneas, el botón del navegador pasa a ser un botón tuyo.' },
+        { id: 'botones', pagina: 'menu',
+          pide: 'Haz que los enlaces del menú parezcan botones: fondo azul, letra blanca, sin subrayado y con espacio por dentro.',
+          sol: 'nav a {\n  background: blue;\n  color: white;\n  text-decoration: none;\n  padding: 0.5rem 1rem;\n}',
+          quiere: [{ en: 'nav a', p: 'background', vale: 'azul' }, { en: 'nav a', p: 'color', vale: 'blanco' }, { en: 'nav a', p: 'text-decoration', vale: 'none' }, { en: 'nav a', p: 'padding', vale: 'mayor' }],
+          pistas: ['El selector de los enlaces del menú es `nav a`. Son cuatro líneas en la misma regla.', 'Las propiedades son `background`, `color`, `text-decoration` y `padding`.'],
+          exp: 'Es el menú de casi todas las webs: enlaces con fondo, sin subrayado y con relleno.' },
+        { id: 'centrar', pagina: 'ficha',
+          pide: 'Pon un borde a la ficha técnica, hazla más estrecha y céntrala.',
+          sol: '.ficha {\n  border: 2px solid black;\n  max-width: 15rem;\n  margin: 0 auto;\n}',
+          quiere: [{ en: '.ficha', p: 'border', vale: 'hay' }, { en: '.ficha', p: 'margin-left', vale: 'mayor', deja: ['margin', 'max-width'] }, { en: '.ficha', p: 'margin-right', vale: 'mayor' }],
+          pistas: ['Son tres líneas en la regla `.ficha`: el borde, el ancho máximo y el margen.', 'El ancho máximo es `max-width`. Para centrar una caja, el margen de los lados es `auto`: `margin: 0 auto`.'],
+          exp: 'Con un ancho máximo y `margin: 0 auto`, la caja queda centrada. Así se centra una zona de la página.' },
+        { id: 'lateral', pagina: 'pagina',
+          pide: 'Haz una caja con el lateral: fondo gris, borde, esquinas redondeadas y espacio por dentro.',
+          sol: 'aside {\n  background: lightgray;\n  border: 1px solid gray;\n  border-radius: 12px;\n  padding: 1rem;\n}',
+          quiere: [{ en: 'aside', p: 'background', vale: 'gris' }, { en: 'aside', p: 'border', vale: 'hay' }, { en: 'aside', p: 'border-radius', vale: 'mayor' }, { en: 'aside', p: 'padding', vale: 'mayor' }],
+          pistas: ['El lateral es la línea 6 del HTML: la etiqueta `aside`. Son cuatro líneas en la misma regla.', 'Las propiedades son `background`, `border`, `border-radius` y `padding`.'],
+          exp: 'Es la caja del lateral de tu página: fondo, borde, esquinas y relleno.' },
+        { id: 'raton', pagina: 'menu',
+          pide: 'Cambia el fondo y el color de los enlaces del menú cuando el ratón está encima.',
+          sol: 'nav a:hover {\n  background: blue;\n  color: white;\n}',
+          quiere: [{ en: 'nav a', p: 'background', vale: 'otro', encima: true }, { en: 'nav a', p: 'color', vale: 'otro', encima: true }],
+          pistas: ['El selector de los enlaces del menú con el ratón encima es `nav a:hover`. Son dos líneas en la regla.', 'Las propiedades son `background` y `color`.'],
+          exp: 'Con `:hover` el enlace avisa de que se puede pulsar.' },
+        { id: 'cebra', pagina: 'tabla',
+          pide: 'Haz una tabla de cebra: más espacio en todas las celdas y fondo gris en las filas pares.',
+          sol: 'th, td {\n  padding: 0.5rem 1rem;\n}\n\ntr:nth-child(even) {\n  background: lightgray;\n}',
+          formas: [[{ en: 'th, td', p: 'padding', vale: 'mayor' }, { en: 'tr:nth-child(even)', p: 'background', vale: 'gris' }],
+            [{ en: 'th, td', p: 'padding', vale: 'mayor' }, { en: 'tr:nth-child(even) td', p: 'background', vale: 'gris' }]],
+          pistas: ['Son dos reglas: una para las celdas, `th, td`, y otra para las filas pares.', 'Las filas pares son `tr:nth-child(even)`. Las propiedades son `padding` y `background`.'],
+          exp: 'Es la receta de la tabla: relleno en las celdas y las filas pares de otro color.' },
+        { id: 'galeria', pagina: 'galeria',
+          pide: 'Pon las capturas en una rejilla de dos columnas.',
+          sol: '.galeria {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n}',
+          quiere: [{ en: '.galeria', p: 'rejilla', vale: 'columnas:2' }, { en: '.galeria img', p: 'display', vale: 'libre' }],
+          pistas: ['La caja de las capturas es la línea 1 del HTML: `.galeria`. Son dos líneas: una dice que es una rejilla y otra, cuántas columnas tiene.', 'La rejilla es `display: grid`. Dos columnas iguales: `grid-template-columns: 1fr 1fr`.'],
+          exp: '`display: grid` hace la rejilla y `grid-template-columns` dice cuántas columnas tiene. `1fr 1fr` son dos iguales.' },
+        { id: 'paleta', lineas: [1],
+          pide: 'Guarda un color verde en la paleta con el nombre --accent. Ponlo de fondo al título «SuperTuxKart».',
+          sol: ':root {\n  --accent: #a5e070;\n}\n\nh1 {\n  background: var(--accent);\n}',
+          quiere: [{ en: 'h1', p: 'background', vale: 'verde' }],
+          usa: [{ re: /--accent\s*:/, msg: 'Falta guardar el color en la paleta. Va dentro de `:root`, con el nombre `--accent`.' },
+            { re: /background(-color)?\s*:\s*var\(\s*--accent\s*\)/, msg: 'El fondo se ve bien, pero el color está escrito a mano. Se pide usar la variable: `var(--accent)`.' }],
+          pistas: ['Son dos reglas. La primera es la paleta: `:root { --accent: … ; }`. La segunda es para el título, `h1`.', 'En la regla `h1`, el fondo usa la variable: `background: var(--accent);`'],
+          exp: 'El color está escrito una sola vez, en `:root`. Si lo cambias ahí, cambia en todos los sitios que usan `var(--accent)`.' }
+      ] },
+      { id: 'examen', nombre: 'Como en el examen', pagina: 'pagina', css: ':root {\n  --background: #0b0f0c;\n  --text: #d7f5dc;\n  --accent: #3ddc84;\n}\n\n', ejercicios: [
+        { id: 'fondo', lineas: [],
+          pide: 'Pon el fondo de la página con el color --background y el texto con el color --text.',
+          sol: ':root {\n  --background: #0b0f0c;\n  --text: #d7f5dc;\n  --accent: #3ddc84;\n}\n\n' + 'body {\n  background: var(--background);\n  color: var(--text);\n}',
+          formas: [[{ en: 'body', p: 'background', vale: 'rgb(11, 15, 12)' }, { en: 'h1, h2, h3, p', p: 'color', vale: 'rgb(215, 245, 220)' }, { en: 'a', p: 'color', vale: 'libre' }],
+            [{ en: 'html', p: 'background', vale: 'rgb(11, 15, 12)' }, { en: 'h1, h2, h3, p', p: 'color', vale: 'rgb(215, 245, 220)' }, { en: 'a', p: 'color', vale: 'libre' }]],
+          usa: [{ re: /background(-color)?\s*:[^;}]*var\(\s*--background\s*\)/, msg: 'Se ve bien, pero el color está escrito a mano. Se pide usar la variable: `var(--background)`.' }, { re: /color\s*:[^;}]*var\(\s*--text\s*\)/, msg: 'Se ve bien, pero el color está escrito a mano. Se pide usar la variable: `var(--text)`.' }],
+          pistas: ['La paleta ya está escrita en `:root`. Escribe debajo una regla para `body`, con dos líneas.', 'Un color de la paleta se usa con `var()`: `background: var(--background);` y `color: var(--text);`'],
+          exp: 'Los colores están en la paleta. En las reglas se usan por su nombre, con `var()`.' },
+        { id: 'titulos',
+          pide: 'Pon los tres títulos con el color --accent.',
+          sol: ':root {\n  --background: #0b0f0c;\n  --text: #d7f5dc;\n  --accent: #3ddc84;\n}\n\n' + 'h1, h2, h3 {\n  color: var(--accent);\n}',
+          quiere: [{ en: 'h1, h2, h3', p: 'color', vale: 'rgb(61, 220, 132)' }],
+          usa: [{ re: /color\s*:[^;}]*var\(\s*--accent\s*\)/, msg: 'Se ve bien, pero el color está escrito a mano. Se pide usar la variable: `var(--accent)`.' }],
+          pistas: ['Los títulos son `h1`, `h2` y `h3`. Con comas, una sola regla vale para los tres.', 'La propiedad es `color` y el valor, `var(--accent)`.'],
+          exp: 'Si cambias `--accent` en la paleta, cambian los tres títulos a la vez.' },
+        { id: 'cabecera',
+          pide: 'Pon un borde solo debajo de la cabecera, con el color --accent.',
+          sol: ':root {\n  --background: #0b0f0c;\n  --text: #d7f5dc;\n  --accent: #3ddc84;\n}\n\n' + 'header {\n  border-bottom: 3px solid var(--accent);\n}',
+          quiere: [{ en: 'header', p: 'border-bottom', vale: 'hay' }, { en: 'header', p: 'border-bottom-color', vale: 'rgb(61, 220, 132)' }],
+          usa: [{ re: /border-bottom(-color)?\s*:[^;}]*var\(\s*--accent\s*\)/, msg: 'Se ve bien, pero el color está escrito a mano. Se pide usar la variable: `var(--accent)`.' }],
+          pistas: ['La cabecera es la línea 1 del HTML: la etiqueta `header`. El borde de abajo es `border-bottom`.', 'Lleva el grosor, el tipo de línea y el color: `3px solid var(--accent)`.'],
+          exp: 'El color del borde también puede venir de la paleta.' },
+        { id: 'raton',
+          pide: 'Con el ratón encima, el enlace tiene el fondo --accent y el texto --background.',
+          sol: ':root {\n  --background: #0b0f0c;\n  --text: #d7f5dc;\n  --accent: #3ddc84;\n}\n\n' + 'a:hover {\n  background: var(--accent);\n  color: var(--background);\n}',
+          quiere: [{ en: 'a', p: 'background', vale: 'rgb(61, 220, 132)', encima: true }, { en: 'a', p: 'color', vale: 'rgb(11, 15, 12)', encima: true }],
+          usa: [{ re: /background(-color)?\s*:[^;}]*var\(\s*--accent\s*\)/, msg: 'Se ve bien, pero el color está escrito a mano. Se pide usar la variable: `var(--accent)`.' }, { re: /color\s*:[^;}]*var\(\s*--background\s*\)/, msg: 'Se ve bien, pero el color está escrito a mano. Se pide usar la variable: `var(--background)`.' }],
+          pistas: ['El enlace con el ratón encima es `a:hover`. Son dos líneas en la regla.', '`background: var(--accent);` y `color: var(--background);`'],
+          exp: 'Es la última tarea del examen: el enlace cambia de fondo y de color con el ratón encima.' }
+      ] }
+    ]
+  };
+
+  // Lo que se compara: lo del texto, solo en los elementos que tienen texto propio (así da igual poner la
+  // letra en body o en cada etiqueta, si se ve lo mismo); lo de la caja, en todos.
+  const PC_LADOS = ['top', 'right', 'bottom', 'left'];
+  const PC_TEXTO = ['color', 'font-family', 'font-size', 'font-weight', 'font-style', 'line-height', 'text-align', 'text-decoration-line'];
+  const PC_CAJA = ['background-color', 'max-width', 'display', 'justify-content', 'column-gap', 'row-gap', 'grid-template-columns', 'border-top-left-radius', 'border-top-right-radius', 'border-bottom-right-radius', 'border-bottom-left-radius']
+    .concat(...PC_LADOS.map((l) => ['margin-' + l, 'padding-' + l, 'border-' + l + '-width', 'border-' + l + '-style', 'border-' + l + '-color']));
+  const PC_CONOCIDAS = ['color', 'background', 'background-color', 'font-family', 'font-size', 'font-weight', 'line-height', 'text-align', 'text-decoration',
+    'padding', 'margin', 'border', 'border-radius', 'max-width', 'width', 'display', 'gap', 'justify-content', 'list-style', 'grid-template-columns']
+    .concat(...PC_LADOS.map((l) => ['margin-' + l, 'padding-' + l, 'border-' + l]));
+  // El nombre que escribiría el alumno: border-top-width es «border»
+  const pcNombre = (p) => p.replace(/^(margin|padding)-.+$/, '$1').replace(/^border-.+-radius$/, 'border-radius')
+    .replace(/^border-(top|right|bottom|left)-.+$/, 'border').replace('background-color', 'background').replace('text-decoration-line', 'text-decoration')
+    .replace(/^(column|row)-gap$/, 'gap').replace('list-style-type', 'list-style');
+  const pcCorto = (s) => { s = s.trim().replace(/\s+/g, ' '); return s.length > 44 ? s.slice(0, 44) + '…' : s; };
+  function pcDistancia(a, b) {
+    const d = [];
+    for (let i = 0; i <= a.length; i++) d[i] = [i];
+    for (let j = 1; j <= b.length; j++) d[0][j] = j;
+    for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    return d[a.length][b.length];
+  }
+
+  // Grupos de propiedades: «padding» son los cuatro lados; «border-bottom», el grosor, el tipo y el color de abajo
+  const PC_GRUPOS = {
+    background: ['background-color'],
+    'text-decoration': ['text-decoration-line'],
+    'list-style': ['list-style-type'],
+    gap: ['column-gap', 'row-gap'],
+    rejilla: ['display', 'grid-template-columns', 'column-gap', 'row-gap'],
+    padding: PC_LADOS.map((l) => 'padding-' + l),
+    margin: PC_LADOS.map((l) => 'margin-' + l),
+    'border-radius': ['border-top-left-radius', 'border-top-right-radius', 'border-bottom-right-radius', 'border-bottom-left-radius'],
+    border: [].concat(...PC_LADOS.map((l) => ['border-' + l + '-width', 'border-' + l + '-style', 'border-' + l + '-color']))
+  };
+  PC_LADOS.forEach((l) => { PC_GRUPOS['border-' + l] = ['border-' + l + '-width', 'border-' + l + '-style', 'border-' + l + '-color']; });
+  const pcProps = (p) => PC_GRUPOS[p] || [p];
+  // Los nombres en español que le valen a un color calculado («rgb(255, 0, 0)» es rojo). Sin color, null.
+  const PC_COLORES = ['rojo', 'naranja', 'amarillo', 'verde', 'azul', 'morado', 'rosa', 'gris', 'blanco', 'negro'];
+  function pcColor(v) {
+    const m = /rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:\s*[,\/]\s*([\d.]+))?/.exec(v || '');
+    if (!m || (m[4] !== undefined && parseFloat(m[4]) === 0)) return null;
+    const r = +m[1], g = +m[2], b = +m[3], max = Math.max(r, g, b), min = Math.min(r, g, b), c = max - min, luz = (max + min) / 510;
+    // casi sin color: blanco, gris o negro según la luz (un gris muy claro vale también como blanco)
+    if (c < 30) return luz > 0.94 ? ['blanco'] : luz < 0.2 ? ['negro'] : luz > 0.9 ? ['gris', 'blanco'] : ['gris'];
+    let h = max === r ? ((g - b) / c) % 6 : max === g ? (b - r) / c + 2 : (r - g) / c + 4;
+    h = (h * 60 + 360) % 360;
+    return [h < 15 || h >= 345 ? 'rojo' : h < 45 ? 'naranja' : h < 70 ? 'amarillo' : h < 170 ? 'verde' : h < 260 ? 'azul' : h < 300 ? 'morado' : 'rosa'];
+  }
+  // ¿Cumple un elemento lo que se pide? U: su estilo con el CSS del alumno; B: sin CSS
+  function pcCumple(q, U, B) {
+    const ps = pcProps(q.p);
+    const suma = (o) => ps.filter((p) => /width|radius|size|margin|padding|gap/.test(p)).reduce((s, p) => s + (parseFloat(o[p]) || 0), 0);
+    if (Array.isArray(q.vale)) return q.vale.includes(U[ps[0]]);
+    if (/^columnas:/.test(q.vale)) return U.display === 'grid' && U['grid-template-columns'].trim().split(/\s+/).length === +q.vale.slice(9);
+    if (PC_COLORES.includes(q.vale)) return (pcColor(U[ps[0]]) || []).includes(q.vale);
+    if (q.vale === 'mayor') return suma(U) > suma(B) + 0.5;
+    if (q.vale === 'otro') return ps.some((p) => U[p] !== B[p]);
+    if (q.vale === 'hay') return ps.filter((p) => /-width$/.test(p)).every((p) => parseFloat(U[p]) > 0 && U[p.replace('-width', '-style')] !== 'none');
+    return U[ps[0]] === q.vale;
+  }
+
+  // Lee la hoja como lo haría una persona: reglas con su selector y sus líneas, y los avisos de lo que
+  // está mal escrito. El navegador se calla estos fallos y por eso el alumno no los ve.
+  function pcAnaliza(css) {
+    const avisos = [], reglas = [];
+    let t = css.replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '));
+    if (t.includes('/*')) { avisos.push('Hay un comentario sin cerrar. Un comentario termina con `*/`.'); t = t.slice(0, t.indexOf('/*')); }
+    let i = 0, pendiente = null;
+    while (i < t.length) {
+      const a = t.indexOf('{', i);
+      if (a < 0) {
+        const resto = t.slice(i), sin = resto.replace(/\}/g, '');
+        if (sin !== resto) avisos.push('Sobra una llave de cierre `}`.');
+        if (sin.trim()) {
+          if (/[:;]/.test(sin.replace(/:(hover|root|nth-child|first-child|last-child)/g, ''))) avisos.push('«' + pcCorto(sin) + '» está fuera de una regla. Las líneas van dentro de las llaves: `selector { propiedad: valor; }`');
+          else { pendiente = { sel: sin.trim(), ini: i + resto.search(/\S/) }; avisos.push('Después del selector `' + pcCorto(sin) + '` falta la llave `{`.'); }
+        }
+        break;
+      }
+      let sel = t.slice(i, a), ini = i;
+      if (sel.includes('}')) { avisos.push('Sobra una llave de cierre `}`.'); ini = i + sel.lastIndexOf('}') + 1; sel = t.slice(ini, a); }
+      const c = t.indexOf('}', a + 1), o = t.indexOf('{', a + 1);
+      let fin, sig;
+      if (c >= 0 && (o < 0 || c < o)) { fin = c; sig = c + 1; }
+      else {
+        // sin llave de cierre: la regla llega hasta la línea del selector siguiente, o hasta el final
+        fin = o < 0 ? t.length : Math.max(t.lastIndexOf('\n', o), a + 1);
+        sig = fin;
+        avisos.push('Falta la llave de cierre `}` de la regla `' + pcCorto(sel) + '`.');
+      }
+      const regla = { sel: sel.trim(), ini: ini, fin: sig, decls: [] };
+      if (!regla.sel) avisos.push('Hay una llave `{` sin selector delante. El selector dice a qué elementos llega la regla.');
+      t.slice(a + 1, fin).split(';').forEach((trozo) => {
+        // dos líneas en el mismo trozo: a la primera le falta el punto y coma
+        const partes = trozo.split(/\n(?=\s*-{0,2}[a-zA-Z][\w-]*\s*:)/).filter((x) => x.trim());
+        partes.forEach((x, k) => {
+          const p = x.trim(), dos = p.indexOf(':');
+          if (dos < 0) { avisos.push('A «' + pcCorto(p) + '» le faltan los dos puntos. Una línea es `propiedad: valor;`'); return; }
+          const prop = p.slice(0, dos).trim(), val = p.slice(dos + 1).trim();
+          if (k < partes.length - 1) avisos.push('Falta el punto y coma al final de «' + pcCorto(p) + '».');
+          if (/\s/.test(prop)) { avisos.push('El nombre de una propiedad no lleva espacios: «' + pcCorto(prop) + '». Las palabras se unen con un guion, como en `font-size`.'); return; }
+          if (!val) { avisos.push('A la línea «' + prop + ':» le falta el valor.'); return; }
+          regla.decls.push({ prop: prop, val: val });
+        });
+      });
+      reglas.push(regla);
+      i = sig;
+    }
+    return { reglas: reglas, avisos: avisos, pendiente: pendiente };
+  }
+
+  // Una línea que el navegador no entiende: devuelve el aviso, o null si vale
+  function pcDeclaracion(d) {
+    if (d.prop.startsWith('--')) return null;
+    const p = d.prop.toLowerCase(), v = d.val.replace(/\s*!important\s*$/, '');
+    if (!CSS.supports(p, 'inherit')) {
+      let mejor = null, min = 3;
+      PC_CONOCIDAS.forEach((c) => { const n = pcDistancia(p, c); if (n < min) { min = n; mejor = c; } });
+      return 'El navegador no conoce la propiedad «' + p + '».' + (mejor ? ' ¿Querías escribir `' + mejor + '`?' : ' Revisa cómo está escrita.');
+    }
+    const linea = '«' + p + ': ' + pcCorto(v) + '»';
+    if (/var\(/.test(v)) return null;
+    if (CSS.supports(p, v)) {
+      // vale, pero sin tipo de línea el borde no se dibuja
+      const sinTipo = /^border(-(top|right|bottom|left))?$/.test(p) && !/^(0|none|inherit|initial|unset)$/.test(v) && !/\b(solid|dashed|dotted|double|groove|ridge|inset|outset|none|hidden)\b/.test(v);
+      return sinTipo ? 'A ' + linea + ' le falta el tipo de línea: `solid`. Sin él, el borde no se dibuja.' : null;
+    }
+    if (/color|background|border/.test(p)) {
+      if (/^([0-9a-f]{3}|[0-9a-f]{6})$/i.test(v) && /\d/.test(v)) return 'En ' + linea + ' falta la almohadilla. Un color en hexadecimal empieza por `#`.';
+      const hex = v.match(/#[\w]*/);
+      if (hex && !/^#[0-9a-f]*$/i.test(hex[0])) return 'En ' + linea + ' el color lleva algo que no vale. Un color en hexadecimal solo lleva cifras del 0 al 9 y letras de la a a la f.';
+      if (hex && hex[0].length !== 7 && hex[0].length !== 4) return 'En ' + linea + ' el color no tiene seis cifras detrás de la almohadilla.';
+    }
+    if (/\d\s+(rem|px|em|%)(\s|$)/.test(v)) return 'En ' + linea + ' sobra el espacio entre el número y la unidad. Van juntos: `1rem`.';
+    if (/\d,\d/.test(v)) return 'En ' + linea + ' los decimales van con punto, no con coma: `1.5rem`.';
+    if (/(^|\s)\d*\.?\d+(\s|$)/.test(v) && /size|margin|padding|border|width|radius/.test(p)) return 'En ' + linea + ' falta la unidad detrás del número: `rem` o `px`.';
+    return 'El navegador no entiende el valor de ' + linea + '. Revisa cómo está escrito.';
+  }
+
+  // Los elementos que alcanza un selector (sin contar :hover), o null si el navegador no lo entiende
+  function pcAlcance(doc, sel) {
+    const s = sel.replace(/::?(hover|focus|active|visited|link)\b/g, '').trim();
+    try { return [...doc.querySelectorAll(s || '*')]; } catch (e) { return null; }
+  }
+  function pcSinAlcance(doc, sel) {
+    const m = sel.trim();
+    if (/^[a-zA-Z][\w-]*$/.test(m) && doc.querySelector('.' + m)) return '«' + m + '» es una clase del HTML. En el CSS, una clase lleva un punto delante: `.' + m + '`.';
+    if (/^[.#][a-zA-Z][\w-]*$/.test(m) && doc.querySelector(m.slice(1))) return '`' + m.slice(1) + '` es una etiqueta. Se escribe sin nada delante: `' + m.slice(1) + '`.';
+    return 'El selector `' + pcCorto(m) + '` no alcanza nada: en el HTML no hay ningún elemento así.';
+  }
+
+  function montaPractica(el) {
+    const P = AW.practicaCss;
+    const pedidos = (el.dataset.bloques || '').split(',').map((s) => s.trim()).filter(Boolean);
+    const lista = [];
+    P.bloques.forEach((b) => {
+      if (pedidos.length && !pedidos.includes(b.id)) return;
+      b.ejercicios.forEach((e) => {
+        const pagina = e.pagina || b.pagina;
+        lista.push(Object.assign({}, e, { clave: b.id + '/' + e.id, bloque: b, pagina: pagina, html: P.paginas[pagina], formas: e.formas || [e.quiere], css: e.css || b.css || '' }));
+      });
+    });
+    if (!lista.length) { el.textContent = 'No hay ejercicios para: ' + (el.dataset.bloques || ''); return; }
+    const CLAVE = 'aw-practica-css';
+    // lo hecho se guarda en este navegador: 'ok' (resuelto) o 'sol' (visto con la solución)
+    let hecho = {};
+    try { hecho = JSON.parse(localStorage.getItem(CLAVE)) || {}; } catch (e) { hecho = {}; }
+    const guarda = () => { try { localStorage.setItem(CLAVE, JSON.stringify(hecho)); } catch (e) { /* sin almacenamiento, sigue funcionando */ } };
+
+    el.innerHTML =
+      '<div class="pc-cab"><span class="pill">Practica CSS</span><select class="pc-bloque" aria-label="Bloque de ejercicios"></select><p class="pc-donde"></p><div class="pc-puntos"></div>'
+      + '<button type="button" class="btn btn-ghost pc-ant">← Anterior</button><button type="button" class="btn btn-ghost pc-sig">Siguiente →</button></div>'
+      + '<div class="pc-pide"><span class="pc-num"></span><p></p></div>'
+      + '<div class="pc-izq">'
+      + '<div class="ventana pc-html"><div class="ventana-barra"><i></i><i></i><i></i><span>index.html</span><span class="ruta"></span></div><pre class="ej-cod"></pre></div>'
+      + '<div class="ventana pc-css"><div class="ventana-barra"><i></i><i></i><i></i><span>style.css</span><span class="ruta">Aquí escribes tú</span></div>'
+      + '<div class="pc-editor"><pre aria-hidden="true"></pre><textarea spellcheck="false" autocomplete="off" autocapitalize="off" wrap="off" aria-label="style.css" placeholder="selector {&#10;  propiedad: valor;&#10;}"></textarea></div></div>'
+      + '<div class="pc-botones ej-fila"><button type="button" class="btn btn-primary pc-comprobar">Comprobar</button><button type="button" class="btn btn-ghost pc-pista">Pista</button>'
+      + '<button type="button" class="btn btn-ghost pc-solucion">Ver solución</button><button type="button" class="btn btn-ghost pc-reinicia">Volver a empezar</button></div>'
+      + '</div>'
+      + '<div class="pc-der">'
+      + '<div class="resultado pc-vista"><div class="resultado-barra pc-pestanas"><button type="button" data-v="tuya" aria-pressed="true">Tu página</button><button type="button" data-v="meta" aria-pressed="false">Así tiene que quedar</button></div>'
+      + '<iframe class="pc-tuya" title="Tu página"></iframe><iframe class="pc-meta" title="Así tiene que quedar" hidden></iframe></div>'
+      + '<div class="pc-fb" aria-live="polite"></div>'
+      + '</div>'
+      + '<iframe class="pc-banco" aria-hidden="true" tabindex="-1"></iframe>';
+    const $ = (s) => el.querySelector(s);
+    const ta = $('textarea'), pinta0 = $('.pc-editor pre'), htmlPre = $('.pc-html pre'), nota = $('.pc-html .ruta'), fb = $('.pc-fb');
+    const marcos = { tuya: $('.pc-tuya'), meta: $('.pc-meta'), banco: $('.pc-banco') };
+    const NOTA = 'Solo se lee';
+    const borrador = {};
+    let n = -1, ex = null, nPista = 0, conSol = false;
+    // Que las teclas dentro del ejercicio no cambien de diapositiva
+    el.addEventListener('keydown', (e) => e.stopPropagation());
+
+    const di = (tipo, titulo, texto) => {
+      fb.className = 'pc-fb' + (tipo ? ' ' + tipo : '');
+      fb.dataset.tipo = tipo;
+      fb.innerHTML = (titulo ? '<b>' + esc(titulo) + '</b>' : '') + '<span>' + fmtQuiz(texto) + '</span>';
+    };
+    const lineasHtml = () => [...htmlPre.querySelectorAll('.ej-linea')];
+    const linea = (i) => htmlPre.querySelector('.ej-linea[data-i="' + i + '"]');
+    const css = (marco, texto) => { marcos[marco].contentDocument.getElementById('aw-css').textContent = texto; };
+
+    // Escribe la página en un iframe. Cada etiqueta lleva su línea del HTML en data-l.
+    function escribe(marco, extra, unida) {
+      const d = marcos[marco].contentDocument;
+      const cuerpo = ex.html.map((l, i) => l.replace(/<([a-zA-Z][\w-]*)/g, '<$1 data-l="' + i + '"')).join('\n');
+      d.open();
+      d.write('<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><style>' + extra + '</style><style id="aw-css"></style></head>' + cuerpo + '</html>');
+      d.close();
+      if (!unida) return;
+      d.addEventListener('click', (e) => { if (e.target.closest && e.target.closest('a')) e.preventDefault(); });
+      // el ratón sobre un elemento de la página enciende su línea en el HTML
+      d.addEventListener('mouseover', (e) => {
+        const x = e.target.closest && e.target.closest('[data-l]');
+        lineasHtml().forEach((f) => f.classList.toggle('mira', !!x && f.dataset.i === x.dataset.l));
+      });
+      d.documentElement.addEventListener('mouseleave', () => lineasHtml().forEach((f) => f.classList.remove('mira')));
+    }
+    const vistaCss = () => 'html{zoom:' + (parseFloat(el.dataset.zoom) || P.zoom[ex.pagina] || 1.5) + '}[data-aw-mira]{outline:3px solid #017CE9!important;outline-offset:2px;box-shadow:inset 0 0 0 999px rgba(1,124,233,.16)!important}';
+    function mira(i) {
+      ['tuya', 'meta'].forEach((m) => {
+        const d = marcos[m].contentDocument;
+        d.querySelectorAll('[data-aw-mira]').forEach((x) => x.removeAttribute('data-aw-mira'));
+        if (i !== null) d.querySelectorAll('[data-l="' + i + '"]').forEach((x) => x.setAttribute('data-aw-mira', ''));
+      });
+    }
+
+    // El estilo calculado de cada elemento con una hoja dada. «encima» pone todos los elementos como si
+    // tuvieran el ratón encima (:hover pasa a ser una clase que llevan todos).
+    function foto(hoja, encima) {
+      const d = marcos.banco.contentDocument, w = marcos.banco.contentWindow;
+      d.getElementById('aw-css').textContent = encima ? hoja.replace(/:hover\b/g, '.aw-encima') : hoja;
+      return [...d.querySelectorAll('html, body, body *')].map((x) => {
+        x.classList.toggle('aw-encima', !!encima);
+        const cs = w.getComputedStyle(x), v = {};
+        if ([...x.childNodes].some((h) => h.nodeType === 3 && h.textContent.trim())) {
+          PC_TEXTO.forEach((p) => { v[p] = cs.getPropertyValue(p); });
+          v['font-family'] = v['font-family'].split(',')[0].replace(/["']/g, '').trim().toLowerCase();
+        }
+        PC_CAJA.forEach((p) => { v[p] = cs.getPropertyValue(p); });
+        if (x.tagName === 'LI') v['list-style-type'] = cs.getPropertyValue('list-style-type');
+        // el color de un borde que no se dibuja no cuenta
+        PC_LADOS.forEach((l) => { if (v['border-' + l + '-style'] === 'none' || parseFloat(v['border-' + l + '-width']) === 0) v['border-' + l + '-color'] = '-'; });
+        return { el: x, l: x.dataset.l === undefined ? null : +x.dataset.l, tag: x.tagName.toLowerCase(), v: v };
+      });
+    }
+    // u: la página con el CSS del alumno; b: sin CSS; forma: la lista «quiere».
+    // bien, mal y faltan son de lo que se pide; sobran, lo que ha cambiado sin que se pida.
+    function evalua(u, b, forma, encima) {
+      const d = marcos.banco.contentDocument;
+      const r = { mal: [], sobran: [], faltan: [], bien: [], info: u };
+      const libre = u.map(() => new Set());
+      forma.forEach((q) => {
+        if (q.encima && !encima) return;
+        const els = new Set(d.querySelectorAll(q.en)), ps = pcProps(q.p);
+        // lo que puede cambiar: lo pedido, lo que se deja y, con la letra, los espacios que dependen de ella
+        const puede = ps.concat(...[].concat(q.deja || []).map(pcProps), q.p === 'font-size' ? PC_GRUPOS.margin.concat(PC_GRUPOS.padding) : []);
+        u.forEach((x, i) => {
+          if (!els.has(x.el)) return;
+          puede.forEach((p) => libre[i].add(p));
+          if (q.vale === 'libre') return;
+          const igual = ps.every((p) => x.v[p] === b[i].v[p]);
+          (pcCumple(q, x.v, b[i].v) ? r.bien : igual ? r.faltan : r.mal).push({ i: i, p: ps.find((p) => x.v[p] !== b[i].v[p]) || ps[0], q: q });
+        });
+      });
+      u.forEach((x, i) => Object.keys(x.v).forEach((p) => { if (!libre[i].has(p) && x.v[p] !== b[i].v[p]) r.sobran.push({ i: i, p: p }); }));
+      r.total = r.mal.length + r.sobran.length + r.faltan.length;
+      return r;
+    }
+    function explica(r, encima) {
+      const nums = (xs) => [...new Set(xs.map((x) => r.info[x.i].l).filter((l) => l !== null))].sort((p, q) => p - q).map((l) => l + 1);
+      const donde = (xs) => {
+        const ls = nums(xs);
+        if (!ls.length) return 'la página entera';
+        return ls.length === 1 ? 'la línea ' + ls[0] + ' del HTML' : 'las líneas ' + ls.slice(0, -1).join(', ') + ' y ' + ls[ls.length - 1] + ' del HTML';
+      };
+      const cuando = encima ? ' con el ratón encima' : '';
+      const objetivos = new Set(r.bien.concat(r.faltan, r.mal).map((x) => x.i));
+      if (r.mal.length) {
+        const m = r.mal[0], nombre = '`' + pcNombre(m.p) + '`';
+        if (PC_COLORES.includes(m.q.vale)) return 'Has cambiado el color en ' + donde([m]) + ', pero no es ' + m.q.vale + '.';
+        if (m.q.vale === 'mayor') return 'Has cambiado ' + nombre + ' en ' + donde([m]) + ', pero tiene que ser más grande que antes.';
+        if (m.q.vale === 'hay') return 'El borde de ' + donde([m]) + ' no está en todos los lados que se piden.';
+        if (/^columnas:/.test(m.q.vale)) return 'En ' + donde([m]) + ' todavía no hay una rejilla de ' + m.q.vale.slice(9) + ' columnas. Hacen falta dos líneas: `display` y `grid-template-columns`.';
+        return 'Has cambiado ' + nombre + ' en ' + donde([m]) + ', pero el valor no es el que se pide.';
+      }
+      if (r.sobran.length) {
+        const fuera = r.sobran.filter((x) => !objetivos.has(x.i)), s0 = r.sobran[0];
+        // lo que solo se pide con el ratón encima no puede cambiar sin él
+        if (!encima && !r.faltan.length && !r.bien.length) return 'La página ha cambiado sin el ratón encima: ' + donde(r.sobran) + '. El cambio se pide solo con el ratón encima.';
+        if (!r.faltan.length) {
+          if (fuera.length) return 'Lo que se pide está bien, pero también ' + (nums(fuera).length > 1 ? 'han' : 'ha') + ' cambiado ' + donde(fuera) + cuando + '. Tu selector alcanza de más.';
+          const lado = (p) => pcNombre(p.replace(/^(margin|padding|border)-(top|right|bottom|left)$/, '$1'));
+          return r.bien.some((x) => x.i === s0.i && lado(x.q.p) === pcNombre(s0.p))
+            ? 'Lo que se pide está bien, pero has cambiado más lados de los que se piden. Revisa `' + pcNombre(s0.p) + '`.'
+            : 'Lo que se pide está bien, pero en ' + donde([s0]) + ' has cambiado algo más: `' + pcNombre(s0.p) + '`. Eso no se pide.';
+        }
+        return fuera.length
+          ? 'Tu regla cambia ' + donde(fuera) + cuando + ', pero no cambia lo que se pide. Revisa el selector.'
+          : 'Has cambiado `' + pcNombre(s0.p) + '` y se pide otra cosa. Lee otra vez la frase de arriba.';
+      }
+      if (r.bien.length) {
+        const otras = r.faltan.filter((x) => !r.bien.some((y) => y.i === x.i));
+        if (otras.length && !nums(otras).length) return 'Vas bien, pero falta una parte de lo que se pide. Lee otra vez la frase de arriba.';
+        return otras.length ? 'Vas bien. ' + (nums(otras).length > 1 ? 'Falta que cambien' : 'Falta que cambie') + ' también ' + donde(otras) + cuando + '.' : 'Vas bien, pero falta algo más en ' + donde([r.faltan[0]]) + '.';
+      }
+      if (ta.value.trim() === ex.css.trim()) return ex.css ? 'Todavía no has escrito tu regla. La paleta ya está: escribe debajo.' : 'style.css está vacío. Escribe una regla.';
+      return 'Lo que has escrito no cambia lo que se pide' + cuando + '. Revisa el selector y la propiedad.'
+        + (!encima && /:hover/.test(ta.value) ? ' Lo que va con `:hover` solo se ve con el ratón encima.' : '');
+    }
+
+    function comprobar() {
+      const hoja = ta.value, an = pcAnaliza(hoja), d = marcos.banco.contentDocument;
+      const avisos = an.avisos.slice();
+      an.reglas.forEach((r) => {
+        if (r.sel) {
+          const al = pcAlcance(d, r.sel);
+          if (al === null) avisos.push(/^<\/?[a-zA-Z]/.test(r.sel) ? 'En el CSS, la etiqueta se escribe sin los signos `<` y `>`: `' + r.sel.replace(/[<>\/\s]/g, '') + '`.' : 'El navegador no entiende el selector «' + pcCorto(r.sel) + '». Revisa cómo está escrito.');
+          else if (!al.length) avisos.push(pcSinAlcance(d, r.sel));
+        }
+        r.decls.forEach((x) => { const a = pcDeclaracion(x); if (a) avisos.push(a); });
+      });
+      // primero sin el ratón y, si se pide algo con el ratón encima, otra vez con él; de las formas buenas, la que más se acerca
+      let dif = null, encima = false;
+      (ex.formas.some((f) => f.some((q) => q.encima)) ? [false, true] : [false]).some((h) => {
+        const u = foto(hoja, h), b = foto(ex.css, h);
+        const r = ex.formas.map((f) => evalua(u, b, f, h)).reduce((a, c) => (c.total < a.total ? c : a));
+        if (r.total) { dif = r; encima = h; }
+        return !!r.total;
+      });
+      if (dif) { di('ko', 'Todavía no', avisos.length ? avisos[0] : explica(dif, encima)); return; }
+      const falta = (ex.usa || []).find((x) => !x.re.test(hoja));
+      if (falta) { di('ko', 'Todavía no', falta.msg); return; }
+      hecho[ex.clave] = conSol && hecho[ex.clave] !== 'ok' ? 'sol' : 'ok';
+      guarda();
+      const quedan = lista.filter((x) => !hecho[x.clave]).length;
+      di('ok', 'Correcto', ex.exp + (avisos.length ? ' Ojo: ' + avisos[0] : '') + (quedan ? ' Pulsa «Siguiente».' : ' Has terminado los ' + lista.length + ' ejercicios.'));
+      cabecera();
+    }
+    function pista() {
+      if (nPista === 0) {
+        // la primera pista señala en el HTML lo que hay que cambiar
+        const d = marcos.banco.contentDocument;
+        const ls = ex.lineas || [...new Set([].concat(...ex.formas[0].filter((q) => q.vale !== 'libre').map((q) => [...d.querySelectorAll(q.en)].map((x) => x.dataset.l))))].filter((l) => l !== undefined);
+        ls.forEach((i) => { const f = linea(i); if (f) f.classList.add('objetivo'); });
+      }
+      nPista = Math.min(nPista + 1, ex.pistas.length);
+      di('pista', 'Pista ' + nPista + ' de ' + ex.pistas.length, ex.pistas[nPista - 1]);
+      $('.pc-pista').textContent = nPista < ex.pistas.length ? 'Otra pista' : 'Pista';
+    }
+    function solucion() {
+      conSol = true;
+      if (!hecho[ex.clave]) { hecho[ex.clave] = 'sol'; guarda(); }
+      ta.value = ex.sol; vista('tuya'); pinta();
+      di('pista', 'Solución', 'Está escrita en style.css. ' + ex.exp);
+      cabecera();
+    }
+
+    // Colorea el editor, pasa el CSS a la página y marca en el HTML lo que alcanza el selector
+    function pinta() {
+      pinta0.innerHTML = AW.resalta.css(ta.value) + '\n';
+      pinta0.scrollTop = ta.scrollTop; pinta0.scrollLeft = ta.scrollLeft;
+      css('tuya', ta.value);
+      alcance();
+    }
+    function alcance() {
+      const an = pcAnaliza(ta.value), pos = ta.selectionStart;
+      // la regla donde está el cursor; si está entre dos, la de antes
+      let r = an.reglas[0] || null;
+      an.reglas.forEach((x) => { if (x.ini <= pos) r = x; });
+      if (an.pendiente && (an.pendiente.ini <= pos || !r)) r = an.pendiente;
+      const al = r && r.sel ? pcAlcance(marcos.banco.contentDocument, r.sel) : null;
+      const ls = new Set((al || []).filter((x) => x.dataset.l !== undefined).map((x) => x.dataset.l));
+      lineasHtml().forEach((f) => f.classList.toggle('alcanza', ls.has(f.dataset.i)));
+      nota.innerHTML = ls.size ? 'En azul, lo que alcanza <b>' + esc(pcCorto(r.sel)) + '</b>' : NOTA;
+    }
+    function vista(v) {
+      el.querySelectorAll('.pc-pestanas button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
+      marcos.tuya.hidden = v !== 'tuya'; marcos.meta.hidden = v !== 'meta';
+      $('.pc-vista').classList.toggle('meta', v === 'meta');
+    }
+    // Arriba: el bloque (un desplegable para saltar a otro), por dónde vas y un punto por cada ejercicio del bloque
+    const bloques = [...new Set(lista.map((x) => x.bloque))];
+    const delBloque = (b) => lista.map((x, k) => k).filter((k) => lista[k].bloque === b);
+    function cabecera() {
+      $('.pc-donde').textContent = 'Ejercicio ' + (n + 1) + ' de ' + lista.length;
+      $('.pc-num').textContent = n + 1;
+      $('.pc-bloque').innerHTML = bloques.map((b, i) => {
+        const suyos = delBloque(b);
+        return '<option value="' + i + '"' + (b === ex.bloque ? ' selected' : '') + '>' + (i + 1) + '. ' + esc(b.nombre) + ' (' + suyos.filter((k) => hecho[lista[k].clave]).length + ' de ' + suyos.length + ')</option>';
+      }).join('');
+      $('.pc-puntos').innerHTML = delBloque(ex.bloque).map((k) => '<button type="button" data-k="' + k + '" class="' + (hecho[lista[k].clave] || '') + (k === n ? ' aqui' : '')
+        + '" title="Ejercicio ' + (k + 1) + '" aria-label="Ejercicio ' + (k + 1) + '"></button>').join('');
+      $('.pc-ant').disabled = n === 0;
+      $('.pc-sig').disabled = n === lista.length - 1;
+      $('.pc-sig').classList.toggle('btn-primary', !!hecho[ex.clave] && n < lista.length - 1);
+      $('.pc-sig').classList.toggle('btn-ghost', !(hecho[ex.clave] && n < lista.length - 1));
+    }
+    function carga(k) {
+      if (ex) borrador[ex.clave] = ta.value;
+      n = k; ex = lista[n]; nPista = 0; conSol = false;
+      escribe('banco', '', false);
+      escribe('tuya', vistaCss(), true);
+      escribe('meta', vistaCss(), true);
+      css('meta', ex.sol);
+      htmlPre.innerHTML = ex.html.map((l, i) => '<div class="ej-linea" data-i="' + i + '"><i>' + (i + 1) + '</i><span>' + AW.resalta.html(l) + '</span></div>').join('');
+      lineasHtml().forEach((f) => {
+        f.addEventListener('mouseenter', () => mira(f.dataset.i));
+        f.addEventListener('mouseleave', () => mira(null));
+      });
+      $('.pc-pide p').innerHTML = fmtQuiz(ex.pide);
+      $('.pc-pista').textContent = 'Pista';
+      ta.value = borrador[ex.clave] !== undefined ? borrador[ex.clave] : ex.css;
+      ta.selectionStart = ta.selectionEnd = ta.value.length;
+      ta.scrollTop = 0; ta.scrollLeft = 0;
+      vista('tuya');
+      di('', '', (ex.css ? 'La paleta ya está escrita. Escribe tu regla debajo' : 'Escribe la regla en style.css') + ' y mira «Tu página». Cuando termines, pulsa «Comprobar».');
+      cabecera();
+      pinta();
+    }
+
+    // Tabulador y sangría dentro del editor; Ctrl+Intro comprueba
+    const inserta = (txt) => { if (!document.execCommand || !document.execCommand('insertText', false, txt)) { ta.setRangeText(txt, ta.selectionStart, ta.selectionEnd, 'end'); ta.dispatchEvent(new Event('input')); } };
+    ta.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab' && !e.shiftKey) { e.preventDefault(); inserta('  '); }
+      else if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); comprobar(); }
+      else if (e.key === '}' && !e.ctrlKey && !e.metaKey) {
+        // la llave de cierre, sola en su línea, va a la primera columna: se lleva la sangría que tenga delante
+        const ini = ta.value.lastIndexOf('\n', ta.selectionStart - 1) + 1, delante = ta.value.slice(ini, ta.selectionStart);
+        if (delante && !delante.trim()) { e.preventDefault(); ta.setSelectionRange(ini, ta.selectionEnd); inserta('}'); }
+      }
+      else if (e.key === 'Enter') {
+        const antes = ta.value.slice(0, ta.selectionStart), ultima = antes.slice(antes.lastIndexOf('\n') + 1);
+        const sangria = /\{\s*$/.test(ultima) ? '  ' : ultima.match(/^\s*/)[0];
+        if (sangria) { e.preventDefault(); inserta('\n' + sangria); }
+      }
+    });
+    ta.addEventListener('input', () => {
+      vista('tuya');
+      if (fb.dataset.tipo === 'ok' || fb.dataset.tipo === 'ko') di('', '', 'Cuando termines, pulsa «Comprobar».');
+      pinta();
+    });
+    ta.addEventListener('scroll', () => { pinta0.scrollTop = ta.scrollTop; pinta0.scrollLeft = ta.scrollLeft; });
+    ['keyup', 'click', 'focus'].forEach((t) => ta.addEventListener(t, alcance));
+    $('.pc-comprobar').addEventListener('click', comprobar);
+    $('.pc-pista').addEventListener('click', pista);
+    $('.pc-solucion').addEventListener('click', solucion);
+    $('.pc-reinicia').addEventListener('click', () => { ta.value = ex.css; nPista = 0; $('.pc-pista').textContent = 'Pista'; lineasHtml().forEach((f) => f.classList.remove('objetivo')); di('', '', 'style.css está como al principio.'); vista('tuya'); pinta(); ta.focus(); });
+    $('.pc-ant').addEventListener('click', () => { if (n > 0) carga(n - 1); });
+    $('.pc-sig').addEventListener('click', () => { if (n < lista.length - 1) carga(n + 1); });
+    $('.pc-puntos').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) carga(+b.dataset.k); });
+    // otro bloque: su primer ejercicio sin hacer
+    $('.pc-bloque').addEventListener('change', (e) => { const ks = delBloque(bloques[+e.target.value]), k = ks.find((i) => !hecho[lista[i].clave]); carga(k === undefined ? ks[0] : k); });
+    el.querySelectorAll('.pc-pestanas button').forEach((b) => b.addEventListener('click', () => vista(b.dataset.v)));
+
+    const primero = lista.findIndex((x) => !hecho[x.clave]);
+    carga(primero < 0 ? 0 : primero);
   }
 
   /* ---------- panel que se revela (pregunta a la clase) ---------- */
@@ -2097,6 +2992,7 @@
     document.querySelectorAll('.resultado[data-codigo]').forEach(montaResultado);
     document.querySelectorAll('.ej[data-tipo]').forEach(montaEjercicio);
     document.querySelectorAll('.caja-sim').forEach(montaCaja);
+    document.querySelectorAll('.practica-css').forEach(montaPractica);
     document.querySelectorAll('.quiz').forEach(montaQuiz);
     document.querySelectorAll('.revela').forEach(montaRevela);
     document.querySelectorAll('.galeria').forEach(montaGaleria);
